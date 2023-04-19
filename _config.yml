@@ -8,7 +8,9 @@ subtitle: '刘晓鹏的博客'
 description: '为自己开拓的互联网净地'
 keywords: LEO Blog, 刘晓鹏, LEO
 author: Burgess Leo
-language: zh-CN
+language: 
+  - zh-CN
+  - en
 timezone: Asia/Shanghai
 
 # URL
