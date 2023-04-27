@@ -3,7 +3,7 @@ title: 使用Python加密文件
 date: 2023-04-17 22:03:13
 categories: 技术
 tags:
-    - 网络安全
+    - python
 ---
 
 ### 功能
