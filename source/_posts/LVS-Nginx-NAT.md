@@ -58,7 +58,7 @@ ipvsadm -Ln
 开启路由转发功能
 
 ```bash
-echo "1" > /proc/sys/net/ipv4/ip_forword
+echo "1" > /proc/sys/net/ipv4/ip_forward
 ```
 
 使用命令修改轮训的时间

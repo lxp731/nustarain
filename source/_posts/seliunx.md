@@ -61,3 +61,5 @@ system_u:object_r:admin_home_t:s0 /home/student/
 ```
 
 发现student目录的selinux值变成了**admin_home_t**。
+
+---
