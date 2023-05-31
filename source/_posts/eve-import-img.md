@@ -35,3 +35,16 @@ tar -xf linux-centos-8.tgz
 4. 最后大功告成，在EVE网页中可以使用了(鼠标右击-->node-->linux-->image)。
 
 ![导入成功](./eve-import-img/1.png)
+
+---
+
+### 补充
+
+应***汪某人***的需求（作为一名出色的博主，应该做到尽善尽美），再补充一点内容。
+
+* 首先是EVE连接时有一个很坑的点，虚拟机打开时提示默认用户名是`root`，密码是`eve`。但其实密码是不对的，密码是`cisco`。不清楚是不是因为版本的问题。总之，如果`eve`不好使，就换成`cisco`试试。
+
+* 连接工具大多数人使用的都是Xshell和XFTP，这两个工具确实非常不错，但是后来本人在逛github时，发现一个非常好用的工具，这个工具是免费开源的，并且集合了Xshell远程命令的功能和XFTP的文件传输功能，还有额外的CMD窗口。支持windows视窗化查看虚拟机的文件。截图如下，[链接在这](https://github.com/kingToolbox/WindTerm/releases/download/2.5.0/WindTerm_2.5.0_Windows_Portable_x86_64.zip) 。
+
+![windterm](./eve-import-img/2.png)
+
