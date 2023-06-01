@@ -10,7 +10,7 @@ tags:
 
 ### 前期准备
 
-首先需要EVE的导入镜像，我只用到了CENTOS8的，[相关链接](链接：https://pan.baidu.com/s/14OK6FP1sUPU5KDQHexRLbA) 放在了云盘里，提取码：0731，需要自取。
+首先需要EVE的导入镜像，我只用到了CENTOS8的，[相关链接](https://pan.baidu.com/s/14OK6FP1sUPU5KDQHexRLbA) 放在了云盘里，提取码：0731，需要自取。虚拟机的`user`用户和`root`密码均为`Test123`。
 
 <!-- more -->
 
