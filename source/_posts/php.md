@@ -18,13 +18,13 @@ tags:
 
 * 解压源码包
 
-```
+```bash
 tar -zxf php-5.6.17.tar.gz
 ```
 
 * 安装相关的依赖
 
-```
+```bash
 yum install -y gcc make pcre pcre-devel zlib zlib-devel openssl openssl-devel
 yum install -y libxml2 libxml2-devel
 ```
@@ -33,50 +33,50 @@ yum install -y libxml2 libxml2-devel
 
 * 执行configure脚本
 
-```
+```bash
 ./configure --prefix=/usr/local/php --enable-mbstring --enable-fpm --with-mysql --with-mysqli
 ```
 
 * 再执行两步安装完成
 
-```
+```bash
 make  # 这里make的时间会相对长一点
 make install
 ```
 
 * 拷贝一份配置文件
 
-```
+```bash
 cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
 ```
 
 * 拷贝启动文件
 
-```
+```bash
 cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 ```
 
 * 为启动文件添加启动权限
 
-```
+```bash
 chmod +x /etc/init.d/php-fpm
 ```
 
 * 再拷贝一份到系统的命令里面
 
-```
+```bash
 cp /etc/init.d/php-fpm /sbin/php-fpm
 ```
 
 然后就可以使用简单的命令对PHP进行管理
 
-```
+```bash
 php-fpm start
 php-fpm reload
 php-fpm stop
 ```
 * 启动之后可以检查一下监听端口
 
-```
+```bash
 lsof -i:80
 ```

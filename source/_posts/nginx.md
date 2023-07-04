@@ -20,25 +20,25 @@ tags:
 
 * 解压源码包
 
-```
+```bash
 tar -zxf nginx-1.17.10.tar.gz
 ```
 
 * 安装相关的依赖
 
-```
+```bash
 yum install -y gcc make pcre pcre-devel zlib zlib-devel openssl openssl-devel
 ```
 
 * 执行configure脚本
 
-```
+```bash
 ./configure --prefix=/usr/local/nginx --with-http_ssl_module
 ```
 
 * 再执行两步安装完成
 
-```
+```bash
 make
 make install
 ```
@@ -47,19 +47,19 @@ make install
 
 直接执行这条命令可以启动NGINX
 
-```
+```bash
 /usr/local/nginx/sbin/nginx
 ```
 
 但是这个命令是在太长了，很不方便，我们可以拷贝一份到系统命令里面。
 
-```
+```bash
 cp /usr/local/nginx/sbin/nginx /sbin/nginx
 ```
 
 然后我们就可以愉快地使用一些简单的命令来对NGINX进行管理。
 
-```
+```bash
 nginx # 启动nginx
 nginx -s reload # 重启nginx
 nginx -s stop # 关闭nginx
@@ -67,7 +67,7 @@ nginx -s stop # 关闭nginx
 
 再补充一点，就是关于NGINX的配置文件，源码安装的NGINX配置文件的路径`cd /usr/local/nginx/conf`里面很多我们不需要的内容，直接一条命令带走他们。
 
-```
+```bash
 egrep -v "^[[:space:]]*#|^$" nginx.conf.default > nginx.conf
 ```
 之后就很清爽了，开始配置吧少年。
