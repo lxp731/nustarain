@@ -29,7 +29,7 @@ yum install -y gcc make pcre pcre-devel zlib zlib-devel openssl openssl-devel
 yum install -y libxml2 libxml2-devel
 ```
 
-这里分了两条依赖命令，如果是按照之前我写的源码安装NGINX的博客已经安装NGINX了，那么不需要再执行第一条yum命令，反之则相反，如果你也不确定，那就全部执行一遍吧。
+这里分了两条依赖命令，如果是按照[之前我写的源码安装NGINX的博客](./nginx.md)已经安装NGINX了，那么不需要再执行第一条yum命令，反之则相反，如果你也不确定，那就全部执行一遍吧。
 
 * 执行configure脚本
 
