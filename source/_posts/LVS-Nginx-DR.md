@@ -38,12 +38,34 @@ ipvsadm -a -t 172.21.8.80:80 -r 172.21.8.30:80 -g -w 2
 ipvsadm --set 1 1 1
 ```
 
+也可以直接编辑成一个脚本文件，方便后面进行策略的调整
+
+```
+#!/bin/bash
+ipvsadm -C
+ipvsadm -A -t 10.8.7.10:80 -s wrr
+ipvsadm -a -t 10.8.7.10:80 -r 10.8.7.80:80 -g -w 1
+ipvsadm -a -t 10.8.7.10:80 -r 10.8.7.81:80 -g -w 2
+ipvsadm -a -t 10.8.7.10:80 -r 10.8.7.82:80 -g -w 1
+ipvsadm -a -t 10.8.7.10:80 -r 10.8.7.83:80 -g -w 2
+ipvsadm --set 1 1 1
+echo "轮巡策略已成功添加！！！"
+```
+
 ### Web1主机和Web2主机配置
 
 * 配置回环接口（VIP）
 
 ```bash
 ip addr add 172.21.8.80/32 dev lo
+```
+
+因为环回口配置的IP在每次重启之后都会丢失IP，每次配置起来也比较麻烦，同样的把他写成一个脚本
+
+```
+#!/bin/bash
+ip addr add 10.8.7.10/32 dev lo:1
+echo "VIP 已经成功添加到loopback口。"
 ```
 
 * 修改Web1内核控制系统arp响应
@@ -63,12 +85,14 @@ case $1 in
         echo "2" > /proc/sys/net/ipv4/conf/lo/arp_announce
         echo "1" > /proc/sys/net/ipv4/conf/all/arp_ignore
         echo "2" > /proc/sys/net/ipv4/conf/all/arp_announce
+        echo "LVS DR 模式已开启！"
         ;;
     off)
         echo "0" > /proc/sys/net/ipv4/conf/lo/arp_ignore
         echo "0" > /proc/sys/net/ipv4/conf/lo/arp_announce
         echo "0" > /proc/sys/net/ipv4/conf/all/arp_ignore
         echo "0" > /proc/sys/net/ipv4/conf/all/arp_announce
+        echo "LVS DR 模式已关闭！"
         ;;
     *)
         echo 'error!'"usage:$0 on|off"
