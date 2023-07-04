@@ -1,5 +1,5 @@
 ---
-title: mariadb+keepalived
+title: Mariadb双主复制+Keepalived
 date: 2023-06-04 09:36:42
 categories: 技术
 tags:
@@ -131,7 +131,7 @@ change master to master_host = '172.21.8.34',master_user = 'slave',master_passwo
 
 ```bash
 start slave;
-show slave status;
+show slave status \G;
 ```
 
 ![mariadb-1 复制成功](./keepalived-linux/6.png)

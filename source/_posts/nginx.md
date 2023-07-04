@@ -1,5 +1,5 @@
 ---
-title: nginx部分的配置
+title: 源码安装NGINX
 date: 2023-07-04 10:09:47
 categories: 技术
 tags:
@@ -11,6 +11,8 @@ tags:
 如果是centos8版本的话，可以直接使用本地yum或者网络yum安装NGINX，对于8版本的就不在做过多赘述。
 
 主要针对Centos7版本做一下说明，因为Centos7的yum是不提供NGINX的，所以需要自己手动使用源码安装的方式进行安装。
+
+<!-- more -->
 
 [nginx源码包下载链接](https://pan.baidu.com/s/1hjUud-D1Du-s-dbFAGJxTQ?pwd=46k1)
 
