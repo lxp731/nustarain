@@ -36,6 +36,18 @@ yum install -y nfs-utils
 chmod 777 /www
 ```
 
+4. 启动服务
+
+```bash
+systemctl start nfs-server
+```
+
+5. 导出配置文件
+
+```bash
+exportfs -rv
+```
+
 ### Web服务器的部分
 
 1. 编辑`/etc/fstab`实现永久挂载

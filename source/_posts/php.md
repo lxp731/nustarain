@@ -8,7 +8,7 @@ tags:
 
 ### 安装PHP
 
-无论是在Centos7还是在Centos8都需要进行源码安装，其实这句话也不对，因为在Centos8里是可以yum安装php和php-fpm的但是，安装之后使用`php-fpm start`启动命令之后是监听不到内容的。有可能是自己还是不太会用Centos8的PHP，自己也没有再去深入研究，做的项目都是用的源码装的，在这里先把源码安装的教程发不出来，后续有时间再去研究。
+无论是在Centos7还是在Centos8都需要进行源码安装，其实这句话也不对，因为在Centos8里是可以yum安装php和php-fpm的。但是，安装之后使用`php-fpm start`启动命令之后是监听不到内容的。有可能是自己还是不太会用Centos8的PHP，自己也没有再去深入研究，做的项目都是用的源码装的，在这里先把源码安装的教程发不出来，后续有时间再去研究。
 
 <!-- more -->
 
@@ -29,7 +29,7 @@ yum install -y gcc make pcre pcre-devel zlib zlib-devel openssl openssl-devel
 yum install -y libxml2 libxml2-devel
 ```
 
-这里分了两条依赖命令，如果是按照[之前我写的源码安装NGINX的博客](./nginx.md)已经安装NGINX了，那么不需要再执行第一条yum命令，反之则相反，如果你也不确定，那就全部执行一遍吧。
+这里分了两条依赖命令，如果是按照之前我写的[源码安装NGINX的博客](https://nustarain.gitee.io/2023/07/04/nginx/)已经安装NGINX了，那么不需要再执行第一条yum命令，反之则相反，如果你也不确定，那就全部执行一遍吧。
 
 * 执行configure脚本
 
@@ -78,5 +78,5 @@ php-fpm stop
 * 启动之后可以检查一下监听端口
 
 ```bash
-lsof -i:80
+lsof -i:9000
 ```

@@ -62,7 +62,7 @@ yum install -y tree
 6. **net-tools**，这个工具提供了比如`ifconfig`，`netstat`，`arp`，`route`命令，有时候用起来发现没有这个命令的话，记得安装这个包。
 
 ```bash
-yum install -y lsof
+yum install -y net-tools
 ```
 
 5. **lsof工具**，查看端口监听的常用工具，个人来讲使用频率高于`netstat`，使用也比较方便，可以安装一个。

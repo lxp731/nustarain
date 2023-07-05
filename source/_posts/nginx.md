@@ -65,6 +65,12 @@ nginx -s reload # 重启nginx
 nginx -s stop # 关闭nginx
 ```
 
+启动之后，可以通过80端口检查是否处于监听状态
+
+```bash
+lsof -i:80
+```
+
 再补充一点，就是关于NGINX的配置文件，源码安装的NGINX配置文件的路径`cd /usr/local/nginx/conf`里面很多我们不需要的内容，直接一条命令带走他们。
 
 ```bash

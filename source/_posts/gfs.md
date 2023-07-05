@@ -49,10 +49,10 @@ tags:
 ```bash
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-10.8.7.82   web3.com
-10.8.7.83   web4.com
-10.8.7.41   storage1.com
-10.8.7.42   storage2.com
+10.8.7.82   web3.liuxp.com
+10.8.7.83   web4.liuxp.com
+10.8.7.41   storage1.liuxp.com
+10.8.7.42   storage2.liuxp.com
 ```
 
 如果你也打算用这个，编辑完之后可以使用scp命令直接拷贝到别的主机。
@@ -65,7 +65,7 @@ scp /etc/hosts 10.8.7.42:/etc/
 
 * 一定要按照顺序来做。
 
-* 关于ISCSI服务器创建和挂载到客户端的操作，具体搭建过程可以看[搭建并挂载ISCSI存储服务器](./ISCSI.md)这篇文章，本文章不在赘述。对于我这个项目，两台ISCSI存储器都各自提供了一块磁盘，并且在两台web服务器都实现了挂载，storage1提供的ISCSI存储映射到web服务器上是`/dev/sdb`，storage2提供的ISCSI存储映射到web服务器上是`/dev/sdc`。
+* 关于ISCSI服务器创建和挂载到客户端的操作，具体搭建过程可以看[搭建并挂载ISCSI存储服务器](https://nustarain.gitee.io/2023/07/04/ISCSI/)这篇文章，本文章不在赘述。对于我这个项目，两台ISCSI存储器都各自提供了一块磁盘，并且在两台web服务器都实现了挂载，storage1提供的ISCSI存储映射到web服务器上是`/dev/sdb`，storage2提供的ISCSI存储映射到web服务器上是`/dev/sdc`。
 
 * 我接下来讲的“两台虚拟机”是指web3和web4，“任意一台虚拟机”是指web3或者web4其中的任意一台。
 
@@ -86,7 +86,7 @@ echo "q" | passwd --stdin hacluster
 
 ```bash
 ssh-keygen
-ssh-copy-id -i /root/.ssh/id_rsa.pub web4.com
+ssh-copy-id -i /root/.ssh/id_rsa.pub web4.liuxp.com
 ```
 
 上面的命令是以web3举的例子。
@@ -94,13 +94,13 @@ ssh-copy-id -i /root/.ssh/id_rsa.pub web4.com
 * 搭建集群，两台虚拟机都需要做的
 
 ```bash
-pcs cluster auth web3.com web4.com
+pcs cluster auth web3.liuxp.com web4.liuxp.com
 Username: hacluster
 Password:q
 node3: Authorized
 node4: Authorized
-pcs cluster setup --name nginx_cluster web3.com web4.com
-pcs cluster setup --name nginx_cluster web3.com web4.com --force # 如果报错就强制执行进行覆盖
+pcs cluster setup --name nginx_cluster web3.liuxp.com web4.liuxp.com
+pcs cluster setup --name nginx_cluster web3.liuxp.com web4.liuxp.com --force # 如果报错就强制执行进行覆盖
 pcs cluster start
 pcs cluster status
 pcs cluster enable --all
@@ -112,7 +112,7 @@ pcs status corosync
 如果第一次集群出现了什么问题，打算重新做，可以通过下面的这个命令摧毁集群，然后再强制建立集群。
 
 ```bash
-pcs cluster destory
+pcs cluster destroy
 ```
 
 * 挂载GFS文件系统，两台虚拟机都需要做的
@@ -152,7 +152,7 @@ vgcreate -cy qavg /dev/sdb /dev/sdc
 lvcreate -L 12G -n qa qavg
 ```
 
-这里命令的具体含义如果不懂，可以看我的[关于LVM的配置](./LVM.md)的文章。
+这里命令的具体含义如果不懂，可以看我的[关于LVM的配置](https://nustarain.gitee.io/2023/07/04/LVM/)的文章。
 
 * 挂载实现共享存储
 
