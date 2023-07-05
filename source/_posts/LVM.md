@@ -40,6 +40,8 @@ pvs
 
 ### 卷组
 
+* 创建卷组
+
 ```bash
 pvcreate qavg /dev/sdb
 ```
