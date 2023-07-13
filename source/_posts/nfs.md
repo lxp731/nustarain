@@ -50,12 +50,19 @@ exportfs -rv
 
 ### Web服务器的部分
 
-1. 编辑`/etc/fstab`实现永久挂载
+1. 创建挂载点
+
+```bash
+mkdir /www
+```
+
+2. 编辑`/etc/fstab`实现永久挂载
 
 ```bash
 10.8.7.40:/www  /www    nfs     rw,sync 0 0
 ```
-2. 挂载共享目录
+
+3. 挂载共享目录
 
 ```bash
 systemctl daemon-reload
