@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMontserrat:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本信息            主机名 身份 网络接口 连接模式 IP地址    web3 web服务器 ens224 仅主机 10.8.7.82&#x2F;24    web4 web服务器 ens224 仅主机 10.8.7.83&#x2F;24    storage1 iscsi存储服务器 ens224 仅主机 10.8.7.41&#x2F;24    storage2 iscsi存储服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux关于iscsi+pacemaker+CLVM+gfs的实现">
+<meta property="og:url" content="https://nustarain.gitee.io/2023/07/05/gfs/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="基本信息            主机名 身份 网络接口 连接模式 IP地址    web3 web服务器 ens224 仅主机 10.8.7.82&#x2F;24    web4 web服务器 ens224 仅主机 10.8.7.83&#x2F;24    storage1 iscsi存储服务器 ens224 仅主机 10.8.7.41&#x2F;24    storage2 iscsi存储服务器">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-04T23:55:37.000Z">
+<meta property="article:modified_time" content="2023-07-05T06:58:28.432Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://nustarain.gitee.io/2023/07/05/gfs/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.gitee.io/2023/07/05/gfs/","path":"2023/07/05/gfs/","title":"Linux关于iscsi+pacemaker+CLVM+gfs的实现"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux关于iscsi+pacemaker+CLVM+gfs的实现 | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%AF%B4%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">项目说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">准备环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD"><span class="nav-number">4.</span> <span class="nav-text">项目实施</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">为自己开拓的互联网净地</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/07/05/gfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="为自己开拓的互联网净地">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux关于iscsi+pacemaker+CLVM+gfs的实现 | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux关于iscsi+pacemaker+CLVM+gfs的实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-07-05 07:55:37 / 修改时间：14:58:28" itemprop="dateCreated datePublished" datetime="2023-07-05T07:55:37+08:00">2023-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux关于iscsi+pacemaker+CLVM+gfs的实现" href="/2023/07/05/gfs/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::dfccc5c966933d8b27bbaf510d01a76b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">主机名</td>
+<td align="center">身份</td>
+<td align="center">网络接口</td>
+<td align="center">连接模式</td>
+<td align="center">IP地址</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">web3</td>
+<td align="center">web服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.82&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">web4</td>
+<td align="center">web服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.83&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">storage1</td>
+<td align="center">iscsi存储服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.41&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">storage2</td>
+<td align="center">iscsi存储服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.42&#x2F;24</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h3><p>在本项目中，主要完成以下任务：</p>
+<ol>
+<li>完成gfs1和gfs2关于ISCSI存储服务器的搭建，并且成功挂载到web1和web2主机。</li>
+</ol>
+<span id="more"></span>
+
+<ol start="2">
+<li><p>建立web1和web2主机的集群关系。</p>
+</li>
+<li><p>挂载GFS文件系统。</p>
+</li>
+<li><p>配置集群资源。</p>
+</li>
+<li><p>创建CLVM。</p>
+</li>
+<li><p>挂载共享存储。</p>
+</li>
+</ol>
+<h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><ul>
+<li><p>Centos7版本的虚拟机，Centos8版本的没有找到资料，还在自我探索的过程中。等待后期的更新吧。</p>
+</li>
+<li><p>虚拟机关闭SELINUX。</p>
+</li>
+<li><p>虚拟机关闭防火墙。</p>
+</li>
+<li><p>虚拟机关闭NetworkManager。</p>
+</li>
+<li><p>编写<code>/etc/hosts</code>文件，这个可选，我是为了后期配置方便，才写这样一个文件。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">10.8.7.82   web3.liuxp.com</span><br><span class="line">10.8.7.83   web4.liuxp.com</span><br><span class="line">10.8.7.41   storage1.liuxp.com</span><br><span class="line">10.8.7.42   storage2.liuxp.com</span><br></pre></td></tr></table></figure>
+
+<p>如果你也打算用这个，编辑完之后可以使用scp命令直接拷贝到别的主机。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/hosts 10.8.7.42:/etc/</span><br></pre></td></tr></table></figure>
+
+<h3 id="项目实施"><a href="#项目实施" class="headerlink" title="项目实施"></a>项目实施</h3><ul>
+<li><p>一定要按照顺序来做。</p>
+</li>
+<li><p>关于ISCSI服务器创建和挂载到客户端的操作，具体搭建过程可以看<a href="https://nustarain.gitee.io/2023/07/04/ISCSI/">搭建并挂载ISCSI存储服务器</a>这篇文章，本文章不在赘述。对于我这个项目，两台ISCSI存储器都各自提供了一块磁盘，并且在两台web服务器都实现了挂载，storage1提供的ISCSI存储映射到web服务器上是<code>/dev/sdb</code>，storage2提供的ISCSI存储映射到web服务器上是<code>/dev/sdc</code>。</p>
+</li>
+<li><p>我接下来讲的“两台虚拟机”是指web3和web4，“任意一台虚拟机”是指web3或者web4其中的任意一台。</p>
+</li>
+<li><p>下载软件，两台虚拟机都需要做的</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum -y install pacemaker pcs</span><br><span class="line">systemctl start pcsd</span><br><span class="line">systemctl <span class="built_in">enable</span> pcsd</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;q&quot;</span> | passwd --stdin hacluster</span><br></pre></td></tr></table></figure>
+
+<p>这块的意思是下载了pcsd服务，开启并设置自启动，安装这个服务会再系统创建一个<code>hacluster</code>用户，后面要用，要先给他改个密码。</p>
+<ul>
+<li>集群建立免认证，在集群任意一台机器做就可以</li>
+</ul>
+<p>说白一点，就是web3生成公钥私钥，然后把公钥发给web4，或者web4生成公钥私钥，然后把公钥发给web3。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br><span class="line">ssh-copy-id -i /root/.ssh/id_rsa.pub web4.liuxp.com</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令是以web3举的例子。</p>
+<ul>
+<li>搭建集群，两台虚拟机都需要做的</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster auth web3.liuxp.com web4.liuxp.com</span><br><span class="line">Username: hacluster</span><br><span class="line">Password:q</span><br><span class="line">node3: Authorized</span><br><span class="line">node4: Authorized</span><br><span class="line">pcs cluster setup --name nginx_cluster web3.liuxp.com web4.liuxp.com</span><br><span class="line">pcs cluster setup --name nginx_cluster web3.liuxp.com web4.liuxp.com --force <span class="comment"># 如果报错就强制执行进行覆盖</span></span><br><span class="line">pcs cluster start</span><br><span class="line">pcs cluster status</span><br><span class="line">pcs cluster <span class="built_in">enable</span> --all</span><br><span class="line">pcs status corosync</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下如果第一次创建集群，上面命令可以直接创建成功，如果不是第一次创建，就需要加<code>--force</code>选项强制覆盖。等到所有信息都success，下面的集群开启，查看状态，设置自启动都不会出现什么问题的。</p>
+<p>如果第一次集群出现了什么问题，打算重新做，可以通过下面的这个命令摧毁集群，然后再强制建立集群。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster destroy</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>挂载GFS文件系统，两台虚拟机都需要做的</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install -y lvm2-cluster gfs2-utils fence-agents-all</span><br><span class="line">lvmconf --enable-cluster</span><br><span class="line">modprobe gfs2</span><br><span class="line">lsmod | grep gfs2 </span><br></pre></td></tr></table></figure>
+
+<p>在进行完最后一步之后，如果出现一些看不懂的内容就说明，GFS文件系统已经挂载到这个系统上了，可以使用它进行格式化磁盘了。</p>
+<ul>
+<li>配置集群资源，在集群任意一台机器做就可以</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pcs property <span class="built_in">set</span> no-quorum-policy=ignore</span><br><span class="line">pcs property <span class="built_in">set</span> stonith-enabled=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line">pcs resource create dlm ocf:pacemaker:controld allow_stonith_disabled=<span class="literal">true</span> op monitor interval=30s <span class="built_in">clone</span> interleave=<span class="literal">true</span> ordered=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">pcs resource create clvmd ocf:heartbeat:clvm op monitor interval=30s <span class="built_in">clone</span> interleave=<span class="literal">true</span> ordered=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">pcs constraint order start dlm-clone <span class="keyword">then</span> clvmd-clone</span><br><span class="line">pcs constraint colocation add clvmd-clone with dlm-clone</span><br><span class="line">pcs property <span class="built_in">set</span> no-quorum-policy=freeze</span><br></pre></td></tr></table></figure>
+
+<p>这块是没有个性化的，可以直接无脑<kbd>Ctrl</kbd>+<kbd>C</kbd>和<kbd>Ctrl</kbd>+<kbd>V</kbd></p>
+<ul>
+<li>创建CLVM，在集群任意一台机器做就可以</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sdb</span><br><span class="line">pvcreate /dev/sdc</span><br><span class="line">vgcreate -cy qavg /dev/sdb /dev/sdc</span><br><span class="line">lvcreate -L 12G -n qa qavg</span><br></pre></td></tr></table></figure>
+
+<p>这里命令的具体含义如果不懂，可以看我的<a href="https://nustarain.gitee.io/2023/07/04/LVM/">关于LVM的配置</a>的文章。</p>
+<ul>
+<li>挂载实现共享存储</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 格式化文件系统，在集群任意一台机器做就可以</span></span><br><span class="line">mkfs.gfs2 -p lock_dlm -t nginx_cluster:gfs2 -j 2 /dev/qavg/qa</span><br><span class="line"><span class="comment"># 创建挂载点，两台虚拟机都需要做的</span></span><br><span class="line"><span class="built_in">mkdir</span> /mnt/cluster</span><br><span class="line"><span class="comment"># 要实现自动挂载，在集群任意一台机器做就可以</span></span><br><span class="line">pcs resource create fs_gfs2 Filesystem device=<span class="string">&quot;/dev/qavg/qa&quot;</span> directory=<span class="string">&quot;/mnt/cluster&quot;</span> fstype=<span class="string">&quot;gfs2&quot;</span> options=<span class="string">&quot;noatime,nodiratime&quot;</span> op monitor interval=10s <span class="built_in">clone</span> interleave=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 给集群资源设置启动顺序</span></span><br><span class="line">pcs constraint order start clvmd-clone <span class="keyword">then</span> fs_gfs2-clone</span><br><span class="line">pcs constraint colocation add fs_gfs2-clone with clvmd-clone</span><br><span class="line">pcs constraint show</span><br><span class="line"><span class="built_in">df</span></span><br></pre></td></tr></table></figure>
+
+<p>最后<code>df</code>如果看到自己创建的逻辑卷<code>/dev/qavg/qa</code>，就说明挂载成功了，可以通过向挂载点里面写入文件来使用存储了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/04/LVM/" rel="prev" title="关于LVM的配置">
+                  <i class="fa fa-chevron-left"></i> 关于LVM的配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/13/modify-METRIC/" rel="next" title="Linux多网卡引起的网络不可达">
+                  Linux多网卡引起的网络不可达 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="dfccc5c966933d8b27bbaf510d01a76b"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: 'unset',
+  left: '16px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

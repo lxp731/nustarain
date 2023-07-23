@@ -3,6 +3,14 @@ Thumbs.db
 db.json
 *.log
 node_modules/
-public/
+public/2023
+public/about
+public/archives
+public/categories
+public/css
+public/images
+public/js
+public/page
+public/tags
 .deploy*/
 _multiconfig.yml
