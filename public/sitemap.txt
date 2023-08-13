@@ -1,3 +1,12 @@
+https://nustarain.gitee.io/2023/08/13/HasSlot/
+https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/
+https://nustarain.gitee.io/2023/08/13/HashRemainder/
+https://nustarain.gitee.io/2023/07/04/LVM/
+https://nustarain.gitee.io/2023/07/13/why-mysql-binlog/
+https://nustarain.gitee.io/2023/08/12/DockerMySQLMasterSlave/
+https://nustarain.gitee.io/2023/08/10/DockerVolume/
+https://nustarain.gitee.io/2023/08/10/DockerMySQL/
+https://nustarain.gitee.io/2023/08/10/DockerMySQL-Utf8/
 https://nustarain.gitee.io/2023/08/09/DockerPushLocal/
 https://nustarain.gitee.io/2023/08/08/DanglingImage/
 https://nustarain.gitee.io/2023/08/09/DockerPushAliyun/
@@ -5,7 +14,6 @@ https://nustarain.gitee.io/2023/08/09/ContainerCommit/
 https://nustarain.gitee.io/2023/08/09/ContainerDownloadSoft/
 https://nustarain.gitee.io/2023/08/08/DockerBackup/
 https://nustarain.gitee.io/2023/08/08/ExitContainer/
-https://nustarain.gitee.io/2023/07/13/why-mysql-binlog/
 https://nustarain.gitee.io/2023/04/17/Python-encrypted-file/
 https://nustarain.gitee.io/2023/08/06/Remove-aptkey/
 https://nustarain.gitee.io/2023/04/23/ms08-067/
@@ -17,7 +25,6 @@ https://nustarain.gitee.io/2023/07/25/science-network/
 https://nustarain.gitee.io/2023/05/24/seliunx/
 https://nustarain.gitee.io/2023/08/06/GitSpecifyBranch/
 https://nustarain.gitee.io/2023/07/04/ISCSI/
-https://nustarain.gitee.io/2023/07/04/LVM/
 https://nustarain.gitee.io/2023/05/18/LVS-Nginx-DR/
 https://nustarain.gitee.io/2023/05/17/LVS-Nginx-NAT/
 https://nustarain.gitee.io/2023/04/22/heartbleed/
@@ -56,6 +63,7 @@ https://nustarain.gitee.io/tags/EVE/
 https://nustarain.gitee.io/tags/science-online/
 https://nustarain.gitee.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/
 https://nustarain.gitee.io/categories/%E6%8A%80%E6%9C%AF/
+https://nustarain.gitee.io/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/
 https://nustarain.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/
 https://nustarain.gitee.io/categories/%E6%8E%A2%E7%B4%A2/
 https://nustarain.gitee.io/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/
