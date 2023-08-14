@@ -3,7 +3,8 @@ title: Docker演示Redis集群主从切换案例
 date: 2023-08-14 14:46:40
 categories: 技术
 tags:
-  - Docker
+  - Docker 
+  - Redis
 ---
 
 ### 操作步骤

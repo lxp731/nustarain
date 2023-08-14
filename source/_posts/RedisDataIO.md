@@ -3,7 +3,8 @@ title: Redis集群数据读写演示
 date: 2023-08-13 16:32:45
 categories: 技术
 tags:
-  - Docker
+  - Docker 
+  - Redis
 ---
 
 ### 数据读写存储

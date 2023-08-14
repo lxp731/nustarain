@@ -3,7 +3,8 @@ title: 二进制日志与数据库复制的关系
 date: 2023-07-13 10:47:40
 categories: 理论知识
 tags:
-  - Linux
+  - Linux 
+  - MySQL
 ---
 
 ### 数据库复制的原理解读

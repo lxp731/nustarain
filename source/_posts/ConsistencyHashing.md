@@ -4,6 +4,7 @@ date: 2023-08-13 15:03:35
 categories: 理论知识
 tags:
   - Docker
+  - Redis
 ---
 
 ### 基本思想

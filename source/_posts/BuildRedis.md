@@ -4,6 +4,7 @@ date: 2023-08-13 15:19:35
 categories: 技术
 tags:
   - Docker
+  - Redis
 ---
 
 ### 操作步骤

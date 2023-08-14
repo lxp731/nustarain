@@ -2,6 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nustarain.gitee.io/2023/08/13/BuildRedis/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL-Utf8/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/12/DockerMySQLMasterSlave/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/13/HashRemainder/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/13/HasSlot/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/06/04/keepalived-linux/</loc>
+    
+    <lastmod>2023-08-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.gitee.io/2023/08/13/RedisDataIO/</loc>
     
     <lastmod>2023-08-14</lastmod>
@@ -20,7 +92,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/13/BuildRedis/</loc>
+    <loc>https://nustarain.gitee.io/2023/07/13/why-mysql-binlog/</loc>
     
     <lastmod>2023-08-14</lastmod>
     
@@ -29,27 +101,18 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/13/HasSlot/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/14/RedisDel/</loc>
     
-    <lastmod>2023-08-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/</loc>
-    
-    <lastmod>2023-08-13</lastmod>
+    <lastmod>2023-08-14</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/13/HashRemainder/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/14/RedisAdd/</loc>
     
-    <lastmod>2023-08-13</lastmod>
+    <lastmod>2023-08-14</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -65,45 +128,9 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/13/why-mysql-binlog/</loc>
-    
-    <lastmod>2023-08-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/08/12/DockerMySQLMasterSlave/</loc>
-    
-    <lastmod>2023-08-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/2023/08/10/DockerVolume/</loc>
     
     <lastmod>2023-08-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL/</loc>
-    
-    <lastmod>2023-08-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL-Utf8/</loc>
-    
-    <lastmod>2023-08-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -299,15 +326,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/06/04/keepalived-linux/</loc>
-    
-    <lastmod>2023-08-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/2023/05/18/linux-init/</loc>
     
     <lastmod>2023-08-06</lastmod>
@@ -344,7 +362,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/05/07/CVE-extend/</loc>
+    <loc>https://nustarain.gitee.io/2023/04/21/CVE-2020-0796/</loc>
     
     <lastmod>2023-08-06</lastmod>
     
@@ -353,7 +371,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/04/21/CVE-2020-0796/</loc>
+    <loc>https://nustarain.gitee.io/2023/05/07/CVE-extend/</loc>
     
     <lastmod>2023-08-06</lastmod>
     
@@ -470,7 +488,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/archives/index.html</loc>
+    <loc>https://nustarain.gitee.io/about/index.html</loc>
     
     <lastmod>2023-08-06</lastmod>
     
@@ -479,7 +497,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/about/index.html</loc>
+    <loc>https://nustarain.gitee.io/archives/index.html</loc>
     
     <lastmod>2023-08-06</lastmod>
     
@@ -511,6 +529,13 @@
   </url>
   
   <url>
+    <loc>https://nustarain.gitee.io/tags/Redis/</loc>
+    <lastmod>2023-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.gitee.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2023-08-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -519,6 +544,13 @@
   
   <url>
     <loc>https://nustarain.gitee.io/tags/Ubuntu/</loc>
+    <lastmod>2023-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/tags/MySQL/</loc>
     <lastmod>2023-08-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
