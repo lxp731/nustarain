@@ -1,7 +1,7 @@
 ---
 title: 关于LVM的配置
 date: 2023-07-04 21:25:45
-categories: 技术
+categories: 理论知识
 tags:
   - Linux
 ---
