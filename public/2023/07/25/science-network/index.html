@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CMontserrat:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="从我有了第一台电脑后，science online的手段也逐渐见证着我的成长，从最初的浏览器插件上网，到SSR的小飞机，再到V2ray，以及后面陪伴我最久的clash。可以说已经是身经百战的老油条了。到今天我又遇到了一个具有里程碑式的science online手段CloudFlare+Warp+ 优选IP。 CloudFlare拥有极高的业界权威，拥有顶尖的技术团队，拥有最安全的网络方案，他们公">
+<meta property="og:type" content="article">
+<meta property="og:title" content="science online的终极解决方案">
+<meta property="og:url" content="https://nustarain.gitee.io/2023/07/25/science-network/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="从我有了第一台电脑后，science online的手段也逐渐见证着我的成长，从最初的浏览器插件上网，到SSR的小飞机，再到V2ray，以及后面陪伴我最久的clash。可以说已经是身经百战的老油条了。到今天我又遇到了一个具有里程碑式的science online手段CloudFlare+Warp+ 优选IP。 CloudFlare拥有极高的业界权威，拥有顶尖的技术团队，拥有最安全的网络方案，他们公">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/1.jpg">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/2.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/3.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/4.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/5.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/6.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/7.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/8.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2023/07/25/science-network/9.png">
+<meta property="article:published_time" content="2023-07-25T12:22:51.000Z">
+<meta property="article:modified_time" content="2023-08-20T10:18:27.066Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="science online">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nustarain.gitee.io/2023/07/25/science-network/1.jpg">
+
+
+<link rel="canonical" href="https://nustarain.gitee.io/2023/07/25/science-network/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.gitee.io/2023/07/25/science-network/","path":"2023/07/25/science-network/","title":"science online的终极解决方案"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>science online的终极解决方案 | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Warp-%E7%9A%84%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9%E6%B5%81%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">获取Warp+的永久免费流量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7"><span class="nav-number">3.</span> <span class="nav-text">下载代理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">4.</span> <span class="nav-text">生成配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%9B%E9%80%89%E6%9C%80%E4%BC%98IP"><span class="nav-number">5.</span> <span class="nav-text">筛选最优IP</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">为自己开拓的互联网净地</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/07/25/science-network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="为自己开拓的互联网净地">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="science online的终极解决方案 | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          science online的终极解决方案
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-25 20:22:51" itemprop="dateCreated datePublished" datetime="2023-07-25T20:22:51+08:00">2023-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-08-20 18:18:27" itemprop="dateModified" datetime="2023-08-20T18:18:27+08:00">2023-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/" itemprop="url" rel="index"><span itemprop="name">小玩意儿</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="science online的终极解决方案" href="/2023/07/25/science-network/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::9f3a718de6e9556612f7b4c335a9a952" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>从我有了第一台电脑后，science online的手段也逐渐见证着我的成长，从最初的浏览器插件上网，到SSR的小飞机，再到V2ray，以及后面陪伴我最久的clash。可以说已经是身经百战的老油条了。到今天我又遇到了一个具有里程碑式的science online手段<strong>CloudFlare+Warp+ 优选IP</strong>。</p>
+<p>CloudFlare拥有极高的业界权威，拥有顶尖的技术团队，拥有最安全的网络方案，他们公司的推出的science online技术那是无形中代表了一个技术标准的。在我实际体验下来，效果确实非常好，很舒服。</p>
+<span id="more"></span>
+
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>虽说是教程，但可不是从0开始的教程。</p>
+<ul>
+<li><p>需要拥有telegram账号和客户端，客户端可以是安卓、windows、Mac、iOS、Linux。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://telegram.org/">telegram官网</a></p>
+</li>
+</ul>
+<h3 id="获取Warp-的永久免费流量"><a href="#获取Warp-的永久免费流量" class="headerlink" title="获取Warp+的永久免费流量"></a>获取Warp+的永久免费流量</h3><p>需要在telegram里搜索一个机器人，机器人叫“warp+ bot”，但是我试了一下，直接搜是搜不出来的，后来发现可以通过链接直接找到他，<a target="_blank" rel="noopener" href="https://t.me/generatewarpplusbot">链接地址</a></p>
+<p><img src="/2023/07/25/science-network/1.jpg" alt="telegram"></p>
+<ul>
+<li><p>找到这个机器人之后，发送指令<code>/generate</code></p>
+</li>
+<li><p>然后他会让你关注两个类似公众号的东西，就是图中的<code>Warp Plus</code>和<code>akame.moe enjoyers</code>直接按他的意思进行关注</p>
+</li>
+<li><p>再次发送<code>/generate</code> 然后他会进行真人验证，给你出一道一位数相加的数学题</p>
+</li>
+<li><p>按照他的题，把答案写在命令之后，比如图中的<code>/generate 8</code>，然后就可以拿到一个秘钥，把这个秘钥留好，待会要用到。（其实不留好也没关系，丢了可以再申领一个，而且每个秘钥含的流量已经超过2EB了，所以说根本用不完，就差把永久免费写在脑门上了）</p>
+</li>
+</ul>
+<p>我也向大家提供几个可以直接使用的秘钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">🔐 Key: T23Xt4d0-w6J8K04D-18l5xeE6 (24598562 GB)</span><br><span class="line">🔐 Key: A7o25Ti0-6L73vi2x-85oL63gt (24598562 GB)</span><br><span class="line">🔐 Key: l8PNO546-Lt90kn31-O659R1rZ (24598562 GB)</span><br><span class="line">🔐 Key: 8Rh75w0a-7xO04f5W-B32tI8n9 (24598562 GB)</span><br><span class="line">🔐 Key: jmB9306F-789SI6ph-7S365JVv (24598562 GB)</span><br><span class="line">🔐 Key: 164biRE3-ct261Rh3-8y9RC6L5 (24598562 GB)</span><br><span class="line">🔐 Key: 73sH81gV-7dDQ239P-5br73p6L (24598562 GB)</span><br><span class="line">🔐 Key: 9BH18g0q-8TV9U6r4-zcDr8703 (24598562 GB)</span><br><span class="line">🔐 Key: w9L6WQ14-t375aI2F-91j27zEW (24598562 GB)</span><br><span class="line">🔐 Key: L76Hzc89-pN9r36S0-T85Jw0z9 (24598562 GB)</span><br><span class="line">🔐 Key: hV25y10g-0Hi678gc-9b06HL5F (24598562 GB)</span><br><span class="line">🔐 Key: 4BLI280U-B5c9d17X-57b89Njn (24598562 GB)</span><br><span class="line">🔐 Key: 0e3d75yj-ga82N70x-YG3a5C06 (24598562 GB)</span><br><span class="line">🔐 Key: N2C143ct-uea678k1-8mUot240 (24598562 GB)</span><br><span class="line">🔐 Key: 6y4g9f7j-H198qdA6-9F2G8vw0 (24598562 GB)</span><br><span class="line">🔐 Key: EGR3r108-eU0m381t-8Ec26i9t (24598562 GB)</span><br><span class="line">🔐 Key: zg2B0W41-S16ye8m5-kEQ64R05 (24598562 GB)</span><br><span class="line">🔐 Key: vgs159Q0-6OQe9v07-aj2385TU (24598562 GB)</span><br><span class="line">🔐 Key: 6dU2q39L-207jq8nP-3V4L6Sl2 (24598562 GB)</span><br><span class="line">🔐 Key: 19Gk4bL0-9V8XPS64-g72TEu90 (24598562 GB)</span><br><span class="line">🔐 Key: C2045eQc-n0841qKY-4vV3jY08 (24598562 GB)</span><br><span class="line">🔐 Key: p58J1O4H-P14tT65z-8Rr36mv4 (24598562 GB)</span><br><span class="line">🔐 Key: 24n6m9eh-9T0jH35K-5k71A9mf (24598562 GB)</span><br><span class="line">🔐 Key: 8dIB52E1-3s19ar7z-apS65f73 (24598562 GB)</span><br><span class="line">🔐 Key: z4jG2I08-ha5Y2c17-5U8qi39F (24598562 GB)</span><br><span class="line">🔐 Key: 2mp506db-L57S9Mu2-ey2WI461 (24598562 GB)</span><br><span class="line">🔐 Key: 13R58eyJ-d79iD3I0-7Z64mz9L (24598562 GB)</span><br><span class="line">🔐 Key: 154vY2qO-Kb51S83l-2J04FdQ7 (24598562 GB)</span><br><span class="line">🔐 Key: 132oL6bq-K4S3oz05-h5324nxf (24598562 GB)</span><br><span class="line">🔐 Key: f107WP6Q-g1e3wF74-18Q7lt5S (24598562 GB)</span><br></pre></td></tr></table></figure>
+
+<h3 id="下载代理工具"><a href="#下载代理工具" class="headerlink" title="下载代理工具"></a>下载代理工具</h3><p>这次需要的代理工具是wireguard，<a target="_blank" rel="noopener" href="https://www.wireguard.com/install/">官方下载链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Dlg26xlYBnfWNVXx0PWTdA?pwd=trha">备用下载地址</a><br>提取码：trha</p>
+<p>下载完直接安装就OK。</p>
+<p>这是软件的截图。</p>
+<p><img src="/2023/07/25/science-network/2.png" alt="wireguard软件截图"></p>
+<p>新用户没有配置是不会有配置信息的</p>
+<ul>
+<li><p>首先左下角找到这个下拉框，点击新建空隧道</p>
+</li>
+<li><p>会让你起一个名字，随便起一个名字就好</p>
+</li>
+<li><p>公钥的部分不要动</p>
+</li>
+<li><p>再往下的文本块是配置信息，然后把画面停在这里，最小化，我们去生成配置信息</p>
+</li>
+</ul>
+<h3 id="生成配置信息"><a href="#生成配置信息" class="headerlink" title="生成配置信息"></a>生成配置信息</h3><p>利用一个在线的工具生成配置信息，<a target="_blank" rel="noopener" href="https://replit.com/@misaka-blog/wgcf-profile-generator?v=1">工具链接地址</a></p>
+<p><img src="/2023/07/25/science-network/3.png" alt="网站截图"></p>
+<p>进入网站后，点击右上角的Run，稍等片刻</p>
+<p><img src="/2023/07/25/science-network/4.png" alt="开始配置"></p>
+<p>出现这个画面后，因为我们使用的是秘钥，对应的选项是2，输入2后回车。</p>
+<p><img src="/2023/07/25/science-network/5.png" alt="开始配置"></p>
+<p>这里让输入秘钥，就是之前在telegram获取的秘钥，粘贴在这里后回车。</p>
+<p>之后会要求输入一个随机设备名，随便输入一个字符串回车就好。</p>
+<p><img src="/2023/07/25/science-network/6.png" alt="开始配置"></p>
+<p>生成的红色部分就是配置信息，把配置信息复制下来，然后粘贴在wireguard的文本块里，就像这样。</p>
+<p><img src="/2023/07/25/science-network/7.png" alt="开始配置"></p>
+<p>最后保存配置信息。</p>
+<p>大多数情况下是没有办法直接使用的，因为现在拿到的IP并不是最优IP，所以需要另一个工具来帮助筛选最优的IP，需要注意的是，如果目前有在使用任何的代理或者science online工具必须要停下来，不然会极度影响最优IP的筛选。</p>
+<h3 id="筛选最优IP"><a href="#筛选最优IP" class="headerlink" title="筛选最优IP"></a>筛选最优IP</h3><p><a target="_blank" rel="noopener" href="https://gitlab.com/Misaka-blog/warp-script/-/blob/main/files/warp-yxip/warp-yxip-win.7z">工具下载链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1UZZsxrOWu-PglAx9IYFBKA?pwd=je5f">备用下载链接</a><br>提取码：je5f</p>
+<p>这个工具是完全免费开源的，可以放心使用。</p>
+<p>下载完解压，有一个<code>warp-yxip.bat</code>的文件，双击运行</p>
+<p><img src="/2023/07/25/science-network/8.png" alt="运行效果"></p>
+<p>选择IPV4的筛选，输入1，回车，等待片刻，进程运行完毕后，会在工具的目录下生成一个result的文件使用Excel打开。</p>
+<p><img src="/2023/07/25/science-network/9.png" alt="效果如图"></p>
+<ul>
+<li><p>LOSS 是丢包率</p>
+</li>
+<li><p>DELAY 是延迟</p>
+</li>
+</ul>
+<p>默认会把结果按从优到差进行排序，只需要从前面几个抽一个，复制好IP和端口号然后替换掉wireguard配置文件里的最后一项，比如<code>Endpoint = 162.159.192.160:894</code>。</p>
+<p>补充一点，在wireguard里，如果需要再对配置文件进行更改，可以直接右击配置名称，选择“编辑所选隧道”。</p>
+<p>配置到这里，就完成了，可以进行连接，开始science online旅程了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/science-online/" rel="tag"># science online</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/21/classic-menu/" rel="prev" title="Win11切换Win10经典右击菜单栏">
+                  <i class="fa fa-chevron-left"></i> Win11切换Win10经典右击菜单栏
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/07/27/conf-dhcp/" rel="next" title="Linux配置DHCP服务器">
+                  Linux配置DHCP服务器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="9f3a718de6e9556612f7b4c335a9a952"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://unpkg.com/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: 'unset',
+  left: '16px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
