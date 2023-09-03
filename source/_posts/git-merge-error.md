@@ -1,9 +1,7 @@
 ---
 title: Git 拒绝合并无关历史
 date: 2023-03-26 22:46:29
-categories: 
-  - 探索
-  - 学习过程
+categories: 探索
 tags:
   - Git
 ---

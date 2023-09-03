@@ -1,9 +1,7 @@
 ---
 title: Git进阶操作--回滚代码
 date: 2023-3-24 17:00:00
-categories:
-  - 探索
-  - 学习过程
+categories: 探索
 tags: 
   - Git
 ---
