@@ -22,7 +22,7 @@ tags:
 
 1. 首先在网站上把要恢复的Git-sha码复制下来
 
-![](https://lxp731.github.io/img/git/git_sha.png "sha码")
+![sha码](./git-rollback/1.png)
 
 2. 接下来回到终端执行
 

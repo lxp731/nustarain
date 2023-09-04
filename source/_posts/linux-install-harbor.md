@@ -34,9 +34,9 @@ cp harbor.yml.tmpl harbor.yml
 
 按照自己的意愿修改端口和登录密码，其他的不用修改，最后保存退出。
 
-![](https://lxp731.github.io/img/docker/1.png)
+![](./linux-install-harbor/1.png)
 
-![](https://lxp731.github.io/img/docker/2.png)
+![](./linux-install-harbor/2.png)
 
 ### 执行可执行文件
 
@@ -68,7 +68,7 @@ systemctl restart docker
 
 7. 最后一条也是最重要的一条，一定要检查执行install.sh脚本后，生成的容器是否都处于运行的状态。因为经常有一些容器没有运行起来，我手头这边就出现两个容器没有运行起来。
 
-![](https://lxp731.github.io/img/docker/3.png)
+![](./linux-install-harbor/3.png)
 
 执行以下命令查看运行的/运行过的容器。
 
