@@ -29,15 +29,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/archives/index.html</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/tags/index.html</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -56,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/05/24/seliunx/</loc>
+    <loc>https://nustarain.gitee.io/archives/index.html</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -83,6 +74,15 @@
   </url>
   
   <url>
+    <loc>https://nustarain.gitee.io/2023/05/24/seliunx/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.gitee.io/2023/07/04/nfs/</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -101,24 +101,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/04/nginx/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/04/23/openstack-deploy/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/2023/03/19/openstack-install/</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -128,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/04/php/</loc>
+    <loc>https://nustarain.gitee.io/2023/07/04/nginx/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -155,6 +137,24 @@
   </url>
   
   <url>
+    <loc>https://nustarain.gitee.io/2023/04/23/openstack-deploy/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/07/04/php/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.gitee.io/2023/05/18/linux-init/</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -173,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/13/modify-METRIC/</loc>
+    <loc>https://nustarain.gitee.io/2023/04/23/ms08-067/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/04/23/ms08-067/</loc>
+    <loc>https://nustarain.gitee.io/2023/07/13/modify-METRIC/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -209,15 +209,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/05/31/eve-import-img/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/2023/07/05/gfs/</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -236,6 +227,15 @@
   </url>
   
   <url>
+    <loc>https://nustarain.gitee.io/2023/07/14/gitalk-comment/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.gitee.io/2023/03/26/git-merge-error/</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -245,7 +245,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/14/gitalk-comment/</loc>
+    <loc>https://nustarain.gitee.io/2023/05/31/eve-import-img/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/27/conf-dhcp/</loc>
+    <loc>https://nustarain.gitee.io/2023/07/21/classic-menu/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -272,7 +272,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/21/classic-menu/</loc>
+    <loc>https://nustarain.gitee.io/2023/07/27/conf-dhcp/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -290,15 +290,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/06/Remove-aptkey/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/2023/07/17/changyan-comment/</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -308,7 +299,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/14/RedisAdd/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/06/Remove-aptkey/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -335,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/09/DockerPushLocal/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/14/RedisAdd/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -362,34 +353,16 @@
   </url>
   
   <url>
+    <loc>https://nustarain.gitee.io/2023/08/09/DockerPushLocal/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.gitee.io/2023/07/17/FlyLine/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/08/06/GitSpecifyBranch/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/08/13/HasSlot/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/07/04/ISCSI/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -407,7 +380,16 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/07/04/LVM/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/06/GitSpecifyBranch/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/07/04/ISCSI/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -443,7 +425,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/05/07/CVE-extend/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/13/HasSlot/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -452,7 +434,16 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/</loc>
+    <loc>https://nustarain.gitee.io/2023/07/04/LVM/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/05/07/CVE-extend/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -470,25 +461,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/09/ContainerDownloadSoft/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/2023/08/08/DanglingImage/</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/2023/08/06/DelDesktopFolder/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -506,7 +479,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL-Utf8/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -515,7 +488,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL-Utf8/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/10/DockerMySQL/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -533,7 +506,34 @@
   </url>
   
   <url>
+    <loc>https://nustarain.gitee.io/2023/08/09/ContainerDownloadSoft/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.gitee.io/2023/08/09/DockerPushAliyun/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/2023/08/06/DelDesktopFolder/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -580,7 +580,7 @@
 
   <url>
     <loc>https://nustarain.gitee.io/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -588,98 +588,98 @@
   
   <url>
     <loc>https://nustarain.gitee.io/tags/%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/Docker/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/Redis/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2023-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/tags/Ubuntu/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/MySQL/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/tags/Ubuntu/</loc>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/Git/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/Linux/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/python/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/Windows/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/EVE/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/Openstack/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/tags/science-online/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -688,42 +688,42 @@
   
   <url>
     <loc>https://nustarain.gitee.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2023-09-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.gitee.io/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/categories/%E6%8E%A2%E7%B4%A2/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.gitee.io/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/</loc>
-    <lastmod>2023-09-04</lastmod>
+    <lastmod>2023-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
