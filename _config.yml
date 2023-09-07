@@ -6,11 +6,16 @@
 title: Leo Blog
 subtitle: '刘晓鹏的博客'
 description: '为自己开拓的互联网净地'
-keywords: LEO Blog, 刘晓鹏, LEO
+keywords: LEO Blog, 刘晓鹏, LEO, 刘晓鹏的博客, nustarain, nustarain.io
 author: Burgess Leo
 language: 
   - zh-CN
 timezone: Asia/Shanghai
+
+# 音乐播放器的设置
+aplayer:
+  meting: true       # MetingJS 支持
+  asset_inject: false
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
