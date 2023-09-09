@@ -36,9 +36,8 @@ npm install hexo-tag-aplayer --save
 
 详细参数如下：
 
-|||
-|:---:|:---:|
 |参数|说明|
+|:---:|:---:|
 |title|歌曲标题|
 |author|歌曲作者|
 |url|音乐文件URL地址|
@@ -127,9 +126,8 @@ aplayer:
 {% meting "60198" "netease" "playlist" "autoplay" "mutex:false" "listmaxheight:340px" "preload:none" "theme:#ad7a86" %}
 ```
 
-||||
-|:---:|:---:|:---:|
 |参数|说明|
+|:---:|:---:|:---:|
 |id|必须值|歌曲 id / 播放列表 id / 相册 id / 搜索关键字|
 |server|必须值|音乐平台: netease, tencent, kugou, xiami, baidu|
 |type|必须值|song, playlist, album, search, artist|

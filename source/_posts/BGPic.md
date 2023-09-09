@@ -49,3 +49,14 @@ body {
 * background-size：图片展示大小，这里设置 100%，100% 的意义为：如果背景图片不能全屏，那么是否通过拉伸的方式将背景强制拉伸至全屏显示。
 
 重新生成一下配置，就会出现效果了。
+
+### 补充
+
+已经取消注释的文件对应的功能和教程链接。
+
+|文件|功能|
+|:---:|:---:|
+|footer|**[背景"小飞棍"](https://nustarain.gitee.io/2023/07/17/FlyLine/)**|
+|bodyEnd|**[折叠代码](https://nustarain.gitee.io/2023/09/09/blog-FoldCode/)**|
+|variable|**[设置圆角](https://nustarain.gitee.io/2023/09/09/blog-fillet/)**|
+|style|**[背景图片](https://nustarain.gitee.io/2023/07/17/BGPic/)**、**[博客透明度](https://nustarain.gitee.io/2023/09/09/blog-transparency/)**、**[折叠代码](https://nustarain.gitee.io/2023/09/09/blog-FoldCode/)**|
