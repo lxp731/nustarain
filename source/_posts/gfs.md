@@ -93,7 +93,7 @@ ssh-copy-id -i /root/.ssh/id_rsa.pub web4.liuxp.com
 
 * 搭建集群，两台虚拟机都需要做的
 
-```bash
+```bash 折叠代码
 pcs cluster auth web3.liuxp.com web4.liuxp.com
 Username: hacluster
 Password:q
@@ -156,7 +156,7 @@ lvcreate -L 12G -n qa qavg
 
 * 挂载实现共享存储
 
-```bash
+```bash 折叠代码
 # 格式化文件系统，在集群任意一台机器做就可以
 mkfs.gfs2 -p lock_dlm -t nginx_cluster:gfs2 -j 2 /dev/qavg/qa
 # 创建挂载点，两台虚拟机都需要做的

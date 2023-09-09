@@ -16,7 +16,7 @@ tags:
 
 <!-- more -->
 
-```yml
+```yml 折叠代码
 custom_file_path:
   #head: source/_data/head.njk
   #header: source/_data/header.njk
@@ -28,7 +28,7 @@ custom_file_path:
   #variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
   style: source/_data/styles.styl
-  ```
+```
 
 3. 取消注释以后，创建这样的一个文件source/_data/styles.styl，需要注意的是，这个source是站点目录下的source，而不是主题目录下的source。
 

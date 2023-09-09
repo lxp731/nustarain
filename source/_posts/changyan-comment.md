@@ -30,7 +30,7 @@ tags:
 
 将comment的active值修改为changyan。
 
-```yml
+```bash
 comments:
   # Available values: tabs | buttons
   style: tabs
@@ -41,7 +41,7 @@ comments:
 
 然后进行changyan的主配置修改，将enable值改为true，下面的appid和appkey对应畅言官网的APP ID和APP SECRET。
 
-```yml
+```bash
 changyan:
   enable: true # false
   appid: c*******s

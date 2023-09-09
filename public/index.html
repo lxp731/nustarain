@@ -352,7 +352,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-08 01:04:48" itemprop="dateModified" datetime="2023-09-08T01:04:48+08:00">2023-09-08</time>
+      <time title="修改时间：2023-09-09 17:22:42" itemprop="dateModified" datetime="2023-09-09T17:22:42+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -462,7 +462,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:28:52" itemprop="dateModified" datetime="2023-09-09T17:28:52+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -572,7 +572,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:28:16" itemprop="dateModified" datetime="2023-09-09T17:28:16+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -681,7 +681,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:29:21" itemprop="dateModified" datetime="2023-09-09T17:29:21+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -790,7 +790,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:28:31" itemprop="dateModified" datetime="2023-09-09T17:28:31+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -827,7 +827,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <h3 id="数据读写存储"><a href="#数据读写存储" class="headerlink" title="数据读写存储"></a>数据读写存储</h3><p>错误演示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@knight:/data<span class="comment"># redis-cli -p 6381</span></span><br><span class="line">127.0.0.1:6381&gt; keys *</span><br><span class="line">(empty array)</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k1 v1</span><br><span class="line">(error) MOVED 12706 192.168.1.42:6383</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k2 v2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k3 v3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k4 v4</span><br><span class="line">(error) MOVED 8455 192.168.1.42:6382</span><br><span class="line">127.0.0.1:6381&gt; </span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>折叠代码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root@knight:/data<span class="comment"># redis-cli -p 6381</span></span><br><span class="line">127.0.0.1:6381&gt; keys *</span><br><span class="line">(empty array)</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k1 v1</span><br><span class="line">(error) MOVED 12706 192.168.1.42:6383</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k2 v2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k3 v3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6381&gt; <span class="built_in">set</span> k4 v4</span><br><span class="line">(error) MOVED 8455 192.168.1.42:6382</span><br><span class="line">127.0.0.1:6381&gt; </span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/08/13/RedisDataIO/#more" rel="contents">
@@ -897,7 +897,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:05:59" itemprop="dateModified" datetime="2023-09-09T17:05:59+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1342,7 +1342,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:16:39" itemprop="dateModified" datetime="2023-09-09T17:16:39+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1453,7 +1453,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:14:29" itemprop="dateModified" datetime="2023-09-09T17:14:29+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1561,7 +1561,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:14:51" itemprop="dateModified" datetime="2023-09-09T17:14:51+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1670,7 +1670,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:18:42" itemprop="dateModified" datetime="2023-09-09T17:18:42+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1780,7 +1780,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:18:33" itemprop="dateModified" datetime="2023-09-09T17:18:33+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1891,7 +1891,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:17:46" itemprop="dateModified" datetime="2023-09-09T17:17:46+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2000,7 +2000,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:09:49" itemprop="dateModified" datetime="2023-09-09T17:09:49+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2107,7 +2107,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:10:29" itemprop="dateModified" datetime="2023-09-09T17:10:29+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2215,7 +2215,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:13:25" itemprop="dateModified" datetime="2023-09-09T17:13:25+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2324,7 +2324,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 17:19:36" itemprop="dateModified" datetime="2023-09-09T17:19:36+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -2493,7 +2493,57 @@ darkmode.showWidget();
 </script>
 <script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
 <script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
 
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
 
   <div class="aplayer" 
   data-id="5861160166" 

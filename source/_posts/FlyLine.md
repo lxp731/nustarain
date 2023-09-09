@@ -14,7 +14,7 @@ tags:
 
 <!-- more -->
 
-```yml
+```yml 折叠代码
 custom_file_path:
   #head: source/_data/head.njk
   #header: source/_data/header.njk

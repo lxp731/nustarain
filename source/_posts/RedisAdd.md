@@ -48,7 +48,7 @@ redis-cli --cluster check 192.168.1.42:8371
 
 效果：
 
-```bash
+```bash 折叠代码
 192.168.1.42:6386 (849a82f0...) -> 0 keys | 5461 slots | 1 slaves.
 192.168.1.42:6382 (6dca8499...) -> 1 keys | 5462 slots | 1 slaves.
 192.168.1.42:6387 (79117230...) -> 0 keys | 0 slots | 0 slaves.
@@ -107,7 +107,7 @@ Source node #1: all
 redis-cli --cluster check 192.168.1.42:6381
 ```
 
-```bash
+```bash 折叠代码
 192.168.1.42:6386 (849a82f0...) -> 0 keys | 4096 slots | 1 slaves.
 192.168.1.42:6382 (6dca8499...) -> 1 keys | 4096 slots | 1 slaves.
 192.168.1.42:6387 (79117230...) -> 0 keys | 4096 slots | 0 slaves.
@@ -151,7 +151,7 @@ redis-cli --cluster add-node 192.168.1.42:6388 192.168.1.42:6387 --cluster-slave
 
 8. 查看节点信息
 
-```bash
+```bash 折叠代码
 root@knight:/data# redis-cli -p 6381
 127.0.0.1:6381> cluster nodes
 849a82f0bd85238762ca7ccf234aa30ba97d93a0 192.168.1.42:6386@16386 master - 0 1692019970307 7 connected 1365-5460

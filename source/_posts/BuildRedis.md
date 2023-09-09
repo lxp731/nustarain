@@ -48,7 +48,7 @@ e361d9695a0c   redis:6.0.8   "docker-entrypoint.s…"   About a minute ago   Up 
 * 进入容器
 
 ```bash
-docker exec -it redis-node-1 bash
+docker exec -it redis-node-1 js 折叠代码
 ```
 
 * 建立集群
@@ -84,7 +84,7 @@ cluster nodes
 
 效果展示：
 
-```bash
+```bash 折叠代码
 root@knight:/data# redis-cli -p 6381
 127.0.0.1:6381> cluster info
 cluster_state:ok
@@ -122,7 +122,7 @@ redis-cli --cluster check 192.168.1.42:6381
 
 效果展示：
 
-```bash
+```bash 折叠代码
 root@knight:/data# redis-cli --cluster check 192.168.1.42:6381
 192.168.1.42:6381 (f999e351...) -> 0 keys | 5461 slots | 1 slaves.
 192.168.1.42:6383 (41f99f51...) -> 1 keys | 5461 slots | 1 slaves.

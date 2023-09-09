@@ -48,7 +48,7 @@ swaks --to m19527705687@163.com --from m19527705687@163.com --body 'This is a te
 
 这个命令的to和from都是一样的参数，很明显是执行不成功的。
 
-```bash
+```bash 折叠代码
 === Trying 163mx01.mxmail.netease.com:25...
 === Connected to 163mx01.mxmail.netease.com.
 <-  220 163.com Anti-spam GT for Coremail System (163com[20141201])
@@ -83,7 +83,7 @@ swaks --to river_li@whu.edu.cn --data data.eml
 指定的data内容就是一封邮件的内容，可以指定From、Subject、Content-Type、DKIM-Signature等字段。
 可以把下面这一段代码，写进一个文件，命名为data.eml 在执行命令时进行引用。然后文件里的--to选项和--from选项即使相同也并不发生冲突，命令里的--to选项正常写。
 
-```bash
+```bash 折叠代码
 Delivered-To: yixianosaurusphangnga7096@gmail.com
 Received: by 2002:a4f:f31a:0:0:0:0:0 with SMTP id c26csp2268818ivo;
         Mon, 30 Mar 2020 00:33:01 -0700 (PDT)
@@ -147,7 +147,7 @@ X-Mailer: saucer-man.com
 
 ### 成功的案例
 
-```bash
+```bash 折叠代码
 swaks --to worktestnet321@163.com --data /data.eml 
 ```
 

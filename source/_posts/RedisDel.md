@@ -21,7 +21,7 @@ redis-cli --cluster check 192.168.1.42:6381
 
 效果：
 
-```bash
+```bash 折叠代码
 S: f999e35136ec2e61fcceebf182f5c38ef4a4354d 192.168.1.42:6381
    slots: (0 slots) slave
    replicates 849a82f0bd85238762ca7ccf234aa30ba97d93a0
@@ -71,7 +71,7 @@ redis-cli --cluster check 192.168.1.42:6381
 
 效果：
 
-```bash
+```bash 折叠代码
 S: f999e35136ec2e61fcceebf182f5c38ef4a4354d 192.168.1.42:6381
    slots: (0 slots) slave
    replicates 849a82f0bd85238762ca7ccf234aa30ba97d93a0
@@ -147,7 +147,7 @@ redis-cli --cluster check 192.168.1.42:6381
 
 效果：
 
-```bash
+```bash 折叠代码
 S: f999e35136ec2e61fcceebf182f5c38ef4a4354d 192.168.1.42:6381
    slots: (0 slots) slave
    replicates 849a82f0bd85238762ca7ccf234aa30ba97d93a0

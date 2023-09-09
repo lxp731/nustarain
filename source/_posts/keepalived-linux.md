@@ -164,7 +164,7 @@ cp /etc/keepalived/keepalived.conf{,.bak}
 
 全局配置模块
 
-```bash
+```bash 折叠代码
 ! Configuration File for keepalived
 
 global_defs {
@@ -193,7 +193,7 @@ vrrp_script check_mariadb {
 
 VRRPD 配置段  
 
-```bash
+```bash 折叠代码
 vrrp_instance mariadb-ha {
     state BACKUP	# 备用
     interface ens224
@@ -218,7 +218,7 @@ vrrp_instance mariadb-ha {
 
 全局配置段
 
-```bash
+```bash 折叠代码
 ! Configuration File for keepalived
 
 global_defs {
@@ -247,7 +247,7 @@ vrrp_script check_mariadb {
 
 VRRPD 配置段
 
-```bash
+```bash 折叠代码
 vrrp_instance mariadb-ha {
     state BACKUP
     interface ens224

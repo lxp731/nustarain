@@ -37,7 +37,7 @@ docker stop redis-node-1
 
 效果：
 
-```bash
+```bash 折叠代码
 root@knight:/docker# docker stop redis-node-1
 redis-node-1
 root@knight:/docker# docker ps -a
@@ -81,7 +81,7 @@ f999e35136ec2e61fcceebf182f5c38ef4a4354d 192.168.1.42:6381@16381 master,fail - 1
 
 效果如下：
 
-```bash
+```bash 折叠代码
 root@knight:/docker# docker start redis-node-1 
 redis-node-1
 root@knight:/docker# docker exec -it redis-node-1 bash

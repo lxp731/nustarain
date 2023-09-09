@@ -12,7 +12,7 @@ tags:
 
 * 报错信息
 
-```
+```bash
 有 44 个软件包可以升级。请执行 ‘apt list --upgradable’ 来查看它们。
 W: https://community-store-packages.deepin.com/appstore/dists/eagle/InRelease: 密钥存储在过时的 trusted.gpg 密钥环中（/etc/apt/trusted.gpg），请参见 apt-key(8) 的 DEPRECATION 一节以了解详情。
 W: 无法下载 https://typora.io/linux/./InRelease  Could not wait for server fd - select (11: 资源暂时不可用) [IP: 2a03:2880:f10d:183:face:b00c:0:25de 443]
@@ -50,7 +50,7 @@ W: https://community-store-packages.deepin.com/appstore/dists/eagle/InRelease: �
 
 1. 首先先查看一下系统有多少存储秘钥
 
-```bash
+```bash 折叠代码
 knight@knight:~/nustarain$ sudo apt-key list
 [sudo] knight 的密码： 
 Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
@@ -110,7 +110,7 @@ uid             [ 未知 ] Ubuntu Archive Automatic Signing Key (2018) <ftpmaste
 
 2. 可以看到有很多秘钥，然后在报错信息里面找关键字，发现有`deepin`关键字，然后使用 grep 查找，可以筛选出来，符合条件的就只有两个。
 
-```bash
+```bash 折叠代码
 /etc/apt/trusted.gpg
 --------------------
 pub   rsa2048 2014-12-16 [SC]
@@ -144,7 +144,7 @@ google-chrome.gpg  tickstep-packages-archive-keyring.gpg  ubuntu-keyring-2018-ar
 
 4. 最后，`sudo apt-key list`查看导出的秘钥并不会消失，但是执行`sudo apt update`不会再报警告了。
 
-```
+``` bash 
 获取:18 http://mirrors.aliyun.com/ubuntu jammy-security/universe amd64 DEP-11 Metadata [39.9 kB] 
 命中:19 https://dl.winehq.org/wine-builds/ubuntu focal InRelease                     
 命中:20 http://file.tickstep.com/apt aliyunpan InRelease 

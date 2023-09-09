@@ -30,7 +30,7 @@ docker attach nginx-1
 
 从下面的例子来看这两种进入容器的区别：
 
-```bash
+```bash 折叠代码
 root@knight:/docker# docker ps 
 CONTAINER ID   IMAGE         COMMAND       CREATED          STATUS          PORTS     NAMES
 c2dbddec15d3   mynginx:0.1   "/bin/bash"   21 seconds ago   Up 20 seconds             nginx-1
@@ -70,7 +70,7 @@ root@knight:/docker#
 
 从下面的例子来看这两种退出容器的区别：
 
-```bash
+```bash 折叠代码
 root@knight:/docker# docker images
 REPOSITORY    TAG       IMAGE ID       CREATED             SIZE
 mynginx       0.1       babef9096509   About an hour ago   140MB

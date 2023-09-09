@@ -20,7 +20,7 @@ tags:
 
 如果前面有了解RSA算法的话，那么肯定知道，我们第一步就是要生成公钥和私钥，用公钥对文件进行加密，用私钥对文件进行解密。
 
-```python
+```bash 折叠代码
 from Crypto.PublicKey import RSA
 
 
@@ -59,7 +59,7 @@ UQIDAQAB
 
 私钥：
 
-```bash
+```bash 折叠代码
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIFJTBPBgkqhkiG9w0BBQ0wQjAhBgkrBgEEAdpHBAswFAQIYFPAcEnz9NUCAkAA
 AgEIAgEBMB0GCWCGSAFlAwQBAgQQV9WQuQ24VS4bv3+pL+lm3ASCBNBw9SW3QVpT
@@ -98,7 +98,7 @@ G5V6ZnooEecwqjFhZ1xHKMtvDcPAO0ivEw==
 
 现在我们来看看如何对文件进行加密处理：
 
-```python
+```bash 折叠代码
 from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
 from Crypto.Random import get_random_bytes
@@ -136,7 +136,7 @@ Encrypt("e://test/music.mp3")
 
 ### 私钥解密
 
-```python
+```bash 折叠代码
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import AES, PKCS1_OAEP
 
@@ -176,7 +176,7 @@ Descrypt("e://test/music.mp3")
 
 举例比如：blog2.rar ==> yFmcuIzZvxmY.liuxp
 
-```python
+```bash 折叠代码
 import os
 import base64
 
@@ -204,7 +204,7 @@ RenameFile("e:/test/", "cool.png")
 
 举例比如: yFmcuIzZvxmY.liuxp ==> blog2.rar
 
-```python
+```bash 折叠代码
 import os
 import base64
 
@@ -233,7 +233,7 @@ RestoreFilename("e://test/", "0hHdu8GbsVGa.liuxp")
 
 我们把上述几个过程整合起来，然后实现对某一个目录下的所有文件进行不对称加密和不对称解密：
 
-```python
+```bash 折叠代码
 # coding=utf-8
 from Crypto.PublicKey import RSA
 from Crypto.Random import get_random_bytes

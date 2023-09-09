@@ -149,7 +149,7 @@ docker pull 192.168.1.42:5000/mynginx:1.1
 
 例子：
 
-```bash
+```bash 折叠代码
 root@knight:/# docker images
 REPOSITORY                  TAG       IMAGE ID       CREATED             SIZE
 192.168.1.42:5000/mynginx   1.1       f35ce030ad11   About an hour ago   198MB

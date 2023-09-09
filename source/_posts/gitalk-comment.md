@@ -56,7 +56,7 @@ tags:
 
 1. 首先需要把`active`的值，改为gitalk
 
-```yaml
+```bash 折叠代码
 comments:
   # Available values: tabs | buttons
   style: tabs
@@ -88,7 +88,7 @@ comments:
   * proxy代理值，默认就好。
   * language语言类型，别的地方我不管，在我这里必须讲中文。
 
-```yaml
+```bash 折叠代码
 gitalk:
   enable: true
   github_id: lxp731 # GitHub repo owner

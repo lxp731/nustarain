@@ -126,7 +126,7 @@ SHOW VARIABLES LIKE 'character%';
 
 回车出现以下，修改成功：
 
-```bash
+```bash 折叠代码
 mysql> SHOW VARIABLES LIKE 'character%';
 +--------------------------+--------------------------------+
 | Variable_name            | Value                          |

@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://nustarain.gitee.io/2023/04/23/ms08-067/5.png">
 <meta property="og:image" content="https://nustarain.gitee.io/2023/04/23/ms08-067/6.png">
 <meta property="article:published_time" content="2023-04-23T14:48:43.000Z">
-<meta property="article:modified_time" content="2023-09-04T08:18:59.196Z">
+<meta property="article:modified_time" content="2023-09-09T08:47:27.101Z">
 <meta property="article:author" content="Burgess Leo">
 <meta property="article:tag" content="网络安全">
 <meta name="twitter:card" content="summary">
@@ -255,7 +255,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+      <time title="修改时间：2023-09-09 16:47:27" itemprop="dateModified" datetime="2023-09-09T16:47:27+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -302,10 +302,10 @@
 <p>靶机：XP windows，下载链接，推荐使用电脑版的腾讯微云下载，这是目前我找到的最好用的ed2k的下载工具了。</p>
 <span id="more"></span>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ed2k://|file|sc_winxp_tablet_2005_CD1.iso|629227520|505B810E128351482AF8B83AC4D04FD2|/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ed2k://|file|sc_winxp_tablet_2005_CD1.iso|629227520|505B810E128351482AF8B83AC4D04FD2|/</span><br></pre></td></tr></table></figure>
 
 <h3 id="域内扫描"><a href="#域内扫描" class="headerlink" title="域内扫描"></a>域内扫描</h3><p>攻击第一步，先扫描网络内存活并可以利用的主机。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -T4 -A -v -Pn 192.168.20.1/24</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -T4 -A -v -Pn 192.168.20.1/24</span><br></pre></td></tr></table></figure>
 
 <h3 id="开始攻击"><a href="#开始攻击" class="headerlink" title="开始攻击"></a>开始攻击</h3><ol>
 <li>执行<code>msfconsole -q</code>。</li>
@@ -463,7 +463,57 @@ darkmode.showWidget();
 </script>
 <script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
 <script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
 
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
 
   <div class="aplayer" 
   data-id="5861160166" 

@@ -36,7 +36,7 @@ CloudFlare拥有极高的业界权威，拥有顶尖的技术团队，拥有最�
 
 我也向大家提供几个可以直接使用的秘钥：
 
-```bash
+```bash 折叠代码
 🔐 Key: T23Xt4d0-w6J8K04D-18l5xeE6 (24598562 GB)
 🔐 Key: A7o25Ti0-6L73vi2x-85oL63gt (24598562 GB)
 🔐 Key: l8PNO546-Lt90kn31-O659R1rZ (24598562 GB)

@@ -54,7 +54,7 @@ a1f6f6e03029   mysql:latest   "docker-entrypoint.s…"   6 seconds ago   Up 5 se
 
 进入`/docker/mysql-master/conf`目录，编辑配置文件`my.cnf`，插入以下内容：
 
-```bash
+```bash 折叠代码
 [mysqld]
 ## 设置server_id，同一局域网中需要唯一
 server_id=101 
@@ -178,6 +178,7 @@ docker restart mysql-slave
 12. 在从数据库中配置主从复制
 
 进入容器
+
 ```bash
 docker exec -it mysql-slave /bin/bash
 ```
@@ -218,7 +219,7 @@ start slave;
 show slave status \G;
 ```
 
-```sql
+```sql 折叠代码
 mysql> show slave status \G
 *************************** 1. row ***************************
                Slave_IO_State: Connecting to source

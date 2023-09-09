@@ -91,7 +91,7 @@ egrep -v "^[[:space:]]*#|^$" nginx.conf.default > nginx.conf
 
 修改配置文件
 
-```bash
+```bash 折叠代码
 worker_processes  1;
 events {
     worker_connections  1024;
@@ -153,7 +153,7 @@ egrep -v "^[[:space:]]*#|^$" nginx.conf.default > nginx.conf
 
 修改配置文件
 
-```bash
+```bash 折叠代码
 worker_processes  1;
 events {
     worker_connections  1024;

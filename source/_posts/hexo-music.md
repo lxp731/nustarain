@@ -67,7 +67,7 @@ npm install hexo-tag-aplayer --save
 
 除了可以添加一首歌曲，还以编辑歌单，代码如下：
 
-```bash
+```bash 折叠代码
 {% aplayerlist %}
 {
     "narrow": false,
@@ -153,7 +153,7 @@ aplayer:
 如果在文章中将播放器的参数fixed激活，只会固定在文章页面中，要将其放在文章外，即博客的左下角，需要另外修改页面代码。
 打开themes/next/layout/_layout.njk文件，在body标签里面的最后处加入aplyer的实例html代码。
 
-```bash
+```bash 折叠代码
 <div class="aplayer" 
   data-id="387465322" 
   data-server="netease" 

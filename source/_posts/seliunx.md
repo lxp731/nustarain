@@ -50,7 +50,6 @@ Relabeled /home/student/.ssh from unconfined_u:object_r:ssh_home_t:s0 to system_
 Relabeled /home/student/.ssh/known_hosts from unconfined_u:object_r:ssh_home_t:s0 to system_u:object_r:admin_home_t:s0
 Relabeled /home/student/.ssh/authorized_keys from unconfined_u:object_r:ssh_home_t:s0 to system_u:object_r:admin_home_t:s0
 Relabeled /home/student/.bash_history from unconfined_u:object_r:user_home_t:s0 to system_u:object_r:admin_home_t:s0
-
 ```
 
 * 再次查看student目录的selinux

@@ -11,7 +11,7 @@ tags:
 
 错误演示：
 
-```bash
+```bash 折叠代码
 root@knight:/data# redis-cli -p 6381
 127.0.0.1:6381> keys *
 (empty array)
@@ -32,7 +32,7 @@ OK
 
 正确演示：
 
-```bash
+```bash 折叠代码
 127.0.0.1:6381> exit
 root@knight:/data# redis-cli -p 6381 -c
 127.0.0.1:6381> FLUSHALL
