@@ -1,3 +1,4 @@
+https://nustarain.gitee.io/2023/09/10/OpenSourceSofts/
 https://nustarain.gitee.io/2023/09/09/blog-FoldCode/
 https://nustarain.gitee.io/2023/07/04/nfs/
 https://nustarain.gitee.io/2023/05/17/LVS-Nginx-NAT/
@@ -51,21 +52,21 @@ https://nustarain.gitee.io/2023/07/17/changyan-comment/
 https://nustarain.gitee.io/2023/04/23/ms08-067/
 https://nustarain.gitee.io/2023/09/08/tiangangfu/
 https://nustarain.gitee.io/2023/03/24/git-rollback/
-https://nustarain.gitee.io/about/index.html
 https://nustarain.gitee.io/archives/index.html
+https://nustarain.gitee.io/about/index.html
 https://nustarain.gitee.io/categories/index.html
 https://nustarain.gitee.io/tags/index.html
 https://nustarain.gitee.io/2023/07/13/why-mysql-binlog/
 https://nustarain.gitee.io/2023/07/04/nginx/
-https://nustarain.gitee.io/2023/03/19/openstack-install/
 https://nustarain.gitee.io/2023/04/23/openstack-deploy/
+https://nustarain.gitee.io/2023/03/19/openstack-install/
 https://nustarain.gitee.io/2023/07/13/modify-METRIC/
 https://nustarain.gitee.io/2023/03/13/git-basic-operation/
 https://nustarain.gitee.io/2023/08/06/GitSpecifyBranch/
 https://nustarain.gitee.io/2023/08/13/HasSlot/
 https://nustarain.gitee.io/2023/08/13/HashRemainder/
-https://nustarain.gitee.io/2023/05/07/CVE-extend/
 https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/
+https://nustarain.gitee.io/2023/05/07/CVE-extend/
 https://nustarain.gitee.io/2023/04/22/CVE-2019-0708/
 https://nustarain.gitee.io/
 https://nustarain.gitee.io/tags/%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/
@@ -76,6 +77,7 @@ https://nustarain.gitee.io/tags/Ubuntu/
 https://nustarain.gitee.io/tags/MySQL/
 https://nustarain.gitee.io/tags/Git/
 https://nustarain.gitee.io/tags/Linux/
+https://nustarain.gitee.io/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/
 https://nustarain.gitee.io/tags/python/
 https://nustarain.gitee.io/tags/%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/
 https://nustarain.gitee.io/tags/Windows/
