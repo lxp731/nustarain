@@ -488,15 +488,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/archives/index.html</loc>
-    
-    <lastmod>2023-09-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.gitee.io/about/index.html</loc>
     
     <lastmod>2023-09-04</lastmod>
@@ -507,6 +498,15 @@
   
   <url>
     <loc>https://nustarain.gitee.io/categories/index.html</loc>
+    
+    <lastmod>2023-09-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.gitee.io/archives/index.html</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -605,7 +605,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/</loc>
+    <loc>https://nustarain.gitee.io/2023/05/07/CVE-extend/</loc>
     
     <lastmod>2023-09-04</lastmod>
     
@@ -614,7 +614,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.gitee.io/2023/05/07/CVE-extend/</loc>
+    <loc>https://nustarain.gitee.io/2023/08/13/ConsistencyHashing/</loc>
     
     <lastmod>2023-09-04</lastmod>
     

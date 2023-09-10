@@ -167,6 +167,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 <div align="center" style="width:50%;">
 
 ![UI](./OpenSourceSofts/2.png)
+
 </div>
 
 * **[BlackHole](https://github.com/Sangwan5688/BlackHole)**
@@ -176,6 +177,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 <div align="center" style="width:50%;">
 
 ![UI](./OpenSourceSofts/1.png)
+
 </div>
 
 ### 高阶AI区
