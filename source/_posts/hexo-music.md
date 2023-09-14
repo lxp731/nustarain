@@ -126,9 +126,9 @@ aplayer:
 {% meting "60198" "netease" "playlist" "autoplay" "mutex:false" "listmaxheight:340px" "preload:none" "theme:#ad7a86" %}
 ```
 
-|参数|说明|
+|参数|默认|说明|
 |:---:|:---:|:---:|
-|id|必须值|歌曲 id / 播放列表 id / 相册 id / 搜索关键字|
+|id|必须值|歌曲 id、播放列表 id、相册 id、搜索关键字|
 |server|必须值|音乐平台: netease, tencent, kugou, xiami, baidu|
 |type|必须值|song, playlist, album, search, artist|
 |fixed|false|开启固定模式|

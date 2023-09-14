@@ -24,7 +24,7 @@ hexo-tag-dplayer:
     - https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css
   default: 
     api: https://api.prprpr.me/dplayer/
-    loop: yes
+    loop: false
     screenshot: yes
 
 # URL

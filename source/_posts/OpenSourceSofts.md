@@ -17,17 +17,16 @@ tags:
 堪称是Windows 系统上最好用的性能优化器！
 
 <p align="center" style="width:60%;">
-   <img src="https://raw.githubusercontent.com/hellzerg/optimizer/master/banner.png">
+   <img src="./OpenSourceSofts/5.png">
 </p>
 
 * **[SophiApp](https://github.com/wangshusen/SearchEngine)**
 
 一款强大的 Windows 微调工具。这是一个用于微调 Windows 10 和 Windows 11 配置的调整器。它拥有现代化的操作界面，在保证系统稳定的前提下，提供了超过 130 种的调整选项。
 
-<div align="center" style="width:60%;">
-
-![Image](https://github.com/Sophia-Community/SophiApp/raw/master/img/1.png?raw=true)
-</div>
+<p align="center" style="width:60%;">
+   <img src="./OpenSourceSofts/6.png">
+</p>
 
 * **[ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)**
 
@@ -38,34 +37,74 @@ tags:
 内存自动优化清理，轻量级实时内存管理应用程序，用于监视和清理计算机上的系统内存。
 
 <p align="center" style="width:50%;">
-	<img src="https://www.henrypp.org/images/memreduct.png" />
+	<img src="./OpenSourceSofts/7.png" />
 </p>
 
 ### Windows实用区
+
+* **[Everything](https://www.voidtools.com/zh-cn/)**
+
+本地文件搜索工具，属于本人装机必备的软件。
+
+<p align="center" style="width:40%;">
+	<img src="./OpenSourceSofts/8.png" />
+</p>
+
+* **[Geek](https://geekuninstaller.com/)**
+
+高效快速、小巧便携。100% 免费的Windows卸载工具，同时在卸载之后会自动清理注册表缓存，也属于我的装机必备软件。
+
+<p align="center" style="width:30%;">
+  <img src="./OpenSourceSofts/9.png" />
+</p>
+
+* **[potplayer视频播放器](https://potplayer.daum.net/)**
+
+本人一直在用的视频播放器软件，几乎是装机必备的软件，功能很强大，唯一的缺点是只支持Windows系统。
+
+<p align="center" style="width:50%;">
+	<img src="./OpenSourceSofts/10.png" />
+</p>
+
+* **[VLC视频播放器](https://www.videolan.org/vlc/)**
+
+VLC 是一款免费、自由、开源的跨平台多媒体播放器及框架，可播放大多数多媒体文件，以及各类流媒体协议。可在所有平台运行 - Windows, Linux, Mac OS X, Unix, iOS, Android...   
+本人在Ubuntu上就是用的这个。
+
+<p align="center" style="width:50%;">
+	<img src="./OpenSourceSofts/1.jpg" />
+</p>
+
+* **[Captura](https://mathewsachin.github.io/blog/2023/04/09/captura-unmaintained.html)**
+
+Captura是一款适用于 Windows 的屏幕捕获（屏幕截图、录制）应用程序，可以捕获屏幕、网络摄像头、音频和击键。它不再维护，但源代码仍然存档在 GitHub 上，有 8k+ star 和 1.5k+ fork。
+
+<p align="center" style="width:30%;">
+  <img src="./OpenSourceSofts/11.png" />
+</p>
 
 * **[鼠标自动点击器（简单版）](https://github.com/InJeCTrL/ClickRun)** **[鼠标自动点击器（高级版）](https://github.com/taojy123/KeymouseGo)**
 
 可以帮我们自动完成一些机械性重复的工作！
 
 <div align="center" style="width:60%;">
-
-![UI展示](./OpenSourceSofts/3.png)
+  <img src="./OpenSourceSofts/3.png" />
 </div>
 
 * **[server](https://github.com/screego/server/releases/tag/v1.10.0)**
 
 多用户的屏幕分享服务。它可以快速启动一个在线共享屏幕的服务，让用户无需安装任何软件，仅使用浏览器就能分享自己的屏幕画面。项目基于网页实时通信(WebRTC) 实现，由 STUN/TURN 协议完成内网穿透和浏览器端对端的连接，既实用又有源码可以学习。
 
-<p align="center" style="width:60%;">
-  <img src="https://github.com/screego/server/raw/v1.10.0/docs/logo.png" />
+<p align="center" style="width:50%;">
+  <img src="./OpenSourceSofts/12.png" />
 </p>
 
 * **[Umi-OCR](https://github.com/hiroi-sora/Umi-OCR)**
 
 OCR图片转文字识别软件，完全离线。截屏/批量导入图片，支持多国语言、合并段落、竖排文字。可排除水印区域，提取干净的文本。基于 PaddleOCR 。基于 PaddleOCR 的 OCR 图片转文字识别软件。完全免费、可离线使用的开源软件，支持截屏识别文字、批量导入图片、横/竖排文字，还可以自动忽略水印区域，适用于 Win10、Win11 操作系统。
-<div align="center" style="width:60%;">
 
-![](https://tupian.li/images/2023/04/26/6447fe3273efd.png)
+<div align="center" style="width:60%;">
+  <img src="./OpenSourceSofts/13.png" />
 </div>
 
 * **[Gopeed](https://gopeed.com/zh-CN)**
@@ -73,7 +112,7 @@ OCR图片转文字识别软件，完全离线。截屏/批量导入图片，支�
 一款支持全平台的下载器。
 
 <div align="center" style="width:60%;">
-  <img src="https://www.freedidi.com/wp-content/uploads/2023/07/2023-07-04-220012.jpg" />
+  <img src="./OpenSourceSofts/2.jpg" />
 </div>
 
 ### Windows工作区
@@ -83,16 +122,15 @@ OCR图片转文字识别软件，完全离线。截屏/批量导入图片，支�
 HandBrake 是一款由志愿者构建的开源工具，用于将视频从几乎任何格式转换为一系列广泛支持的现代编解码器。转换几乎任何格式的视频，免费和开源多平台（Windows、Mac 和 Linux）。
 
 <div align="center" style="width:60%;">
-<img src="https://handbrake.fr/img/slides/slide1_win.jpg?raw=true" />
+  <img src="./OpenSourceSofts/3.jpg" />
 </div>
 
 * **[LogicFlow](https://github.com/didi/LogicFlow/)**
 
 是一款流程图编辑框架，提供了一系列 流程图的交互、编辑所必需的功能和简单灵活的节点自定义、插件等拓展机制，方便我们快速在业务系统内满足类流程图的需求。
 
-<div align="center" style="width:70%;">
-
-![图片:organizer](https://cdn.jsdelivr.net/gh/Logic-Flow/static@latest/core/organizer-iii.gif)
+<div align="center" style="width:60%;">
+  <img src="./OpenSourceSofts/2.gif" />
 </div>
 
 * **[SpleeterGui](https://github.com/boy1dr/SpleeterGui)**
@@ -100,7 +138,7 @@ HandBrake 是一款由志愿者构建的开源工具，用于将视频从几乎�
 一款Windows 上的音轨分离工具，它是第三方制作的Spleeter 桌面应用，支持中文在内的多国语言，可以将音乐里的人声和乐器声分离，轻松实现提取音乐中的伴奏。
 
 <div align="center" style="width:40%;">
-  <img src="https://github.com/boy1dr/SpleeterGui/raw/master/Spleeter_GUI.png" />
+  <img src="./OpenSourceSofts/14.png" />
 </div>
 
 ### Windows娱乐区
@@ -110,7 +148,7 @@ HandBrake 是一款由志愿者构建的开源工具，用于将视频从几乎�
 Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件为桌面壁纸的工具，不仅安装简单效果炫酷，而且完全免费。
 
 <div align="center" style="width:50%;">
-  <img src="https://github.com/rocksdanister/lively/raw/core-separation/resources/figma_promo_16x9.jpg" />
+  <img src="./OpenSourceSofts/4.jpg" />
 </div>
 
 * **[jellyfin](https://github.com/jellyfin/jellyfin)**
@@ -128,7 +166,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 黑客工具全家桶。该项目收录了各种黑客工具，包括破解密码、SQL 注入、钓鱼攻击、XSS、DDos 等。堪称黑客军火库的开源项目啊
 
 <div align="center" style="width:70%;">
-  <img src="https://github.com/Z4nzu/hackingtool/raw/master/images/A00.png" />
+  <img src="./OpenSourceSofts/15.png" />
 </div>
 
 * **[Rocket.Chat](https://github.com/RocketChat/Rocket.Chat)**
@@ -136,7 +174,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 一款可自由定制的企业级开源通信平台源码。用它来可以搭建一个功能丰富的通信平台，可自托管做为 Slack 的开源替代品。支持创建频道、团队和讨论等多种不同功能的群聊，消息支持图片、文件、视频和语音，拥有包括 Windows、Linux、macOS、Android 和 iOS 在内的多种客户端。 如果你需要搭建一个安全加密，且具有高度私密性的通信平台，那么这款开源项目就非常适合你了。
 
 <div align="center" style="width:70%;">
-  <img src="https://global-uploads.webflow.com/611a19b9853b7414a0f6b3f6/6319c72bbd8af5c8c22efab6_heroImage.webp" />
+  <img src="./OpenSourceSofts/1.webp" />
 </div>
 
 * **[vanblog](https://github.com/Mereithhh/vanblog)**
@@ -146,7 +184,23 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 [vanblog快速上手](https://vanblog.mereith.com/guide/get-started.html)
 
 <div align="center" style="width:60%;">
-  <img src="https://github.com/Mereithhh/vanblog/raw/master/img/%E5%90%88%E5%B9%B6.png" />
+  <img src="./OpenSourceSofts/16.png" />
+</div>
+
+* **[HWiNFO ](https://www.hwinfo.com/)**
+
+适用于 Windows 和 DOS 的全面硬件分析、监控和报告。坦白说，是一个计算机硬件监测工具，并且可以生成报告保存、最全面的系统审计工具。受到了NASA、AMD、华硕、因特尔、戴尔、技嘉等厂商的一致认可。
+
+<div align="center" style="width:60%;">
+  <img src="./OpenSourceSofts/5.jpg" />
+</div>
+
+* **[crystaldiskmark](https://crystalmark.info/en/software/crystaldiskmark/)**
+
+CrystalDiskMark 是一款简单的磁盘基准测试软件。
+
+<div align="center" style="width:50%;">
+  <img src="./OpenSourceSofts/4.png" />
 </div>
 
 * **[1Panel](https://github.com/1Panel-dev/1Panel)**
@@ -154,8 +208,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 现代化、开源的 Linux 服务器运维管理面板
 
 <div align="center" style="width:60%;">
-
-![UI展示](https://resource.fit2cloud.com/1panel/img/overview.png)
+  <img src="./OpenSourceSofts/17.png" />
 </div>
 
 ### 安卓应用区
@@ -165,9 +218,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 一款免费、没广告的离线地图应用。适用于旅行者、游客、徒步旅行者和骑行者的Android 和iOS 离线地图应用，它使用OpenStreetMap 数据，支持详细的离线地图、骑行路线、语音导航、等高线、海拔剖面、山峰和坡度等功能。
 
 <div align="center" style="width:50%;">
-
-![UI](./OpenSourceSofts/2.png)
-
+  <img src="./OpenSourceSofts/2.png" />
 </div>
 
 * **[BlackHole](https://github.com/Sangwan5688/BlackHole)**
@@ -175,9 +226,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 一款高颜值的音乐播放器应用。该项目是用 Flutter 写的高颜值、无广告、免费音乐播放器，拥有歌词、专辑、艺术家、播放列表、定时关闭等功能，支持 Android、iOS、macOS 系统。
 
 <div align="center" style="width:50%;">
-
-![UI](./OpenSourceSofts/1.png)
-
+  <img src="./OpenSourceSofts/1.png" />
 </div>
 
 ### 高阶AI区
@@ -191,7 +240,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 通过深度学习修复老照片的工具，由微软开源的深度学习项目，可用于修复破损的老照片，修复效果显著。
 
 <div align="center" style="width:60%;">
-<img src="https://github.com/microsoft/Bringing-Old-Photos-Back-to-Life/raw/master/imgs/0001.jpg" />
+  <img src="./OpenSourceSofts/6.jpg" />
 </div>
 
 * **[Final2x](https://github.com/Tohrusky/Final2x/)**
@@ -199,7 +248,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 图片放大工具，免费开源，主要是清晰度会提高。
 
 <div align="center" style="width:40%;">
-<img src="https://s2.loli.net/2023/07/20/hWi4U6BNeqau3MF.png" />
+  <img src="./OpenSourceSofts/18.png" />
 </div>
 
 * **[AnimatedDrawings](https://github.com/facebookresearch/AnimatedDrawings)**
@@ -207,8 +256,7 @@ Windows 动态桌面壁纸工具。支持 Windows 用户设置多种动画文件
 让画作动起来的AI 项目。这是Meta AI 研究院开源的动画库，它能让你的画作动起来。无论是小朋友画的小人，还是高水平的卡通人物，该项目都能让它们跟着你一起做动作。
 
 <div align="center" style="width:60%;">
-
-![Sequence 02](https://user-images.githubusercontent.com/6675724/219223438-2c93f9cb-d4b5-45e9-a433-149ed76affa6.gif)
+  <img src="./OpenSourceSofts/1.gif" />
 </div>
 
 ### 不正经项目区
