@@ -5,7 +5,7 @@
 # Site
 title: Leo Blog
 subtitle: '刘晓鹏的博客'
-description: '为自己开拓的互联网净地'
+description: '互联网乌托邦，'
 keywords: LEO Blog, 刘晓鹏, LEO, 刘晓鹏的博客, nustarain, nustarain.io
 author: Burgess Leo
 language: 
@@ -15,7 +15,7 @@ timezone: Asia/Shanghai
 # 音乐播放器的设置
 aplayer:
   meting: true       # MetingJS 支持
-  asset_inject: false
+  asset_inject: true
 
 # 视频播放器的设置
 hexo-tag-dplayer:
