@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -199,6 +199,167 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/07/05/gfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="互联网乌托邦，">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/05/gfs/" class="post-title-link" itemprop="url">Linux关于iscsi+pacemaker+CLVM+gfs的实现</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-05 07:55:37" itemprop="dateCreated datePublished" datetime="2023-07-05T07:55:37+08:00">2023-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 17:21:05" itemprop="dateModified" datetime="2023-09-09T17:21:05+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux关于iscsi+pacemaker+CLVM+gfs的实现" href="/2023/07/05/gfs/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::dfccc5c966933d8b27bbaf510d01a76b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">主机名</td>
+<td align="center">身份</td>
+<td align="center">网络接口</td>
+<td align="center">连接模式</td>
+<td align="center">IP地址</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">web3</td>
+<td align="center">web服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.82&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">web4</td>
+<td align="center">web服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.83&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">storage1</td>
+<td align="center">iscsi存储服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.41&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">storage2</td>
+<td align="center">iscsi存储服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.42&#x2F;24</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h3><p>在本项目中，主要完成以下任务：</p>
+<ol>
+<li>完成gfs1和gfs2关于ISCSI存储服务器的搭建，并且成功挂载到web1和web2主机。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/05/gfs/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2372,113 +2533,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/21/CVE-2020-0796/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/04/17/Python-encrypted-file/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="互联网乌托邦，">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/17/Python-encrypted-file/" class="post-title-link" itemprop="url">使用Python加密文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-17 22:03:13" itemprop="dateCreated datePublished" datetime="2023-04-17T22:03:13+08:00">2023-04-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:27:42" itemprop="dateModified" datetime="2023-09-09T17:27:42+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="使用Python加密文件" href="/2023/04/17/Python-encrypted-file/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e96ece9beabcf8479f7a3690738320f0" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>用Python实现对文件的加密和解密，即ransomware的代码原理实现。</p>
-<h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>如果你是直接copy的代码块，粘贴到pycharm后，你会看到.py文件会有一些导入包的报错。你可以自己去网上找教程进行下载。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/17/Python-encrypted-file/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
