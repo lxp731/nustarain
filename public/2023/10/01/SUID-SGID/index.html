@@ -20,26 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="网上乌托邦，心底陶乐庄。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Leo Blog">
-<meta property="og:url" content="https://nustarain.gitee.io/categories/%E6%8E%A2%E7%B4%A2/index.html">
+    <meta name="description" content="背景在linux中，关于 SUID 和 SGID 这种特殊权限的使用，是非常谨慎的，稍有不慎，便有可能导致权限泄露。所以在工作中，常常需要对系统进行检测，重点关注除了 Linux 系统以外的带有类似 SUID 和 SGID 这种特殊权限的文件。下面是检测带有 SUID 和 SGID 特殊权限位的脚本，方便各位使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="检测带有 SUID SGID 的文件">
+<meta property="og:url" content="https://nustarain.gitee.io/2023/10/01/SUID-SGID/index.html">
 <meta property="og:site_name" content="Leo Blog">
-<meta property="og:description" content="网上乌托邦，心底陶乐庄。">
+<meta property="og:description" content="背景在linux中，关于 SUID 和 SGID 这种特殊权限的使用，是非常谨慎的，稍有不慎，便有可能导致权限泄露。所以在工作中，常常需要对系统进行检测，重点关注除了 Linux 系统以外的带有类似 SUID 和 SGID 这种特殊权限的文件。下面是检测带有 SUID 和 SGID 特殊权限位的脚本，方便各位使用。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-01T04:59:49.000Z">
+<meta property="article:modified_time" content="2023-10-01T05:11:13.716Z">
 <meta property="article:author" content="Burgess Leo">
-<meta property="article:tag" content="LEO Blog, 刘晓鹏, LEO, 刘晓鹏的博客, nustarain, nustarain.io">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://nustarain.gitee.io/categories/%E6%8E%A2%E7%B4%A2/">
+<link rel="canonical" href="https://nustarain.gitee.io/2023/10/01/SUID-SGID/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/探索/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.gitee.io/2023/10/01/SUID-SGID/","path":"2023/10/01/SUID-SGID/","title":"检测带有 SUID SGID 的文件"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类: 探索 | Leo Blog</title>
+<title>检测带有 SUID SGID 的文件 | Leo Blog</title>
   
 
 
@@ -126,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -139,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -198,174 +201,126 @@
 
     </div>
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">探索
-          <small>分类</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/10/01/SUID-SGID/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="检测带有 SUID SGID 的文件 | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          检测带有 SUID SGID 的文件
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-10-01 12:59:49 / 修改时间：13:11:13" itemprop="dateCreated datePublished" datetime="2023-10-01T12:59:49+08:00">2023-10-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/" itemprop="url" rel="index"><span itemprop="name">小玩意儿</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="检测带有 SUID SGID 的文件" href="/2023/10/01/SUID-SGID/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::fd7e82f529fba1f8b97d6e22547506ad" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在linux中，关于 SUID 和 SGID 这种特殊权限的使用，是非常谨慎的，稍有不慎，便有可能导致权限泄露。所以在工作中，常常需要对系统进行检测，重点关注除了 Linux 系统以外的带有类似 SUID 和 SGID 这种特殊权限的文件。下面是检测带有 SUID 和 SGID 特殊权限位的脚本，方便各位使用。</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><figcaption><span>点击折叠</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查是否提供了目录作为参数</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -ne 1 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;用法: <span class="variable">$0</span> &lt;目录路径&gt;&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取要扫描的目录路径</span></span><br><span class="line">scan_directory=<span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查目录是否存在</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="string">&quot;<span class="variable">$scan_directory</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;目录不存在: <span class="variable">$scan_directory</span>&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个存储结果的文件</span></span><br><span class="line">output_file=<span class="string">&quot;suid_sgid_files.txt&quot;</span></span><br><span class="line"><span class="built_in">touch</span> <span class="string">&quot;<span class="variable">$output_file</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索并记录SUID和SGID文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(date <span class="string">&quot;+%F %H:%M&quot;</span>)</span>&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$output_file</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;以下是带有SUID和SGID权限的文件和目录：&quot;</span> &gt;&gt; <span class="string">&quot;<span class="variable">$output_file</span>&quot;</span></span><br><span class="line">find <span class="string">&quot;<span class="variable">$scan_directory</span>&quot;</span> -<span class="built_in">type</span> f \( -perm -4000 -o -perm -2000 \) -<span class="built_in">exec</span> <span class="built_in">ls</span> -l &#123;&#125; \; &gt;&gt; <span class="string">&quot;<span class="variable">$output_file</span>&quot;</span> 2&gt;/dev/null</span><br><span class="line">find <span class="string">&quot;<span class="variable">$scan_directory</span>&quot;</span> -<span class="built_in">type</span> d \( -perm -4000 -o -perm -2000 \) -<span class="built_in">exec</span> <span class="built_in">ls</span> -ld &#123;&#125; \; &gt;&gt; <span class="string">&quot;<span class="variable">$output_file</span>&quot;</span> 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;结果已保存到 <span class="variable">$output_file</span>&quot;</span></span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-09-10T22:11:11+08:00"
-              content="2023-09-10">
-          09-10
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/09/10/OpenSourceSofts/" itemprop="url">
-            <span itemprop="name">超良心的开源精品软件或项目</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/28/ip-tools/" rel="prev" title="命令行IP工具">
+                  <i class="fa fa-chevron-left"></i> 命令行IP工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-08-06T21:46:38+08:00"
-              content="2023-08-06">
-          08-06
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/08/06/Remove-aptkey/" itemprop="url">
-            <span itemprop="name">修复Ubuntu中的“Key is stored in legacy trusted.gpg keyring”问题</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-08-06T20:51:19+08:00"
-              content="2023-08-06">
-          08-06
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/08/06/DelDesktopFolder/" itemprop="url">
-            <span itemprop="name">移除Ubuntu桌面的家目录文件夹</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-04-23T14:23:00+08:00"
-              content="2023-04-23">
-          04-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/04/23/openstack-deploy/" itemprop="url">
-            <span itemprop="name">在OpenStack上分发虚拟机实例</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-03-26T22:53:00+08:00"
-              content="2023-03-26">
-          03-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/03/26/ubuntu-update-git/" itemprop="url">
-            <span itemprop="name">Ubuntu 升级Git版本</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-03-26T22:46:29+08:00"
-              content="2023-03-26">
-          03-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/03/26/git-merge-error/" itemprop="url">
-            <span itemprop="name">Git 拒绝合并无关历史</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-03-24T17:00:00+08:00"
-              content="2023-03-24">
-          03-24
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2023/03/24/git-rollback/" itemprop="url">
-            <span itemprop="name">Git进阶操作--回滚代码</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/%E6%8E%A2%E7%B4%A2/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/categories/%E6%8E%A2%E7%B4%A2/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="comments" id="SOHUCS" sid="fd7e82f529fba1f8b97d6e22547506ad"></div>
 </div>
   </main>
 
