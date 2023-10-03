@@ -23,7 +23,7 @@
     <meta name="description" content="网上乌托邦，心底陶乐庄。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Leo Blog">
-<meta property="og:url" content="https://nustarain.gitee.io/page/3/index.html">
+<meta property="og:url" content="https://nustarain.gitee.io/page/7/index.html">
 <meta property="og:site_name" content="Leo Blog">
 <meta property="og:description" content="网上乌托邦，心底陶乐庄。">
 <meta property="og:locale" content="zh_CN">
@@ -32,11 +32,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://nustarain.gitee.io/page/3/">
+<link rel="canonical" href="https://nustarain.gitee.io/page/7/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/3/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/7/index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Leo Blog - 刘晓鹏的博客</title>
@@ -208,7 +208,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/10/DockerMySQL/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/04/21/CVE-2020-0796/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/10/DockerMySQL/" class="post-title-link" itemprop="url">利用Docker搭建MySQL服务器（实战版）</a>
+          <a href="/2023/04/21/CVE-2020-0796/" class="post-title-link" itemprop="url">永恒之黑（CVE-2020-0796）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -237,14 +237,334 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-08-10 14:40:04" itemprop="dateCreated datePublished" datetime="2023-08-10T14:40:04+08:00">2023-08-10</time>
+      <time title="创建时间：2023-04-21 10:10:13" itemprop="dateCreated datePublished" datetime="2023-04-21T10:10:13+08:00">2023-04-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:14:51" itemprop="dateModified" datetime="2023-09-09T17:14:51+08:00">2023-09-09</time>
+      <time title="修改时间：2023-09-09 17:11:56" itemprop="dateModified" datetime="2023-09-09T17:11:56+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="永恒之黑（CVE-2020-0796）" href="/2023/04/21/CVE-2020-0796/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::f5c4a6f793d1f890b179afbe71918ce7" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="惭愧声明"><a href="#惭愧声明" class="headerlink" title="惭愧声明"></a>惭愧声明</h3><p>稍微了解一点就会知道，CVE-2020-0796是可以拿到shell的，但是因为技术能力的限制，到现在复现bug我也没有拿到shell，只会让靶机蓝屏重启。先把博客更了，等后续搞明白了，再来更新。</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>首先，准备一台kali和一台运行1903版本或者1909版本的windows10。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/21/CVE-2020-0796/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/04/17/Python-encrypted-file/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/04/17/Python-encrypted-file/" class="post-title-link" itemprop="url">使用Python加密文件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-17 22:03:13" itemprop="dateCreated datePublished" datetime="2023-04-17T22:03:13+08:00">2023-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 17:27:42" itemprop="dateModified" datetime="2023-09-09T17:27:42+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="使用Python加密文件" href="/2023/04/17/Python-encrypted-file/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::e96ece9beabcf8479f7a3690738320f0" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>用Python实现对文件的加密和解密，即ransomware的代码原理实现。</p>
+<h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>如果你是直接copy的代码块，粘贴到pycharm后，你会看到.py文件会有一些导入包的报错。你可以自己去网上找教程进行下载。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/17/Python-encrypted-file/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/04/16/crypto/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/04/16/crypto/" class="post-title-link" itemprop="url">永恒之蓝复现以及简单的后渗透信息收集</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-16 15:34:29" itemprop="dateCreated datePublished" datetime="2023-04-16T15:34:29+08:00">2023-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 17:11:24" itemprop="dateModified" datetime="2023-09-09T17:11:24+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="永恒之蓝复现以及简单的后渗透信息收集" href="/2023/04/16/crypto/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::2f095f071c651563fb04f4055f6dc698" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>首先需要准备两台虚拟机，一台运行kali linux，一台运行windows7，windows其他版本的没有测试，不过非常有可能其他版本已经修复这个bug了，用来学习测试的话，用windows7比较妥善。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/04/16/crypto/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/04/07/linux-install-harbor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/04/07/linux-install-harbor/" class="post-title-link" itemprop="url">Linux安装harbor</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-07 09:04:00" itemprop="dateCreated datePublished" datetime="2023-04-07T09:04:00+08:00">2023-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 17:23:59" itemprop="dateModified" datetime="2023-09-09T17:23:59+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,8 +585,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="利用Docker搭建MySQL服务器（实战版）" href="/2023/08/10/DockerMySQL/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::a44b9a14c7953f88fadbf53ead6d9725" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="Linux安装harbor" href="/2023/04/07/linux-install-harbor/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::0f71adc9083abba98d0e3efb5f9748fd" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -280,343 +600,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
-<li>拉取镜像</li>
+          <h3 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h3><ol>
+<li>首先下载harbor的包，我使用的是v2.8.0版本的。自己创建一个barbor目录,并且进入此目录，执行以下命令。</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/10/DockerMySQL/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://github.com/goharbor/harbor/releases/download/v2.8.0-rc1/harbor-offline-installer-v2.8.0-rc1.tgz</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/10/DockerVolume/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/10/DockerVolume/" class="post-title-link" itemprop="url">Docker数据卷详解</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-08-10 14:39:46" itemprop="dateCreated datePublished" datetime="2023-08-10T14:39:46+08:00">2023-08-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:18:42" itemprop="dateModified" datetime="2023-09-09T17:18:42+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker数据卷详解" href="/2023/08/10/DockerVolume/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::def1b5fb95ca2fb0cbc6e192e1aaa101" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="数据卷介绍"><a href="#数据卷介绍" class="headerlink" title="数据卷介绍"></a>数据卷介绍</h3><p>容器数据卷(Container Volumes)是Docker用于持久化和共享容器数据的一种机制。它允许您在容器之间共享文件&#x2F;文件夹,并且对容器生命周期之外的数据进行持久化存储。</p>
-<p>主要特点包括:</p>
-<ul>
-<li>数据共享 - 容器之间可以通过数据卷来共享数据。多个容器可以同时挂载一个数据卷,实现数据共享。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/10/DockerVolume/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/09/DockerPushLocal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/09/DockerPushLocal/" class="post-title-link" itemprop="url">Docker镜像推送到私有仓库</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-08-09 23:15:50" itemprop="dateCreated datePublished" datetime="2023-08-09T23:15:50+08:00">2023-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:18:33" itemprop="dateModified" datetime="2023-09-09T17:18:33+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker镜像推送到私有仓库" href="/2023/08/09/DockerPushLocal/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e6650c4eb7886082c8df861895f88e7e" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在实际的生产条件中，公司会用到涉及公司内部的资料，并不希望将镜像挂在公共的仓库，那就需要一个私有的容器仓库来存放打包的镜像，本节记录如何创建本地私有镜像仓库，并上传下载镜像。</p>
-<ol>
-<li>拉取镜像</li>
-</ol>
-<p>执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/09/DockerPushLocal/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/09/DockerPushAliyun/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/09/DockerPushAliyun/" class="post-title-link" itemprop="url">Docker镜像推送到阿里云</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-08-09 21:40:49" itemprop="dateCreated datePublished" datetime="2023-08-09T21:40:49+08:00">2023-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:17:46" itemprop="dateModified" datetime="2023-09-09T17:17:46+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker镜像推送到阿里云" href="/2023/08/09/DockerPushAliyun/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e8c1d6c78f262312882e5acc3030faa4" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在自己本地生产需要的Docker镜像，只留在本地只能供自己使用，而在团队协作的过程中，更多的要发挥文件共享的优势，那么就需要把Docker镜像推送到远端仓库，作为一个共享的资源。Docker Hub 确实是一个不错的工具，但是作为国内用户来讲，不是很友好，那么在阿里云迅猛发展的今天，也给我们提供了不错的解决方案。所以，最后决定把阿里云仓库作为docker镜像的选择。</p>
-<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
-<li>需要拥有一个阿里云旗下的一个账号，支付宝，淘宝等等都可以。浏览器搜索<code>aliyun.com</code>。</li>
+<h3 id="解压包"><a href="#解压包" class="headerlink" title="解压包"></a>解压包</h3><ol start="2">
+<li>下载完成后，执行以下命令进行解压。</li>
 </ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/08/09/DockerPushAliyun/#more" rel="contents">
+              <a class="btn" href="/2023/04/07/linux-install-harbor/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -647,7 +641,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/09/ContainerCommit/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/04/04/post-fake-mail/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -665,7 +659,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/09/ContainerCommit/" class="post-title-link" itemprop="url">将更改过的容器导出为镜像</a>
+          <a href="/2023/04/04/post-fake-mail/" class="post-title-link" itemprop="url">邮件伪造 自己给自己发了一封邮件？？？</a>
         </h2>
 
         <div class="post-meta-container">
@@ -676,14 +670,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-08-09 21:20:05" itemprop="dateCreated datePublished" datetime="2023-08-09T21:20:05+08:00">2023-08-09</time>
+      <time title="创建时间：2023-04-04 21:37:00" itemprop="dateCreated datePublished" datetime="2023-04-04T21:37:00+08:00">2023-04-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:09:49" itemprop="dateModified" datetime="2023-09-09T17:09:49+08:00">2023-09-09</time>
+      <time title="修改时间：2023-09-09 17:26:47" itemprop="dateModified" datetime="2023-09-09T17:26:47+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -691,7 +685,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
         </span>
     </span>
 
@@ -704,8 +698,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="将更改过的容器导出为镜像" href="/2023/08/09/ContainerCommit/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::feecac4a0d081399e0a13748679bfb84" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="邮件伪造 自己给自己发了一封邮件？？？" href="/2023/04/04/post-fake-mail/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::1ec4a786af1ec7e27f5815a1d6ea6b46" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -719,228 +713,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -m <span class="string">&quot;add vim package&quot;</span> -a <span class="string">&quot;liuxp&quot;</span> 容器ID 容器名:版本号</span><br></pre></td></tr></table></figure>
+          <p>网络的安全是360度向外发射的，邮件的方向也是可以被利用的漏洞。今天新学的一个技能，可以自己给自己发邮件，目前只在163邮箱进行了实验，先把今天的小成果记录下来，后续有发现再做更新。</p>
+<p>如果有kali直接利用kali就OK，有一个工具叫swaks.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swaks --to river_li@whu.edu.cn</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><p>-m 添加提交描述。</p>
-</li>
-<li><p>-a 指明提交人。</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/09/ContainerDownloadSoft/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/09/ContainerDownloadSoft/" class="post-title-link" itemprop="url">容器中下载软件包</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-08-09 20:36:43" itemprop="dateCreated datePublished" datetime="2023-08-09T20:36:43+08:00">2023-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:10:29" itemprop="dateModified" datetime="2023-09-09T17:10:29+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="容器中下载软件包" href="/2023/08/09/ContainerDownloadSoft/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::bd17133af25327acc65fd9f018ea6564" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>每个容器都相当于一台单独linux机器。也正因为容器的轻便型，部署好容器后，非常多的软件都是不存在的，需要自己按需下载。</p>
-<p>一般的步骤是：</p>
-<ol>
-<li>执行命令：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>等待软件包缓存更新完毕，执行下载命令，比如：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install -y vim</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/08/DockerBackup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/08/DockerBackup/" class="post-title-link" itemprop="url">Docker重要数据备份</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-08-08 15:02:50" itemprop="dateCreated datePublished" datetime="2023-08-08T15:02:50+08:00">2023-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:13:25" itemprop="dateModified" datetime="2023-09-09T17:13:25+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker重要数据备份" href="/2023/08/08/DockerBackup/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::f055d05769747cace3fd37f13cdc0eca" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>生产环境中，免不了会出现一些误操作，导致Docker开发重要文件或者数据的丢失，那么做好重要数据的备份是免不了的。主要就是重要的配置文件，甚至已经生成的重要的容器，后者更简单粗暴。</p>
-<h3 id="拷贝容器的配置文件"><a href="#拷贝容器的配置文件" class="headerlink" title="拷贝容器的配置文件"></a>拷贝容器的配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">cp</span> 容器ID:/tmp/a.txt /home/admin</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
+<p>这里只指定了收件人，目的是测试发送的连通性，可以当成一个测试。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/08/08/DockerBackup/#more" rel="contents">
+              <a class="btn" href="/2023/04/04/post-fake-mail/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -971,7 +751,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/08/ExitContainer/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/03/26/ubuntu-update-git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -989,7 +769,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/08/ExitContainer/" class="post-title-link" itemprop="url">两种进入和退出容器的方法以及它们之间的区别</a>
+          <a href="/2023/03/26/ubuntu-update-git/" class="post-title-link" itemprop="url">Ubuntu 升级Git版本</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1000,236 +780,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-08-08 14:12:17" itemprop="dateCreated datePublished" datetime="2023-08-08T14:12:17+08:00">2023-08-08</time>
+      <time title="创建时间：2023-03-26 22:53:00" itemprop="dateCreated datePublished" datetime="2023-03-26T22:53:00+08:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:19:36" itemprop="dateModified" datetime="2023-09-09T17:19:36+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="两种进入和退出容器的方法以及它们之间的区别" href="/2023/08/08/ExitContainer/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::148a97db31923004423b9895922069db" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="进入容器的两种方法"><a href="#进入容器的两种方法" class="headerlink" title="进入容器的两种方法"></a>进入容器的两种方法</h3><p>两种进入容器的方法分别是使用<code>exec</code>he<code>attach</code>两种方法。</p>
-<p>具体如下：</p>
-<ul>
-<li>使用<code>exec</code>的方式</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it nginx-1 /bin/bash</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>使用<code>attach</code>的方式</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/08/ExitContainer/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/08/DanglingImage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/08/DanglingImage/" class="post-title-link" itemprop="url">Docker的虚悬镜像的查看和删除</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-08-08 01:06:41" itemprop="dateCreated datePublished" datetime="2023-08-08T01:06:41+08:00">2023-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:12:18" itemprop="dateModified" datetime="2023-09-09T17:12:18+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">学习过程</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker的虚悬镜像的查看和删除" href="/2023/08/08/DanglingImage/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::afc9cd37644b474a0df2434b2aad98cd" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="什么是虚悬镜像"><a href="#什么是虚悬镜像" class="headerlink" title="什么是虚悬镜像"></a>什么是虚悬镜像</h3><p>虚悬镜像（dangling image）一言以蔽之：镜像既没有仓库名，也没有标签，均为&lt;none&gt;</p>
-<p>&lt;none&gt;      &lt;none&gt;     02385df0ef86    3 days ago   123 MB</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/08/08/DanglingImage/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/08/06/Remove-aptkey/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/06/Remove-aptkey/" class="post-title-link" itemprop="url">修复Ubuntu中的“Key is stored in legacy trusted.gpg keyring”问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-08-06 21:46:38" itemprop="dateCreated datePublished" datetime="2023-08-06T21:46:38+08:00">2023-08-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:30:06" itemprop="dateModified" datetime="2023-09-09T17:30:06+08:00">2023-09-09</time>
+      <time title="修改时间：2023-09-09 17:31:32" itemprop="dateModified" datetime="2023-09-09T17:31:32+08:00">2023-09-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1250,8 +808,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="修复Ubuntu中的“Key is stored in legacy trusted.gpg keyring”问题" href="/2023/08/06/Remove-aptkey/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::d507efa9a49646b624b034d7795aa224" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="Ubuntu 升级Git版本" href="/2023/03/26/ubuntu-update-git/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::e74227d951ff88848b1d96ab90e75e78" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1265,14 +823,458 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在Ubuntu下载软件时，经常会安装一些存储秘钥，时间一长就会有一些过期的，不能用的，经常会在<code>apt udate</code>时进行检测，卡着很长时间，最后进行警告，非常浪费时间，而且对于强迫症患者来讲，提示警告和提示报错没什么区别，必须解决。</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><ul>
-<li>报错信息</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">有 44 个软件包可以升级。请执行 ‘apt list --upgradable’ 来查看它们。</span><br><span class="line">W: https://community-store-packages.deepin.com/appstore/dists/eagle/InRelease: 密钥存储在过时的 trusted.gpg 密钥环中（/etc/apt/trusted.gpg），请参见 apt-key(8) 的 DEPRECATION 一节以了解详情。</span><br><span class="line">W: 无法下载 https://typora.io/linux/./InRelease  Could not <span class="built_in">wait</span> <span class="keyword">for</span> server fd - select (11: 资源暂时不可用) [IP: 2a03:2880:f10d:183:face:b00c:0:25de 443]</span><br><span class="line">W: 部分索引文件下载失败。如果忽略它们，那将转而使用旧的索引文件。</span><br></pre></td></tr></table></figure>
+          <p>Ubuntu自己带的git的版本可以正常使用，但是出于对完美的追求，还是想将Git升级为相对高一点的版本。</p>
+<p>只需要依次执行以下代码就OK了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:git-core/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<p>执行完事后，可以通过以下命令查看Git的版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --veision</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/08/06/Remove-aptkey/#more" rel="contents">
+              <a class="btn" href="/2023/03/26/ubuntu-update-git/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/03/26/git-merge-error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/26/git-merge-error/" class="post-title-link" itemprop="url">Git 拒绝合并无关历史</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-26 22:46:29" itemprop="dateCreated datePublished" datetime="2023-03-26T22:46:29+08:00">2023-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 17:21:27" itemprop="dateModified" datetime="2023-09-09T17:21:27+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">探索</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Git 拒绝合并无关历史" href="/2023/03/26/git-merge-error/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::90e885698bdb513a3cf31e34bc16b2e2" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>可能是因为经常在两台电脑上开发的缘故吧，之间来回倒腾。在windows上开发了一些东西，又回到Ubuntu后，就应该是先进行git pull。没错，就应该是这样，然而在我进行git pull时，所有的进度都进行完成之后，出现了以下的报错。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/26/git-merge-error/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/03/24/git-rollback/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/24/git-rollback/" class="post-title-link" itemprop="url">Git进阶操作--回滚代码</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-24 17:00:00" itemprop="dateCreated datePublished" datetime="2023-03-24T17:00:00+08:00">2023-03-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-04 21:36:46" itemprop="dateModified" datetime="2023-09-04T21:36:46+08:00">2023-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">探索</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Git进阶操作--回滚代码" href="/2023/03/24/git-rollback/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::0c98268d835956d2eff3df0395fe4314" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>可能是我之前的操作都太简单了，几乎都是一遍提交，从来没有遇到过回滚的情况，也没有进行深入的研究。直到今天，我把一次修改提交之后，发现博客网站全部乱码，倒也不是乱码，只是没有任何秩序可言，我当时只感脑壳一白。我是谁？我在哪？我在干什么？</p>
+<p>我真的不知道是做了什么修改，可能是因为修改时几次误操作，而且操作过那么多文件，要想一个一个去排查，几乎是不可能的。</p>
+<p>我想这可能就是Git之所以能够封神的原因之一吧，他支持项目的回滚。可以回到任何一个提交的修改点，就像是每次提交都像是给虚拟机拍了一个快照。</p>
+<p>那么进入今天的正题吧！！！</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/24/git-rollback/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/03/19/openstack-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/19/openstack-install/" class="post-title-link" itemprop="url">OpenStack在windows上安装教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-19 14:23:00" itemprop="dateCreated datePublished" datetime="2023-03-19T14:23:00+08:00">2023-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">探索</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="OpenStack在windows上安装教程" href="/2023/03/19/openstack-install/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::94a49d8be4c053310e3ae19d7ff67262" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h3><ol>
+<li>安装VirtualBOX</li>
+</ol>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0.6-155176-Win.exe">https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0.6-155176-Win.exe</a></p>
+</blockquote>
+<ol start="2">
+<li>下载OpenStack的项目资源</li>
+</ol>
+<p>OpenStack <a target="_blank" rel="noopener" href="https://www.aliyundrive.com/s/3uZc1uBwq24">https://www.aliyundrive.com/s/3uZc1uBwq24</a> 提取码: m8zf</p>
+<p>如果是下载的这个网站提供的OpenStack项目资源，那么可以进行查看一下以下几个文件都应该已经存在了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/19/openstack-install/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/03/13/git-basic-operation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/03/13/git-basic-operation/" class="post-title-link" itemprop="url">Git 的基本操作</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-13 12:00:00" itemprop="dateCreated datePublished" datetime="2023-03-13T12:00:00+08:00">2023-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-04 16:18:59" itemprop="dateModified" datetime="2023-09-04T16:18:59+08:00">2023-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">探索</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Git 的基本操作" href="/2023/03/13/git-basic-operation/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::05fe1d1093b70176b666c3eb30c14ee6" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>添加修改到暂存区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+
+<p>添加提交说明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;modify file1&quot;</span><br></pre></td></tr></table></figure>
+
+<p>把本地修改推送到远程仓库</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/13/git-basic-operation/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1296,7 +1298,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
   </nav>
 
 </div>
