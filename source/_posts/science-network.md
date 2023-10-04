@@ -1,9 +1,9 @@
 ---
-title: science online的终极解决方案
+title: 科学上网的终极解决方案
 date: 2023-07-25 20:22:51
 categories: 小玩意儿
 tags:
-  - science online
+  - 科学上网
 ---
 
 从我有了第一台电脑后，science online的手段也逐渐见证着我的成长，从最初的浏览器插件上网，到SSR的小飞机，再到V2ray，以及后面陪伴我最久的clash。可以说已经是身经百战的老油条了。到今天我又遇到了一个具有里程碑式的science online手段**CloudFlare+Warp+ 优选IP**。
