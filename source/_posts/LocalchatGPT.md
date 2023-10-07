@@ -42,3 +42,9 @@ docker run  -e PANDORA_CLOUD=cloud -e PANDORA_SERVER=0.0.0.0:8899 -p 8899:8899 -
 5. 最终的效果图，左边是docker环境下的chatGPT，右边是OpenAI的chatGPT。
 
 ![success](./LocalchatGPT/3.png)
+
+---
+
+除此以外，pandora 的作者还搭建了共享的 chatGPT，都是由网友提供的共享的 chatGPT 的账号组成。
+
+怀着敬意地低调使用吧，[**共享的 chatGPT 点击跳转**](https://chat-shared2.zhile.io/shared.html?v=2)
