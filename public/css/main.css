@@ -2752,29 +2752,12 @@ body {
   background-size: cover;
   background-position: 100% 100%;
 }
-.main-inner > .sub-menu,
-.main-inner > .post-block,
-.main-inner > .tabs-comment,
-.main-inner > .comments,
-.main-inner > .pagination {
-  background: rgba(245,245,245,0.42);
-}
-body {
-  color: #000;
-}
-.posts-expand .post-title-link {
-  color: #000;
-}
 .posts-expand .post-meta-container {
-  color: #800;
-}
-.sidebar {
-  opacity: 0.7;
+  color: #eeb422;
 }
 .header-inner {
-  background: rgba(255,0,255,0.7);
+  background: rgba(238,180,34,0.7);
 }
-y,
 .popup {
   opacity: 0.7;
 }

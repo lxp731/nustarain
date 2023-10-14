@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -199,6 +199,280 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/07/05/gfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/05/gfs/" class="post-title-link" itemprop="url">Linux关于iscsi+pacemaker+CLVM+gfs的实现</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-05 07:55:37" itemprop="dateCreated datePublished" datetime="2023-07-05T07:55:37+08:00">2023-07-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 17:21:05" itemprop="dateModified" datetime="2023-09-09T17:21:05+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux关于iscsi+pacemaker+CLVM+gfs的实现" href="/2023/07/05/gfs/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::dfccc5c966933d8b27bbaf510d01a76b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">主机名</td>
+<td align="center">身份</td>
+<td align="center">网络接口</td>
+<td align="center">连接模式</td>
+<td align="center">IP地址</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">web3</td>
+<td align="center">web服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.82&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">web4</td>
+<td align="center">web服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.83&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">storage1</td>
+<td align="center">iscsi存储服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.41&#x2F;24</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">storage2</td>
+<td align="center">iscsi存储服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.42&#x2F;24</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h3><p>在本项目中，主要完成以下任务：</p>
+<ol>
+<li>完成gfs1和gfs2关于ISCSI存储服务器的搭建，并且成功挂载到web1和web2主机。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/05/gfs/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/07/04/LVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/04/LVM/" class="post-title-link" itemprop="url">关于LVM的配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-04 21:25:45" itemprop="dateCreated datePublished" datetime="2023-07-04T21:25:45+08:00">2023-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 17:24:13" itemprop="dateModified" datetime="2023-09-09T17:24:13+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">理论知识</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="关于LVM的配置" href="/2023/07/04/LVM/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::60326c9708b30f65b0ecae95971f3a53" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>LVM里面主要有三个名词，物理卷（PV），卷组（VG），逻辑卷（LV）。</p>
+<p>物理卷可以有很多形式，一块单独的磁盘（<code>/dev/sda</code>），一个分好的分区（<code>/dev/sdb2</code>），甚至一个文件都可以是物理卷的一种形式。</p>
+<p>单个物理卷或者多个物理卷都可以组合起来变成一个卷组，这样就把几个单独的存储空间给整合了起来，变成了一个大的存储池。</p>
+<p>如果要使用的话，我们可以从这个池子里面分出一部分来作为存储，这个存储就是逻辑卷。</p>
+<h3 id="物理卷"><a href="#物理卷" class="headerlink" title="物理卷"></a>物理卷</h3><ul>
+<li>创建物理卷</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sdb</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/04/LVM/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1066,281 +1340,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/05/24/seliunx/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/18/LVS-Nginx-DR/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/18/LVS-Nginx-DR/" class="post-title-link" itemprop="url">使用LVS+Nginx配置DR模式的Web集群</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-18 22:13:29" itemprop="dateCreated datePublished" datetime="2023-05-18T22:13:29+08:00">2023-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 19:13:27" itemprop="dateModified" datetime="2023-09-09T19:13:27+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="使用LVS+Nginx配置DR模式的Web集群" href="/2023/05/18/LVS-Nginx-DR/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::5b9d2548f817c0927e40a6d7eab886d8" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>需要最少准备三台虚拟机，关闭selinx和防火墙。</p>
-<table>
-<thead>
-<tr>
-<th align="center">主机名</th>
-<th align="center">身份</th>
-<th align="center">网络接口</th>
-<th align="center">连接模式</th>
-<th align="center">IP地址</th>
-<th align="center">软件</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">DS</td>
-<td align="center">调度服务器</td>
-<td align="center">ens224</td>
-<td align="center">仅主机</td>
-<td align="center">172.21.8.80&#x2F;24</td>
-<td align="center">ipvsadm</td>
-</tr>
-<tr>
-<td align="center">web1</td>
-<td align="center">真实服务器</td>
-<td align="center">ens224</td>
-<td align="center">仅主机</td>
-<td align="center">172.21.8.20&#x2F;24</td>
-<td align="center">nginx</td>
-</tr>
-<tr>
-<td align="center">web1</td>
-<td align="center">真实服务器</td>
-<td align="center">lo(VIP)</td>
-<td align="center">-</td>
-<td align="center">172.21.8.80&#x2F;32</td>
-<td align="center">nginx</td>
-</tr>
-<tr>
-<td align="center">web2</td>
-<td align="center">真实服务器</td>
-<td align="center">ens224</td>
-<td align="center">仅主机</td>
-<td align="center">172.21.8.30&#x2F;24</td>
-<td align="center">nginx</td>
-</tr>
-<tr>
-<td align="center">web2</td>
-<td align="center">真实服务器</td>
-<td align="center">lo(VIP)</td>
-<td align="center">-</td>
-<td align="center">172.21.8.80&#x2F;32</td>
-<td align="center">nginx</td>
-</tr>
-</tbody></table>
-<p>PS:</p>
-<ol>
-<li>建议DS（调度机）的网卡使用仅主机模式的。</li>
-<li>web1和web2的loopback网卡都要设置为DS主机的metric值大的那一张网卡。</li></ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/18/LVS-Nginx-DR/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/18/linux-tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/18/linux-tips/" class="post-title-link" itemprop="url">Linux使用小tips</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-18 17:26:10" itemprop="dateCreated datePublished" datetime="2023-05-18T17:26:10+08:00">2023-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:24:07" itemprop="dateModified" datetime="2023-09-09T17:24:07+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/" itemprop="url" rel="index"><span itemprop="name">小玩意儿</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Linux使用小tips" href="/2023/05/18/linux-tips/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::c58de2ed8aca4abbb5510d16611a0a6e" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="常用的一些操作"><a href="#常用的一些操作" class="headerlink" title="常用的一些操作"></a>常用的一些操作</h3><ol>
-<li>永久修改SELINUX值。</li>
-</ol>
-<p>使用虚拟机进行一些服务的配置的时候，如果SELINX的值不调整为permissive，经常会出现一些稀奇古怪的错误，如果每次都开机设置<code>setenforce 0</code>就太麻烦了。所以直接编辑<code>/etc/selinux/config</code>文件，设置<code>SELINUX=permissive</code>，最后保存退出。</p>
-<ol start="2">
-<li>永久修改网卡的IP地址。</li>
-</ol>
-<p>在平常的服务器的配置时，总是会涉及到IP的变动，我个人使用最多的方法是直接修改配置文件。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/18/linux-tips/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
