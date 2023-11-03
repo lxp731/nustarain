@@ -20,29 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="主动模式与被动模式FTP（File Transfer Protocol）是一种用于在计算机之间传输文件的协议，它有两种常见的模式：主动模式（Active Mode）和被动模式（Passive Mode）。这两种模式在建立数据连接时的方式不同，适用于不同的网络环境和安全要求。">
+    <meta name="description" content="在线安装安装命令在github上，下载起来会很慢，可自行尝试。如果出现url: (7) Failed to connect to github.com port 443: 拒绝连接错误，可以通过在&#x2F;etc&#x2F;hosts文件里添加140.82.114.3 github.com条目解决。 1sudo curl -L &quot;https:&#x2F;&#x2F;github.com&#x2F;docker&#x2F;compose&#x2F;rele">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FTP服务器的主动模式和被动模式">
-<meta property="og:url" content="https://nustarain.gitee.io/2023/10/06/ftp-ITAV-PASV/index.html">
+<meta property="og:title" content="安装 docker-compose">
+<meta property="og:url" content="https://nustarain.gitee.io/2023/11/03/install-docker-compose/index.html">
 <meta property="og:site_name" content="Leo Blog">
-<meta property="og:description" content="主动模式与被动模式FTP（File Transfer Protocol）是一种用于在计算机之间传输文件的协议，它有两种常见的模式：主动模式（Active Mode）和被动模式（Passive Mode）。这两种模式在建立数据连接时的方式不同，适用于不同的网络环境和安全要求。">
+<meta property="og:description" content="在线安装安装命令在github上，下载起来会很慢，可自行尝试。如果出现url: (7) Failed to connect to github.com port 443: 拒绝连接错误，可以通过在&#x2F;etc&#x2F;hosts文件里添加140.82.114.3 github.com条目解决。 1sudo curl -L &quot;https:&#x2F;&#x2F;github.com&#x2F;docker&#x2F;compose&#x2F;rele">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-06T02:42:03.000Z">
-<meta property="article:modified_time" content="2023-10-06T02:56:00.885Z">
+<meta property="article:published_time" content="2023-11-03T15:28:03.000Z">
+<meta property="article:modified_time" content="2023-11-03T15:50:54.866Z">
 <meta property="article:author" content="Burgess Leo">
-<meta property="article:tag" content="面试">
-<meta property="article:tag" content="网络基础">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://nustarain.gitee.io/2023/10/06/ftp-ITAV-PASV/">
+<link rel="canonical" href="https://nustarain.gitee.io/2023/11/03/install-docker-compose/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.gitee.io/2023/10/06/ftp-ITAV-PASV/","path":"2023/10/06/ftp-ITAV-PASV/","title":"FTP服务器的主动模式和被动模式"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.gitee.io/2023/11/03/install-docker-compose/","path":"2023/11/03/install-docker-compose/","title":"安装 docker-compose"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>FTP服务器的主动模式和被动模式 | Leo Blog</title>
+<title>安装 docker-compose | Leo Blog</title>
   
 
 
@@ -142,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">主动模式与被动模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-%E7%AB%AF%E5%8F%A3%E4%B8%8E-20-%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">21 端口与 20 端口</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">在线安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">离线安装</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -213,7 +212,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/10/06/ftp-ITAV-PASV/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/11/03/install-docker-compose/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -226,12 +225,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="FTP服务器的主动模式和被动模式 | Leo Blog">
+      <meta itemprop="name" content="安装 docker-compose | Leo Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          FTP服务器的主动模式和被动模式
+          安装 docker-compose
         </h1>
 
         <div class="post-meta-container">
@@ -243,7 +242,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-10-06 10:42:03 / 修改时间：10:56:00" itemprop="dateCreated datePublished" datetime="2023-10-06T10:42:03+08:00">2023-10-06</time>
+      <time title="创建时间：2023-11-03 23:28:03 / 修改时间：23:50:54" itemprop="dateCreated datePublished" datetime="2023-11-03T23:28:03+08:00">2023-11-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,7 +250,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">理论知识</span></a>
+          <a href="/categories/%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">探索</span></a>
         </span>
     </span>
 
@@ -271,8 +270,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="FTP服务器的主动模式和被动模式" href="/2023/10/06/ftp-ITAV-PASV/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::a5c92a559cd66746e6edea6433d7456c" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="安装 docker-compose" href="/2023/11/03/install-docker-compose/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::601c23ba92284bea46055074aca6d0cd" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -286,61 +285,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="主动模式与被动模式"><a href="#主动模式与被动模式" class="headerlink" title="主动模式与被动模式"></a>主动模式与被动模式</h3><p>FTP（File Transfer Protocol）是一种用于在计算机之间传输文件的协议，它有两种常见的模式：主动模式（Active Mode）和被动模式（Passive Mode）。这两种模式在建立数据连接时的方式不同，适用于不同的网络环境和安全要求。</p>
+        <h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><p>安装命令在github上，下载起来会很慢，可自行尝试。<br>如果出现<code>url: (7) Failed to connect to github.com port 443: 拒绝连接</code>错误，可以通过在<code>/etc/hosts</code>文件里添加<code>140.82.114.3 github.com</code>条目解决。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L <span class="string">&quot;https://github.com/docker/compose/releases/latest/download/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<p>以下是对主动模式和被动模式的详细阐述：</p>
-<ol>
-<li><strong>主动模式（Active Mode）</strong>：</li>
-</ol>
-<ul>
-<li><p>在主动模式中，客户端（FTP 客户端）发起连接，客户端的命令连接是从客户端的随机端口（通常是大于1023的端口）发起的。</p>
-</li>
-<li><p>当客户端需要下载文件时，它会向服务器发送一个PORT命令，其中包括它要监听的数据连接端口号和地址。服务器将在该端口上建立数据连接，并将数据传输到客户端的指定端口。</p>
-</li>
-<li><p>主动模式在防火墙和NAT（网络地址转换）背后可能会遇到问题，因为服务器需要连接到客户端的随机端口，这些端口可能被防火墙或NAT设备拦截或阻止。</p>
-</li>
-</ul>
-<ol start="2">
-<li><strong>被动模式（Passive Mode）</strong>：</li>
-</ol>
-<ul>
-<li><p>在被动模式中，服务器发起数据连接。客户端的命令连接仍然是从客户端发起的，但数据连接是从服务器的随机端口发起的。</p>
-</li>
-<li><p>当客户端需要下载文件时，它会向服务器发送一个PASV命令，服务器将随机选择一个端口并通知客户端。然后，客户端建立一个新的数据连接到服务器的指定端口，服务器将在该端口上传输数据。</p>
-</li>
-<li><p>被动模式通常更适合在防火墙和NAT后面的环境中，因为客户端可以通过建立对服务器的新数据连接来绕过防火墙或NAT设备。</p>
-</li>
-</ul>
-<p>总结：</p>
-<ul>
-<li>主动模式需要客户端打开一个端口以供服务器连接，可能需要处理防火墙和NAT的问题。</li>
-<li>被动模式需要服务器打开一个端口以供客户端连接，更容易在防火墙和NAT环境中工作。</li>
-<li>选择模式取决于网络架构和安全需求，被动模式在大多数情况下更为常见。FTP客户端和服务器通常都支持这两种模式，可以根据需要进行配置。</li>
-</ul>
-<h3 id="21-端口与-20-端口"><a href="#21-端口与-20-端口" class="headerlink" title="21 端口与 20 端口"></a>21 端口与 20 端口</h3><p>在FTP中，端口21和端口20扮演着不同的角色，分别用于控制连接和数据连接。以下是它们的作用和功能的详细阐述：</p>
-<ol>
-<li><strong>端口21（FTP控制端口）</strong>：</li>
-</ol>
-<ul>
-<li>端口21是FTP的控制连接端口，也称为命令端口。</li>
-<li>当一个FTP客户端需要连接到一个FTP服务器时，它首先建立一个连接到服务器的端口21。这个连接用于传输FTP命令，例如登录、切换目录、列出文件、获取文件等。</li>
-<li>控制连接是明文的，通常不加密，但可以通过FTP服务器的配置来启用FTP的加密传输（如FTPS或SFTP）来提高安全性。</li>
-</ul>
-<ol start="2">
-<li><strong>端口20（FTP数据端口）</strong>：</li>
-</ol>
-<ul>
-<li>端口20是FTP的数据连接端口，也称为数据传输端口。</li>
-<li>当FTP客户端和服务器需要传输文件或数据时，数据连接将在端口20上建立。</li>
-<li>在FTP的主动模式中，服务器使用端口20向客户端发起数据连接。这意味着服务器将发送数据给客户端的端口20。在FTP的被动模式中，客户端会随机选择一个端口，然后服务器将在客户端选择的端口上建立数据连接。</li>
-</ul>
-<p>总结：</p>
-<ul>
-<li>端口21用于FTP的控制连接，用于传输FTP命令和控制操作。</li>
-<li>端口20用于FTP的数据连接，用于实际的数据传输，如文件传输。</li>
-<li>这两个端口在FTP协议中扮演不同的角色，用于支持FTP的命令和数据传输，共同构成了FTP通信的基础。</li>
-</ul>
+<h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3><p>如果因为网络问题不能安装的话，可以通过离线安装，在这里提供一个 V2.23.0 版本的包。<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1QB1o3NeihQoWKZ6q0pG6MQ?pwd=hsu3"><strong>docker-compose-linux-x86_64</strong></a>，提取码：hsu3。</p>
+<p>上传到服务器后，执行以下操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> docker-compose-linux-x86_64 /usr/local/bin/docker-compose</span><br><span class="line"><span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
+
+<p>如果看到版本号在，即安装成功。</p>
 
     </div>
 
@@ -350,22 +304,18 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
-              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" rel="tag"># 网络基础</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/10/04/backup-style/" rel="prev" title="完整备份、增量备份、差异备份">
-                  <i class="fa fa-chevron-left"></i> 完整备份、增量备份、差异备份
+                <a href="/2023/11/03/docker-apache/" rel="prev" title="Docker 如何正确启动 Apache">
+                  <i class="fa fa-chevron-left"></i> Docker 如何正确启动 Apache
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/10/06/DHCP-server/" rel="next" title="关于 DHCP 的理论知识">
-                  关于 DHCP 的理论知识 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -377,7 +327,7 @@
 
 
 
-    <div class="comments" id="SOHUCS" sid="a5c92a559cd66746e6edea6433d7456c"></div>
+    <div class="comments" id="SOHUCS" sid="601c23ba92284bea46055074aca6d0cd"></div>
 </div>
   </main>
 
