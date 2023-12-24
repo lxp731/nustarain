@@ -1,10 +1,14 @@
 ---
-title: 利用docker搭建本地的chatGPT
+title: 利用docker搭建本地的chatGPT（已失效）
 date: 2023-09-12 15:43:04
 categories: 小玩意儿
 tags:
   - AI
 ---
+
+### 写在前面的话
+
+由于docker镜像不再维护，项目被作者转移为另一个项目，所以本教程已过期，最新的教程可以看[**在 VPS 上搭建自己的 chatGPT**]()。
 
 在偶然的机会看到一个不错的项目，可以利用docker搭建一个能在本地跑的chatGPT，速度出奇地快，而且和真实chatGPT的数据是一模一样的，实测很nice，可以搞。
 

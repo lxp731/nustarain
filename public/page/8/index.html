@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -199,6 +199,166 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/17/LVS-Nginx-NAT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/17/LVS-Nginx-NAT/" class="post-title-link" itemprop="url">使用LVS+Nginx配置NAT模式的Web集群</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-17 19:59:09" itemprop="dateCreated datePublished" datetime="2023-05-17T19:59:09+08:00">2023-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-09 19:14:41" itemprop="dateModified" datetime="2023-09-09T19:14:41+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="使用LVS+Nginx配置NAT模式的Web集群" href="/2023/05/17/LVS-Nginx-NAT/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::5fca2fa4b2dddb397e72a3c51f5c3e76" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="准备条件"><a href="#准备条件" class="headerlink" title="准备条件"></a>准备条件</h3><p>需要最少准备三台虚拟机，关闭selinx和防火墙。</p>
+<table>
+<thead>
+<tr>
+<th align="center">主机名</th>
+<th align="center">身份</th>
+<th align="center">网络接口</th>
+<th align="center">连接模式</th>
+<th align="center">IP地址</th>
+<th align="center">网关</th>
+<th align="center">软件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DS</td>
+<td align="center">调度服务器</td>
+<td align="center">ens160</td>
+<td align="center">nat</td>
+<td align="center">192.168.20.40&#x2F;24</td>
+<td align="center">192.168.20.254</td>
+<td align="center">ipvsadm</td>
+</tr>
+<tr>
+<td align="center">DS</td>
+<td align="center">调度服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">172.21.8.10&#x2F;24</td>
+<td align="center">-</td>
+<td align="center">ipvsadm</td>
+</tr>
+<tr>
+<td align="center">web1</td>
+<td align="center">真实服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">172.21.8.20&#x2F;24</td>
+<td align="center">172.21.8.10&#x2F;24</td>
+<td align="center">nginx</td>
+</tr>
+<tr>
+<td align="center">web2</td>
+<td align="center">真实服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">172.21.8.30&#x2F;24</td>
+<td align="center">172.21.8.10&#x2F;24</td>
+<td align="center">nginx</td>
+</tr>
+</tbody></table>
+<p>PS:</p>
+<ol>
+<li>DS一定是两块网卡，并且用一张网卡去作为真实服务器的网关。</li>
+<li>DS的两块网卡最好模式是不一样的。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/17/LVS-Nginx-NAT/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1149,116 +1309,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/07/linux-install-harbor/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/04/04/post-fake-mail/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/04/04/post-fake-mail/" class="post-title-link" itemprop="url">邮件伪造 自己给自己发了一封邮件？？？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-04 21:37:00" itemprop="dateCreated datePublished" datetime="2023-04-04T21:37:00+08:00">2023-04-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-09-09 17:26:47" itemprop="dateModified" datetime="2023-09-09T17:26:47+08:00">2023-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="邮件伪造 自己给自己发了一封邮件？？？" href="/2023/04/04/post-fake-mail/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::1ec4a786af1ec7e27f5815a1d6ea6b46" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>网络的安全是360度向外发射的，邮件的方向也是可以被利用的漏洞。今天新学的一个技能，可以自己给自己发邮件，目前只在163邮箱进行了实验，先把今天的小成果记录下来，后续有发现再做更新。</p>
-<p>如果有kali直接利用kali就OK，有一个工具叫swaks.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swaks --to river_li@whu.edu.cn</span><br></pre></td></tr></table></figure>
-
-<p>这里只指定了收件人，目的是测试发送的连通性，可以当成一个测试。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/04/04/post-fake-mail/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
