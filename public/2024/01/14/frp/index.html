@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近入手了一台VPS，针对VPS进行了一些功能探索。所以此教程是需要基于一台VPS的。类似于向日葵和 To Desk 的远程桌面，只不过 FRP 实现的远程桌面不需要你再去记住远程软件提供的控制码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FRP实现 Windows 远程桌面">
+<meta property="og:url" content="https://nustarain.gitee.io/2024/01/14/frp/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="最近入手了一台VPS，针对VPS进行了一些功能探索。所以此教程是需要基于一台VPS的。类似于向日葵和 To Desk 的远程桌面，只不过 FRP 实现的远程桌面不需要你再去记住远程软件提供的控制码。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://nustarain.gitee.io/2024/01/14/frp/1.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2024/01/14/frp/4.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2024/01/14/frp/2.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2024/01/14/frp/3.png">
+<meta property="og:image" content="https://nustarain.gitee.io/2024/01/14/frp/5.png">
+<meta property="article:published_time" content="2024-01-14T13:18:49.000Z">
+<meta property="article:modified_time" content="2024-01-14T15:17:23.259Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://nustarain.gitee.io/2024/01/14/frp/1.png">
+
+
+<link rel="canonical" href="https://nustarain.gitee.io/2024/01/14/frp/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.gitee.io/2024/01/14/frp/","path":"2024/01/14/frp/","title":"FRP实现 Windows 远程桌面"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>FRP实现 Windows 远程桌面 | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%95%B0%E5%97%A6%E5%87%A0%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">啰嗦几句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%89%E8%A3%85-FRP"><span class="nav-number">2.</span> <span class="nav-text">服务器端安装 FRP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6frps-toml"><span class="nav-number">3.</span> <span class="nav-text">修改服务端配置文件frps.toml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-systemctl-%E7%AE%A1%E7%90%86-FRP-%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">使用 systemctl 管理 FRP 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%88Windows%EF%BC%89%E5%AE%89%E8%A3%85FRP"><span class="nav-number">5.</span> <span class="nav-text">客户端（Windows）安装FRP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-number">6.</span> <span class="nav-text">客户端配置文件修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEWindows%E6%97%A0%E7%AA%97%E5%8F%A3%E5%90%AF%E5%8A%A8"><span class="nav-number">7.</span> <span class="nav-text">设置Windows无窗口启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">8.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%93%E9%94%99%E7%82%B9"><span class="nav-number">9.</span> <span class="nav-text">易错点</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">网上乌托邦，心底陶乐庄。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2024/01/14/frp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="FRP实现 Windows 远程桌面 | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FRP实现 Windows 远程桌面
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-14 21:18:49 / 修改时间：23:17:23" itemprop="dateCreated datePublished" datetime="2024-01-14T21:18:49+08:00">2024-01-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/" itemprop="url" rel="index"><span itemprop="name">小玩意儿</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="FRP实现 Windows 远程桌面" href="/2024/01/14/frp/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::424a281a67f3a274ffb6e3f57a804671" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最近入手了一台VPS，针对VPS进行了一些功能探索。所以此教程是需要基于一台VPS的。类似于向日葵和 To Desk 的远程桌面，只不过 FRP 实现的远程桌面不需要你再去记住远程软件提供的控制码。</p>
+<span id="more"></span>
+
+<h3 id="啰嗦几句"><a href="#啰嗦几句" class="headerlink" title="啰嗦几句"></a>啰嗦几句</h3><p>FRP 的安装分为服务器端和客户端。服务器端需要在 VPS 上安装，客户端需要在本地安装（也就是需要被远程连接的机器）。</p>
+<p>此项目也是Github上的项目，<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">项目链接 https://github.com/fatedier/frp</a></p>
+<h3 id="服务器端安装-FRP"><a href="#服务器端安装-FRP" class="headerlink" title="服务器端安装 FRP"></a>服务器端安装 FRP</h3><p>直接使用下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/fatedier/frp/releases/download/v0.15.1/frp_0.15.1_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<p>下载好后压缩包后解压，会得到以下几个文件</p>
+<p><img src="/2024/01/14/frp/1.png" alt="文件展示"></p>
+<ul>
+<li>frpc 是客户端运行的可执行文件，VPS这里不需要理它。</li>
+<li>frpc.toml 是客户端的配置文件，VPS这里不需要理它。</li>
+<li>frps 是服务端运行的可执行文件，VPS要用</li>
+<li>frps.toml 是服务端的配置文件，VPS要用。</li>
+</ul>
+<h3 id="修改服务端配置文件frps-toml"><a href="#修改服务端配置文件frps-toml" class="headerlink" title="修改服务端配置文件frps.toml"></a>修改服务端配置文件frps.toml</h3><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">bindPort</span> = <span class="number">7000</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/01/14/frp/4.png" alt="服务端配置文件">]</p>
+<p>修改后运行如下命令启动服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frps -c ./frps.toml</span><br></pre></td></tr></table></figure>
+
+<p>运行后，会有输出内容，这是问题就出现了，不能<kbd>Ctrl</kbd> + <kbd>C</kbd>停止掉，这就造成当前运行服务后不能进行其他操作了。所以需要把服务做成后台服务，这样就可以在前台进行其他操作了。</p>
+<p>如果访问Github有困难的话，可以去百度网盘下载，我使用的是0.53.0版本，提供的也是0.53.0版本。<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1eTxV0C_ApwfWivirMB6zIg?pwd=wzns"><strong>服务器端百度网盘链接，点击跳转，</strong></a> 提取码：wzns</p>
+<h3 id="使用-systemctl-管理-FRP-服务"><a href="#使用-systemctl-管理-FRP-服务" class="headerlink" title="使用 systemctl 管理 FRP 服务"></a>使用 systemctl 管理 FRP 服务</h3><p>首先放一个官方链接，<a target="_blank" rel="noopener" href="https://gofrp.org/zh-cn/docs/setup/systemd/"><strong>点击跳转。</strong></a></p>
+<ol>
+<li>安装 systemd</li>
+</ol>
+<p>如果您的 Linux 服务器上尚未安装 systemd，可以使用包管理器如 yum（适用于 CentOS&#x2F;RHEL）或 apt（适用于 Debian&#x2F;Ubuntu）来安装它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 yum 安装 systemd（CentOS/RHEL）</span></span><br><span class="line">yum install systemd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 apt 安装 systemd（Debian/Ubuntu）</span></span><br><span class="line">apt install systemd</span><br></pre></td></tr></table></figure>
+
+<p>2.创建 frps.service 文件</p>
+<p>使用文本编辑器 (如 vim) 在 &#x2F;etc&#x2F;systemd&#x2F;system 目录下创建一个 frps.service 文件，用于配置 frps 服务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/system/frps.service</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>写入内容</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line"><span class="comment"># 服务名称，可自定义</span></span><br><span class="line">Description = frp server</span><br><span class="line">After = network.target syslog.target</span><br><span class="line">Wants = network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type = simple</span><br><span class="line"><span class="comment"># 启动frps的命令，需修改为您的frps的安装路径</span></span><br><span class="line">ExecStart = /path/to/frps -c /path/to/frps.toml</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy = multi-user.target</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>然后就可以像管理其他服务一样，使用systemctl命令来管理frps了。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动frp</span></span><br><span class="line">sudo systemctl start frps</span><br><span class="line"><span class="comment"># 停止frp</span></span><br><span class="line">sudo systemctl stop frps</span><br><span class="line"><span class="comment"># 重启frp</span></span><br><span class="line">sudo systemctl restart frps</span><br><span class="line"><span class="comment"># 查看frp状态</span></span><br><span class="line">sudo systemctl status frps</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端（Windows）安装FRP"><a href="#客户端（Windows）安装FRP" class="headerlink" title="客户端（Windows）安装FRP"></a>客户端（Windows）安装FRP</h3><p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases/download/v0.53.0/frp_0.53.0_windows_amd64.zip">0.53.0官方Windows下载链接，点击下载</a><br>同样的，访问Github有困难的话，可以使用百度网盘下载，<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/11-wDw4l_augPWeAf9OcTGA?pwd=kstm"><strong>客户端百度网盘链接，点击跳转</strong></a> 提取码：kstm</p>
+<h3 id="客户端配置文件修改"><a href="#客户端配置文件修改" class="headerlink" title="客户端配置文件修改"></a>客户端配置文件修改</h3><p>下载解压后，除了你们没有如图所示的第一个文件外，其他应该都一样。</p>
+<p><img src="/2024/01/14/frp/2.png" alt="客户端文件展示"></p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">serverAddr</span> = <span class="string">&quot;123.56.10.1&quot;</span>  <span class="comment"># 服务器地址，填写自己真实的VPS地址</span></span><br><span class="line"><span class="attr">serverPort</span> = <span class="number">7000</span>           <span class="comment"># 服务器端口，与服务端配置的端口一致</span></span><br><span class="line"></span><br><span class="line"><span class="section">[[proxies]]</span></span><br><span class="line"><span class="attr">name</span> = <span class="string">&quot;HP-desktop&quot;</span>         <span class="comment"># 备注，随便写</span></span><br><span class="line"><span class="attr">type</span> = <span class="string">&quot;tcp&quot;</span>                <span class="comment"># 类型，不要变</span></span><br><span class="line"><span class="attr">localIP</span> = <span class="string">&quot;127.0.0.1&quot;</span>       <span class="comment"># 不要变</span></span><br><span class="line"><span class="attr">localPort</span> = <span class="number">3389</span>            <span class="comment"># 本地端口，不要变</span></span><br><span class="line"><span class="attr">remotePort</span> = <span class="number">10086</span>          <span class="comment"># 远程端口，自己设，比如设置为10086，以后访问这台Windows就是输入123.56.10.1:10086。</span></span><br></pre></td></tr></table></figure>
+
+<p>使用起来是和服务器端一样的，只不过这次需要运行客户端的文件。在当前目录鼠标右击打开CMD，然后如图所示运行（一定要看清楚运行的是 <strong>frpc</strong> 的文件）。</p>
+<p><img src="/2024/01/14/frp/3.png" alt="客户端文件展示"></p>
+<h3 id="设置Windows无窗口启动"><a href="#设置Windows无窗口启动" class="headerlink" title="设置Windows无窗口启动"></a>设置Windows无窗口启动</h3><p>这也就是为什么我会多出来一个.vbs文件。话不多说，放码出去。</p>
+<figure class="highlight vbs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Set</span> WShell = <span class="built_in">CreateObject</span>(<span class="string">&quot;WScript.Shell&quot;</span>)</span><br><span class="line">command = <span class="string">&quot;frpc.exe&quot;</span></span><br><span class="line">arguments = <span class="string">&quot;-c frpc.toml&quot;</span></span><br><span class="line">fullCommand = command &amp; <span class="string">&quot; &quot;</span> &amp; arguments</span><br><span class="line">WShell.Run fullCommand, <span class="number">0</span>, <span class="literal">False</span></span><br><span class="line"><span class="keyword">Set</span> WShell = <span class="literal">Nothing</span></span><br></pre></td></tr></table></figure>
+
+<p>想启动服务直接双击这个.vbs文件即可，如果想达到开机自启动，可以将这个.vbs文件放到开机计划中。</p>
+<ol>
+<li>首先创建好快捷方式。</li>
+<li><kbd>Win</kbd>+<kbd>R</kbd>输入<code>shell:startup</code>，直接回车。</li>
+<li>将快捷方式放入这个文件夹中，大功告成。</li>
+</ol>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p><kbd>Win</kbd>+<kbd>Q</kbd>搜索“远程桌面连接”，输入IP以及端口号，如果没毛病的话，就是如下的效果。如果有什么问题，可以评论区留言。</p>
+<p><img src="/2024/01/14/frp/5.png" alt="客户端文件展示"></p>
+<p>最后输入被控电脑的用户名和密码进行登录。</p>
+<hr>
+<hr>
+<h3 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h3><ol>
+<li><p>以上面的教程为例，VPS 是需要打开 7000 端口和 10086 端口的，放行这两个端口，否则无法连接。</p>
+</li>
+<li><p>Windows 家庭版无法使用远程桌面，要么重新安装 Windows 专业版，要么使用专业版激活码重新激活。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/24/pandora-next/" rel="prev" title="在本地搭建自己的chatGPT">
+                  <i class="fa fa-chevron-left"></i> 在本地搭建自己的chatGPT
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="424a281a67f3a274ffb6e3f57a804671"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: '30px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
+
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
+
+  <div class="aplayer" 
+    data-id="8732332178" 
+    data-server="netease" 
+    data-type="playlist" 
+    data-fixed="true" 
+    data-autoplay="false" 
+    data-order="random"
+    data-volume="0.5" 
+    data-theme="#1da496" 
+    data-preload="auto" >
+  </div>
+</body>
+</html>

@@ -26,9 +26,10 @@ tags:
 
 ### 配置步骤
 
-1. 首先克隆项目的仓库。
+1. 首先克隆项目的仓库，墙外用第一个链接，墙内用第二个链接。
 
 ```bash
+git clone https://github.com/pandora-next/deploy.git
 git clone https://gitclone.com/github.com/pandora-next/deploy.git
 ```
 
