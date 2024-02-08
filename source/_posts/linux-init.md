@@ -12,13 +12,13 @@ tags:
 2. 执行命令，下载yum源。(CENTOS-7)
 
 ```bash
-curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+curl -o /etc/yum.repos.d/aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
 CENTOS-8 yum源
 
 ```bash
-curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
+curl -o /etc/yum.repos.d/aliyun.repo http://mirrors.aliyun.com/repo/Centos-8.repo
 ```
 
 <!-- more -->
