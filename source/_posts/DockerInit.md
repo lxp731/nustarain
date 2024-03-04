@@ -20,7 +20,7 @@ curl -fsSL https://get.docker.com | bash -s docker
 
 ```bash
 sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json <<-'EOF'
+sudo tee /etc/docker/daemon.conf <<-'EOF'
 {
   "registry-mirrors": ["https://az7a5oso.mirror.aliyuncs.com"]
 }
