@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -208,6 +208,130 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2024/03/25/install-k8s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/25/install-k8s/" class="post-title-link" itemprop="url">K8S集群环境搭建</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-25 21:28:43 / 修改时间：22:56:28" itemprop="dateCreated datePublished" datetime="2024-03-25T21:28:43+08:00">2024-03-25</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="K8S集群环境搭建" href="/2024/03/25/install-k8s/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::eaf56f224d90eb60fddfca912cd55aee" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>简单玩了一下K8S，安装也太费劲了，一大堆坑，浅浅记录一下吧。</p>
+<h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><ol>
+<li>CentOS Stream release 8</li>
+<li>K8S v1.23.6</li>
+<li>Docker version 26.0.0, build 2ae903e</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">主机名</th>
+<th align="center">IP</th>
+<th align="center">CPU</th>
+<th align="center">内存</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">k8s-mst</td>
+<td align="center">192.168.229.130</td>
+<td align="center">4</td>
+<td align="center">3G</td>
+</tr>
+<tr>
+<td align="center">k8s-nd1</td>
+<td align="center">192.168.229.131</td>
+<td align="center">4</td>
+<td align="center">2G</td>
+</tr>
+<tr>
+<td align="center">k8s-nd2</td>
+<td align="center">192.168.229.132</td>
+<td align="center">4</td>
+<td align="center">2G</td>
+</tr>
+</tbody></table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/03/25/install-k8s/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2024/03/04/DockerModifyConf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -236,9 +360,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-03-04 22:12:28 / 修改时间：22:58:08" itemprop="dateCreated datePublished" datetime="2024-03-04T22:12:28+08:00">2024-03-04</time>
+      <time title="创建时间：2024-03-04 22:12:28" itemprop="dateCreated datePublished" datetime="2024-03-04T22:12:28+08:00">2024-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-06 15:39:07" itemprop="dateModified" datetime="2024-03-06T15:39:07+08:00">2024-03-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -865,7 +995,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/11/03/install-docker-compose/" class="post-title-link" itemprop="url">安装 docker-compose</a>
+          <a href="/2023/11/03/install-docker-compose/" class="post-title-link" itemprop="url">docker-compose 安装</a>
         </h2>
 
         <div class="post-meta-container">
@@ -883,7 +1013,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-08 18:46:02" itemprop="dateModified" datetime="2024-02-08T18:46:02+08:00">2024-02-08</time>
+      <time title="修改时间：2024-03-25 21:43:46" itemprop="dateModified" datetime="2024-03-25T21:43:46+08:00">2024-03-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -891,7 +1021,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8E%A2%E7%B4%A2/" itemprop="url" rel="index"><span itemprop="name">探索</span></a>
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
         </span>
     </span>
 
@@ -904,7 +1034,7 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="安装 docker-compose" href="/2023/11/03/install-docker-compose/#SOHUCS" itemprop="discussionUrl">
+    <a title="docker-compose 安装" href="/2023/11/03/install-docker-compose/#SOHUCS" itemprop="discussionUrl">
       <span id="sourceId::601c23ba92284bea46055074aca6d0cd" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
@@ -1096,7 +1226,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-04 22:11:19" itemprop="dateModified" datetime="2024-03-04T22:11:19+08:00">2024-03-04</time>
+      <time title="修改时间：2024-03-25 21:43:21" itemprop="dateModified" datetime="2024-03-25T21:43:21+08:00">2024-03-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1137,116 +1267,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/10/30/DockerInit/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/10/14/fping/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/14/fping/" class="post-title-link" itemprop="url">源码安装 fping 命令</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-14 13:12:58" itemprop="dateCreated datePublished" datetime="2023-10-14T13:12:58+08:00">2023-10-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-08 18:46:02" itemprop="dateModified" datetime="2024-02-08T18:46:02+08:00">2024-02-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/" itemprop="url" rel="index"><span itemprop="name">小玩意儿</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="源码安装 fping 命令" href="/2023/10/14/fping/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::820bfda1186aa1104c8f986b58a44ed2" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><ol>
-<li>下载源码包</li>
-</ol>
-<p>连接网络在线下载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://fping.org/dist/fping-3.15.tar.gz</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/10/14/fping/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

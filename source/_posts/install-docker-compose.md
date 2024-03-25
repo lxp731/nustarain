@@ -1,7 +1,7 @@
 ---
-title: 安装 docker-compose
+title: docker-compose 安装
 date: 2023-11-03 23:28:03
-categories: 探索
+categories: 技术
 tags:
   - Docker
 ---
