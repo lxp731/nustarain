@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -208,6 +208,104 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2024/04/02/nginx-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/02/nginx-proxy/" class="post-title-link" itemprop="url">NGINX配置的那些事</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-02 14:27:45 / 修改时间：14:53:59" itemprop="dateCreated datePublished" datetime="2024-04-02T14:27:45+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="NGINX配置的那些事" href="/2024/04/02/nginx-proxy/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::2d4616c8239e85d1d953262ae63204d7" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <span id="more"></span>
+
+<h3 id="NGINX端口重定向（80-to-443）"><a href="#NGINX端口重定向（80-to-443）" class="headerlink" title="NGINX端口重定向（80 to 443）"></a>NGINX端口重定向（80 to 443）</h3><figure class="highlight bash"><figcaption><span>折叠代码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="comment"># HTTPS的默认访问端口443。如果未在此处配置HTTPS的默认访问端口，可能会造成Nginx无法启动。</span></span><br><span class="line">    listen 443 ssl;</span><br><span class="line">     </span><br><span class="line">    <span class="comment"># 填写证书绑定的域名</span></span><br><span class="line">    server_name itellyou.cf;</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 关于配置SSL证书的部分，保证证书路径正确，其他保持不变即可</span></span><br><span class="line">    ssl_certificate /opt/ssl/itellyou.cf.pem;</span><br><span class="line">    ssl_certificate_key /opt/ssl/itellyou.cf.key;</span><br><span class="line">    ssl_session_cache shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">    ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">        index index.php index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    <span class="comment">#填写证书绑定的域名</span></span><br><span class="line">    server_name itellyou.cf;</span><br><span class="line">    <span class="comment">#将所有HTTP请求通过rewrite指令重定向到HTTPS。</span></span><br><span class="line">    rewrite ^(.*)$ https://$host<span class="variable">$1</span>;</span><br><span class="line">    location / &#123;</span><br><span class="line">        index index.php index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="NGINX反向代理"><a href="#NGINX反向代理" class="headerlink" title="NGINX反向代理"></a>NGINX反向代理</h3><h4 id="反向代理不加密站点"><a href="#反向代理不加密站点" class="headerlink" title="反向代理不加密站点"></a>反向代理不加密站点</h4><figure class="highlight bash"><figcaption><span>折叠代码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="comment"># 配置http要监听80端口</span></span><br><span class="line">    listen 80;</span><br><span class="line">    <span class="comment"># 确保DNS厂商已经正确解析域名</span></span><br><span class="line">    server_name ai.itellyou.cf;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 填写正确的后端代理地址</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://itellyou.cf:30080;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="反向代理SSL加密站点"><a href="#反向代理SSL加密站点" class="headerlink" title="反向代理SSL加密站点"></a>反向代理SSL加密站点</h4><figure class="highlight bash"><figcaption><span>折叠代码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    <span class="comment"># 配置https要监听443端口</span></span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    <span class="comment"># 确保DNS厂商已经正确解析域名</span></span><br><span class="line">    server_name ai.itellyou.cf;</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># 关于配置SSL证书的部分，保证证书路径正确，其他保持不变即可</span></span><br><span class="line">    ssl_certificate /opt/ssl/ai.itellyou.cf.pem;</span><br><span class="line">    ssl_certificate_key /opt/ssl/ai.itellyou.cf.key;</span><br><span class="line">    ssl_session_cache shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">    ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 填写正确的后端代理地址</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://itellyou.cf:30080;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2024/03/25/install-k8s/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -238,7 +336,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-03-25 21:28:43 / 修改时间：22:56:28" itemprop="dateCreated datePublished" datetime="2024-03-25T21:28:43+08:00">2024-03-25</time>
+      <time title="创建时间：2024-03-25 21:28:43 / 修改时间：23:16:33" itemprop="dateCreated datePublished" datetime="2024-03-25T21:28:43+08:00">2024-03-25</time>
     </span>
 
   
@@ -267,38 +365,7 @@
     <div class="post-body" itemprop="articleBody">
           <p>简单玩了一下K8S，安装也太费劲了，一大堆坑，浅浅记录一下吧。</p>
 <h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><ol>
-<li>CentOS Stream release 8</li>
-<li>K8S v1.23.6</li>
-<li>Docker version 26.0.0, build 2ae903e</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="center">主机名</th>
-<th align="center">IP</th>
-<th align="center">CPU</th>
-<th align="center">内存</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">k8s-mst</td>
-<td align="center">192.168.229.130</td>
-<td align="center">4</td>
-<td align="center">3G</td>
-</tr>
-<tr>
-<td align="center">k8s-nd1</td>
-<td align="center">192.168.229.131</td>
-<td align="center">4</td>
-<td align="center">2G</td>
-</tr>
-<tr>
-<td align="center">k8s-nd2</td>
-<td align="center">192.168.229.132</td>
-<td align="center">4</td>
-<td align="center">2G</td>
-</tr>
-</tbody></table>
+<li>CentOS Stream release 8</li></ol>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/03/25/install-k8s/#more" rel="contents">
@@ -1160,113 +1227,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/11/03/docker-apache/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/10/30/DockerInit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/30/DockerInit/" class="post-title-link" itemprop="url">Docker安装及镜像加速</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-30 20:36:19" itemprop="dateCreated datePublished" datetime="2023-10-30T20:36:19+08:00">2023-10-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-25 21:43:21" itemprop="dateModified" datetime="2024-03-25T21:43:21+08:00">2024-03-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker安装及镜像加速" href="/2023/10/30/DockerInit/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::c6f388ceaaefa079cd45a92344946982" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h3><p>官方提供了一键安装脚本，直接执行，耐心等待脚本执行完毕即可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/10/30/DockerInit/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

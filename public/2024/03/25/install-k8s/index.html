@@ -20,19 +20,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="简单玩了一下K8S，安装也太费劲了，一大堆坑，浅浅记录一下吧。 安装环境 CentOS Stream release 8 K8S v1.23.6 Docker version 26.0.0, build 2ae903e     主机名 IP CPU 内存    k8s-mst 192.168.229.130 4 3G   k8s-nd1 192.168.229.131 4 2G   k8s-nd2">
+    <meta name="description" content="简单玩了一下K8S，安装也太费劲了，一大堆坑，浅浅记录一下吧。 安装环境 CentOS Stream release 8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="K8S集群环境搭建">
 <meta property="og:url" content="https://nustarain.gitee.io/2024/03/25/install-k8s/index.html">
 <meta property="og:site_name" content="Leo Blog">
-<meta property="og:description" content="简单玩了一下K8S，安装也太费劲了，一大堆坑，浅浅记录一下吧。 安装环境 CentOS Stream release 8 K8S v1.23.6 Docker version 26.0.0, build 2ae903e     主机名 IP CPU 内存    k8s-mst 192.168.229.130 4 3G   k8s-nd1 192.168.229.131 4 2G   k8s-nd2">
+<meta property="og:description" content="简单玩了一下K8S，安装也太费劲了，一大堆坑，浅浅记录一下吧。 安装环境 CentOS Stream release 8">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://nustarain.gitee.io/2024/03/25/install-k8s/1.png">
 <meta property="og:image" content="https://nustarain.gitee.io/2024/03/25/install-k8s/2.png">
 <meta property="og:image" content="https://nustarain.gitee.io/2024/03/25/install-k8s/3.png">
 <meta property="og:image" content="https://nustarain.gitee.io/2024/03/25/install-k8s/4.png">
 <meta property="article:published_time" content="2024-03-25T13:28:43.000Z">
-<meta property="article:modified_time" content="2024-03-25T14:56:28.025Z">
+<meta property="article:modified_time" content="2024-03-25T15:16:33.161Z">
 <meta property="article:author" content="Burgess Leo">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="K8S">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">安装步骤</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">基础操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%88%AB%E4%BF%AE%E6%94%B9%E5%90%84%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">2.2.</span> <span class="nav-text">分别修改各主机的主机名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%90%84%E4%B8%BB%E6%9C%BA%E7%9A%84hosts%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">修改各主机的hosts文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">修改内核参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="nav-number">2.5.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEK8S%E7%9A%84yum%E6%BA%90"><span class="nav-number">2.6.</span> <span class="nav-text">配置K8S的yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85K8S"><span class="nav-number">2.7.</span> <span class="nav-text">安装K8S</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8K8S%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.8.</span> <span class="nav-text">启动K8S服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96K8S%E9%9B%86%E7%BE%A4"><span class="nav-number">2.9.</span> <span class="nav-text">初始化K8S集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEkubectl"><span class="nav-number">2.10.</span> <span class="nav-text">配置kubectl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4"><span class="nav-number">2.11.</span> <span class="nav-text">节点加入集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6CNI"><span class="nav-number">2.12.</span> <span class="nav-text">安装网络插件CNI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDcalico-yaml%E6%96%87%E4%BB%B6%E9%87%8C%E6%8F%8F%E8%BF%B0%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">2.13.</span> <span class="nav-text">下载calico.yaml文件里描述的镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">2.14.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%9C%A8%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-number">2.15.</span> <span class="nav-text">配置在其他节点的控制</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -173,7 +173,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -248,7 +248,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-03-25 21:28:43 / 修改时间：22:56:28" itemprop="dateCreated datePublished" datetime="2024-03-25T21:28:43+08:00">2024-03-25</time>
+      <time title="创建时间：2024-03-25 21:28:43 / 修改时间：23:16:33" itemprop="dateCreated datePublished" datetime="2024-03-25T21:28:43+08:00">2024-03-25</time>
     </span>
 
   
@@ -284,7 +284,7 @@
     <div class="post-body" itemprop="articleBody">
         <p>简单玩了一下K8S，安装也太费劲了，一大堆坑，浅浅记录一下吧。</p>
 <h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><ol>
-<li>CentOS Stream release 8</li>
+<li>CentOS Stream release 8<span id="more"></span></li>
 <li>K8S v1.23.6</li>
 <li>Docker version 26.0.0, build 2ae903e</li>
 </ol>
@@ -316,35 +316,22 @@
 <td align="center">2G</td>
 </tr>
 </tbody></table>
-<span id="more"></span>
-
-<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><ol>
-<li>下面的操作代表的含义依次是：关闭防火墙、关闭selinux、关闭swap分区</li>
-</ol>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><blockquote>
+<p>下面的步骤1-8，都是需要在三台虚拟机上都执行的。</p>
+</blockquote>
+<h4 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h4><p>下面的操作代表的含义依次是：关闭防火墙、关闭selinux、关闭swap分区</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld &amp;&amp; systemctl <span class="built_in">disable</span> firewalld &amp;&amp; iptables -F</span><br><span class="line">sed -i <span class="string">&#x27;s/enforcing/disabled/&#x27;</span> /etc/selinux/config &amp;&amp; setenforce 0</span><br><span class="line">swapoff -a</span><br><span class="line">sed -ri <span class="string">&#x27;s/.*swap.*/#&amp;/&#x27;</span> /etc/fstab</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>分别修改各主机的主机名</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname k8s-mst</span><br><span class="line">hostnamectl set-hostname k8s-nd1</span><br><span class="line">hostnamectl set-hostname k8s-nd2</span><br></pre></td></tr></table></figure>
+<h4 id="分别修改各主机的主机名"><a href="#分别修改各主机的主机名" class="headerlink" title="分别修改各主机的主机名"></a>分别修改各主机的主机名</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname k8s-mst</span><br><span class="line">hostnamectl set-hostname k8s-nd1</span><br><span class="line">hostnamectl set-hostname k8s-nd2</span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>修改各主机的hosts文件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.229.130 k8s-mst</span><br><span class="line">192.168.229.131 k8s-nd1</span><br><span class="line">192.168.229.132 k8s-nd2</span><br></pre></td></tr></table></figure>
+<h4 id="修改各主机的hosts文件"><a href="#修改各主机的hosts文件" class="headerlink" title="修改各主机的hosts文件"></a>修改各主机的hosts文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.229.130 k8s-mst</span><br><span class="line">192.168.229.131 k8s-nd1</span><br><span class="line">192.168.229.132 k8s-nd2</span><br></pre></td></tr></table></figure>
 
 <p>利用 <code>scp</code> 命令将 <code>/etc/hosts</code> 文件复制到其他主机</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/hosts k8s-nd1:/etc/hosts</span><br></pre></td></tr></table></figure>
 
-<ol start="4">
-<li>修改内核参数</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /etc/sysctl.d/k8s.conf &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">net.ipv4.ip_forward = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+<h4 id="修改内核参数"><a href="#修改内核参数" class="headerlink" title="修改内核参数"></a>修改内核参数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /etc/sysctl.d/k8s.conf &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">net.ipv4.ip_forward = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
 
-<ol start="5">
-<li><a href="https://nustarain.gitee.io/2023/10/30/DockerInit">安装Docker</a></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker</span><br></pre></td></tr></table></figure>
+<h4 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a><a href="https://nustarain.gitee.io/2023/10/30/DockerInit">安装Docker</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | bash -s docker</span><br></pre></td></tr></table></figure>
 
 <p>如果要适配K8S，需要对Docker的daemon.json文件进行升级，配置如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /etc/docker/daemon.json &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">&quot;registry-mirrors&quot;: [&quot;https://gqs7xcfd.mirror.aliyuncs.com&quot;,&quot;https://hub-mirror.c.163.com&quot;],</span></span><br><span class="line"><span class="string">&quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;],</span></span><br><span class="line"><span class="string">&quot;log-driver&quot;: &quot;json-file&quot;,</span></span><br><span class="line"><span class="string">&quot;log-opts&quot;: &#123;</span></span><br><span class="line"><span class="string">&quot;max-size&quot;: &quot;100m&quot;</span></span><br><span class="line"><span class="string">&#125;,</span></span><br><span class="line"><span class="string">&quot;storage-driver&quot;: &quot;overlay2&quot;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
@@ -352,27 +339,15 @@
 <p>启动Docker服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload &amp;&amp; systemctl <span class="built_in">enable</span> --now docker</span><br></pre></td></tr></table></figure>
 
-<ol start="6">
-<li>配置K8S的yum源</li>
-</ol>
-<p>需要自己添加一个用于下载K8S的yum源，这里我使用的是阿里云的源。</p>
+<h4 id="配置K8S的yum源"><a href="#配置K8S的yum源" class="headerlink" title="配置K8S的yum源"></a>配置K8S的yum源</h4><p>需要自己添加一个用于下载K8S的yum源，这里我使用的是阿里云的源。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &gt; /etc/yum.repos.d/kubernetes.repo &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">repo_gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
 
-<ol start="7">
-<li>安装K8S</li>
-</ol>
-<p>1.24.X 版本都不再兼容Docker，所以还是使用1.23.X版本。</p>
+<h4 id="安装K8S"><a href="#安装K8S" class="headerlink" title="安装K8S"></a>安装K8S</h4><p>1.24.X 版本都不再兼容Docker，所以还是使用1.23.X版本。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y kubelet-1.23.6 kubeadm-1.23.6 kubectl-1.23.6</span><br></pre></td></tr></table></figure>
 
-<ol start="8">
-<li>启动K8S服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br></pre></td></tr></table></figure>
+<h4 id="启动K8S服务"><a href="#启动K8S服务" class="headerlink" title="启动K8S服务"></a>启动K8S服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br></pre></td></tr></table></figure>
 
-<ol start="9">
-<li>初始化K8S集群</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init \</span><br><span class="line">--kubernetes-version 1.23.6 \</span><br><span class="line">--apiserver-advertise-address=192.168.229.130 \</span><br><span class="line">--service-cidr=10.96.0.0/12 \</span><br><span class="line">--pod-network-cidr=10.244.0.0/16 \</span><br><span class="line">--image-repository registry.aliyuncs.com/google_containers</span><br></pre></td></tr></table></figure>
+<h4 id="初始化K8S集群"><a href="#初始化K8S集群" class="headerlink" title="初始化K8S集群"></a>初始化K8S集群</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init \</span><br><span class="line">--kubernetes-version 1.23.6 \</span><br><span class="line">--apiserver-advertise-address=192.168.229.130 \</span><br><span class="line">--service-cidr=10.96.0.0/12 \</span><br><span class="line">--pod-network-cidr=10.244.0.0/16 \</span><br><span class="line">--image-repository registry.aliyuncs.com/google_containers</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>kubernetes-version 集群版本</li>
@@ -384,16 +359,10 @@
 <p>这一步会产生很多奇奇怪怪的问题，但是如果是按照我这个步骤和版本安装下来的，估计是不会出问题的。安装完事之后如果看到如下输出，说明安装成功了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubeadm <span class="built_in">join</span> 192.168.229.130:6443 --token iks8xq.pqnnn0uvotgtloyj \</span><br><span class="line">--discovery-token-ca-cert-hash</span><br><span class="line">sha256:674a06791e7637efccdaf9874346d0815a6f864a29670acccaa2aa1c998e2ef4 </span><br></pre></td></tr></table></figure>
 
-<ol start="10">
-<li>配置kubectl</li>
-</ol>
-<p>不要清屏，按照上面的提示，依次执行他给出来的命令。</p>
+<h4 id="配置kubectl"><a href="#配置kubectl" class="headerlink" title="配置kubectl"></a>配置kubectl</h4><p>不要清屏，按照上面的提示，依次执行他给出来的命令。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo <span class="built_in">cp</span> -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo <span class="built_in">chown</span> $(<span class="built_in">id</span> -u):$(<span class="built_in">id</span> -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
 
-<ol start="11">
-<li>节点加入集群</li>
-</ol>
-<p>如果还留着提示，直接复制他给出的<code>kubeadm join</code>命令，然后执行即可。如果丢了，需要手动查看一下两个参数，<code>--token</code>和<code>--discovery-token-ca-cert-hash</code>。</p>
+<h4 id="节点加入集群"><a href="#节点加入集群" class="headerlink" title="节点加入集群"></a>节点加入集群</h4><p>如果还留着提示，直接复制他给出的<code>kubeadm join</code>命令，然后执行即可。如果丢了，需要手动查看一下两个参数，<code>--token</code>和<code>--discovery-token-ca-cert-hash</code>。</p>
 <p>token可以使用如下命令查看，比如是“xxxxxx”。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm token list</span><br></pre></td></tr></table></figure>
 
@@ -403,18 +372,12 @@
 <p>然后给他们组合到一块</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm <span class="built_in">join</span> 192.168.229.130:6443 --token xxxxxx \</span><br><span class="line">--discovery-token-ca-cert-hash sha256:yyyyyy</span><br></pre></td></tr></table></figure>
 
-<ol start="12">
-<li>安装网络插件CNI</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /opt/k8s &amp;&amp; <span class="built_in">cd</span> /opt/k8s</span><br><span class="line">curl https://calico-v3-25.netlify.app/archive/v3.25/manifests/calico.yaml -O</span><br></pre></td></tr></table></figure>
+<h4 id="安装网络插件CNI"><a href="#安装网络插件CNI" class="headerlink" title="安装网络插件CNI"></a>安装网络插件CNI</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /opt/k8s &amp;&amp; <span class="built_in">cd</span> /opt/k8s</span><br><span class="line">curl https://calico-v3-25.netlify.app/archive/v3.25/manifests/calico.yaml -O</span><br></pre></td></tr></table></figure>
 
 <p>这个时我们就下载了一个文件名字叫：calico.yaml，但是这个文件需要改一下cidr。这里的cidr就是我们初始化时候那个cidr。</p>
 <p>vim calico.yaml，搜索“CALICO_IPV4POOL_CIDR”。</p>
 <p><img src="/2024/03/25/install-k8s/1.png" alt="修改配置文件"></p>
-<ol start="13">
-<li>下载calico.yaml文件里描述的镜像</li>
-</ol>
-<p>calico.yaml 里面用的都是docker.io的镜像，你可以先使用<code>grep image calico.yaml</code>命令查看一下。然后我们做一下修改，执行以下命令：</p>
+<h4 id="下载calico-yaml文件里描述的镜像"><a href="#下载calico-yaml文件里描述的镜像" class="headerlink" title="下载calico.yaml文件里描述的镜像"></a>下载calico.yaml文件里描述的镜像</h4><p>calico.yaml 里面用的都是docker.io的镜像，你可以先使用<code>grep image calico.yaml</code>命令查看一下。然后我们做一下修改，执行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s#docker.io/##g&#x27;</span> calico.yaml </span><br></pre></td></tr></table></figure>
 
 <p>完事后你也可以再验证一下：<code>grep image calico.yaml</code>。然后kubectl apply一下：</p>
@@ -423,19 +386,13 @@
 <p>这个时候kebe就会自己去下载镜像了，不会前台显示，下载速度取决于你的网速。但是你可以通过<code>kubectl get pods -n kube-system</code>命令查看一下，如果镜像下载完了，就会看到如下输出，所有容器都是运行起来的：</p>
 <p><img src="/2024/03/25/install-k8s/2.png" alt="下载验证"></p>
 <p>这样就完成了K8S的安装。</p>
-<ol start="14">
-<li>验证</li>
-</ol>
-<p>我们可以去运行一个nginx实例，去看看到底还有没有什么问题。</p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>我们可以去运行一个nginx实例，去看看到底还有没有什么问题。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl create deployment nginx --image=nginx</span><br><span class="line">kubectl expose deployment nginx --port=80 --<span class="built_in">type</span>=NodePort</span><br><span class="line">kubectl get pod,svc</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2024/03/25/install-k8s/3.png" alt="验证kube"></p>
 <p>在宿主机上访问节点IP:port。</p>
 <p><img src="/2024/03/25/install-k8s/4.png" alt="验证kube"></p>
-<ol start="15">
-<li>配置在其他节点的控制</li>
-</ol>
-<p>这个就是说在任何节点上都可以对k8s的API-server进行访问，对节点进行管理。换言之，你不配置这一步，你只能在主节点进行<code>kubectl get nodes</code>命令，其他节点执行不了。</p>
+<h4 id="配置在其他节点的控制"><a href="#配置在其他节点的控制" class="headerlink" title="配置在其他节点的控制"></a>配置在其他节点的控制</h4><p>这个就是说在任何节点上都可以对k8s的API-server进行访问，对节点进行管理。换言之，你不配置这一步，你只能在主节点进行<code>kubectl get nodes</code>命令，其他节点执行不了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/kubernetes/admin.conf root@k8s-nd1:/etc/kubernetes</span><br><span class="line">scp /etc/kubernetes/admin.conf root@k8s-nd2:/etc/kubernetes</span><br></pre></td></tr></table></figure>
 
 <p>拷贝过去之后，分别在两个节点上执行如下命令：</p>
@@ -464,6 +421,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/04/02/nginx-proxy/" rel="next" title="NGINX配置的那些事">
+                  NGINX配置的那些事 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

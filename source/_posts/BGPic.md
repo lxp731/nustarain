@@ -6,17 +6,19 @@ tags:
   - 博客美化
 ---
 
-### 修改NEXT的配置文件
-
 我一直使用的是Next的主题，这个主题默认是可以自定义一些样式的。
 
-1. 首先选择一张心仪的背景图片，添加到themes/next/source/images/xx.jpg。我建议图片的大小最好控制一下，最好控制在400k-500K左右，动辄几兆大小的背景图片网页加载起来会很吃力，非常影响实际体验。
+### 添加图片
 
-2. 然后需要打开这个开关，也就是取消style这个注释
+首先选择一张心仪的背景图片，添加到themes/next/source/images/xx.jpg。我建议图片的大小最好控制一下，最好控制在400k-500K左右，动辄几兆大小的背景图片网页加载起来会很吃力，非常影响实际体验。
 
 <!-- more -->
 
-```yml 折叠代码
+### 取消注释
+
+然后需要打开这个开关，也就是取消style这个注释
+
+```bash 折叠代码
 custom_file_path:
   #head: source/_data/head.njk
   #header: source/_data/header.njk
@@ -30,16 +32,18 @@ custom_file_path:
   style: source/_data/styles.styl
 ```
 
-3. 取消注释以后，创建这样的一个文件source/_data/styles.styl，需要注意的是，这个source是站点目录下的source，而不是主题目录下的source。
+### 创建文件
+
+取消注释以后，创建这样的一个文件source/_data/styles.styl，需要注意的是，这个source是站点目录下的source，而不是主题目录下的source。
 
 创建好之后，在文件插入以下代码：
 
-```yml
+```bash
 body {
- 	background:url(/images/xx.jpg);
- 	background-repeat: no-repeat;
-    background-attachment:fixed;
-    background-position:100% 100%;
+  background:url(/images/xx.jpg);
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position:100% 100%;
 }
 ```
 
