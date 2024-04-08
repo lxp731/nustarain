@@ -1,11 +1,12 @@
 .deploy*/
 .github/
 .vscode/
+node_modules/
 .htaccess
 db.json
 nginx.htaccess
+
 .DS_Store
 Thumbs.db
 *.log
-node_modules/
 _multiconfig.yml
