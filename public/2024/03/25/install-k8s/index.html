@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://nustarain.gitee.io/2024/03/25/install-k8s/3.png">
 <meta property="og:image" content="https://nustarain.gitee.io/2024/03/25/install-k8s/4.png">
 <meta property="article:published_time" content="2024-03-25T13:28:43.000Z">
-<meta property="article:modified_time" content="2024-03-25T15:16:33.161Z">
+<meta property="article:modified_time" content="2024-04-07T13:35:44.944Z">
 <meta property="article:author" content="Burgess Leo">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="K8S">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">基础操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%88%AB%E4%BF%AE%E6%94%B9%E5%90%84%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">2.2.</span> <span class="nav-text">分别修改各主机的主机名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%90%84%E4%B8%BB%E6%9C%BA%E7%9A%84hosts%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">修改各主机的hosts文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">修改内核参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="nav-number">2.5.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEK8S%E7%9A%84yum%E6%BA%90"><span class="nav-number">2.6.</span> <span class="nav-text">配置K8S的yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85K8S"><span class="nav-number">2.7.</span> <span class="nav-text">安装K8S</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8K8S%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.8.</span> <span class="nav-text">启动K8S服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96K8S%E9%9B%86%E7%BE%A4"><span class="nav-number">2.9.</span> <span class="nav-text">初始化K8S集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEkubectl"><span class="nav-number">2.10.</span> <span class="nav-text">配置kubectl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4"><span class="nav-number">2.11.</span> <span class="nav-text">节点加入集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6CNI"><span class="nav-number">2.12.</span> <span class="nav-text">安装网络插件CNI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDcalico-yaml%E6%96%87%E4%BB%B6%E9%87%8C%E6%8F%8F%E8%BF%B0%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">2.13.</span> <span class="nav-text">下载calico.yaml文件里描述的镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">2.14.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%9C%A8%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-number">2.15.</span> <span class="nav-text">配置在其他节点的控制</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">基础操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%88%AB%E4%BF%AE%E6%94%B9%E5%90%84%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">2.2.</span> <span class="nav-text">分别修改各主机的主机名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%90%84%E4%B8%BB%E6%9C%BA%E7%9A%84hosts%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">修改各主机的hosts文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">修改内核参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="nav-number">2.5.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEK8S%E7%9A%84yum%E6%BA%90"><span class="nav-number">2.6.</span> <span class="nav-text">配置K8S的yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85K8S"><span class="nav-number">2.7.</span> <span class="nav-text">安装K8S</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8K8S%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.8.</span> <span class="nav-text">启动K8S服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96K8S%E9%9B%86%E7%BE%A4"><span class="nav-number">2.9.</span> <span class="nav-text">初始化K8S集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEkubectl"><span class="nav-number">2.10.</span> <span class="nav-text">配置kubectl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4"><span class="nav-number">2.11.</span> <span class="nav-text">节点加入集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6CNI"><span class="nav-number">2.12.</span> <span class="nav-text">安装网络插件CNI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDcalico-yaml%E6%96%87%E4%BB%B6%E9%87%8C%E6%8F%8F%E8%BF%B0%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">2.13.</span> <span class="nav-text">下载calico.yaml文件里描述的镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">2.14.</span> <span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%AB%98%E7%BA%A7%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">其他高级配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%9C%A8%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="nav-number">3.1.</span> <span class="nav-text">配置在其他节点的控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEkubectl%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8"><span class="nav-number">3.2.</span> <span class="nav-text">配置kubectl命令自动补全</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -246,9 +246,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-03-25 21:28:43 / 修改时间：23:16:33" itemprop="dateCreated datePublished" datetime="2024-03-25T21:28:43+08:00">2024-03-25</time>
+      <time title="创建时间：2024-03-25 21:28:43" itemprop="dateCreated datePublished" datetime="2024-03-25T21:28:43+08:00">2024-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-07 21:35:44" itemprop="dateModified" datetime="2024-04-07T21:35:44+08:00">2024-04-07</time>
     </span>
 
   
@@ -301,23 +307,23 @@
 <td align="center">k8s-mst</td>
 <td align="center">192.168.229.130</td>
 <td align="center">4</td>
-<td align="center">3G</td>
+<td align="center">8G</td>
 </tr>
 <tr>
 <td align="center">k8s-nd1</td>
 <td align="center">192.168.229.131</td>
 <td align="center">4</td>
-<td align="center">2G</td>
+<td align="center">4G</td>
 </tr>
 <tr>
 <td align="center">k8s-nd2</td>
 <td align="center">192.168.229.132</td>
 <td align="center">4</td>
-<td align="center">2G</td>
+<td align="center">4G</td>
 </tr>
 </tbody></table>
 <h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><blockquote>
-<p>下面的步骤1-8，都是需要在三台虚拟机上都执行的。</p>
+<p>下面的步骤2.1-2.8，是需要在三台虚拟机上都执行的；2.9-2.10只在master主机执行即可；2.11在所有节点主机执行即可；2.12-2.14在master主机执行即可。</p>
 </blockquote>
 <h4 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h4><p>下面的操作代表的含义依次是：关闭防火墙、关闭selinux、关闭swap分区</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld &amp;&amp; systemctl <span class="built_in">disable</span> firewalld &amp;&amp; iptables -F</span><br><span class="line">sed -i <span class="string">&#x27;s/enforcing/disabled/&#x27;</span> /etc/selinux/config &amp;&amp; setenforce 0</span><br><span class="line">swapoff -a</span><br><span class="line">sed -ri <span class="string">&#x27;s/.*swap.*/#&amp;/&#x27;</span> /etc/fstab</span><br></pre></td></tr></table></figure>
@@ -374,7 +380,7 @@
 
 <h4 id="安装网络插件CNI"><a href="#安装网络插件CNI" class="headerlink" title="安装网络插件CNI"></a>安装网络插件CNI</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /opt/k8s &amp;&amp; <span class="built_in">cd</span> /opt/k8s</span><br><span class="line">curl https://calico-v3-25.netlify.app/archive/v3.25/manifests/calico.yaml -O</span><br></pre></td></tr></table></figure>
 
-<p>这个时我们就下载了一个文件名字叫：calico.yaml，但是这个文件需要改一下cidr。这里的cidr就是我们初始化时候那个cidr。</p>
+<p>这个时我们就下载了一个文件名字叫：calico.yaml，但是这个文件需要改一下cidr。这里的cidr就是我们初始化时候<code>--pod-network-cidr</code>字段的cidr。</p>
 <p>vim calico.yaml，搜索“CALICO_IPV4POOL_CIDR”。</p>
 <p><img src="/2024/03/25/install-k8s/1.png" alt="修改配置文件"></p>
 <h4 id="下载calico-yaml文件里描述的镜像"><a href="#下载calico-yaml文件里描述的镜像" class="headerlink" title="下载calico.yaml文件里描述的镜像"></a>下载calico.yaml文件里描述的镜像</h4><p>calico.yaml 里面用的都是docker.io的镜像，你可以先使用<code>grep image calico.yaml</code>命令查看一下。然后我们做一下修改，执行以下命令：</p>
@@ -392,14 +398,18 @@
 <p><img src="/2024/03/25/install-k8s/3.png" alt="验证kube"></p>
 <p>在宿主机上访问节点IP:port。</p>
 <p><img src="/2024/03/25/install-k8s/4.png" alt="验证kube"></p>
-<h4 id="配置在其他节点的控制"><a href="#配置在其他节点的控制" class="headerlink" title="配置在其他节点的控制"></a>配置在其他节点的控制</h4><p>这个就是说在任何节点上都可以对k8s的API-server进行访问，对节点进行管理。换言之，你不配置这一步，你只能在主节点进行<code>kubectl get nodes</code>命令，其他节点执行不了。</p>
+<h3 id="其他高级配置"><a href="#其他高级配置" class="headerlink" title="其他高级配置"></a>其他高级配置</h3><h4 id="配置在其他节点的控制"><a href="#配置在其他节点的控制" class="headerlink" title="配置在其他节点的控制"></a>配置在其他节点的控制</h4><p>这个就是说在任何节点上都可以对k8s的API-server进行访问，对节点进行管理。换言之，你不配置这一步，你只能在主节点进行<code>kubectl get nodes</code>命令，其他节点执行不了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp /etc/kubernetes/admin.conf root@k8s-nd1:/etc/kubernetes</span><br><span class="line">scp /etc/kubernetes/admin.conf root@k8s-nd2:/etc/kubernetes</span><br></pre></td></tr></table></figure>
 
 <p>拷贝过去之后，分别在两个节点上执行如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export KUBECONFIG=/etc/kubernetes/admin.conf&quot;</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br><span class="line">kubectl get no</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export KUBECONFIG=/etc/kubernetes/admin.conf&quot;</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br><span class="line">kubectl get node</span><br></pre></td></tr></table></figure>
 
 <p>如果显示有效内容，说明配置成功了。</p>
-
+<h4 id="配置kubectl命令自动补全"><a href="#配置kubectl命令自动补全" class="headerlink" title="配置kubectl命令自动补全"></a>配置kubectl命令自动补全</h4><p>初始配置K8S是不能进行命令补全的，使用起来太麻烦，尤其是对于我这个<kbd>Tab</kbd>键重度使用者，实在太不爽。下面是配置K8S命令补全的方法：</p>
+<blockquote>
+<p>一般在master节点执行就可以满足需求，但是如果有需求，也可以在worker节点上配置。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install -y bash-completion</span><br><span class="line"><span class="built_in">source</span> /usr/share/bash-completion/bash_completion</span><br><span class="line"><span class="built_in">source</span> &lt;(kubectl completion bash)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;source &lt;(kubectl completion bash)&quot;</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
     </div>
 
     

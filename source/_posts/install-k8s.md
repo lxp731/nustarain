@@ -18,13 +18,13 @@ tags:
 
 |主机名|IP|CPU|内存|
 |:---:|:---:|:---:|:---:|
-|k8s-mst|192.168.229.130|4|3G|
-|k8s-nd1|192.168.229.131|4|2G|
-|k8s-nd2|192.168.229.132|4|2G|
+|k8s-mst|192.168.229.130|4|8G|
+|k8s-nd1|192.168.229.131|4|4G|
+|k8s-nd2|192.168.229.132|4|4G|
 
 ### 安装步骤
 
-> 下面的步骤1-8，都是需要在三台虚拟机上都执行的。
+> 下面的步骤2.1-2.8，是需要在三台虚拟机上都执行的；2.9-2.10只在master主机执行即可；2.11在所有节点主机执行即可；2.12-2.14在master主机执行即可。
 
 #### 基础操作
 
@@ -194,7 +194,7 @@ mkdir /opt/k8s && cd /opt/k8s
 curl https://calico-v3-25.netlify.app/archive/v3.25/manifests/calico.yaml -O
 ```
 
-这个时我们就下载了一个文件名字叫：calico.yaml，但是这个文件需要改一下cidr。这里的cidr就是我们初始化时候那个cidr。
+这个时我们就下载了一个文件名字叫：calico.yaml，但是这个文件需要改一下cidr。这里的cidr就是我们初始化时候`--pod-network-cidr`字段的cidr。
 
 vim calico.yaml，搜索“CALICO_IPV4POOL_CIDR”。
 
@@ -236,6 +236,8 @@ kubectl get pod,svc
 
 ![验证kube](./install-k8s/4.png)
 
+### 其他高级配置
+
 #### 配置在其他节点的控制
 
 这个就是说在任何节点上都可以对k8s的API-server进行访问，对节点进行管理。换言之，你不配置这一步，你只能在主节点进行`kubectl get nodes`命令，其他节点执行不了。
@@ -250,7 +252,20 @@ scp /etc/kubernetes/admin.conf root@k8s-nd2:/etc/kubernetes
 ```bash
 echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bash_profile
 source ~/.bash_profile
-kubectl get no
+kubectl get node
 ```
 
 如果显示有效内容，说明配置成功了。
+
+#### 配置kubectl命令自动补全
+
+初始配置K8S是不能进行命令补全的，使用起来太麻烦，尤其是对于我这个<kbd>Tab</kbd>键重度使用者，实在太不爽。下面是配置K8S命令补全的方法：
+
+> 一般在master节点执行就可以满足需求，但是如果有需求，也可以在worker节点上配置。
+
+```bash
+yum install -y bash-completion
+source /usr/share/bash-completion/bash_completion
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+```

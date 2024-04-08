@@ -126,9 +126,9 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
-ignore:
+# include: 
+# exclude: 
+# ignore:
 
 search:
   path: search.json #之前就是这里出了问题导致图标错误，错误的教程是 search.xml
