@@ -34,7 +34,7 @@ encrypt: # hexo-blog-encrypt
   message: 您好, 这里需要密码.
   theme: blink
   tags:
-  - {name: 她, password: leo}
+  - {name: 私密, password: buzhidao}
   wrong_pass_message: 抱歉, 这个密码看着不太对, 请再试试.
   wrong_hash_message: 抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.
 
