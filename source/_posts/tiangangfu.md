@@ -72,7 +72,7 @@ tags:
 
 ### 恭送大帅
 
-{% dplayer 
+$\lbrace$% dplayer 
   "url=https://dpv.videocc.net/a2ad892af4/8/a2ad892af4a82f0ad4f5062526946108_1.mp4?pid=1694175956521X1590085" 
   "screenshot" 
   "loop=false" 
@@ -81,4 +81,4 @@ tags:
   "id=46190A32F63DFF2CF0A3BB0F3293636C" 
   "api=https://api.prprpr.me/dplayer/" 
   "addition=https://api.prprpr.me/dplayer/v3/bilibili?aid=17150441" 
-%} 
+%$\rbrace$
