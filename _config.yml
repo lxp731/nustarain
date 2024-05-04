@@ -145,5 +145,5 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@gitee.com:nustarain/nustarain.git
+  repo: https://github.com/lxp731/nustarain.git
   branch: hexo
