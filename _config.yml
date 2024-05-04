@@ -146,4 +146,4 @@ theme: next
 deploy:
   type: git
   repo: git@gitee.com:nustarain/nustarain.git
-  branch: main
+  branch: hexo
