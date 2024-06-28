@@ -19,8 +19,8 @@ tags:
 * [**注册github账号**](https://github.com/)
 
 有 docker 环境，最好有 docker-compose 环境。   
-* [**安装docker环境教程**](https://nustarain.gitee.io/2023/10/30/DockerInit/?highlight=docker)
-* [**安装docker-compose环境教程**](https://nustarain.gitee.io/2023/11/03/install-docker-compose/?highlight=docker)
+* [**安装docker环境教程**](https://nustarain.pages.dev/2023/10/30/DockerInit)
+* [**安装docker-compose环境教程**](https://nustarain.pages.dev/2023/11/03/install-docker-compose/)
 
 接下来就是教程时间。
 
