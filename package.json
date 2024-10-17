@@ -12,7 +12,7 @@
     "version": "6.3.0"
   },
   "dependencies": {
-    "acorn": "^8.11.3",
+    "acorn": "^8.13.0",
     "hexo": "^6.3.0",
     "hexo-asset-image": "github:CodeFalling/hexo-asset-image",
     "hexo-blog-encrypt": "^3.1.9",
