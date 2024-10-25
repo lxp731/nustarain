@@ -5,7 +5,6 @@ node_modules/
 .htaccess
 db.json
 nginx.htaccess
-
 .DS_Store
 Thumbs.db
 *.log
