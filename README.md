@@ -38,4 +38,5 @@ hexo server
 Maybe you can find some useful information in the following links.
 
 [Hexo Official Website](https://hexo.io/zh-cn/)
+
 [Hexo-Theme-Next](https://github.com/next-theme/hexo-theme-next)
