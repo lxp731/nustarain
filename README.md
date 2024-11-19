@@ -24,7 +24,7 @@ git clone https://github.com/nustarain/nustarain.git
 2. Install dependencies
 
 ```bash
-npm install --froce
+npm install
 ```
 
 3. Start server
