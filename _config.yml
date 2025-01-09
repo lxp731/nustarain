@@ -146,4 +146,4 @@ theme: next
 deploy:
   type: git
   repo: git@github.com:lxp731/nustarain.git
-  branch: hexo
+  branch: main
