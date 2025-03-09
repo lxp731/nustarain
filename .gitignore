@@ -1,0 +1,12 @@
+.deploy*/
+.github/
+.vscode/
+node_modules/
+.htaccess
+db.json
+nginx.htaccess
+.DS_Store
+Thumbs.db
+*.log
+_multiconfig.yml
+package-lock.json
