@@ -12,15 +12,18 @@ tags:
 
 ```bash
 openssl genrsa -out private.pem 2048
+
+# 设置指定的加密模式，生成私钥时会要求输入密码。
+openssl genrsa -des3 -out private.pem 2048
 ```
+
+<!-- more -->
 
 2. 利用 private.pem 提取出公钥 public.pem
 
 ```bash
 openssl rsa -in private.pem -pubout -out public.pem
 ```
-
-<!-- more -->
 
 ### 使用 openssl 对文件进行签名以及验证
 
@@ -67,3 +70,69 @@ openssl pkeyutl -encrypt -pubin -in source.txt -inkey public.pem -out encrypted.
 ```bash
 openssl pkeyutl -decrypt -in encrypted.txt -inkey private.pem -out decrypted.txt
 ```
+
+### Create CA Certificate
+
+1. 假定你已经拥有了`private.pem`，即私钥文件
+
+```bash
+# 通过命令交互生成证书
+openssl req -x509 -key private.pem -out ca.crt -days 365
+```
+
+```bash
+# 免交互一次性生成证书
+openssl req -x509 -key private.pem -out ca.crt -days 365 -subj "/C=CN/ST=Beijing/L=Beijing/O=BeiYa/OU=IT/CN=frombyte.auto/emailAddress=admin@frombyte.auto"
+```
+
+#### 参数说明：
+
+* -x509：生成自签名证书。
+* -key private.pem：指定私钥文件。
+* -out ca.crt：指定输出的证书文件。
+* -days 365：设置证书的有效期为 365 天。
+* -subj：指定证书的主题信息，格式为 /字段=值。
+
+#### -subj 字段说明：
+
+* /C：国家代码（例如：CN 表示中国）。
+* /ST：州或省份（例如：Beijing）。
+* /L：城市或地区（例如：Beijing）。
+* /O：组织名称（例如：MyCompany）。
+* /OU：组织单位名称（例如：IT）。
+* /CN：通用名称（通常是域名，例如：mycompany.com）。
+* /emailAddress：电子邮件地址（例如：admin@mycompany.com）。
+
+2. 查看`ca.crt`证书文件的相关信息
+
+```bash
+openssl x509 -in ca.crt -text -noout
+```
+
+### 利用私钥为自己的网站生成`csr`文件
+
+1. 假定个人组织已经有了自己的私钥文件`frombyte.pem`
+
+```bash
+# 通过交互的方式生成 CSR 文件
+openssl req -new -key frombyte.auto.pem -out frombyte.auto.csr
+```
+
+```bash
+# 通过非交互的方式生成 CSR 文件
+openssl req -new -key frombyte.auto.pem -out frombyte.auto.csr -subj "/C=CN/ST=Beijing/L=Beijing/O=MyCompany/OU=IT/CN=frombyte.com/emailAddress=admin@frombyte.com"
+```
+
+2. 查看 CSR 文件的内容
+
+```bash
+openssl req -text -noout -verify -in frombyte.auto.csr
+```
+
+### CA 验证 CSR 生成个人域名证书
+
+```bash
+openssl x509 -req -in frombyte.auto.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out frombyte.auto.crt -days 365
+```
+
+The last, you can use frombyte.auto.pem and frombyte.auto.crt to apply your website.

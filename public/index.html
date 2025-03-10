@@ -244,7 +244,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2025-03-10 11:27:53" itemprop="dateModified" datetime="2025-03-10T11:27:53+08:00">2025-03-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,12 +283,7 @@
           <h3 id="使用-openssl-生成公私密钥对"><a href="#使用-openssl-生成公私密钥对" class="headerlink" title="使用 openssl 生成公私密钥对"></a>使用 openssl 生成公私密钥对</h3><ol>
 <li>首先生成私钥 private.pem (private.pem 密钥文件中包含了私钥和公钥)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private.pem 2048</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>利用 private.pem 提取出公钥 public.pem</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -<span class="keyword">in</span> private.pem -pubout -out public.pem</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置指定的加密模式，生成私钥时会要求输入密码。</span></span><br><span class="line">openssl genrsa -des3 -out private.pem 2048</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/03/09/openssl/#more" rel="contents">

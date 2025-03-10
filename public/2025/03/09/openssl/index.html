@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="使用 openssl 生成公私密钥对 首先生成私钥 private.pem (private.pem 密钥文件中包含了私钥和公钥)  1openssl genrsa -out private.pem 2048   利用 private.pem 提取出公钥 public.pem  1openssl rsa -in private.pem -pubout -out public.pem">
+    <meta name="description" content="使用 openssl 生成公私密钥对 首先生成私钥 private.pem (private.pem 密钥文件中包含了私钥和公钥)  1234openssl genrsa -out private.pem 2048# 设置指定的加密模式，生成私钥时会要求输入密码。openssl genrsa -des3 -out private.pem 2048">
 <meta property="og:type" content="article">
 <meta property="og:title" content="openssl 简单使用">
 <meta property="og:url" content="https://nustarain.gitee.io/2025/03/09/openssl/index.html">
 <meta property="og:site_name" content="Leo Blog">
-<meta property="og:description" content="使用 openssl 生成公私密钥对 首先生成私钥 private.pem (private.pem 密钥文件中包含了私钥和公钥)  1openssl genrsa -out private.pem 2048   利用 private.pem 提取出公钥 public.pem  1openssl rsa -in private.pem -pubout -out public.pem">
+<meta property="og:description" content="使用 openssl 生成公私密钥对 首先生成私钥 private.pem (private.pem 密钥文件中包含了私钥和公钥)  1234openssl genrsa -out private.pem 2048# 设置指定的加密模式，生成私钥时会要求输入密码。openssl genrsa -des3 -out private.pem 2048">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-09T07:48:29.000Z">
-<meta property="article:modified_time" content="2025-03-10T02:05:25.990Z">
+<meta property="article:modified_time" content="2025-03-10T03:27:53.555Z">
 <meta property="article:author" content="Burgess Leo">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-openssl-%E7%94%9F%E6%88%90%E5%85%AC%E7%A7%81%E5%AF%86%E9%92%A5%E5%AF%B9"><span class="nav-number">1.</span> <span class="nav-text">使用 openssl 生成公私密钥对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-openssl-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E7%AD%BE%E5%90%8D%E4%BB%A5%E5%8F%8A%E9%AA%8C%E8%AF%81"><span class="nav-number">2.</span> <span class="nav-text">使用 openssl 对文件进行签名以及验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-openssl-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%AF%86"><span class="nav-number">3.</span> <span class="nav-text">使用 openssl 对文件进行加密以及解密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%86%E7%A0%81%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E6%88%96%E8%A7%A3%E5%AF%86"><span class="nav-number">3.1.</span> <span class="nav-text">使用密码的方式对文件进行加密或解密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%86%E9%92%A5%E5%AF%B9%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E6%88%96%E8%A7%A3%E5%AF%86"><span class="nav-number">3.2.</span> <span class="nav-text">使用密钥对的方式对文件进行加密或解密</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-openssl-%E7%94%9F%E6%88%90%E5%85%AC%E7%A7%81%E5%AF%86%E9%92%A5%E5%AF%B9"><span class="nav-number">1.</span> <span class="nav-text">使用 openssl 生成公私密钥对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-openssl-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E7%AD%BE%E5%90%8D%E4%BB%A5%E5%8F%8A%E9%AA%8C%E8%AF%81"><span class="nav-number">2.</span> <span class="nav-text">使用 openssl 对文件进行签名以及验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-openssl-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%AF%86"><span class="nav-number">3.</span> <span class="nav-text">使用 openssl 对文件进行加密以及解密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%86%E7%A0%81%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E6%88%96%E8%A7%A3%E5%AF%86"><span class="nav-number">3.1.</span> <span class="nav-text">使用密码的方式对文件进行加密或解密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%86%E9%92%A5%E5%AF%B9%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E6%88%96%E8%A7%A3%E5%AF%86"><span class="nav-number">3.2.</span> <span class="nav-text">使用密钥对的方式对文件进行加密或解密</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-CA-Certificate"><span class="nav-number">4.</span> <span class="nav-text">Create CA Certificate</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">参数说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#subj-%E5%AD%97%E6%AE%B5%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="nav-number">4.2.</span> <span class="nav-text">-subj 字段说明：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E7%A7%81%E9%92%A5%E4%B8%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90csr%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">利用私钥为自己的网站生成csr文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CA-%E9%AA%8C%E8%AF%81-CSR-%E7%94%9F%E6%88%90%E4%B8%AA%E4%BA%BA%E5%9F%9F%E5%90%8D%E8%AF%81%E4%B9%A6"><span class="nav-number">6.</span> <span class="nav-text">CA 验证 CSR 生成个人域名证书</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -248,7 +248,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2025-03-10 11:27:53" itemprop="dateModified" datetime="2025-03-10T11:27:53+08:00">2025-03-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -294,14 +294,14 @@
         <h3 id="使用-openssl-生成公私密钥对"><a href="#使用-openssl-生成公私密钥对" class="headerlink" title="使用 openssl 生成公私密钥对"></a>使用 openssl 生成公私密钥对</h3><ol>
 <li>首先生成私钥 private.pem (private.pem 密钥文件中包含了私钥和公钥)</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private.pem 2048</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置指定的加密模式，生成私钥时会要求输入密码。</span></span><br><span class="line">openssl genrsa -des3 -out private.pem 2048</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
 
 <ol start="2">
 <li>利用 private.pem 提取出公钥 public.pem</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -<span class="keyword">in</span> private.pem -pubout -out public.pem</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
 
 <h3 id="使用-openssl-对文件进行签名以及验证"><a href="#使用-openssl-对文件进行签名以及验证" class="headerlink" title="使用 openssl 对文件进行签名以及验证"></a>使用 openssl 对文件进行签名以及验证</h3><ol>
 <li>利用私钥对文件进行签名 (signature.bin 为签名文件, file.txt 为待签名文件)</li>
@@ -333,6 +333,51 @@
 <li>使用 private.pem 私钥解密一个文件 (encrypted.txt 为加密之后的文件，decrypted.txt 为解密之后的文件)</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkeyutl -decrypt -<span class="keyword">in</span> encrypted.txt -inkey private.pem -out decrypted.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-CA-Certificate"><a href="#Create-CA-Certificate" class="headerlink" title="Create CA Certificate"></a>Create CA Certificate</h3><ol>
+<li>假定你已经拥有了<code>private.pem</code>，即私钥文件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过命令交互生成证书</span></span><br><span class="line">openssl req -x509 -key private.pem -out ca.crt -days 365</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 免交互一次性生成证书</span></span><br><span class="line">openssl req -x509 -key private.pem -out ca.crt -days 365 -subj <span class="string">&quot;/C=CN/ST=Beijing/L=Beijing/O=BeiYa/OU=IT/CN=frombyte.auto/emailAddress=admin@frombyte.auto&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h4><ul>
+<li>-x509：生成自签名证书。</li>
+<li>-key private.pem：指定私钥文件。</li>
+<li>-out ca.crt：指定输出的证书文件。</li>
+<li>-days 365：设置证书的有效期为 365 天。</li>
+<li>-subj：指定证书的主题信息，格式为 &#x2F;字段&#x3D;值。</li>
+</ul>
+<h4 id="subj-字段说明："><a href="#subj-字段说明：" class="headerlink" title="-subj 字段说明："></a>-subj 字段说明：</h4><ul>
+<li>&#x2F;C：国家代码（例如：CN 表示中国）。</li>
+<li>&#x2F;ST：州或省份（例如：Beijing）。</li>
+<li>&#x2F;L：城市或地区（例如：Beijing）。</li>
+<li>&#x2F;O：组织名称（例如：MyCompany）。</li>
+<li>&#x2F;OU：组织单位名称（例如：IT）。</li>
+<li>&#x2F;CN：通用名称（通常是域名，例如：mycompany.com）。</li>
+<li>&#x2F;emailAddress：电子邮件地址（例如：<a href="mailto:&#97;&#x64;&#109;&#x69;&#110;&#64;&#x6d;&#121;&#99;&#x6f;&#109;&#x70;&#97;&#x6e;&#121;&#x2e;&#99;&#x6f;&#x6d;">&#97;&#x64;&#109;&#x69;&#110;&#64;&#x6d;&#121;&#99;&#x6f;&#109;&#x70;&#97;&#x6e;&#121;&#x2e;&#99;&#x6f;&#x6d;</a>）。</li>
+</ul>
+<ol start="2">
+<li>查看<code>ca.crt</code>证书文件的相关信息</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> ca.crt -text -noout</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用私钥为自己的网站生成csr文件"><a href="#利用私钥为自己的网站生成csr文件" class="headerlink" title="利用私钥为自己的网站生成csr文件"></a>利用私钥为自己的网站生成<code>csr</code>文件</h3><ol>
+<li>假定个人组织已经有了自己的私钥文件<code>frombyte.pem</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过交互的方式生成 CSR 文件</span></span><br><span class="line">openssl req -new -key frombyte.auto.pem -out frombyte.auto.csr</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过非交互的方式生成 CSR 文件</span></span><br><span class="line">openssl req -new -key frombyte.auto.pem -out frombyte.auto.csr -subj <span class="string">&quot;/C=CN/ST=Beijing/L=Beijing/O=MyCompany/OU=IT/CN=frombyte.com/emailAddress=admin@frombyte.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查看 CSR 文件的内容</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -text -noout -verify -<span class="keyword">in</span> frombyte.auto.csr</span><br></pre></td></tr></table></figure>
+
+<h3 id="CA-验证-CSR-生成个人域名证书"><a href="#CA-验证-CSR-生成个人域名证书" class="headerlink" title="CA 验证 CSR 生成个人域名证书"></a>CA 验证 CSR 生成个人域名证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> frombyte.auto.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out frombyte.auto.crt -days 365</span><br></pre></td></tr></table></figure>
+
+<p>The last, you can use frombyte.auto.pem and frombyte.auto.crt to apply your website.</p>
+
     </div>
 
     
