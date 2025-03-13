@@ -136,3 +136,31 @@ openssl x509 -req -in frombyte.auto.csr -CA ca.crt -CAkey ca.key -set_serial 01 
 ```
 
 The last, you can use frombyte.auto.pem and frombyte.auto.crt to apply your website.
+
+### 其他参考
+
+1. 查看并显示证书（ca.crt）的详细信息
+
+```bash
+openssl x509 -noout -text -in ca.crt
+```
+
+2. 验证客户端证书（client.pem）是否由指定的 CA 证书（ca.pem）签发
+
+```bash
+openssl verify -CAfile ca.crt client.pem
+```
+
+如果验证成功，输出 client.pem: OK。
+
+如果验证失败，输出错误信息（如证书不匹配、证书过期等）。
+
+3. 比较证书文件（cert.crt）和私钥文件（cert.key）中的公钥是否匹配
+
+```bash
+diff -eq <(openssl x509 -pubkey -noout -in cert.crt) <(openssl rsa -pubout -in cert.key)
+```
+
+如果公钥匹配，命令无输出（退出状态码为 0）。
+
+如果公钥不匹配，命令无输出（退出状态码为非 0）。
