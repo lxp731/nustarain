@@ -42,17 +42,17 @@ pvs
 
 * 创建卷组
 
-```bash
-pvcreate qavg /dev/sdb
-```
-
-利用`/dev/sdb`创建一个叫qavg的卷组。
+1. 利用`/dev/sdb`创建一个叫qavg的卷组。
 
 ```bash
-pvcreate -s 16M qavg /dev/sdb
+vgcreate qavg /dev/sdb
 ```
 
-利用`/dev/sdb`创建一个叫qavg的卷组，并且设置卷组里最小的逻辑存储单位为16M。
+2. 利用`/dev/sdb`创建一个叫qavg的卷组，并且设置卷组里最小的逻辑存储单位为16M。
+
+```bash
+vgcreate -s 16M qavg /dev/sdb
+```
 
 * 查看卷组的详细信息
 
@@ -76,11 +76,11 @@ vgextend qavg /dev/sdb2
 
 * 删减卷组
 
+将物理卷`/dev/sdb2`从卷组qavg中删除
+
 ```bash
 vgreduce qavg /dev/sdb2
 ```
-
-将物理卷`/dev/sdb2`从卷组qavg中删除
 
 * 删除卷组
 
@@ -90,53 +90,53 @@ vgremove qavg
 
 * 重命名卷组
 
+重命名卷组`/dev/qavg1`为`/dev/qavg2`。
+
 ```bash
 vgrename /dev/qavg1 /dev/qavg2
 ```
-
-重命名卷组`/dev/qavg1`为`/dev/qavg2`。
 
 ### 逻辑卷
 
 * 创建逻辑卷
 
+利用`qavg`这个卷组创建一个叫`qa`大小为200M的逻辑卷。这里的**L选项**指定的是平常讲的磁盘的大小。
+
 ```bash
 lvcreate -L 200M qavg -n qa
 ```
 
-利用`qavg`这个卷组创建一个叫`qa`大小为200M的逻辑卷。这里的**L选项**指定的是平常讲的磁盘的大小。
+使用**l选项**是指定的逻辑的块多少，比如上面创建卷组时指定的一个块的大小是16M，这里指定45个，逻辑卷的大小就是720M
 
 ```bash
 lvcreate -l 45 qavg -n qa
 ```
 
-使用**l选项**是指定的逻辑的块多少，比如上面创建卷组时指定的一个块的大小是16M，这里指定45个，逻辑卷的大小就是720M
-
 * 扩容逻辑卷
+
+这个是指在原来逻辑卷的基础上再增加54Mib的存储空间。但增加不能超过卷组的总容量大小。
 
 ```bash
 lvextend -L +54 /dev/qavg/qa
 ```
 
-这个是指在原来逻辑卷的基础上再增加54Mib的存储空间。但增加不能超过卷组的总容量大小。
+使用卷组里`/dev/sdk3`这个物理卷的全部空间为`qavg/qa`扩容。
 
 ```bash
 lvextend qavg/qa /dev/sdk3
 ```
 
-使用卷组里`/dev/sdk3`这个物理卷的全部空间为`qavg/qa`扩容。
+使用卷组里`/dev/sda`的8-9M的空间和`/dev/sdb`的8-9M的空间为逻辑卷`qavg/qa`扩容
 
 ```bash
 lvextend -L+16m qavg/qa /dev/sda:8-9 /dev/sdb:8-9
 ```
 
-使用卷组里`/dev/sda`的8-9M的空间和`/dev/sdb`的8-9M的空间为逻辑卷`qavg/qa`扩容
+使用卷组所有剩余的空间为`qavg/qa`扩容。
 
 ```bash
 lvextend -l+100%FREE -r qavg/qa
 ```
-
-使用卷组所有剩余的空间为`qavg/qa`扩容。
 
 * 查看逻辑卷详细信息
 
