@@ -18,12 +18,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.gitee.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.pages.dev","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="网上乌托邦，心底陶乐庄。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Leo Blog">
-<meta property="og:url" content="https://nustarain.gitee.io/page/8/index.html">
+<meta property="og:url" content="https://nustarain.pages.dev/page/8/index.html">
 <meta property="og:site_name" content="Leo Blog">
 <meta property="og:description" content="网上乌托邦，心底陶乐庄。">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://nustarain.gitee.io/page/8/">
+<link rel="canonical" href="https://nustarain.pages.dev/page/8/">
 
 
 
@@ -153,18 +153,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -208,7 +208,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/07/04/php/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/07/04/%E6%8A%80%E6%9C%AF/ISCSI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -226,7 +226,368 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/04/php/" class="post-title-link" itemprop="url">源码安装PHP</a>
+          <a href="/2023/07/04/%E6%8A%80%E6%9C%AF/ISCSI/" class="post-title-link" itemprop="url">搭建并挂载ISCSI存储服务器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-04 15:18:06" itemprop="dateCreated datePublished" datetime="2023-07-04T15:18:06+08:00">2023-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-02 14:37:41" itemprop="dateModified" datetime="2026-06-02T14:37:41+08:00">2026-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="搭建并挂载ISCSI存储服务器" href="/2023/07/04/%E6%8A%80%E6%9C%AF/ISCSI/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::30e61d908d3014492bf4de6e7489d191" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="ISCSI服务器端"><a href="#ISCSI服务器端" class="headerlink" title="ISCSI服务器端"></a>ISCSI服务器端</h3><p>比如现在ISCSI服务器端有两块硬盘，我们想把第二块硬盘（sdb）共享出去。</p>
+<ol>
+<li>下载软件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y targetcli</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>开始进行服务端的配置</li>
+</ol>
+<ul>
+<li>首先键入<code>targetcli</code>进入iscsi配置模式</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">targetcli</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/04/%E6%8A%80%E6%9C%AF/ISCSI/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/07/04/%E6%8A%80%E6%9C%AF/nfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/04/%E6%8A%80%E6%9C%AF/nfs/" class="post-title-link" itemprop="url">NFS挂载到服务器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-04 13:54:37" itemprop="dateCreated datePublished" datetime="2023-07-04T13:54:37+08:00">2023-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-02 14:37:41" itemprop="dateModified" datetime="2026-06-02T14:37:41+08:00">2026-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="NFS挂载到服务器" href="/2023/07/04/%E6%8A%80%E6%9C%AF/nfs/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::688f725c100589a71b548c69526bbc46" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <table>
+<thead>
+<tr>
+<th align="center">主机名</th>
+<th align="center">身份</th>
+<th align="center">网络接口</th>
+<th align="center">连接模式</th>
+<th align="center">IP地址</th>
+<th align="center">软件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">NFS</td>
+<td align="center">存储服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.40&#x2F;24</td>
+<td align="center">nfs-utils</td>
+</tr>
+<tr>
+<td align="center">Web1</td>
+<td align="center">Web服务器</td>
+<td align="center">ens224</td>
+<td align="center">仅主机</td>
+<td align="center">10.8.7.80&#x2F;24</td>
+<td align="center">nginx、nfs-utils</td>
+</tr>
+</tbody></table>
+<h3 id="NFS服务器部分"><a href="#NFS服务器部分" class="headerlink" title="NFS服务器部分"></a>NFS服务器部分</h3><ol>
+<li>下载软件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nfs-utils</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/04/%E6%8A%80%E6%9C%AF/nfs/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/07/04/%E6%8A%80%E6%9C%AF/nginx-union-php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/04/%E6%8A%80%E6%9C%AF/nginx-union-php/" class="post-title-link" itemprop="url">NGINX整合PHP</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-07-04 11:53:35" itemprop="dateCreated datePublished" datetime="2023-07-04T11:53:35+08:00">2023-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-02 15:56:35" itemprop="dateModified" datetime="2026-06-02T15:56:35+08:00">2026-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="NGINX整合PHP" href="/2023/07/04/%E6%8A%80%E6%9C%AF/nginx-union-php/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::bdc5636c2cbb048d2e471a0eb025a619" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="NGINX整合PHP"><a href="#NGINX整合PHP" class="headerlink" title="NGINX整合PHP"></a>NGINX整合PHP</h3><p>这个实现起来比较简单，就是一段代码的事，但是之前没有出现我这样的开源工作者的时候，我只能手敲那一段代码，有时候一不留神就会把单词拼错，尤其是朱行查找错误的时候，简直苦不堪言。为了后浪们的幸福生活，再次我将那一段代码写下来供你们<kbd>Ctrl</kbd>+<kbd>C</kbd>和<kbd>Ctrl</kbd>+<kbd>V</kbd>使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/07/04/%E6%8A%80%E6%9C%AF/nginx-union-php/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/07/04/%E6%8A%80%E6%9C%AF/php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/04/%E6%8A%80%E6%9C%AF/php/" class="post-title-link" itemprop="url">源码安装PHP</a>
         </h2>
 
         <div class="post-meta-container">
@@ -244,7 +605,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2026-06-02 14:37:41" itemprop="dateModified" datetime="2026-06-02T14:37:41+08:00">2026-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,8 +626,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="源码安装PHP" href="/2023/07/04/php/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::9e1a5ad66fa331732875e48735267ce6" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="源码安装PHP" href="/2023/07/04/%E6%8A%80%E6%9C%AF/php/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::aebaf0070d06d325ba8ecc7d97119760" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -283,7 +644,7 @@
           <h3 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h3><p>无论是在Centos7还是在Centos8都需要进行源码安装，其实这句话也不对，因为在Centos8里是可以yum安装php和php-fpm的。但是，安装之后使用<code>php-fpm start</code>启动命令之后是监听不到内容的。有可能是自己还是不太会用Centos8的PHP，自己也没有再去深入研究，做的项目都是用的源码装的，在这里先把源码安装的教程发不出来，后续有时间再去研究。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/04/php/#more" rel="contents">
+              <a class="btn" href="/2023/07/04/%E6%8A%80%E6%9C%AF/php/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -314,7 +675,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/07/04/nginx/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/07/04/%E6%8A%80%E6%9C%AF/nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -332,7 +693,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/07/04/nginx/" class="post-title-link" itemprop="url">源码安装NGINX</a>
+          <a href="/2023/07/04/%E6%8A%80%E6%9C%AF/nginx/" class="post-title-link" itemprop="url">源码安装NGINX</a>
         </h2>
 
         <div class="post-meta-container">
@@ -350,7 +711,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2026-06-02 14:37:41" itemprop="dateModified" datetime="2026-06-02T14:37:41+08:00">2026-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -371,8 +732,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="源码安装NGINX" href="/2023/07/04/nginx/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::42e9d947d67a2a637569f9824d772b47" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="源码安装NGINX" href="/2023/07/04/%E6%8A%80%E6%9C%AF/nginx/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::ac9d5ef06fbe909a4027e22b6081e83c" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -390,7 +751,7 @@
 <p>主要针对Centos7版本做一下说明，因为Centos7的yum是不提供NGINX的，所以需要自己手动使用源码安装的方式进行安装。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/07/04/nginx/#more" rel="contents">
+              <a class="btn" href="/2023/07/04/%E6%8A%80%E6%9C%AF/nginx/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -421,7 +782,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/06/04/keepalived-linux/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/06/04/%E6%8A%80%E6%9C%AF/keepalived-linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -439,7 +800,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/06/04/keepalived-linux/" class="post-title-link" itemprop="url">Mariadb双主复制+Keepalived</a>
+          <a href="/2023/06/04/%E6%8A%80%E6%9C%AF/keepalived-linux/" class="post-title-link" itemprop="url">Mariadb双主复制+Keepalived</a>
         </h2>
 
         <div class="post-meta-container">
@@ -457,7 +818,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2026-06-02 15:56:35" itemprop="dateModified" datetime="2026-06-02T15:56:35+08:00">2026-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,8 +839,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="Mariadb双主复制+Keepalived" href="/2023/06/04/keepalived-linux/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::486cb97440cd8a042270ff2e3d85174c" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="Mariadb双主复制+Keepalived" href="/2023/06/04/%E6%8A%80%E6%9C%AF/keepalived-linux/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::e6aa0c055a08d9e0f64559584fb897e2" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -497,7 +858,7 @@
 <h3 id="项目梗概"><a href="#项目梗概" class="headerlink" title="项目梗概"></a>项目梗概</h3><p>项目一共设计7台虚拟机，其中2台作为调度机，进行对访问请求的分配；2台作为Nginx服务器；2台作为Mariadb数据库服务器；一台作为NFS储存服务器，负责存储Nginx服务器的网页资源。其逻辑拓扑图如下：</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/06/04/keepalived-linux/#more" rel="contents">
+              <a class="btn" href="/2023/06/04/%E6%8A%80%E6%9C%AF/keepalived-linux/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -528,7 +889,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/31/eve-import-img/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/05/31/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/eve-import-img/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -546,7 +907,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/31/eve-import-img/" class="post-title-link" itemprop="url">EVE导入CENTOS8的镜像</a>
+          <a href="/2023/05/31/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/eve-import-img/" class="post-title-link" itemprop="url">EVE导入CENTOS8的镜像</a>
         </h2>
 
         <div class="post-meta-container">
@@ -564,7 +925,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2026-06-02 15:56:35" itemprop="dateModified" datetime="2026-06-02T15:56:35+08:00">2026-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -585,8 +946,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="EVE导入CENTOS8的镜像" href="/2023/05/31/eve-import-img/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::3e40281a84bfd84daf09a3239fe118bd" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="EVE导入CENTOS8的镜像" href="/2023/05/31/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/eve-import-img/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::44f5cdd7db096b4d6ab644198db49023" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -604,7 +965,7 @@
 <h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>首先需要EVE的导入镜像，我只用到了CENTOS8的，<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14OK6FP1sUPU5KDQHexRLbA">相关链接</a> 放在了云盘里，提取码：0731，需要自取。虚拟机的<code>user</code>用户和<code>root</code>密码均为<code>Test123</code>。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/31/eve-import-img/#more" rel="contents">
+              <a class="btn" href="/2023/05/31/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/eve-import-img/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -635,7 +996,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/24/seliunx/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/05/24/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/seliunx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -653,7 +1014,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/seliunx/" class="post-title-link" itemprop="url">关于seliunx的学习过程</a>
+          <a href="/2023/05/24/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/seliunx/" class="post-title-link" itemprop="url">关于seliunx的学习过程</a>
         </h2>
 
         <div class="post-meta-container">
@@ -671,7 +1032,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2026-06-02 14:37:41" itemprop="dateModified" datetime="2026-06-02T14:37:41+08:00">2026-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -692,8 +1053,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="关于seliunx的学习过程" href="/2023/05/24/seliunx/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::32cffbce2cf18d834f0b82ea300900fa" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="关于seliunx的学习过程" href="/2023/05/24/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/seliunx/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::9b4a5823b1861a0e2983ee276b7f22e9" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -713,7 +1074,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@servera home]# <span class="built_in">ls</span> -dZ student/</span><br><span class="line">unconfined_u:object_r:user_home_dir_t:s0 student/</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/24/seliunx/#more" rel="contents">
+              <a class="btn" href="/2023/05/24/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/seliunx/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -744,7 +1105,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/18/LVS-Nginx-DR/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/05/18/%E6%8A%80%E6%9C%AF/LVS-Nginx-DR/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -762,7 +1123,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/18/LVS-Nginx-DR/" class="post-title-link" itemprop="url">使用LVS+Nginx配置DR模式的Web集群</a>
+          <a href="/2023/05/18/%E6%8A%80%E6%9C%AF/LVS-Nginx-DR/" class="post-title-link" itemprop="url">使用LVS+Nginx配置DR模式的Web集群</a>
         </h2>
 
         <div class="post-meta-container">
@@ -780,7 +1141,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2026-06-02 14:37:41" itemprop="dateModified" datetime="2026-06-02T14:37:41+08:00">2026-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -801,8 +1162,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="使用LVS+Nginx配置DR模式的Web集群" href="/2023/05/18/LVS-Nginx-DR/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::5b9d2548f817c0927e40a6d7eab886d8" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="使用LVS+Nginx配置DR模式的Web集群" href="/2023/05/18/%E6%8A%80%E6%9C%AF/LVS-Nginx-DR/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::4c60c6cbc8d78710da705488abe753ec" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -875,7 +1236,7 @@
 <li>web1和web2的loopback网卡都要设置为DS主机的metric值大的那一张网卡。</li></ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/18/LVS-Nginx-DR/#more" rel="contents">
+              <a class="btn" href="/2023/05/18/%E6%8A%80%E6%9C%AF/LVS-Nginx-DR/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -906,7 +1267,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/18/linux-tips/">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2023/05/18/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/linux-tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -924,7 +1285,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/18/linux-tips/" class="post-title-link" itemprop="url">Linux使用小tips</a>
+          <a href="/2023/05/18/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/linux-tips/" class="post-title-link" itemprop="url">Linux使用小tips</a>
         </h2>
 
         <div class="post-meta-container">
@@ -942,7 +1303,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
+      <time title="修改时间：2026-06-02 14:37:41" itemprop="dateModified" datetime="2026-06-02T14:37:41+08:00">2026-06-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -963,8 +1324,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="Linux使用小tips" href="/2023/05/18/linux-tips/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::c58de2ed8aca4abbb5510d16611a0a6e" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="Linux使用小tips" href="/2023/05/18/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/linux-tips/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::a0fcfee156f1fa154749b0293b27c8ec" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -988,387 +1349,7 @@
 <p>在平常的服务器的配置时，总是会涉及到IP的变动，我个人使用最多的方法是直接修改配置文件。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/18/linux-tips/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/18/linux-init/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/18/linux-init/" class="post-title-link" itemprop="url">新的Linux虚拟机快速基本配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-18 09:54:34" itemprop="dateCreated datePublished" datetime="2023-05-18T09:54:34+08:00">2023-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/" itemprop="url" rel="index"><span itemprop="name">小玩意儿</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="新的Linux虚拟机快速基本配置" href="/2023/05/18/linux-init/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::97b255b46f07fc38900c2f2c4cbdf334" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="配置阿里yum源"><a href="#配置阿里yum源" class="headerlink" title="配置阿里yum源"></a>配置阿里yum源</h3><ol>
-<li>首先保证虚拟机可以正常访问网络。</li>
-<li>执行命令，下载yum源。(CENTOS-7)</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o /etc/yum.repos.d/aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
-
-<p>CENTOS-8 yum源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o /etc/yum.repos.d/aliyun.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/18/linux-init/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/17/LVS-Nginx-NAT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/17/LVS-Nginx-NAT/" class="post-title-link" itemprop="url">使用LVS+Nginx配置NAT模式的Web集群</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-17 19:59:09" itemprop="dateCreated datePublished" datetime="2023-05-17T19:59:09+08:00">2023-05-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="使用LVS+Nginx配置NAT模式的Web集群" href="/2023/05/17/LVS-Nginx-NAT/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::5fca2fa4b2dddb397e72a3c51f5c3e76" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="准备条件"><a href="#准备条件" class="headerlink" title="准备条件"></a>准备条件</h3><p>需要最少准备三台虚拟机，关闭selinx和防火墙。</p>
-<table>
-<thead>
-<tr>
-<th align="center">主机名</th>
-<th align="center">身份</th>
-<th align="center">网络接口</th>
-<th align="center">连接模式</th>
-<th align="center">IP地址</th>
-<th align="center">网关</th>
-<th align="center">软件</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">DS</td>
-<td align="center">调度服务器</td>
-<td align="center">ens160</td>
-<td align="center">nat</td>
-<td align="center">192.168.20.40&#x2F;24</td>
-<td align="center">192.168.20.254</td>
-<td align="center">ipvsadm</td>
-</tr>
-<tr>
-<td align="center">DS</td>
-<td align="center">调度服务器</td>
-<td align="center">ens224</td>
-<td align="center">仅主机</td>
-<td align="center">172.21.8.10&#x2F;24</td>
-<td align="center">-</td>
-<td align="center">ipvsadm</td>
-</tr>
-<tr>
-<td align="center">web1</td>
-<td align="center">真实服务器</td>
-<td align="center">ens224</td>
-<td align="center">仅主机</td>
-<td align="center">172.21.8.20&#x2F;24</td>
-<td align="center">172.21.8.10&#x2F;24</td>
-<td align="center">nginx</td>
-</tr>
-<tr>
-<td align="center">web2</td>
-<td align="center">真实服务器</td>
-<td align="center">ens224</td>
-<td align="center">仅主机</td>
-<td align="center">172.21.8.30&#x2F;24</td>
-<td align="center">172.21.8.10&#x2F;24</td>
-<td align="center">nginx</td>
-</tr>
-</tbody></table>
-<p>PS:</p>
-<ol>
-<li>DS一定是两块网卡，并且用一张网卡去作为真实服务器的网关。</li>
-<li>DS的两块网卡最好模式是不一样的。</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/17/LVS-Nginx-NAT/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://nustarain.gitee.io/2023/05/07/CVE-extend/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Burgess Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Leo Blog">
-      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Leo Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/07/CVE-extend/" class="post-title-link" itemprop="url">CVE漏洞成功复现的玄学条件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-07 11:30:06" itemprop="dateCreated datePublished" datetime="2023-05-07T11:30:06+08:00">2023-05-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-10 10:05:25" itemprop="dateModified" datetime="2025-03-10T10:05:25+08:00">2025-03-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="CVE漏洞成功复现的玄学条件" href="/2023/05/07/CVE-extend/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::61fc99be0023f24eb5ea94e192156bee" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>总结一下漏洞复现得出来的几点体会，之前在永恒之黑文章里就已经提过几次了。</p>
-<p>但还是有两点得补充一下</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/07/CVE-extend/#more" rel="contents">
+              <a class="btn" href="/2023/05/18/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/linux-tips/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1408,7 +1389,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2025</span>
+  <span itemprop="copyrightYear">2026</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
