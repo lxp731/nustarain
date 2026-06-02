@@ -2,7 +2,6 @@
 title: 为Linux设置一套合理的备份方案
 date: 2023-10-04 20:48:42
 categories: 理论知识 
-  - 理论知识
 tags:
   - Linux
   - 面试

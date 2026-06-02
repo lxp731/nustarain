@@ -2,7 +2,6 @@
 title: OpenStack在windows上安装教程
 date:       2023-03-19 14:23
 categories: 探索 
-  - 探索
 tags: 
   - Openstack
 ---
