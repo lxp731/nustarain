@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.pages.dev","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="蛐蛐（ququ）是一个开源免费的桌面语音转文字工具，对标 Wispr Flow——你说话，文字直接上屏；语音识别在本地跑，数据不出本机。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ququ 语音转文字项目复盘：开源免费的中文语音工作流">
+<meta property="og:url" content="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ququ-project/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="蛐蛐（ququ）是一个开源免费的桌面语音转文字工具，对标 Wispr Flow——你说话，文字直接上屏；语音识别在本地跑，数据不出本机。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-27T02:15:00.000Z">
+<meta property="article:modified_time" content="2026-08-27T09:39:04.479Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="项目复盘">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ququ-project/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ququ-project/","path":"2026/08/27/技术/ququ-project/","title":"ququ 语音转文字项目复盘：开源免费的中文语音工作流"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ququ 语音转文字项目复盘：开源免费的中文语音工作流 | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E9%80%9F%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">一、项目速览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF%EF%BC%88%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、项目背景（动机）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%8C%E6%88%90%E6%83%85%E5%86%B5%EF%BC%88%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、完成情况（技术架构）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%B4%9F%E8%B4%A3%E5%86%85%E5%AE%B9"><span class="nav-number">4.</span> <span class="nav-text">四、负责内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%AE%8C%E6%88%90%E6%88%90%E6%95%88"><span class="nav-number">5.</span> <span class="nav-text">五、完成成效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%9D%A2%E8%AF%95%E5%AE%98%E6%8F%90%E9%97%AE%E4%B8%8E%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94"><span class="nav-number">6.</span> <span class="nav-text">六、面试官提问与参考回答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%BB%84%EF%BC%9A%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%885-%E9%A2%98%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">第一组：基础问题（5 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E4%BD%A0%E7%9A%84%E2%80%9D%E8%9B%90%E8%9B%90%E2%80%9D%E9%A1%B9%E7%9B%AE%EF%BC%9F"><span class="nav-number">6.1.1.</span> <span class="nav-text">Q1. 简单介绍一下你的”蛐蛐”项目？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-FunASR-%E5%81%9A%E6%9C%AC%E5%9C%B0%E8%AF%86%E5%88%AB%EF%BC%9F%E5%AF%B9%E6%AF%94%E8%BF%87%E5%85%B6%E4%BB%96%E6%96%B9%E6%A1%88%E5%90%97%EF%BC%9F"><span class="nav-number">6.1.2.</span> <span class="nav-text">Q2. 为什么选择 FunASR 做本地识别？对比过其他方案吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-%E4%BD%A0%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F"><span class="nav-number">6.1.3.</span> <span class="nav-text">Q3. 你项目的整体架构是怎么设计的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-%E2%80%9C%E6%95%B0%E6%8D%AE%E6%9C%AC%E5%9C%B0%E5%A4%84%E7%90%86%E2%80%9D%E5%85%B7%E4%BD%93%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E5%88%B0%E7%9A%84%EF%BC%9F"><span class="nav-number">6.1.4.</span> <span class="nav-text">Q4. “数据本地处理”具体是怎么做到的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%94%A8%E5%88%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E6%8A%80%E6%9C%AF%E6%A0%88%EF%BC%9F%E5%92%8C%E4%BD%A0%E7%9A%84%E5%B2%97%E4%BD%8D%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E8%81%94%EF%BC%9F"><span class="nav-number">6.1.5.</span> <span class="nav-text">Q5. 这个项目用到了哪些技术栈？和你的岗位有什么关联？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%BB%84%EF%BC%9A%E6%B7%B1%E5%85%A5%E9%97%AE%E9%A2%98%EF%BC%886-%E9%A2%98%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">第二组：深入问题（6 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-%E2%80%9C%E5%8F%AF%E9%85%8D%E7%BD%AE%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E2%80%9D%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">6.2.1.</span> <span class="nav-text">Q6. “可配置大语言模型”是怎么实现的？支持哪些配置方式？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7-%E8%AE%B2%E8%AE%B2%E4%BD%A0%E7%94%A8%E7%9A%84-ASR-%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BB%86%E8%8A%82%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%A4%9A%E5%A4%A7%E3%80%81CPU-%E8%BF%98%E6%98%AF-GPU%E3%80%81%E5%BB%B6%E8%BF%9F%E3%80%81%E6%98%BE%E5%AD%98%E5%8D%A0%E7%94%A8%EF%BC%9F"><span class="nav-number">6.2.2.</span> <span class="nav-text">Q7. 讲讲你用的 ASR 模型的细节：模型多大、CPU 还是 GPU、延迟、显存占用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q8-%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%EF%BC%88JavaScript%EF%BC%89%E5%92%8C-FunASR%EF%BC%88Python%EF%BC%89%E6%98%AF%E6%80%8E%E4%B9%88%E8%81%94%E5%8A%A8%E7%9A%84%EF%BC%9F"><span class="nav-number">6.2.3.</span> <span class="nav-text">Q8. 桌面应用（JavaScript）和 FunASR（Python）是怎么联动的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q9-%E4%BB%8E%E8%AF%B4%E8%AF%9D%E5%88%B0%E6%96%87%E5%AD%97%E4%B8%8A%E5%B1%8F%EF%BC%8C%E5%BB%B6%E8%BF%9F%E7%93%B6%E9%A2%88%E5%9C%A8%E5%93%AA%EF%BC%9F%E4%BD%A0%E5%81%9A%E8%BF%87%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-number">6.2.4.</span> <span class="nav-text">Q9. 从说话到文字上屏，延迟瓶颈在哪？你做过哪些优化？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q10-%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E6%80%8E%E4%B9%88%E6%89%93%E5%8C%85%E5%92%8C%E5%88%86%E5%8F%91%E7%9A%84%EF%BC%9F%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%90%97%EF%BC%9F"><span class="nav-number">6.2.5.</span> <span class="nav-text">Q10. 桌面应用怎么打包和分发的？跨平台吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q11-%E4%BD%A0%E7%BD%91%E7%AB%99%E9%A1%B9%E7%9B%AE%E5%8D%A1%E7%89%87%E4%B8%8A%E6%9C%89%E2%80%9DF-B-Separation%E2%80%9D%E6%A0%87%E7%AD%BE%EF%BC%8C%E8%BF%99%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F"><span class="nav-number">6.2.6.</span> <span class="nav-text">Q11. 你网站项目卡片上有”F&amp;B Separation”标签，这是做什么的？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%BB%84%EF%BC%9A%E5%88%81%E9%92%BB-%E5%8E%8B%E5%8A%9B%E9%97%AE%E9%A2%98%EF%BC%884-%E9%A2%98%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">第三组：刁钻 &#x2F; 压力问题（4 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q12-%E4%BD%A0%E5%86%99%E2%80%9D%E7%94%9F%E4%BA%A7%E7%BA%A7%E5%88%AB%E5%BA%94%E7%94%A8%E2%80%9D%EF%BC%8C%E4%BD%86%E4%BB%93%E5%BA%93%E5%8F%AA%E6%9C%89-2-%E4%B8%AA-star%E3%80%81%E5%87%A0%E4%B9%8E%E6%B2%A1%E6%9C%89%E7%94%A8%E6%88%B7%EF%BC%8C%E5%87%AD%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.3.1.</span> <span class="nav-text">Q12. 你写”生产级别应用”，但仓库只有 2 个 star、几乎没有用户，凭什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q13-%E5%AE%8C%E5%85%A8%E5%BC%80%E6%BA%90%E5%85%8D%E8%B4%B9%EF%BC%8C%E4%BD%A0%E7%9A%84%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BC%9A%E4%B8%8D%E4%BC%9A%E5%81%9A%E7%9D%80%E5%81%9A%E7%9D%80%E5%B0%B1%E4%B8%8D%E7%BB%B4%E6%8A%A4%E4%BA%86%EF%BC%9F"><span class="nav-number">6.3.2.</span> <span class="nav-text">Q13. 完全开源免费，你的商业模式是什么？会不会做着做着就不维护了？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q14-%E4%BD%A0%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E4%B8%8A%E6%9C%89%E4%BB%80%E4%B9%88%E9%9A%BE%E7%9A%84%EF%BC%9F%E6%98%AF%E4%B8%8D%E6%98%AF%E5%B0%B1%E6%98%AF%E8%B0%83-API%E3%80%81%E8%B0%83%E5%BA%93%EF%BC%9F"><span class="nav-number">6.3.3.</span> <span class="nav-text">Q14. 你这个项目技术上有什么难的？是不是就是调 API、调库？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q15-%E6%9C%AC%E5%9C%B0%E8%B7%91-ASR-LLM%EF%BC%8C%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E7%94%B5%E8%84%91%E8%B7%91%E5%BE%97%E5%8A%A8%E5%90%97%EF%BC%9F%E8%BF%99%E7%AE%97%E4%B8%8D%E7%AE%97%E4%BC%AA%E9%9C%80%E6%B1%82%EF%BC%9F"><span class="nav-number">6.3.4.</span> <span class="nav-text">Q15. 本地跑 ASR + LLM，普通用户电脑跑得动吗？这算不算伪需求？</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">网上乌托邦，心底陶乐庄。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ququ-project/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ququ 语音转文字项目复盘：开源免费的中文语音工作流 | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ququ 语音转文字项目复盘：开源免费的中文语音工作流
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-27 10:15:00 / 修改时间：17:39:04" itemprop="dateCreated datePublished" datetime="2026-08-27T10:15:00+08:00">2026-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="ququ 语音转文字项目复盘：开源免费的中文语音工作流" href="/2026/08/27/%E6%8A%80%E6%9C%AF/ququ-project/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::9a41fbdc0ab23e00b55be1c0df7878ce" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>蛐蛐（ququ）是一个开源免费的桌面语音转文字工具，对标 Wispr Flow——你说话，文字直接上屏；语音识别在本地跑，数据不出本机。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>适用岗位：运维工程师 &#x2F; 技术支持工程师 &#x2F; AI 运维工程师 &#x2F; DevOps 工程师（AI运维岗重点）</p>
+</blockquote>
+<hr>
+<h2 id="一、项目速览"><a href="#一、项目速览" class="headerlink" title="一、项目速览"></a>一、项目速览</h2><p><strong>一句话定位</strong>：蛐蛐（ququ）是一个开源免费的桌面语音转文字工具，对标 Wispr Flow——你说话，文字直接上屏；语音识别在本地跑，数据不出本机。</p>
+<p>“蛐蛐是我独立开发的开源桌面语音工作流，定位是 Wispr Flow 的开源免费中文替代。用户按下快捷键开始说话，说完文字直接打到正在输入的窗口里，解放双手。技术上分四段：麦克风采集语音 → FunASR 本地模型识别成文本 → 可配置的大语言模型做润色和格式化 → 把结果输出到当前输入框。核心卖点有两个：一是数据本地处理、音频不出机器，隐私安全；二是完全免费开源，中文场景专门优化。项目挂在 GitHub 上（lxp731&#x2F;ququ），仓库语言字段是 JavaScript，识别推理用本地模型服务。”</p>
+<p><strong>一句话钩子</strong>（可选，抛给面试官）：”这个项目对我来说最大的价值，是让我把’模型服务化、本地部署、性能调优、跨平台打包’这一整套 AI 应用落地流程完整走了一遍。”</p>
+<ul>
+<li>GitHub 描述：开源免费的 Wispr Flow 替代方案 | 集成 FunASR 本地模型和可配置大语言模型的下一代中文桌面语音工作流（language: JavaScript）</li>
+<li>个人网站卡片：蛐蛐 | 语音转文字：解放双手，讲话完毕，直接上字。完全免费开源，数据本地处理，生产级别应用。标签：AI、LLM、F&amp;B Separation</li>
+<li>星标约 2（个人作品规模，别夸大）</li>
+</ul>
+<hr>
+<h2 id="二、项目背景（动机）"><a href="#二、项目背景（动机）" class="headerlink" title="二、项目背景（动机）"></a>二、项目背景（动机）</h2><p>【背景事实】</p>
+<ul>
+<li>对标对象：Wispr Flow —— 优秀的语音输入产品，但<strong>收费、闭源</strong>，数据走云端。</li>
+<li>个人痛点：日常写代码、写文档、做会议记录打字效率低，想要”说话直接上字”的体验。</li>
+<li>中文场景：Wispr Flow 等产品对中文支持一般，识别质量、标点、口语处理都不够好。</li>
+<li>隐私诉求：语音是敏感数据，不希望所有音频上传云端。</li>
+<li>学习驱动：想完整实践一次”AI 应用落地”——从模型选型、本地推理、前后端联动到打包发布。</li>
+</ul>
+<p>【参考话术】<br>“做这个项目有两个原因。第一是真实需求：我写代码和文档打字很多，一直想要 Wispr Flow 那种’说完话字就出来’的体验，但它收费、闭源，而且中文支持一般。第二是学习：我想把’一个 AI 产品从模型选型到打包发布’的完整链路自己走一遍，FunASR 是阿里开源的本地中文识别工具，正好拿来用。另外，语音这种数据我不太放心全传云端，所以’数据本地处理’从一开始就是设计目标，不是事后补的卖点。”</p>
+<p>“现成的免费方案各有各的问题：云 API（讯飞、百度这类）有免费额度但要注册计费、要联网，语音数据还会出境；Whisper 本地能跑，但中文场景和标点处理不如 FunASR 顺手；Vosk 够轻但识别率和断句弱一些。我需要的是’本地、中文、能集成进桌面流程’的方案，FunASR 最合适，而且它开源，我可以自己控制整条链路。”</p>
+<hr>
+<h2 id="三、完成情况（技术架构）"><a href="#三、完成情况（技术架构）" class="headerlink" title="三、完成情况（技术架构）"></a>三、完成情况（技术架构）</h2><p><strong>架构四段（流水线）</strong>：</p>
+<ol>
+<li><strong>语音采集层</strong>：桌面应用内录音（麦克风输入），快捷键启动&#x2F;停止，可配置热键。</li>
+<li><strong>本地识别层</strong>：FunASR 本地模型把音频转成文本，VAD 断句、逐句输出（离线整句识别，视仓库实现可能支持流式）。</li>
+<li><strong>LLM 处理层</strong>：可配置的大语言模型对识别文本做二次处理——补标点、去口语词（”嗯””那个”）、纠错、分段、甚至转成 Markdown。</li>
+<li><strong>文字输出层</strong>：把处理结果写入当前焦点输入框（剪贴板模拟粘贴或直接插入），实现”讲话完毕，直接上字”。</li>
+</ol>
+<p><strong>关键设计——数据本地处理</strong>：音频采集后在本机完成识别，默认不离开机器；LLM 环节默认走本地（或可配置 API，见第七章第 4 条）。”数据本地”是架构选择，不是宣传话术。</p>
+<p>【参考话术】<br>“整体是一条流水线：采集 → 识别 → 润色 → 上屏。音频从麦克风进来，先交给本地跑的 FunASR 识别成文本，中间接 VAD 做断句，避免一口气录完再识别；识别出来的中文口语文本通常没有标点、还带口头禅，所以再交给 LLM 补标点、去口语词、按意思分段；最后把结果输出到当前输入框，用户基本感觉不到中间过程。这个架构里每个环节都是独立、可替换的，这也是我后续做优化和扩展的基础。”</p>
+<p>“直接用的体验很差——裸 ASR 文本没标点、口语词多、没有段落，上屏还要手动改。加一道 LLM 处理是’上屏即可用’的关键。为了速度可以用轻量模型和短提示词，为了隐私可以切本地模型，这一层可配置，用户也可以关掉。”</p>
+<hr>
+<h2 id="四、负责内容"><a href="#四、负责内容" class="headerlink" title="四、负责内容"></a>四、负责内容</h2><ul>
+<li><strong>独立完成</strong>项目从 0 到 1：需求定义、技术选型、架构设计、开发、测试、发布。</li>
+<li><strong>开源维护</strong>：README、使用文档、配置说明；处理 issue&#x2F;反馈（如有）；持续迭代。</li>
+</ul>
+<p>【参考话术】<br>“这个项目从立项到发布基本是我一个人完成的。需求是我自己的使用场景定的，选型我做了一圈对比，架构、开发、打包、文档都是我自己来。开源之后我还在持续迭代，把它当成一个长期维护的个人作品，而不是一次性 demo。对我来说，’独立把一件事从想法做成能天天用的产品’本身就是最大的收获。”</p>
+<hr>
+<h2 id="五、完成成效"><a href="#五、完成成效" class="headerlink" title="五、完成成效"></a>五、完成成效</h2><ul>
+<li>功能达成：说话→上字全流程可用，本地处理，完全免费开源。</li>
+<li>技术达成：完整落地”本地 ASR + LLM 后处理 + 桌面应用”链路。</li>
+<li>个人价值：可作为技术名片——GitHub 开源项目、可被查看的代码、可持续迭代的作品。</li>
+</ul>
+<p>【参考话术】<br>“从功能上讲，项目做到了’说完话文字直接上屏’的完整闭环，识别和润色都在本地完成，全程免费。从我个人角度，它让我把模型服务化、本地推理调优、桌面打包发布这套能力完整跑通，简历里’开源语音工作流’指的就是它，面试官可以直接去 GitHub 看代码。规模上我如实说：它目前还是个人项目，星标和用户都不多，但它是我每天都在用的工具，代码质量、文档和迭代节奏是我更看重的。”</p>
+<hr>
+<h2 id="六、面试官提问与参考回答"><a href="#六、面试官提问与参考回答" class="headerlink" title="六、面试官提问与参考回答"></a>六、面试官提问与参考回答</h2><p>（共 15 题：基础 5 + 深入 6 + 刁钻&#x2F;压力 4）</p>
+<h3 id="第一组：基础问题（5-题）"><a href="#第一组：基础问题（5-题）" class="headerlink" title="第一组：基础问题（5 题）"></a>第一组：基础问题（5 题）</h3><h4 id="Q1-简单介绍一下你的”蛐蛐”项目？"><a href="#Q1-简单介绍一下你的”蛐蛐”项目？" class="headerlink" title="Q1. 简单介绍一下你的”蛐蛐”项目？"></a>Q1. 简单介绍一下你的”蛐蛐”项目？</h4><ul>
+<li>【面试官意图】考察表达与总结能力；判断你对项目是否熟悉、讲得是否清楚。</li>
+<li>【参考回答】”蛐蛐是一个开源免费的桌面语音转文字工具，对标 Wispr Flow。核心体验是：按一下快捷键开始说话，说完文字直接打到正在输入的窗口，解放双手。技术上分成采集、FunASR 本地识别、LLM 润色、文字上屏四段，重点是识别和数据都在本地，音频不出本机。它是我独立开发并持续维护的开源项目，GitHub 上是 lxp731&#x2F;ququ。”</li>
+<li>【追问】”它和你简历里其他个人项目是什么关系？”——“简历里’开源语音工作流’指的就是它，是几个项目里技术含量最高、我投入时间最多的一个。”</li>
+<li>【岗位侧重】通用</li>
+</ul>
+<h4 id="Q2-为什么选择-FunASR-做本地识别？对比过其他方案吗？"><a href="#Q2-为什么选择-FunASR-做本地识别？对比过其他方案吗？" class="headerlink" title="Q2. 为什么选择 FunASR 做本地识别？对比过其他方案吗？"></a>Q2. 为什么选择 FunASR 做本地识别？对比过其他方案吗？</h4><ul>
+<li>【面试官意图】考察技术选型思路和调研能力，是不是”随手选了一个库”。</li>
+<li>【参考回答】”选 FunASR 我做过一轮对比。云 API（讯飞、百度这类）识别效果好，但要联网、要注册计费，语音数据还会出境；Whisper 本地能跑，但中文场景和标点处理不如 FunASR 顺手；Vosk 太轻，识别率和断句一般。FunASR 是阿里达摩院开源的，中文识别是它的强项，支持 CPU&#x2F;GPU、支持断句和标点模型，还提供官方运行时可以直接部署成服务，非常适合做本地中文语音工具。”</li>
+<li>【追问】”如果用户要识别英文怎么办？”——“FunASR 也支持中英混说和多语种模型（比如 SenseVoice），我的设计里识别引擎是可替换的，真有需要可以切换模型。”</li>
+<li>【岗位侧重】通用 &#x2F; AI运维</li>
+</ul>
+<h4 id="Q3-你项目的整体架构是怎么设计的？"><a href="#Q3-你项目的整体架构是怎么设计的？" class="headerlink" title="Q3. 你项目的整体架构是怎么设计的？"></a>Q3. 你项目的整体架构是怎么设计的？</h4><ul>
+<li>【面试官意图】考察架构思维和模块划分能力。</li>
+<li>【参考回答】”一条四段流水线：第一段是采集，桌面应用里录音，热键控制开始和结束；第二段是识别，音频交给本地 FunASR 模型转成文本，中间用 VAD 做断句；第三段是处理，可配置的 LLM 给文本补标点、去口语词、分段；第四段是输出，把结果写进当前输入框。设计上每个环节都是独立、可替换的，这让我后续做优化和扩展都很方便。”</li>
+<li>【追问】”哪一段是性能瓶颈？”——“通常是本地 ASR 推理，这也是我优先做断句识别优化的原因：说完一句立刻出结果，体验提升最明显。”</li>
+<li>【岗位侧重】通用 &#x2F; 运维</li>
+</ul>
+<h4 id="Q4-“数据本地处理”具体是怎么做到的？"><a href="#Q4-“数据本地处理”具体是怎么做到的？" class="headerlink" title="Q4. “数据本地处理”具体是怎么做到的？"></a>Q4. “数据本地处理”具体是怎么做到的？</h4><ul>
+<li>【面试官意图】验证隐私卖点是不是真实现，而不是宣传话术；AI运维岗考察数据流理解。</li>
+<li>【参考回答】”核心是识别这条链路完全在本地：音频从麦克风采集后，在本机完成 VAD 和 FunASR 推理，文本在本地生成，这个过程中音频不离开本机。LLM 润色环节是唯一可能联网的部分，但它是可配置的——隐私敏感时切到本地模型（比如 Ollama），就做到全程不出机器。也就是说，’数据本地’不是口号，是架构选择：能本地跑的坚决不联网。”</li>
+<li>【追问】”本地跑 LLM 会不会太慢？”——“会，所以默认配置里 LLM 环节用轻量模型和短提示词，速度优先；用户可以在’隐私’和’速度’之间自己权衡，这正是可配置的价值。”</li>
+<li>【岗位侧重】运维 &#x2F; AI运维</li>
+</ul>
+<h4 id="Q5-这个项目用到了哪些技术栈？和你的岗位有什么关联？"><a href="#Q5-这个项目用到了哪些技术栈？和你的岗位有什么关联？" class="headerlink" title="Q5. 这个项目用到了哪些技术栈？和你的岗位有什么关联？"></a>Q5. 这个项目用到了哪些技术栈？和你的岗位有什么关联？</h4><ul>
+<li>【面试官意图】把项目和岗位要求串起来，考察技术栈的真实掌握程度。</li>
+<li>【参考回答】”项目本身是桌面应用，主程序以 JavaScript 为主；识别推理用到了 Python 生态的 FunASR 和它的模型服务；LLM 环节对接 OpenAI 兼容接口或本地 Ollama；还涉及录音、热键、剪贴板这类系统级能力，以及应用的打包发布流程。对我来说，这个项目把’前端壳 + 本地模型服务 + 外部&#x2F;本地 LLM’三种形态串在了一起，跟 AI 应用落地场景的运维部署逻辑是相通的。”</li>
+<li>【追问】”如果让你把它部署到服务器上给团队用，你会怎么做？”——“识别服务可以容器化跑起来，只暴露内部接口；LLM 走公司自建网关或本地模型；音频数据留在内网。这套部署思路和我理解的 AI 应用上线流程是通的。”</li>
+<li>【岗位侧重】运维 &#x2F; DevOps &#x2F; AI运维</li>
+</ul>
+<h3 id="第二组：深入问题（6-题）"><a href="#第二组：深入问题（6-题）" class="headerlink" title="第二组：深入问题（6 题）"></a>第二组：深入问题（6 题）</h3><h4 id="Q6-“可配置大语言模型”是怎么实现的？支持哪些配置方式？"><a href="#Q6-“可配置大语言模型”是怎么实现的？支持哪些配置方式？" class="headerlink" title="Q6. “可配置大语言模型”是怎么实现的？支持哪些配置方式？"></a>Q6. “可配置大语言模型”是怎么实现的？支持哪些配置方式？</h4><ul>
+<li>【面试官意图】考察配置化设计能力与工程落地；AI运维岗考察对 LLM 接入方式的熟悉度。</li>
+<li>【参考回答】”设计上走的是’标准接口 + 配置化’：LLM 这一层抽象成 OpenAI 兼容的接口，用户填 base URL、API Key、模型名就能接任意兼容服务，比如 DeepSeek、通义、本地 Ollama（填 localhost 地址就行）。配置放在设置界面或配置文件里，不用改代码。选这个设计是因为不同用户情况差别很大——有人在意隐私要本地模型，有人要速度和质量用云 API，可配置才能覆盖所有人。”</li>
+<li>【追问】”默认推荐哪个？为什么？”——“默认走性价比高的国内 API（比如 DeepSeek 这类），因为识别文本润色不需要顶级模型，便宜快的就够；隐私敏感场景再切 Ollama 本地模型。”</li>
+<li>【岗位侧重】AI运维 &#x2F; DevOps</li>
+</ul>
+<h4 id="Q7-讲讲你用的-ASR-模型的细节：模型多大、CPU-还是-GPU、延迟、显存占用？"><a href="#Q7-讲讲你用的-ASR-模型的细节：模型多大、CPU-还是-GPU、延迟、显存占用？" class="headerlink" title="Q7. 讲讲你用的 ASR 模型的细节：模型多大、CPU 还是 GPU、延迟、显存占用？"></a>Q7. 讲讲你用的 ASR 模型的细节：模型多大、CPU 还是 GPU、延迟、显存占用？</h4><ul>
+<li>【面试官意图】考察是否真的跑过模型、对推理资源有没有概念；AI运维岗必问。</li>
+<li>【岗位侧重】AI运维 &#x2F; 运维</li>
+</ul>
+<h4 id="Q8-桌面应用（JavaScript）和-FunASR（Python）是怎么联动的？"><a href="#Q8-桌面应用（JavaScript）和-FunASR（Python）是怎么联动的？" class="headerlink" title="Q8. 桌面应用（JavaScript）和 FunASR（Python）是怎么联动的？"></a>Q8. 桌面应用（JavaScript）和 FunASR（Python）是怎么联动的？</h4><ul>
+<li>【面试官意图】考察跨语言&#x2F;跨进程集成能力，是不是真把两个生态接起来了。</li>
+<li>【参考回答】”应用主体是 JavaScript 的桌面壳，FunASR 是 Python 生态，我的做法是把识别做成本地模型服务（sidecar 形式）：应用启动时拉起识别进程，两者通过本地接口通信，应用侧发音频、收文本。这样拆的好处是：识别引擎可以独立启动、独立升级，模型换版本不用动主程序；出了问题也好定位是哪一层的故障。”</li>
+<li>【追问】”识别进程挂了怎么处理？”——“做了拉起和重连：识别进程异常退出时主程序能检测到并重启它，同时给用户一个状态提示，不会静默失败。”</li>
+<li>【岗位侧重】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h4 id="Q9-从说话到文字上屏，延迟瓶颈在哪？你做过哪些优化？"><a href="#Q9-从说话到文字上屏，延迟瓶颈在哪？你做过哪些优化？" class="headerlink" title="Q9. 从说话到文字上屏，延迟瓶颈在哪？你做过哪些优化？"></a>Q9. 从说话到文字上屏，延迟瓶颈在哪？你做过哪些优化？</h4><ul>
+<li>【面试官意图】考察性能分析与优化能力；AI运维岗考察对推理管线的理解。</li>
+<li>【参考回答】”瓶颈几乎都在本地 ASR 推理，LLM 和上屏都很快。我的优化思路有两条：一是改识别节奏，VAD 检测到一句话说完就立刻识别输出，而不是整段录完再处理，用户感知的延迟大幅下降；二是把 LLM 提示词做短、模型选轻量的，让润色环节尽量不拖后腿。另外识别进程保持常驻、避免每次冷启动加载模型，这本身就能省掉好几秒。”</li>
+<li>【追问】”如果用户要实时字幕式输出，你的架构支持吗？”——“FunASR 有流式模型，理论上可以边说边出字；我当前实现偏’整句出字’，流式是明确的演进方向。具体支持程度以仓库为准。”</li>
+<li>【岗位侧重】AI运维 &#x2F; DevOps</li>
+</ul>
+<h4 id="Q10-桌面应用怎么打包和分发的？跨平台吗？"><a href="#Q10-桌面应用怎么打包和分发的？跨平台吗？" class="headerlink" title="Q10. 桌面应用怎么打包和分发的？跨平台吗？"></a>Q10. 桌面应用怎么打包和分发的？跨平台吗？</h4><ul>
+<li>【面试官意图】考察工程化完整度：能不能把项目交付出去，而不只是本地能跑。</li>
+<li>【追问】”打包时遇到过什么坑？”——“典型的是原生依赖的跨平台编译，以及不同平台的系统权限适配（比如 macOS 的麦克风权限弹窗）。这些是我实际踩过的点，具体以你的打包记录为准。”</li>
+<li>【岗位侧重】运维 &#x2F; DevOps</li>
+</ul>
+<h4 id="Q11-你网站项目卡片上有”F-B-Separation”标签，这是做什么的？"><a href="#Q11-你网站项目卡片上有”F-B-Separation”标签，这是做什么的？" class="headerlink" title="Q11. 你网站项目卡片上有”F&amp;B Separation”标签，这是做什么的？"></a>Q11. 你网站项目卡片上有”F&amp;B Separation”标签，这是做什么的？</h4><ul>
+<li>【面试官意图】考察对项目功能边界的诚实度，以及是否了解音频分离的概念。</li>
+<li>【追问】”分离用什么方案实现的？”——“有专门的分离模型可以做（比如 Demucs 这类）。如果我在仓库里集成了具体方案，以仓库实现为准；如果这块还处于规划阶段，我也会如实说是 roadmap 里的能力。”</li>
+<li>【岗位侧重】通用 &#x2F; AI运维</li>
+</ul>
+<h3 id="第三组：刁钻-压力问题（4-题）"><a href="#第三组：刁钻-压力问题（4-题）" class="headerlink" title="第三组：刁钻 &#x2F; 压力问题（4 题）"></a>第三组：刁钻 &#x2F; 压力问题（4 题）</h3><h4 id="Q12-你写”生产级别应用”，但仓库只有-2-个-star、几乎没有用户，凭什么？"><a href="#Q12-你写”生产级别应用”，但仓库只有-2-个-star、几乎没有用户，凭什么？" class="headerlink" title="Q12. 你写”生产级别应用”，但仓库只有 2 个 star、几乎没有用户，凭什么？"></a>Q12. 你写”生产级别应用”，但仓库只有 2 个 star、几乎没有用户，凭什么？</h4><ul>
+<li>【面试官意图】压力测试：看你会不会心虚、夸大或恼羞成怒。</li>
+<li>【参考回答】”我说’生产级’指的是稳定性和完成度标准，不是用户量标准——它是我每天在用的工具，经历了多轮迭代、修过真实使用中暴露的 bug，有配置化、有错误处理、有打包发布流程，这个标准是’我自己当产品用’的标准。星标少我如实承认：开源时间不长、没做推广，个人项目而已。但如果代码经得起看、能持续迭代，用户量只是时间问题。”</li>
+<li>【追问】”那你怎么证明它’稳定’？”——“我可以讲真实使用中修过的问题和当前的已知边界，也可以现场演示。空口说’稳定’没用，经得起追问才是证明。”</li>
+<li>【岗位侧重】通用</li>
+</ul>
+<h4 id="Q13-完全开源免费，你的商业模式是什么？会不会做着做着就不维护了？"><a href="#Q13-完全开源免费，你的商业模式是什么？会不会做着做着就不维护了？" class="headerlink" title="Q13. 完全开源免费，你的商业模式是什么？会不会做着做着就不维护了？"></a>Q13. 完全开源免费，你的商业模式是什么？会不会做着做着就不维护了？</h4><ul>
+<li>【面试官意图】考察长期承诺与思考深度，压力测试对个人项目的投入态度。</li>
+<li>【参考回答】”这个项目的定位就是个人作品和技术名片，不是商业项目，所以没有商业模式，也不需要靠它盈利——这反而是它能持续维护的原因：我自己天天用，dogfooding，修 bug 是给自己修。开源免费也是刻意的，对标品收费闭源，我的差异化就是免费开放。至于维护，只要我还在用它、它还在我的简历上，我就会持续迭代，它对我个人是有长期价值的。”</li>
+<li>【追问】”如果大公司做了同样的免费产品呢？”——“那用户有更好的选择是好事；对我来说项目价值本来就不只在用户量，而在于我完整做成了一个产品，这个能力是带得走的。”</li>
+<li>【岗位侧重】通用 &#x2F; 技术支持</li>
+</ul>
+<h4 id="Q14-你这个项目技术上有什么难的？是不是就是调-API、调库？"><a href="#Q14-你这个项目技术上有什么难的？是不是就是调-API、调库？" class="headerlink" title="Q14. 你这个项目技术上有什么难的？是不是就是调 API、调库？"></a>Q14. 你这个项目技术上有什么难的？是不是就是调 API、调库？</h4><ul>
+<li>【面试官意图】考察是否真的做过工程，还是只会”组装”。</li>
+<li>【参考回答】”调库是事实，但把库调通和做成产品是两回事。难的点在于工程集成：桌面应用和 Python 识别服务两个生态怎么稳定通信、识别进程怎么管理、出错怎么恢复；在于体验调优：断句节奏、延迟、输出时机这些细节决定好不好用；在于打包分发和跨平台适配。这些没有现成答案，都是实际踩坑踩出来的。如果你愿意，我可以现场讲其中一个模块的实现细节。”</li>
+<li>【追问】”那你觉得你和直接照着教程做的人差别在哪？”——“差别在取舍：我知道每个环节为什么这么设计、换一个方案会损失什么，这需要自己完整走一遍才会有。”</li>
+<li>【岗位侧重】通用 &#x2F; 运维</li>
+</ul>
+<h4 id="Q15-本地跑-ASR-LLM，普通用户电脑跑得动吗？这算不算伪需求？"><a href="#Q15-本地跑-ASR-LLM，普通用户电脑跑得动吗？这算不算伪需求？" class="headerlink" title="Q15. 本地跑 ASR + LLM，普通用户电脑跑得动吗？这算不算伪需求？"></a>Q15. 本地跑 ASR + LLM，普通用户电脑跑得动吗？这算不算伪需求？</h4><ul>
+<li>【面试官意图】压力测试产品判断力：会不会为技术而技术，忽视真实用户场景。</li>
+<li>【参考回答】”两个问题分开答。配置门槛我承认：本地 ASR 需要一定算力，所以我在设计上留了降级路径——LLM 环节默认走便宜的云 API，识别环节也在模型选择上做过权衡，让中低配机器也能用；真跑不动的人可以选纯云方案，但那不是我这个项目的定位。伪需求不成立：语音输入是真实存在的需求，Wispr Flow 收费不便宜还有大量用户就是证明；我做的是把价格打下来、把中文做好、把数据留在本地，需求本身没有争议。”</li>
+<li>【追问】”你觉得这个项目最大的失败风险是什么？”——“用户规模上不去的风险——它可能永远是个小而美的个人工具。但我接受这个结果，因为我的目标本来就不是做独角兽。”</li>
+<li>【岗位侧重】通用 &#x2F; AI运维 &#x2F; 技术支持</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/" rel="tag"># 项目复盘</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/ntfs-copy-tool-project/" rel="prev" title="NTFS 小文件快拷工具项目复盘：把随机 IO 变成顺序 IO">
+                  <i class="fa fa-chevron-left"></i> NTFS 小文件快拷工具项目复盘：把随机 IO 变成顺序 IO
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/chatgpt-shared-site-project/" rel="next" title="ChatGPT 共享站项目复盘：基于 new-api 的 AI 网关运维实践">
+                  ChatGPT 共享站项目复盘：基于 new-api 的 AI 网关运维实践 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="9a41fbdc0ab23e00b55be1c0df7878ce"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: '30px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
+
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
+
+  <div class="aplayer" 
+  data-id="18010222564" 
+  data-server="netease" 
+  data-type="playlist" 
+  data-fixed="true" 
+  data-autoplay="false" 
+  data-order="list" 
+  data-volume="0.5" 
+  data-theme="#1da496" 
+  data-preload="auto" >
+  </div>
+
+</body>
+</html>

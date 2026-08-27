@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.pages.dev","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文整理了阿里云面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖阿里云、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云面试问答（34 题）">
+<meta property="og:url" content="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/aliyun-interview/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="本文整理了阿里云面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖阿里云、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-27T01:45:00.000Z">
+<meta property="article:modified_time" content="2026-08-27T09:39:04.478Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="阿里云">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/aliyun-interview/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/aliyun-interview/","path":"2026/08/27/技术/aliyun-interview/","title":"阿里云面试问答（34 题）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>阿里云面试问答（34 题） | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B2%97%E4%BD%8D%E9%AB%98%E9%A2%91%E9%80%9F%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">一、岗位高频速查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、基础篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9C%B0%E5%9F%9F%EF%BC%88Region%EF%BC%89%E5%92%8C%E5%8F%AF%E7%94%A8%E5%8C%BA%EF%BC%88Availability-Zone%EF%BC%89%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">Q1. 什么是地域（Region）和可用区（Availability Zone）？有什么区别？怎么选？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E4%BB%80%E4%B9%88%E6%98%AF-VPC%E3%80%81%E4%BA%A4%E6%8D%A2%E6%9C%BA%EF%BC%88vSwitch%EF%BC%89%E5%92%8C%E5%AE%89%E5%85%A8%E7%BB%84%EF%BC%9F%E5%AE%83%E4%BB%AC%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">Q2. 什么是 VPC、交换机（vSwitch）和安全组？它们是什么关系？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-ECS-%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E8%AE%A1%E8%B4%B9%E6%96%B9%E5%BC%8F%EF%BC%9F%E5%8C%85%E5%B9%B4%E5%8C%85%E6%9C%88%E5%92%8C%E6%8C%89%E9%87%8F%E4%BB%98%E8%B4%B9%E6%80%8E%E4%B9%88%E9%80%89%E3%80%81%E6%80%8E%E4%B9%88%E5%88%87%E6%8D%A2%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">Q3. ECS 有哪几种计费方式？包年包月和按量付费怎么选、怎么切换？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E4%BB%80%E4%B9%88%E6%98%AF-ESSD-%E4%BA%91%E7%9B%98%EF%BC%9FESSD-%E5%92%8C%E6%99%AE%E9%80%9A%E4%BA%91%E7%9B%98%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E5%BF%AB%E7%85%A7%E6%98%AF%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">Q4. 什么是 ESSD 云盘？ESSD 和普通云盘有什么区别？快照是干什么的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F%E6%80%8E%E4%B9%88%E5%81%9A%E3%80%81%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">Q5. 系统镜像是什么？自定义镜像怎么做、有什么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9%EF%BC%88ESS%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BC%B8%E7%BC%A9%E7%BB%84%E3%80%81%E4%BC%B8%E7%BC%A9%E8%A7%84%E5%88%99%E3%80%81%E5%86%B7%E5%8D%B4%E6%97%B6%E9%97%B4%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">Q6. 弹性伸缩（ESS）是什么？伸缩组、伸缩规则、冷却时间分别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-SLB-%E5%92%8C-ALB-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%93%AA%E4%B8%AA%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">Q7. SLB 和 ALB 有什么区别？什么时候用哪个？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-EIP-%E5%92%8C%E5%85%AC%E7%BD%91-IP-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8-EIP%EF%BC%9F"><span class="nav-number">2.8.</span> <span class="nav-text">Q8. EIP 和公网 IP 有什么区别？什么时候用 EIP？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93-RDS-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%AE%83%E5%92%8C%E8%87%AA%E5%B7%B1%E5%9C%A8-ECS-%E4%B8%8A%E8%A3%85-MySQL-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.9.</span> <span class="nav-text">Q9. 云数据库 RDS 是什么？它和自己在 ECS 上装 MySQL 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-OSS-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9FBucket%E3%80%81Object%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">Q10. OSS 是什么？Bucket、Object、生命周期分别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E4%BA%91%E7%9B%91%E6%8E%A7%EF%BC%88CloudMonitor%EF%BC%89%E8%83%BD%E7%9B%91%E6%8E%A7%E4%BB%80%E4%B9%88%EF%BC%9F%E5%91%8A%E8%AD%A6%E6%98%AF%E6%80%8E%E4%B9%88%E9%85%8D%E7%BD%AE%E7%9A%84%EF%BC%9F"><span class="nav-number">2.11.</span> <span class="nav-text">Q11. 云监控（CloudMonitor）能监控什么？告警是怎么配置的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-%E4%BB%80%E4%B9%88%E6%98%AF-ACK%EF%BC%9FACK-%E6%89%98%E7%AE%A1%E7%89%88%E9%9B%86%E7%BE%A4%E5%92%8C%E8%87%AA%E5%BB%BA-K8s-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.12.</span> <span class="nav-text">Q12. 什么是 ACK？ACK 托管版集群和自建 K8s 有什么区别？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、进阶篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q13-%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%AE%B2%E4%BD%A0-CMDB-%E9%A1%B9%E7%9B%AE%E9%87%8C%E8%BF%99%E5%A5%97%E9%98%BF%E9%87%8C%E4%BA%91%E6%9E%B6%E6%9E%84%EF%BC%9AECS%E3%80%81ACK%E3%80%81RDS%E3%80%81DTS%E3%80%81OSS%E3%80%81%E4%BA%91%E7%9B%91%E6%8E%A7%E3%80%81ARMS-%E5%90%84%E8%87%AA%E6%89%BF%E6%8B%85%E4%BB%80%E4%B9%88%E8%A7%92%E8%89%B2%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E8%AE%BE%E8%AE%A1%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">Q13. 详细讲讲你 CMDB 项目里这套阿里云架构：ECS、ACK、RDS、DTS、OSS、云监控、ARMS 各自承担什么角色？为什么这么设计？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q14-RDS-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F%E4%B8%BB%E5%A4%87%E5%88%87%E6%8D%A2%E7%9A%84%E8%BF%87%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">Q14. RDS 的高可用是怎么实现的？主备切换的过程是什么样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q15-%E5%8F%AA%E8%AF%BB%E5%AE%9E%E4%BE%8B%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">Q15. 只读实例解决什么问题？主从延迟怎么处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q16-RDS-%E7%9A%84%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9Fbinlog-%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F%E6%80%8E%E4%B9%88%E6%81%A2%E5%A4%8D%E5%88%B0%E4%BB%BB%E6%84%8F%E6%97%B6%E9%97%B4%E7%82%B9%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">Q16. RDS 的备份和恢复是怎么做的？binlog 有什么用？怎么恢复到任意时间点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q17-DTS-%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB-%E5%90%8C%E6%AD%A5%E7%9A%84%EF%BC%9F%E5%85%A8%E9%87%8F-%E5%A2%9E%E9%87%8F%E5%85%B7%E4%BD%93%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%EF%BC%9F%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F"><span class="nav-number">3.5.</span> <span class="nav-text">Q17. DTS 是怎么做数据迁移&#x2F;同步的？全量+增量具体怎么工作？怎么保证一致性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q18-%E4%BD%A0%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9%E7%9A%84%E4%BC%B8%E7%BC%A9%E8%A7%84%E5%88%99%E5%85%B7%E4%BD%93%E6%98%AF%E6%80%8E%E4%B9%88%E9%85%8D%E7%9A%84%EF%BC%9F%E5%AE%9A%E6%97%B6%E4%BC%B8%E7%BC%A9%E5%92%8C%E6%8A%A5%E8%AD%A6%E4%BC%B8%E7%BC%A9%E5%90%84%E9%80%82%E5%90%88%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="nav-number">3.6.</span> <span class="nav-text">Q18. 你弹性伸缩的伸缩规则具体是怎么配的？定时伸缩和报警伸缩各适合什么场景？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q19-%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9%E5%92%8C-SLB-%E6%98%AF%E6%80%8E%E4%B9%88%E8%81%94%E5%8A%A8%E7%9A%84%EF%BC%9F%E6%96%B0%E5%8A%A0%E7%9A%84-ECS-%E6%80%8E%E4%B9%88%E8%87%AA%E5%8A%A8%E6%8E%A5%E5%85%A5%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9F"><span class="nav-number">3.7.</span> <span class="nav-text">Q19. 弹性伸缩和 SLB 是怎么联动的？新加的 ECS 怎么自动接入负载均衡？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q20-OSS-%E7%9A%84%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB%E8%AE%B2%E4%B8%80%E4%B8%8B%EF%BC%9ARAM%E3%80%81Bucket-Policy%E3%80%81STS-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E7%A7%81%E6%9C%89-Bucket-%E6%80%8E%E4%B9%88%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E8%AE%BF%E9%97%AE%EF%BC%9F"><span class="nav-number">3.8.</span> <span class="nav-text">Q20. OSS 的权限体系讲一下：RAM、Bucket Policy、STS 有什么区别？私有 Bucket 怎么对外提供访问？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q21-OSS-%E7%9A%84%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%A7%84%E5%88%99%E6%80%8E%E4%B9%88%E9%85%8D%EF%BC%9F%E6%80%8E%E4%B9%88%E7%9C%81%E9%92%B1%EF%BC%9F"><span class="nav-number">3.9.</span> <span class="nav-text">Q21. OSS 的存储类型有哪些？生命周期规则怎么配？怎么省钱？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q22-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E5%91%8A%E8%AD%A6%E8%A7%84%E5%88%99%E4%BD%A0%E6%98%AF%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E7%9A%84%EF%BC%9F%E6%80%8E%E4%B9%88%E9%81%BF%E5%85%8D%E5%91%8A%E8%AD%A6%E9%A3%8E%E6%9A%B4%EF%BC%9F"><span class="nav-number">3.10.</span> <span class="nav-text">Q22. 生产环境的告警规则你是怎么设计的？怎么避免告警风暴？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q23-ARMS-%E5%92%8C%E4%BA%91%E7%9B%91%E6%8E%A7%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E6%80%8E%E4%B9%88%E7%94%A8-ARMS-%E5%AE%9A%E4%BD%8D%E4%B8%80%E4%B8%AA%E6%85%A2%E6%8E%A5%E5%8F%A3%EF%BC%9F"><span class="nav-number">3.11.</span> <span class="nav-text">Q23. ARMS 和云监控有什么区别？怎么用 ARMS 定位一个慢接口？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q24-%E5%AE%89%E5%85%A8%E7%BB%84%E3%80%81%E5%AF%86%E9%92%A5%E5%AF%B9%E3%80%81RAM-%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%90%84%E8%AE%B2%E4%B8%80%E6%9D%A1%EF%BC%8C%E4%BD%A0%E5%AE%9E%E9%99%85%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F"><span class="nav-number">3.12.</span> <span class="nav-text">Q24. 安全组、密钥对、RAM 的最佳实践各讲一条，你实际是怎么做的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%94%9F%E4%BA%A7%E5%AE%9E%E6%88%98%C2%B7%E5%88%81%E9%92%BB%E7%AF%87%EF%BC%8810-%E9%A2%98%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、生产实战·刁钻篇（10 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q25-%E7%94%9F%E4%BA%A7%E4%B8%8A%E4%B8%80%E5%8F%B0-ECS-%E7%AA%81%E7%84%B6-SSH-%E8%BF%9E%E4%B8%8D%E4%B8%8A%E4%BA%86%EF%BC%8C%E4%BD%A0%E4%BB%8E%E6%8E%A5%E5%88%B0%E5%91%8A%E8%AD%A6%E5%BC%80%E5%A7%8B%EF%BC%8C%E5%AE%8C%E6%95%B4%E7%9A%84%E6%8E%92%E6%9F%A5%E9%A1%BA%E5%BA%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">Q25. 生产上一台 ECS 突然 SSH 连不上了，你从接到告警开始，完整的排查顺序是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q26-%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88%E2%80%9DRDS-%E7%AA%81%E7%84%B6%E5%8F%98%E6%85%A2%E4%BA%86%E2%80%9D%EF%BC%8C%E4%B9%8B%E5%89%8D%E9%83%BD%E5%A5%BD%E5%A5%BD%E7%9A%84%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">Q26. 用户反馈”RDS 突然变慢了”，之前都好好的，你怎么排查？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q27-%E5%87%8C%E6%99%A8-3-%E7%82%B9%E4%BD%A0%E8%A2%AB%E7%94%B5%E8%AF%9D%E5%8F%AB%E9%86%92%EF%BC%8C%E8%AF%B4%E2%80%9D%E5%87%A0%E7%99%BE%E6%9D%A1%E5%91%8A%E8%AD%A6%E2%80%9D%E5%90%8C%E6%97%B6%E6%9D%A5%E4%BA%86%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">Q27. 凌晨 3 点你被电话叫醒，说”几百条告警”同时来了，你怎么处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q28-%E7%9B%91%E6%8E%A7%E5%8F%91%E7%8E%B0%E6%9F%90%E5%8F%B0-ECS-%E7%9A%84%E5%87%BA%E7%BD%91%E5%B8%A6%E5%AE%BD%E8%A2%AB%E6%89%93%E6%BB%A1%E4%BA%86%EF%BC%8C%E6%80%80%E7%96%91%E8%A2%AB-DDoS-%E6%88%96%E6%81%B6%E6%84%8F%E5%88%B7%E6%B5%81%E9%87%8F%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">Q28. 监控发现某台 ECS 的出网带宽被打满了，怀疑被 DDoS 或恶意刷流量，怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q29-%E5%AE%A2%E6%88%B7%E9%97%AE%EF%BC%9A%E6%88%91%E7%9A%84%E5%8C%85%E5%B9%B4%E5%8C%85%E6%9C%88-ECS-%E5%88%B0%E6%9C%9F%E5%BF%98%E7%BB%AD%E8%B4%B9%E4%BA%86%EF%BC%8C%E6%95%B0%E6%8D%AE%E8%BF%98%E8%83%BD%E6%89%BE%E5%9B%9E%E5%90%97%EF%BC%9F"><span class="nav-number">4.5.</span> <span class="nav-text">Q29. 客户问：我的包年包月 ECS 到期忘续费了，数据还能找回吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q30-%E5%90%8C%E4%BA%8B%E8%AF%AF%E6%93%8D%E4%BD%9C%E6%8A%8A%E4%B8%80%E5%8F%B0%E6%8C%89%E9%87%8F%E4%BB%98%E8%B4%B9%E7%9A%84-ECS-%E9%87%8A%E6%94%BE%E4%BA%86%EF%BC%8C%E9%87%8C%E9%9D%A2%E6%9C%89%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">4.6.</span> <span class="nav-text">Q30. 同事误操作把一台按量付费的 ECS 释放了，里面有数据，怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q31-%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9%E8%A7%A6%E5%8F%91%E4%BA%86%E6%89%A9%E5%AE%B9%EF%BC%8C%E4%BD%86%E6%96%B0%E5%AE%9E%E4%BE%8B%E8%A6%81-5-%E5%88%86%E9%92%9F%E6%89%8D%E5%B0%B1%E7%BB%AA%EF%BC%8C%E4%B8%9A%E5%8A%A1%E9%AB%98%E5%B3%B0%E5%B7%B2%E7%BB%8F%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">4.7.</span> <span class="nav-text">Q31. 弹性伸缩触发了扩容，但新实例要 5 分钟才就绪，业务高峰已经过去了，怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q32-%E8%AF%B4%E4%B8%80%E4%B8%AA%E4%BD%A0%E5%9C%A8%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%B8%A9%E8%BF%87%E7%9A%84%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9D%91%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BD%A0%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84%EF%BC%9F"><span class="nav-number">4.8.</span> <span class="nav-text">Q32. 说一个你在生产环境踩过的阿里云相关的坑，以及你怎么解决的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q33-%E4%BD%A0%E8%AF%B4%E2%80%9D%E7%86%9F%E6%82%89%E9%98%BF%E9%87%8C%E4%BA%91%E5%B9%B3%E5%8F%B0%E2%80%9D%EF%BC%8C%E9%82%A3%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96%E4%BD%A0%E5%85%B7%E4%BD%93%E5%81%9A%E8%BF%87%E4%BB%80%E4%B9%88%EF%BC%9F%E8%83%BD%E6%8B%BF%E5%87%BA%E6%95%B0%E5%AD%97%E5%90%97%EF%BC%9F"><span class="nav-number">4.9.</span> <span class="nav-text">Q33. 你说”熟悉阿里云平台”，那成本优化你具体做过什么？能拿出数字吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q34-%E5%8D%8A%E5%A4%9C%E5%91%8A%E8%AD%A6%EF%BC%9ARDS-%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E4%BD%BF%E7%94%A8%E7%8E%87-99-%EF%BC%8C%E9%A9%AC%E4%B8%8A%E8%A6%81%E6%BB%A1%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%EF%BC%88%E5%8F%AA%E8%83%BD%E7%8E%B0%E5%9C%BA%E5%A4%84%E7%90%86%EF%BC%89"><span class="nav-number">4.10.</span> <span class="nav-text">Q34. 半夜告警：RDS 磁盘空间使用率 99%，马上要满，你怎么办？（只能现场处理）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">网上乌托邦，心底陶乐庄。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/aliyun-interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="阿里云面试问答（34 题） | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          阿里云面试问答（34 题）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-27 09:45:00 / 修改时间：17:39:04" itemprop="dateCreated datePublished" datetime="2026-08-27T09:45:00+08:00">2026-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="阿里云面试问答（34 题）" href="/2026/08/27/%E6%8A%80%E6%9C%AF/aliyun-interview/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::16bc111fc0e45d615a580f5119863528" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文整理了阿里云面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖阿里云、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>适用岗位：运维工程师 &#x2F; 技术支持工程师 &#x2F; AI 运维工程师 &#x2F; DevOps 工程师</p>
+</blockquote>
+<hr>
+<h2 id="一、岗位高频速查"><a href="#一、岗位高频速查" class="headerlink" title="一、岗位高频速查"></a>一、岗位高频速查</h2><table>
+<thead>
+<tr>
+<th>岗位</th>
+<th>必考问题（3-5 个）</th>
+<th>一句话要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运维工程师</td>
+<td>① ECS 登录不上怎么排查？② RDS 慢查询&#x2F;磁盘满怎么处理？③ 弹性伸缩的伸缩规则怎么配的？④ 告警怎么配、告警风暴怎么防？⑤ 成本优化做过什么？</td>
+<td>以故障排查、稳定性、资源管理为主线，突出”真实操作过”而不是”知道”</td>
+</tr>
+<tr>
+<td>技术支持工程师</td>
+<td>① 客户报”服务器连不上”，你的排查 SOP？② 安全组放行了还是不通，可能的原因？③ RDS 主备切换对业务有什么影响？④ 包年包月到期没续费，数据能找回吗？⑤ 怎么跟客户解释”不是阿里云的问题”？</td>
+<td>考察沟通 + 分层排查 + 阿里云产品的”规则细节”（到期、回收站、切换时长），要能说清边界</td>
+</tr>
+<tr>
+<td>AI 运维工程师</td>
+<td>① 训练&#x2F;推理任务在 ECS&#x2F;ACK 上怎么调度，抢占式实例能不能用？② GPU 实例规格和计费了解吗？③ ARMS 链路追踪怎么定位模型接口慢？④ 日志&#x2F;指标怎么喂给 LLM 做智能诊断？⑤ RAG 服务（Qdrant 等）部署在云上要注意什么？</td>
+<td>高频会问云上跑 AI 工作负载：GPU 规格、抢占式&#x2F;节省计划、ACK 调度、可观测数据接入；你的 LLM&#x2F;RAG 经验是差异化优势</td>
+</tr>
+<tr>
+<td>DevOps 工程师</td>
+<td>① CI&#x2F;CD 流水线构建镜像后怎么部署到 ACK？② Terraform&#x2F;Ansible 管理阿里云资源怎么做的？③ ACK 托管版和自建 K8s 选哪个？④ 镜像仓库 ACR 与 Harbor 的取舍？⑤ 弹性伸缩 + K8s HPA 怎么配合？</td>
+<td>高频会问云资源即代码（IaC）、容器化交付链路、ACK 与 CI&#x2F;CD 打通，强调自动化而非手工操作</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、基础篇（12-题）"><a href="#二、基础篇（12-题）" class="headerlink" title="二、基础篇（12 题）"></a>二、基础篇（12 题）</h2><h3 id="Q1-什么是地域（Region）和可用区（Availability-Zone）？有什么区别？怎么选？"><a href="#Q1-什么是地域（Region）和可用区（Availability-Zone）？有什么区别？怎么选？" class="headerlink" title="Q1. 什么是地域（Region）和可用区（Availability Zone）？有什么区别？怎么选？"></a>Q1. 什么是地域（Region）和可用区（Availability Zone）？有什么区别？怎么选？</h3><ul>
+<li>【考察点】基础概念是否扎实，是否知道”选错了地域&#x2F;可用区会有什么后果”</li>
+<li>【参考回答】地域是物理上的数据中心所在地，比如华北2（北京）、华东1（杭州）、华东2（上海）；可用区是同一地域内电力和网络互相独立的机房，内网互通，延迟大概 1-2 毫秒。我一般这么选：第一，按业务用户所在位置就近选地域，离得近延迟低；第二，高可用要求高的，在同一个地域内选两个可用区做跨可用区部署，比如 RDS 主备跨可用区、应用也双可用区部署，这样单机房故障业务不挂；第三，备案要求，域名解析到国内服务器必须备案，地域选择也受这个影响。</li>
+<li>【追问】同一地域不同可用区内网通吗？答：通的，走阿里云内网，延迟低还免流量费，但跨地域内网不通，要打通只能走云企业网 CEN 或公网。</li>
+<li>【追问】两个可用区都挂了怎么办？答：那就超出单地域能力了，需要跨地域容灾，比如 RDS 跨地域备份、OSS 跨区域复制，成本高，一般只对核心系统做。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q2-什么是-VPC、交换机（vSwitch）和安全组？它们是什么关系？"><a href="#Q2-什么是-VPC、交换机（vSwitch）和安全组？它们是什么关系？" class="headerlink" title="Q2. 什么是 VPC、交换机（vSwitch）和安全组？它们是什么关系？"></a>Q2. 什么是 VPC、交换机（vSwitch）和安全组？它们是什么关系？</h3><ul>
+<li>【考察点】云网络最基本的三个概念，面试官默认你天天在用</li>
+<li>【参考回答】VPC 是你在云上划出来的私有网络，自己定网段，比如 192.168.0.0&#x2F;16；交换机是 VPC 下按可用区划分的子网，比如 192.168.1.0&#x2F;24 在可用区 A，192.168.2.0&#x2F;24 在可用区 B，ECS 必须挂到某个交换机上才有内网 IP；安全组是 ECS 层面的虚拟防火墙，白名单机制，默认拒绝一切，只有规则里显式放行的流量才进得来。关系一句话：VPC 划网络、交换机定可用区、安全组做 ECS 的流量过滤。我们 CMDB 项目就是一套 VPC 里划了应用、数据库、管理三个子网，数据库子网不放公网，只允许应用子网访问。</li>
+<li>【追问】交换机里的 ECS 没绑公网 IP，能访问外网吗？答：不能直接访问，要走 NAT 网关或绑定 EIP。</li>
+<li>【追问】安全组规则写”放行 0.0.0.0&#x2F;0 的 22 端口”有什么问题？答：等于全网都能 SSH 你的机器，端口爆破风险极高，生产环境应该限定来源 IP 或走堡垒机。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q3-ECS-有哪几种计费方式？包年包月和按量付费怎么选、怎么切换？"><a href="#Q3-ECS-有哪几种计费方式？包年包月和按量付费怎么选、怎么切换？" class="headerlink" title="Q3. ECS 有哪几种计费方式？包年包月和按量付费怎么选、怎么切换？"></a>Q3. ECS 有哪几种计费方式？包年包月和按量付费怎么选、怎么切换？</h3><ul>
+<li>【考察点】是否真用过、有没有成本意识</li>
+<li>【参考回答】主要有三种：包年包月、按量付费、抢占式实例。包年包月提前预付，单价低，适合稳定长期跑的机器，缺点是变配和释放不灵活，到期不续费会被停机甚至释放；按量付费按秒计费、随时释放，适合测试环境和流量波动的场景，但单价贵；抢占式实例是按量的 1-3 折，适合无状态、能容忍被回收的任务。我的做法是：核心业务和数据库用包年包月，测试机用按量，离线批处理用抢占式。按量转包年包月在控制台点”转包年包月”就行，立即生效；包年包月不能直接转按量，但可以在续费时手动改成按量（前提是不欠费、配置满足条件）。</li>
+<li>【追问】包年包月实例到期忘续费了会怎样？答：到期后停机，数据保留，15 天内续费还能恢复；超过 15 天资源释放、数据彻底清除，所以生产实例一定开”自动续费”。</li>
+<li>【追问】按量付费实例停机（不释放）还收费吗？答：停机后不再收实例费用，但云盘、EIP（如果绑定了）这些仍然收费；而且按量实例停机后公网 IP 可能会被回收。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q4-什么是-ESSD-云盘？ESSD-和普通云盘有什么区别？快照是干什么的？"><a href="#Q4-什么是-ESSD-云盘？ESSD-和普通云盘有什么区别？快照是干什么的？" class="headerlink" title="Q4. 什么是 ESSD 云盘？ESSD 和普通云盘有什么区别？快照是干什么的？"></a>Q4. 什么是 ESSD 云盘？ESSD 和普通云盘有什么区别？快照是干什么的？</h3><ul>
+<li>【考察点】存储选型细节，ESSD 的 PL 等级、快照的增量机制都是高频追问</li>
+<li>【参考回答】ESSD 是阿里云的增强型 SSD 云盘，按性能分 PL0&#x2F;PL1&#x2F;PL2&#x2F;PL3 四个等级，PL1 单盘最多 5 万 IOPS、PL3 可以到 100 万，适合数据库这类高 IO 业务。比它低一档的是高效云盘和普通云盘，靠机械盘或者性能上限低，只适合低 IO 的场景。快照是对云盘的备份，本质是增量快照——第一次全量，之后只记录变化的数据块，所以便宜又快；可以手动打，也可以配自动快照策略（比如每天凌晨打一次、保留 7 天）。RDS 的备份、ECS 数据的回滚都靠快照，出事了能一键回滚。</li>
+<li>【追问】ESSD 云盘能扩容吗？答：可以，控制台直接扩容，但扩容后文件系统要自己 extend 分区才能用上。</li>
+<li>【追问】快照和镜像有什么区别？答：快照是单个云盘的数据备份，镜像是一台 ECS 的完整模板（系统盘+配置），用镜像能批量创建同配置的机器。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q5-系统镜像是什么？自定义镜像怎么做、有什么用？"><a href="#Q5-系统镜像是什么？自定义镜像怎么做、有什么用？" class="headerlink" title="Q5. 系统镜像是什么？自定义镜像怎么做、有什么用？"></a>Q5. 系统镜像是什么？自定义镜像怎么做、有什么用？</h3><ul>
+<li>【考察点】是否用镜像做过批量交付或环境标准化</li>
+<li>【参考回答】系统镜像就是 ECS 的”出厂模板”，包含操作系统和预装软件，分公共镜像（阿里云官方和第三方，比如 Alibaba Cloud Linux、CentOS、Ubuntu）、自定义镜像、共享镜像。我们 CMDB 项目做过自定义镜像：先在一台 ECS 上装好 JDK、Agent、初始化脚本，打快照制作成自定义镜像，之后弹性伸缩扩容、新开机器直接拿这个镜像起，五分钟内就能交付一台配置一致的新节点，避免每台都手工装环境。自定义镜像在 ECS 控制台”实例-更多-创建自定义镜像”就能做，做的时候最好先关机保证一致性。</li>
+<li>【追问】自定义镜像能跨地域用吗？答：默认不能，要”复制镜像”到目标地域。</li>
+<li>【追问】镜像里的 Agent 带了机器 IP 等个性化配置怎么办？答：用 cloud-init 或初始化脚本在首次启动时生成，不要写死在镜像里。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q6-弹性伸缩（ESS）是什么？伸缩组、伸缩规则、冷却时间分别是什么？"><a href="#Q6-弹性伸缩（ESS）是什么？伸缩组、伸缩规则、冷却时间分别是什么？" class="headerlink" title="Q6. 弹性伸缩（ESS）是什么？伸缩组、伸缩规则、冷却时间分别是什么？"></a>Q6. 弹性伸缩（ESS）是什么？伸缩组、伸缩规则、冷却时间分别是什么？</h3><ul>
+<li>【考察点】简历写了”熟悉弹性伸缩”，这是必考题，答不出细节就是翻车点</li>
+<li>【参考回答】弹性伸缩 ESS 是让 ECS 实例数量跟着负载自动变化的服务。核心概念三个：伸缩组，定义”在哪个地域哪个 VPC 下、最小几台最大几台、期望几台”，并关联 SLB 和 RDS 白名单；伸缩规则，告诉它什么时候扩缩，有定时规则（比如每天 9 点扩 2 台、18 点缩回去）和报警规则（比如 CPU 超过 80% 持续 5 分钟就加 1 台）；冷却时间，默认 300 秒，伸缩活动结束后这段时间内不响应新的伸缩请求，防止刚扩完又触发扩、抖动。新加的实例用什么配置，由伸缩配置&#x2F;启动模板决定。我们 CMDB 服务就是按业务高峰配的报警伸缩。</li>
+<li>【追问】报警规则里的”持续 5 分钟”为什么重要？答：避免瞬时尖峰误触发，比如一次 GC 或一次爬虫请求就把 CPU 打满 1 分钟，不该扩。</li>
+<li>【追问】缩容时哪台实例先被移出？答：默认移出最老的、或选择”移出最早创建的实例”，也可以自定义策略；被移出的实例会先从 SLB 摘除再释放。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q7-SLB-和-ALB-有什么区别？什么时候用哪个？"><a href="#Q7-SLB-和-ALB-有什么区别？什么时候用哪个？" class="headerlink" title="Q7. SLB 和 ALB 有什么区别？什么时候用哪个？"></a>Q7. SLB 和 ALB 有什么区别？什么时候用哪个？</h3><ul>
+<li>【考察点】负载均衡选型，很多人混着说</li>
+<li>【参考回答】SLB 是负载均衡的统称，阿里云现在分三种：传统型 CLB（就是老 SLB）、应用型 ALB、网络型 NLB。简单说：四层场景（TCP&#x2F;UDP、海量连接）用 CLB 或 NLB，七层场景（HTTP&#x2F;HTTPS、按路径&#x2F;域名转发）用 ALB。ALB 是阿里云现在主推的七层负载均衡，支持 HTTP&#x2F;HTTPS&#x2F;QUIC、gRPC，能做基于请求内容的转发、灰度发布、与 WAF 联动，性能比老 SLB 高。我的原则：新项目、对外 HTTP 服务优先 ALB；纯 TCP 长连接服务用 NLB&#x2F;CLB。CMDB 项目的对外网关就是走 ALB 转发到 ACK 里的服务。</li>
+<li>【追问】SLB 后面的 ECS 有健康检查吗？答：有，默认 TCP&#x2F;HTTP 探活，后端实例挂了会自动摘除，恢复了自动加回来，这对弹性伸缩联动很关键。</li>
+<li>【追问】客户端拿到的 IP 是真实用户 IP 吗？答：七层默认 X-Forwarded-For 里带真实 IP，需要后端服务读取它，否则日志里全是负载均衡的 IP。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q8-EIP-和公网-IP-有什么区别？什么时候用-EIP？"><a href="#Q8-EIP-和公网-IP-有什么区别？什么时候用-EIP？" class="headerlink" title="Q8. EIP 和公网 IP 有什么区别？什么时候用 EIP？"></a>Q8. EIP 和公网 IP 有什么区别？什么时候用 EIP？</h3><ul>
+<li>【考察点】网络基础细节，经常被混淆</li>
+<li>【参考回答】公网 IP 是创建 ECS 时随实例分配的，跟着实例走，实例释放 IP 就没了，而且按量付费实例停机后公网 IP 可能被回收；EIP 是独立的弹性公网 IP 资源，可以绑到 ECS、NAT 网关、CLB 上，随时解绑换绑到另一台机器，IP 本身不丢。所以对外提供固定 IP 的服务、或者要频繁迁移的机器，用 EIP；无所谓 IP 变化的临时机器，直接用系统分配的公网 IP 就行。EIP 计费有按流量和按固定带宽两种。</li>
+<li>【追问】EIP 绑到 ECS 上，ECS 内网流量会经过它吗？答：不会，内网流量走交换机，只有出公网的流量才走 EIP。</li>
+<li>【追问】一台 ECS 能绑多个 EIP 吗？答：默认不行，要提工单开多 EIP 特性。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q9-云数据库-RDS-是什么？它和自己在-ECS-上装-MySQL-有什么区别？"><a href="#Q9-云数据库-RDS-是什么？它和自己在-ECS-上装-MySQL-有什么区别？" class="headerlink" title="Q9. 云数据库 RDS 是什么？它和自己在 ECS 上装 MySQL 有什么区别？"></a>Q9. 云数据库 RDS 是什么？它和自己在 ECS 上装 MySQL 有什么区别？</h3><ul>
+<li>【考察点】为什么用云数据库、高可用的基本认知</li>
+<li>【追问】RDS 能自己 SSH 登录上去吗？答：不能，RDS 只开放数据库端口，管理面是平台控制的，这也是它安全的点。</li>
+<li>【追问】RDS 的 CPU 和内存规格能改吗？答：可以，控制台变配，支持升降配，一般几分钟内完成，建议低峰期操作。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q10-OSS-是什么？Bucket、Object、生命周期分别是什么？"><a href="#Q10-OSS-是什么？Bucket、Object、生命周期分别是什么？" class="headerlink" title="Q10. OSS 是什么？Bucket、Object、生命周期分别是什么？"></a>Q10. OSS 是什么？Bucket、Object、生命周期分别是什么？</h3><ul>
+<li>【考察点】对象存储基本概念，简历写了”静态资源托管至 OSS”必问</li>
+<li>【参考回答】OSS 是阿里云的对象存储，存”文件即对象”（Object），对象放在桶（Bucket）里，Bucket 全局唯一命名、归属一个地域。我们项目把前端静态资源、上传的文件都放 OSS，通过 CDN 加速分发，ECU 就省了，而且 OSS 按量计费、容量无限。生命周期是自动管理对象存储状态的规则：比如”前缀为 logs&#x2F; 的文件，30 天后转低频访问，180 天后转归档，365 天后删除”，我用来做日志归档和清理，能省不少钱。Bucket 读写权限分私有、公共读、公共读写，生产上默认私有，通过签名 URL 或 CDN 鉴权对外提供访问。</li>
+<li>【追问】公共读的 Bucket 有什么风险？答：任何知道 URL 的人都能下载，可能被刷流量产生高额账单，所以静态资源一般用私有+CDN 鉴权，而不是公共读。</li>
+<li>【追问】OSS 里的文件能直接覆盖更新吗？答：同名上传即覆盖，但强烈建议开版本控制，误覆盖还能找回历史版本。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q11-云监控（CloudMonitor）能监控什么？告警是怎么配置的？"><a href="#Q11-云监控（CloudMonitor）能监控什么？告警是怎么配置的？" class="headerlink" title="Q11. 云监控（CloudMonitor）能监控什么？告警是怎么配置的？"></a>Q11. 云监控（CloudMonitor）能监控什么？告警是怎么配置的？</h3><ul>
+<li>【考察点】简历写了”熟悉云监控”，必须能说出指标、阈值、通知链路</li>
+<li>【参考回答】云监控分两块：监控指标和告警。指标层面，ECS 的 CPU、内存、磁盘 IO、网络流量，RDS 的连接数、QPS、磁盘空间，SLB、OSS 都有现成指标，也支持自定义监控上报自己的业务指标。告警配置流程是：创建报警规则（选产品、选实例或实例组、选指标、设阈值和持续周期，比如 CPU &gt; 85% 持续 5 分钟），设置报警联系人组（电话、短信、邮件、钉钉&#x2F;企微 Webhook），触发后按通知渠道发出去，恢复后还能发”恢复通知”。我们项目里 ECS 磁盘、RDS 空间、应用进程这些都有告警，钉钉群收告警，出了问题第一时间知道。</li>
+<li>【追问】只监控”CPU 瞬间 90%”有意义吗？答：没意义，会疯狂误报，所以要加”持续 N 个周期”，过滤瞬时尖峰。</li>
+<li>【追问】告警通知里短信和电话各适合什么场景？答：一般告警发钉钉&#x2F;邮件，P1 级别的才配电话，不然半夜每一条都打电话，值班的人会疯掉。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q12-什么是-ACK？ACK-托管版集群和自建-K8s-有什么区别？"><a href="#Q12-什么是-ACK？ACK-托管版集群和自建-K8s-有什么区别？" class="headerlink" title="Q12. 什么是 ACK？ACK 托管版集群和自建 K8s 有什么区别？"></a>Q12. 什么是 ACK？ACK 托管版集群和自建 K8s 有什么区别？</h3><ul>
+<li>【考察点】简历写了”通过 ACK 实现微服务容器化编排”，容器平台理解</li>
+<li>【参考回答】ACK 是阿里云的容器服务 Kubernetes 版，分托管版和 Pro 版。托管版最大的特点：Master 节点（控制面）由阿里云托管，etcd、API Server、调度器这些不用自己运维，你只管节点池里的工作节点，版本升级也是平台推；自建 K8s 的话，Master 高可用、etcd 备份、证书轮换、组件升级全得自己搞，踩坑成本很高。我们 CMDB 项目用的是托管版 ACK：创建集群时指定节点池（几个节点、什么规格、什么镜像），微服务以 Deployment 方式部署，通过 Service&#x2F;Ingress 对外暴露，节点不够了节点池自动扩缩容。生产建议托管版起步，除非有强定制需求才考虑自建或 ACK 专有版。</li>
+<li>【追问】ACK 托管版 Master 收费吗？答：基础托管版的控制面不单独收费，你只为节点（ECS）付费。</li>
+<li>【追问】节点池是什么？答：一组同规格、同镜像、同登录方式的节点集合，可以理解为”一类工作节点”，支持独立扩缩容，还可以混部按量和抢占式实例。</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<hr>
+<h2 id="三、进阶篇（12-题）"><a href="#三、进阶篇（12-题）" class="headerlink" title="三、进阶篇（12 题）"></a>三、进阶篇（12 题）</h2><h3 id="Q13-详细讲讲你-CMDB-项目里这套阿里云架构：ECS、ACK、RDS、DTS、OSS、云监控、ARMS-各自承担什么角色？为什么这么设计？"><a href="#Q13-详细讲讲你-CMDB-项目里这套阿里云架构：ECS、ACK、RDS、DTS、OSS、云监控、ARMS-各自承担什么角色？为什么这么设计？" class="headerlink" title="Q13. 详细讲讲你 CMDB 项目里这套阿里云架构：ECS、ACK、RDS、DTS、OSS、云监控、ARMS 各自承担什么角色？为什么这么设计？"></a>Q13. 详细讲讲你 CMDB 项目里这套阿里云架构：ECS、ACK、RDS、DTS、OSS、云监控、ARMS 各自承担什么角色？为什么这么设计？</h3><ul>
+<li>【考察点】项目真实性和架构设计能力，面试官会拿这段话逐词追问</li>
+<li>【参考回答】我们 CMDB 服务平台的整体架构是：应用层用 ECS 承载，核心是跑在 ACK 托管集群上的微服务，通过容器化编排实现服务的快速部署和弹性；数据层用 RDS MySQL 做主库存储，主备高可用，历史存量数据通过 DTS 从旧库全量+增量同步过来，业务不停机切换；静态资源和上传文件放 OSS，配合 CDN 做加速；可观测这块，云监控盯基础设施指标——ECS 的 CPU&#x2F;内存&#x2F;磁盘、RDS 的 QPS&#x2F;空间、集群节点状态，ARMS 盯应用层——每个接口的调用链、耗时、异常，两边结合，哪层出问题都能定位。这么设计的原因：容器化解决交付和扩容效率，RDS 解决数据高可用和运维成本，OSS 把静态流量从应用服务器上卸掉，监控分层是为了快速定位是”机器问题”还是”代码问题”。</li>
+<li>【追问】DTS 同步期间业务怎么访问数据？答：DTS 是结构+全量+增量三步：先迁移表结构，再灌全量数据，然后持续同步增量 binlog；业务可以先切读流量（读新库），观察增量追平、校验一致后再切写流量，全程不用停服。</li>
+<li>【追问】微服务在 ACK 里，RDS 的连接数够用吗？答：这是真实踩过的点——Pod 多了连接数飙升，解决方式是连接池（如 HikariCP 限制单 Pod 连接数）+ RDS 最大连接数调大，必要时加只读实例分流。</li>
+<li>【追问】ARMS 的链路追踪怎么接入的？答：应用加 ARMS 探针（Java 是 -javaagent 启动参数），不改业务代码，控制台就能看到 traceId 串联的调用链路。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q14-RDS-的高可用是怎么实现的？主备切换的过程是什么样的？"><a href="#Q14-RDS-的高可用是怎么实现的？主备切换的过程是什么样的？" class="headerlink" title="Q14. RDS 的高可用是怎么实现的？主备切换的过程是什么样的？"></a>Q14. RDS 的高可用是怎么实现的？主备切换的过程是什么样的？</h3><ul>
+<li>【考察点】”RDS 高可用存储”这句简历原文，原理必须说清</li>
+<li>【追问】切换期间有写入丢失吗？答：阿里云承诺数据 0 丢失（有损切换）或 5 秒内丢失（无损切换要开”无损秒级切换”特性，默认是近实时），这也是为什么生产要选高可用版而不是基础版。</li>
+<li>【追问】怎么知道发生过切换？答：控制台事件里有”主备切换”记录，监控上也能看到连接断开和 CPU 突变；另外可以开 RDS 的秒级监控，排查时对照时间点。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q15-只读实例解决什么问题？主从延迟怎么处理？"><a href="#Q15-只读实例解决什么问题？主从延迟怎么处理？" class="headerlink" title="Q15. 只读实例解决什么问题？主从延迟怎么处理？"></a>Q15. 只读实例解决什么问题？主从延迟怎么处理？</h3><ul>
+<li>【考察点】读多写少的业务扩容思路，延迟问题是真实生产痛点</li>
+<li>【参考回答】只读实例解决”读压力大”：RDS 主实例负责写，只读实例同步数据后承担读流量，配合读写分离（应用层自己分，或 RDS 代理自动分），把读从主库上卸下来。它本质还是 binlog 异步复制，所以一定有延迟，延迟大了就会出现”刚写完读不到”的脏读问题。我的处理：一是延迟敏感的查询强制走主库（比如刚提交的订单立刻查状态）；二是监控主从延迟指标（RDS 控制台有”只读实例延迟”），超过阈值就告警；三是只读实例也做索引和慢查询优化，别让慢 SQL 拖慢同步；四是有时候干脆用 Redis 缓存扛读，把读放大问题从数据库层面解决。</li>
+<li>【追问】只读实例挂了会影响主库吗？答：不影响，读流量会暂时失败或回落到主库，所以应用层要有降级。</li>
+<li>【追问】读写分离一般怎么实现？答：简单方案是应用层配两个数据源，复杂业务用 RDS 数据库代理（自动读写分离、事务内强制走主库）。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q16-RDS-的备份和恢复是怎么做的？binlog-有什么用？怎么恢复到任意时间点？"><a href="#Q16-RDS-的备份和恢复是怎么做的？binlog-有什么用？怎么恢复到任意时间点？" class="headerlink" title="Q16. RDS 的备份和恢复是怎么做的？binlog 有什么用？怎么恢复到任意时间点？"></a>Q16. RDS 的备份和恢复是怎么做的？binlog 有什么用？怎么恢复到任意时间点？</h3><ul>
+<li>【考察点】数据安全核心，DBA 基本功</li>
+<li>【参考回答】RDS 的备份分两类：数据备份（全量快照）和日志备份（binlog）。默认每天自动做一次全量备份（备份时间窗口可以自己设，建议低峰期），binlog 持续产生。为什么要 binlog？因为恢复分两步：先恢复到最近一次全量备份，再应用该备份之后的 binlog 把数据”追”到指定时间点——这就是”按时间点恢复（PITR）”，可以恢复到过去任意一秒，比如误删表之后，恢复到删之前的时间点，把表捞回来。我配的是：每天 2 点自动全量备份、保留 7 天，binlog 保留 7 天，配合 RDS 的”克隆实例”功能做恢复演练。恢复时是生成一个新实例，确认数据没问题再切换，而不是原地覆盖，安全得多。</li>
+<li>【追问】为什么恢复出来的是新实例而不是原地恢复？答：防止恢复失败把现网数据弄坏，先在新实例验证，再考虑切换，这是最佳实践。</li>
+<li>【追问】binlog 会占很多磁盘吗？答：会，所以控制 binlog 保留时长、关注磁盘空间，空间满了会影响实例（MySQL 默认 binlog 会按保留策略清理）。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q17-DTS-是怎么做数据迁移-同步的？全量-增量具体怎么工作？怎么保证一致性？"><a href="#Q17-DTS-是怎么做数据迁移-同步的？全量-增量具体怎么工作？怎么保证一致性？" class="headerlink" title="Q17. DTS 是怎么做数据迁移&#x2F;同步的？全量+增量具体怎么工作？怎么保证一致性？"></a>Q17. DTS 是怎么做数据迁移&#x2F;同步的？全量+增量具体怎么工作？怎么保证一致性？</h3><ul>
+<li>【考察点】简历写了”DTS 完成历史数据同步”，细节必须能展开</li>
+<li>【参考回答】DTS 是数据传输服务，核心能力是迁移和同步。历史数据同步的典型链路是”全量迁移 + 增量同步”：第一步结构迁移（建表），第二步全量数据灌入（大批量导，期间源库还在写），第三步增量同步——DTS 订阅源库的 binlog 持续把新变更同步到目标库，直到延迟追平。迁移完成后做数据校验（DTS 有校验任务，全量校验比对行数和数据），校验通过后业务切换，全程业务不停机。配置上我注意几点：源库账号要有 binlog 读取权限、目标库要开大一点（迁移时写入压力大）、大表建议分批或者 DTS 限速，避免把源库打满。同步链路本身高可用，DTS 有断点续传，网络闪断能自动恢复。</li>
+<li>【追问】异构数据库（比如 Oracle 迁 MySQL）DTS 支持吗？答：支持，DTS 可以做异构迁移，但类型映射要人工确认，比如 Oracle 的 NUMBER 到 MySQL 的 DECIMAL，还有函数、存储过程这类可能要改造。</li>
+<li>【追问】DTS 和”mysqldump 导出再导入”比优势在哪？答：mysqldump 要么锁表要么丢增量数据，DTS 是逻辑复制、不停服、有断点续传和校验，生产切换基本都用 DTS。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q18-你弹性伸缩的伸缩规则具体是怎么配的？定时伸缩和报警伸缩各适合什么场景？"><a href="#Q18-你弹性伸缩的伸缩规则具体是怎么配的？定时伸缩和报警伸缩各适合什么场景？" class="headerlink" title="Q18. 你弹性伸缩的伸缩规则具体是怎么配的？定时伸缩和报警伸缩各适合什么场景？"></a>Q18. 你弹性伸缩的伸缩规则具体是怎么配的？定时伸缩和报警伸缩各适合什么场景？</h3><ul>
+<li>【考察点】”熟悉弹性伸缩”的照妖镜问题，能说出具体参数才算用过</li>
+<li>【参考回答】我两种都配过。报警伸缩：以 CMDB 服务为例，伸缩组最小 2 台、最大 6 台，报警规则是”CPU 使用率 &gt; 80% 持续 5 分钟 → 增加 1 台，最多加到 6”；”CPU &lt; 20% 持续 10 分钟 → 减少 1 台”；冷却时间 300 秒，避免抖动。定时伸缩：业务有明确波峰的场景，比如每天早上 9-11 点是使用高峰，就配定时任务”每天 8:50 扩到 4 台、12:00 缩回 2 台”，比等报警再扩容快——因为实例创建要几分钟，报警触发是滞后反应。我的经验：能预测的波峰用定时（提前扩容），突发流量用报警（事后兜底），两者可以叠加。</li>
+<li>【追问】报警扩容慢怎么办？答：扩容有启动时间，所以定时提前扩；或者用”伸缩组+启动模板+自定义镜像”，把镜像和初始化做好，把启动时间压缩到最短。</li>
+<li>【追问】缩容会把正在处理请求的实例干掉吗？答：不会直接干，实例先被 SLB 摘除（不再接新请求），等存量请求处理完（或者优雅退出时间到了）再释放。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q19-弹性伸缩和-SLB-是怎么联动的？新加的-ECS-怎么自动接入负载均衡？"><a href="#Q19-弹性伸缩和-SLB-是怎么联动的？新加的-ECS-怎么自动接入负载均衡？" class="headerlink" title="Q19. 弹性伸缩和 SLB 是怎么联动的？新加的 ECS 怎么自动接入负载均衡？"></a>Q19. 弹性伸缩和 SLB 是怎么联动的？新加的 ECS 怎么自动接入负载均衡？</h3><ul>
+<li>【考察点】资源联动理解，考”扩容出来的机器怎么接流量”</li>
+<li>【参考回答】在创建伸缩组时把 SLB&#x2F;ALB 实例关联进去（关联后端服务器组），这样每次扩容出来的新 ECS 会被自动加入负载均衡的后端服务器组，开始接收流量；缩容时先自动从负载均衡摘除，再释放实例。前提是后端服务器组做了健康检查——新实例要在健康检查超时内（比如 3 次探测失败算不健康）通过探活，否则不会开始接流量。这里有个常见坑：新实例的端口必须和健康检查配置一致，比如健康检查探 8080，但你服务只监听 80，新实例就一直不健康、永远不加进来，业务看着像”扩容了但没生效”。</li>
+<li>【追问】健康检查的频率和超时一般怎么设？答：阿里云默认间隔 2-5 秒、失败 3 次摘除，这个值我一般不乱改，改太小会把慢启动的服务误判挂掉。</li>
+<li>【追问】RDS 那边新实例的 IP 需要白名单吗？答：需要，伸缩组可以配置”RDS 白名单自动同步”，扩容出的内网 IP 自动加进 RDS 白名单，不然新实例连不上数据库，这坑我踩过。</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q20-OSS-的权限体系讲一下：RAM、Bucket-Policy、STS-有什么区别？私有-Bucket-怎么对外提供访问？"><a href="#Q20-OSS-的权限体系讲一下：RAM、Bucket-Policy、STS-有什么区别？私有-Bucket-怎么对外提供访问？" class="headerlink" title="Q20. OSS 的权限体系讲一下：RAM、Bucket Policy、STS 有什么区别？私有 Bucket 怎么对外提供访问？"></a>Q20. OSS 的权限体系讲一下：RAM、Bucket Policy、STS 有什么区别？私有 Bucket 怎么对外提供访问？</h3><ul>
+<li>【考察点】云上权限模型，安全面试的必考点</li>
+<li>【参考回答】三个层次：RAM 是账号体系——给员工&#x2F;程序建子账号和角色，用 Policy 定义”谁能对什么资源做什么操作”；Bucket Policy 是挂在 Bucket 上的访问策略，可以给其他账号或者匿名用户授权，跨账号协作用它；STS 是临时凭证——通过 AssumeRole 拿一个有时效（默认 900 秒到 12 小时）的临时 AK&#x2F;SK，给不可信端（比如前端直接上传文件的场景）用，泄漏了也很快过期。私有 Bucket 对外访问的方案：一是签名 URL（OSS SDK 生成带过期时间的 URL），适合临时分享；二是静态资源走 CDN，开启 CDN 回源鉴权（CDN 回源时带签名），用户访问 CDN 域名就行，源站 Bucket 保持私有，这是我们 CMDB 项目的做法，前端资源全走 CDN 域名。</li>
+<li>【追问】子账号的 AK 泄漏了怎么办？答：立即在 RAM 里禁用或删除该 AK，然后排查审计日志（ActionTrail）看用这个 AK 做过什么，所以平时要最小权限+定期轮换。</li>
+<li>【追问】为什么前端直传 OSS 要用 STS？答：主账号 AK 绝不能给前端，STS 临时凭证有时效、权限可控，最坏情况泄漏影响也有限。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q21-OSS-的存储类型有哪些？生命周期规则怎么配？怎么省钱？"><a href="#Q21-OSS-的存储类型有哪些？生命周期规则怎么配？怎么省钱？" class="headerlink" title="Q21. OSS 的存储类型有哪些？生命周期规则怎么配？怎么省钱？"></a>Q21. OSS 的存储类型有哪些？生命周期规则怎么配？怎么省钱？</h3><ul>
+<li>【考察点】存储成本意识，冷热数据分层</li>
+<li>【参考回答】OSS 存储类型按访问频率分四档：标准（Standard）——热数据，实时访问；低频访问（IA）——一月访问几次的，价格便宜但读要收数据取回费，且有最少存储 30 天；归档（Archive）——半年才碰一次的，更便宜，但要先解冻（restore）才能读，解冻要等 1 分钟左右（可加急）；冷归档（Cold Archive）——一年不碰的，最便宜，解冻要等更久。我的做法：日志文件用生命周期规则自动转储——“logs&#x2F; 前缀下 30 天没动的转低频、180 天转归档、365 天删除”，代码不用改，钱自动省。核心原则：先算”这个数据多大概率会被读、能容忍多长的取回延迟”，再定档位，别一刀切全用标准。</li>
+<li>【追问】低频&#x2F;归档提前删会被收费吗？答：会，低于最少存储时长删除要收”提前删除费”，所以规则要按真实生命周期设，别拍脑袋。</li>
+<li>【追问】CDN 缓存和 OSS 生命周期冲突吗？答：不冲突，CDN 是访问层缓存，OSS 是源数据管理，源数据转归档后 CDN 缓存还能继续服务，直到过期回源才发现要解冻。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q22-生产环境的告警规则你是怎么设计的？怎么避免告警风暴？"><a href="#Q22-生产环境的告警规则你是怎么设计的？怎么避免告警风暴？" class="headerlink" title="Q22. 生产环境的告警规则你是怎么设计的？怎么避免告警风暴？"></a>Q22. 生产环境的告警规则你是怎么设计的？怎么避免告警风暴？</h3><ul>
+<li>【考察点】监控体系的实战能力，”告警风暴”是面试官最爱追问的点</li>
+<li>【参考回答】我的告警设计有几个原则：第一，指标要带持续周期，比如 CPU &gt; 85% 持续 5 分钟才告警，过滤瞬时抖动；第二，分级别分通道——P0（服务不可用、数据盘满、RDS 主备切换）走电话+短信+钉钉，P1 走短信+钉钉，P2（CPU 高、磁盘使用率 80%）只走钉钉；第三，业务高峰期和非高峰期阈值分开（云监控支持不同时段的规则，或干脆定时切换）；第四，同一个根因的告警做合并——比如一台 ECS 挂了，它下面的进程、端口、负载均衡健康检查会同时报警，按实例分组合并成一条”XX 实例失联”，而不是 20 条。告警风暴的处理顺序：先找到根因（通常是某台机器或某个发布导致的），在根因实例上做静默（云监控支持告警静默&#x2F;暂停），处理完再恢复，而不是一条条去点确认。</li>
+<li>【追问】告警重复通知怎么办？答：设置通知间隔（比如 5 分钟合并一次）和恢复通知，配合告警静默，同一问题别反复轰炸。</li>
+<li>【追问】告警到了发现是误报，怎么从机制上防？答：阈值定太高漏报、定太低误报，靠”持续周期+业务时段分阈值”平衡，另外用 ARMS 看应用层指标交叉验证，别只看单指标。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q23-ARMS-和云监控有什么区别？怎么用-ARMS-定位一个慢接口？"><a href="#Q23-ARMS-和云监控有什么区别？怎么用-ARMS-定位一个慢接口？" class="headerlink" title="Q23. ARMS 和云监控有什么区别？怎么用 ARMS 定位一个慢接口？"></a>Q23. ARMS 和云监控有什么区别？怎么用 ARMS 定位一个慢接口？</h3><ul>
+<li>【考察点】简历写了 ARMS，必须讲清”应用层监控”和”基础设施监控”的分工</li>
+<li>【参考回答】云监控管的是”资源层”：CPU、内存、磁盘、网络、连接数，它知道”机器忙不忙”，但不知道”用户请求卡在哪”；ARMS 是应用性能监控（APM），管的是”应用层”：每个接口的调用链（Trace）、耗时分布、SQL 慢查询、JVM 指标、异常堆栈。定位慢接口的流程：ARMS 的”接口监控”里按平均耗时排序找到慢接口 → 点进去看调用链瀑布图，能看出时间花在哪个环节——是应用自身代码、下游 HTTP 调用、还是数据库 SQL → 如果卡在 SQL，直接看 ARMS 里关联的数据库调用耗时和慢 SQL 文本，去 RDS 慢日志里核对执行计划加索引。我们 CMDB 项目排查过一次”列表接口越来越慢”，就是通过 ARMS 发现是某个查询没走索引，全表扫描，加了联合索引后 P95 耗时从 800ms 降到 80ms。</li>
+<li>【追问】ARMS 接入成本高吗？答：不高，Java 应用加一行 javaagent 启动参数，业务代码零侵入。</li>
+<li>【追问】ARMS 和 SkyWalking 这类开源 APM 比呢？答：ARMS 免运维、跟阿里云产品打通好（能直接关联 RDS 慢日志），开源的要自己搭 Collector 和存储；但 ARMS 有采样率，高 QPS 下数据不是全量。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q24-安全组、密钥对、RAM-的最佳实践各讲一条，你实际是怎么做的？"><a href="#Q24-安全组、密钥对、RAM-的最佳实践各讲一条，你实际是怎么做的？" class="headerlink" title="Q24. 安全组、密钥对、RAM 的最佳实践各讲一条，你实际是怎么做的？"></a>Q24. 安全组、密钥对、RAM 的最佳实践各讲一条，你实际是怎么做的？</h3><ul>
+<li>【考察点】云安全基本功，安全组和密钥对是简历明写的</li>
+<li>【参考回答】安全组：最小开放原则——只开放业务必要的端口，SSH 22 端口只允许公司出口 IP 或跳板机访问，绝不写 0.0.0.0&#x2F;0；按环境分安全组（生产、测试隔离），实例变更安全组前先加后删，防止把自己锁在外面。密钥对：新机器一律用密钥对登录而不是密码，密钥对可以禁用密码登录（防止暴力破解），私钥权限设为 600 且绝不出库；密钥对绑定后不能解绑，要换就重新绑定新密钥对。RAM：绝不用主账号 AK 跑自动化，给 CI&#x2F;CD、Terraform、监控脚本分别建最小权限的子账号&#x2F;角色，比如 Terraform 只给它要管理的那几个产品的权限，生产环境操作权限单独收敛。</li>
+<li>【追问】安全组规则太多了怎么管理？答：定期用”安全组规则审计”（阿里云有安全组规则分析工具）找宽松规则，把 0.0.0.0&#x2F;0 的规则逐条确认，另外规则有数量上限，太多了要拆分安全组。</li>
+<li>【追问】密钥对丢了怎么办？答：密钥对私钥丢了没法找回，只能通过控制台重置实例密码（如果密码登录没禁用），或者用快照克隆实例挂新密钥——所以私钥一定要备份到密码管理器。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<hr>
+<h2 id="四、生产实战·刁钻篇（10-题）"><a href="#四、生产实战·刁钻篇（10-题）" class="headerlink" title="四、生产实战·刁钻篇（10 题）"></a>四、生产实战·刁钻篇（10 题）</h2><h3 id="Q25-生产上一台-ECS-突然-SSH-连不上了，你从接到告警开始，完整的排查顺序是什么？"><a href="#Q25-生产上一台-ECS-突然-SSH-连不上了，你从接到告警开始，完整的排查顺序是什么？" class="headerlink" title="Q25. 生产上一台 ECS 突然 SSH 连不上了，你从接到告警开始，完整的排查顺序是什么？"></a>Q25. 生产上一台 ECS 突然 SSH 连不上了，你从接到告警开始，完整的排查顺序是什么？</h3><ul>
+<li>【考察点】故障排查 SOP 是否成体系，会不会跳步骤乱试</li>
+<li>【参考回答】我会按”从云上到云下、从控制台到系统内”的顺序来：第一步，控制台看实例状态——是不是运行中（如果停机&#x2F;重启中，先等或先恢复）；第二步，用阿里云控制台的 VNC&#x2F;远程连接直接登录（不走 SSH、不依赖网络和安全组，先确认系统还活着）；第三步，VNC 能进就查系统资源——<code>top</code> 看 CPU&#x2F;内存、<code>df -h</code> 看磁盘是否 100%、<code>free -m</code>、<code>uptime</code> 看负载，常见原因是 OOM 或磁盘满或 load 飙高；第四步，VNC 都进不去，回控制台查安全组——是不是最近改过规则把 22 端口挡住了、来源 IP 对不对；第五步，看云监控的”网络流入流出”和系统日志，判断是不是带宽打满或被 DDoS；最后还有一招：用快照在另一台机器上挂载数据盘，把数据先保住再慢慢查系统问题。我的原则是：先恢复、再定位、后复盘，必要时直接重启或从镜像重开一台，别在故障机上死磕。</li>
+<li>【追问】安全组和系统防火墙（iptables&#x2F;firewalld）都有规则，先查哪个？答：先查安全组——它在网络入口，规则错了流量根本进不到系统；再看系统内防火墙，两个都要放行才行。</li>
+<li>【追问】怎么防止下次再连不上？答：常态手段：密钥登录+堡垒机、禁 root 密码登录、fail2ban 防爆破、给 22 端口限定来源 IP、监控 SSH 登录失败次数告警。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q26-用户反馈”RDS-突然变慢了”，之前都好好的，你怎么排查？"><a href="#Q26-用户反馈”RDS-突然变慢了”，之前都好好的，你怎么排查？" class="headerlink" title="Q26. 用户反馈”RDS 突然变慢了”，之前都好好的，你怎么排查？"></a>Q26. 用户反馈”RDS 突然变慢了”，之前都好好的，你怎么排查？</h3><ul>
+<li>【考察点】数据库故障排查链路，能不能从现象倒推根因</li>
+<li>【参考回答】我会同时看几个面，用排除法收敛：第一步，看 RDS 监控——CPU、内存、连接数、QPS 有没有突变，连接数满（比如 MySQL 默认 100-3000 个）会导致新连接排队，现象就是”变慢”；第二步，看慢查询日志，找出新增的慢 SQL，重点看是不是最近有数据量增长导致索引失效、或者代码发布了新查询；第三步，看锁——<code>show processlist</code>（RDS 有 SQL 洞察&#x2F;审计功能）看有没有大量 Waiting for lock，常见是某个长事务没提交把行锁或表锁占住了，后面全部排队；第四步，看磁盘和 IO——磁盘空间满、IOPS 打满（ESSD 性能上限）也会整体变慢。定位后对症：慢 SQL 加索引或改写、长事务 kill 掉或从代码侧修、连接数调大或加只读实例分流、IO 瓶颈就升 ESSD 等级或规格。</li>
+<li>【追问】”之前都好好的”这句话可信吗？答：不可信，要自己看趋势，往往是数据量增长到临界点、或者慢 SQL 的量变引起质变，所以要拉 7 天监控对比而不是只看当下。</li>
+<li>【追问】RDS 的 SQL 洞察和慢查询日志有什么区别？答：慢查询日志只记超过 long_query_time 的 SQL，SQL 洞察是全量 SQL 的采集分析（更贵），排查时先看免费的慢日志，不够再开洞察。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q27-凌晨-3-点你被电话叫醒，说”几百条告警”同时来了，你怎么处理？"><a href="#Q27-凌晨-3-点你被电话叫醒，说”几百条告警”同时来了，你怎么处理？" class="headerlink" title="Q27. 凌晨 3 点你被电话叫醒，说”几百条告警”同时来了，你怎么处理？"></a>Q27. 凌晨 3 点你被电话叫醒，说”几百条告警”同时来了，你怎么处理？</h3><ul>
+<li>【考察点】告警风暴处理 + 优先级判断，考临场决策</li>
+<li>【参考回答】我的第一反应不是逐条看告警，而是”找共性”：几百条告警同时来，大概率是单一根因——要么某台核心机器挂了（它下面的服务、端口、健康检查全报），要么某个发布刚生效（全链路报错），要么某个依赖挂了（比如数据库或公网出口）。做法：先在告警平台按”实例&#x2F;应用”分组聚合，看哪个对象占告警大头；然后去阿里云控制台确认这台机器状态，同时看监控曲线是不是大面积异常；确认是单点故障后，先在告警系统对受影响范围做静默（避免继续轰炸），再处理根因——能重启的先重启恢复，需要发布的回滚发布。处理完取消静默、发恢复通知，第二天复盘：这个单点为什么没有单独的高级别告警？为什么健康检查没提前摘除？把这类问题写进故障复盘。</li>
+<li>【追问】你怎么快速区分”告警风暴”和”真的全挂了”？答：看告警的根因一致性——全是同一类指标（比如全是连接超时）且集中在同一批实例上，就是连锁反应；如果不同指标、不同实例各自独立异常，那才是大面积故障。</li>
+<li>【追问】告警风暴本身说明什么？答：说明告警设计有问题——缺少合并、缺少依赖关系建模、阈值不合理，这类问题要在事后用”告警治理”专项解决，而不是靠人肉扛。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q28-监控发现某台-ECS-的出网带宽被打满了，怀疑被-DDoS-或恶意刷流量，怎么办？"><a href="#Q28-监控发现某台-ECS-的出网带宽被打满了，怀疑被-DDoS-或恶意刷流量，怎么办？" class="headerlink" title="Q28. 监控发现某台 ECS 的出网带宽被打满了，怀疑被 DDoS 或恶意刷流量，怎么办？"></a>Q28. 监控发现某台 ECS 的出网带宽被打满了，怀疑被 DDoS 或恶意刷流量，怎么办？</h3><ul>
+<li>【考察点】流量型攻击应对 + 阿里云防护产品的使用</li>
+<li>【参考回答】分几步：第一步，确认——看云监控的带宽曲线，如果持续接近带宽峰值且来源分散，高度怀疑 DDoS；同时看连接数，如果大量新连接涌向某个端口，配合安全组先临时把该端口封掉（限来源 IP 或直接关端口）止血。第二步，看流量构成——用 VPC 流日志或 ECS 上的 tcpdump 抓包看源 IP 分布，如果是固定几个 IP 是恶意调用，直接安全组封掉；如果源 IP 海量且随机，是 DDoS。第三步，针对性防护——阿里云有 DDoS 基础防护（默认 5Gbps 免费，防 Syn Flood 这类）和 DDoS 高防（付费，IP 换成高防 IP，流量先过高防清洗）。第四步，如果是业务被人恶意刷（比如接口被脚本打），从应用层解决：ALB&#x2F;WAF 限流、频控、鉴权，别把成本花在带宽上。事后看费用，流量攻击是会烧钱的，这也是为什么生产要对带宽和流量费用做告警。</li>
+<li>【追问】DDoS 基础防护免费额度是多少？答：默认 5Gbps 的防护能力，超过会被黑洞（暂停服务），所以大流量攻击要上高防。</li>
+<li>【追问】被黑洞了怎么办？答：黑洞是阿里云强制保护措施，一般持续 1-2 小时，期间 IP 不可用；紧急处理是换 IP（EIP 可以重新分配），或直接上高防。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q29-客户问：我的包年包月-ECS-到期忘续费了，数据还能找回吗？"><a href="#Q29-客户问：我的包年包月-ECS-到期忘续费了，数据还能找回吗？" class="headerlink" title="Q29. 客户问：我的包年包月 ECS 到期忘续费了，数据还能找回吗？"></a>Q29. 客户问：我的包年包月 ECS 到期忘续费了，数据还能找回吗？</h3><ul>
+<li>【考察点】阿里云资源生命周期规则的准确掌握（技术支持岗高频场景题）</li>
+<li>【参考回答】要看时间点，阿里云的规则是：包年包月实例到期后进入”已过期”状态，实例停机但数据保留，<strong>15 天内</strong>续费可以恢复并正常开机；超过 15 天未续费，实例会被释放，云盘数据彻底清除、无法找回。所以我的答复和动作：第一时间确认到期时间——如果还在 15 天内，引导客户立即续费恢复，提醒续费后检查服务和数据完整性；如果已超过 15 天被释放，先查有没有最后的手段——有没有保留快照、有没有跨地域备份（这俩都能用来重建数据），如果都没有，如实告知数据无法恢复，并说明这是包年包月产品的标准规则。避免此类问题的建议：设置自动续费、开启到期提醒（阿里云会短信&#x2F;邮件提醒，也可以配费用告警）、核心数据另外用快照&#x2F;备份工具留一份。</li>
+<li>【追问】到期后实例是”立刻停”还是”有缓冲”？答：到期当天进入过期状态，实例停机，有 15 天缓冲期，缓冲期内续费即恢复。</li>
+<li>【追问】那按量付费实例被释放能找回吗？答：按量实例释放后会进”回收站”（默认保留 1 天，可配 1-7 天），回收站里可以找回；但包年包月超期释放不在回收站范围。</li>
+<li>【岗位标注】技术支持 &#x2F; 运维</li>
+</ul>
+<h3 id="Q30-同事误操作把一台按量付费的-ECS-释放了，里面有数据，怎么办？"><a href="#Q30-同事误操作把一台按量付费的-ECS-释放了，里面有数据，怎么办？" class="headerlink" title="Q30. 同事误操作把一台按量付费的 ECS 释放了，里面有数据，怎么办？"></a>Q30. 同事误操作把一台按量付费的 ECS 释放了，里面有数据，怎么办？</h3><ul>
+<li>【考察点】应急恢复能力 + 对”回收站&#x2F;快照&#x2F;镜像”机制的掌握</li>
+<li>【参考回答】先别慌，按优先级处理：第一，立刻去”回收站”看——按量付费 ECS 释放后默认进回收站保留 1 天（可配置 1-7 天），回收站里实例还在就能直接恢复（重新开机）；第二，如果实例不在回收站了，看有没有云盘快照——只要有快照，用快照创建一块云盘，挂到一台临时 ECS 上把数据拷出来，或者直接用快照创建新实例；第三，都没有的话看有没有自定义镜像或 DTS 的同步链路（数据同步到别的库也能重建）。之后做防护：给生产 ECS 开”实例释放保护”（防止误释放）、自动快照策略必须开、对高危操作（释放实例、删除云盘）要求走工单双人确认。这也是为什么我一直强调：快照不是可选项，是救命的。</li>
+<li>【追问】回收站保留多久？答：按量实例默认 1 天，可以在控制台调成最多 7 天，越重要的环境保留越久。</li>
+<li>【追问】释放保护在哪开？答：ECS 实例的”更多-实例属性-释放保护”，开启后控制台和 OpenAPI 都无法直接释放，要先关掉保护，这是个很好的防呆开关。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q31-弹性伸缩触发了扩容，但新实例要-5-分钟才就绪，业务高峰已经过去了，怎么办？"><a href="#Q31-弹性伸缩触发了扩容，但新实例要-5-分钟才就绪，业务高峰已经过去了，怎么办？" class="headerlink" title="Q31. 弹性伸缩触发了扩容，但新实例要 5 分钟才就绪，业务高峰已经过去了，怎么办？"></a>Q31. 弹性伸缩触发了扩容，但新实例要 5 分钟才就绪，业务高峰已经过去了，怎么办？</h3><ul>
+<li>【考察点】对扩容链路延迟的理解 + 预案设计，反直觉点在于”报警扩容天然滞后”</li>
+<li>【参考回答】这是弹性伸缩的经典痛点：报警是滞后的——等你看到 CPU 持续超阈值，流量已经上来了，再加上实例创建（镜像拉起、系统初始化、应用启动、健康检查通过）的几分钟，高峰可能真的错过了。解决思路是”把扩容前置”：第一，能预测的波峰用定时扩容，提前 10-15 分钟把实例加到位；第二，压缩启动时间——用打好环境的自定义镜像+启动脚本（避免现装软件），用弹性伸缩的”伸缩组预热&#x2F;启动模板”把初始化脚本写好，把从触发到可用的时间压到 2 分钟以内；第三，用”预测式伸缩”（阿里云 ESS 的智能预测，基于历史曲线预测未来负载自动扩）或 ACK 的 HPA+节点池自动扩缩容（容器场景秒级弹 Pod，比弹 ECS 快）；第四，兜底——伸缩组最大实例数设得够，别让上限卡住扩容。事后我会看这次的触发记录，评估定时规则要不要调整。</li>
+<li>【追问】Pod 扩容和 ECS 扩容哪个快？答：Pod 扩容秒级（只要节点有余量），ECS 节点扩容要分钟级（创建+初始化+调度），所以容器化场景优先 HPA 弹 Pod，节点不够才弹节点。</li>
+<li>【追问】新实例启动要装依赖，怎么优化？答：依赖全部打进自定义镜像，启动只做配置下发（从配置中心拉），不要在启动脚本里现装包。</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q32-说一个你在生产环境踩过的阿里云相关的坑，以及你怎么解决的？"><a href="#Q32-说一个你在生产环境踩过的阿里云相关的坑，以及你怎么解决的？" class="headerlink" title="Q32. 说一个你在生产环境踩过的阿里云相关的坑，以及你怎么解决的？"></a>Q32. 说一个你在生产环境踩过的阿里云相关的坑，以及你怎么解决的？</h3><ul>
+<li>【考察点】真实性和踩坑复盘能力，编造的回答经不起追问（面试官必追问细节和当时的监控数据）</li>
+<li>【参考回答】说一个比较典型的：有次 CMDB 服务半夜扩容后，新实例一直不接流量，业务高峰期部分请求超时。排查过程：先看伸缩组——实例确实创建成功了，但负载均衡的后端服务器组里它一直是”不健康”状态；再看健康检查配置，发现健康检查探测的是 8080 端口，但新实例的容器服务监听在 80，健康检查永远失败，负载均衡就不给它发流量。根因是伸缩配置里的端口和应用实际端口不一致，加上启动模板没同步更新。解决：改健康检查端口为 80，更新伸缩配置，新实例秒级恢复健康。这个坑给我的教训：第一，伸缩配置、健康检查、实际服务端口三处必须一致，变更时一起改；第二，扩容后要做”业务验证”而不是只看实例起来了；第三，负载均衡健康检查本身也是告警，配合起来用。后来我加了”扩容后自动检查后端健康状态”的脚本和告警，再没出过这问题。</li>
+<li>【追问】当时监控上有哪些指标能提前预警？答：负载均衡的”后端健康主机数”指标——如果提前监控”健康主机数 &lt; 期望值”并告警，不用等用户报障就能发现。</li>
+<li>【追问】这个坑跟”端口不一致”还有哪些类似案例？答：还有 RDS 白名单没开（新实例连不上库）、启动脚本里写死 IP、安全组没放行服务端口，本质都是”配置漂移”——模板和实际不一致，所以现在都用 IaC（Terraform）管配置。</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q33-你说”熟悉阿里云平台”，那成本优化你具体做过什么？能拿出数字吗？"><a href="#Q33-你说”熟悉阿里云平台”，那成本优化你具体做过什么？能拿出数字吗？" class="headerlink" title="Q33. 你说”熟悉阿里云平台”，那成本优化你具体做过什么？能拿出数字吗？"></a>Q33. 你说”熟悉阿里云平台”，那成本优化你具体做过什么？能拿出数字吗？</h3><ul>
+<li>【考察点】费用优化是简历表述最容易被戳穿的点，必须准备真实抓手</li>
+<li>【参考回答】我做过几类，都能讲出具体动作：第一，按量转包年包月——把长期稳定运行的机器（比如 CMDB 的核心 ECS）从按量转成包年包月，一年大约省 30%-40%（包年约 8.5 折、三年约 5 折），前提是确认机器要长期用；第二，闲置资源清理——每月过一遍账单：未挂载的云盘（云盘不挂实例也在收费）、闲置的 EIP（绑着不用按带宽收费）、没人用的快照和镜像，全部释放，这块最容易出”看不见的钱”；第三，带宽计费模式——固定带宽改成按流量，低流量时段多的服务立省；第四，存储分层——OSS 日志转低频&#x2F;归档，RDS 用不到的旧备份缩短保留时间；第五，用预算管理——在费用中心设置月度预算和异常消费告警，钱花超了第一时间知道。数字层面我不会瞎报，一般讲”闲置清理和计费切换这类，月度能省 20% 上下，具体看资源构成”。</li>
+<li>【追问】按量转包年后后悔了怎么办？答：包年包月支持退订（5 天内无理由全额退、之后按剩余价值退），但变更是有代价的，所以转之前先确认资源会长期使用。</li>
+<li>【追问】怎么快速找到闲置资源？答：用费用中心的”资源分析”和实例列表筛选——比如按创建时间排序找 30 天没登录的机器，结合云监控看 CPU 长期个位数的实例，人工确认后释放。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q34-半夜告警：RDS-磁盘空间使用率-99-，马上要满，你怎么办？（只能现场处理）"><a href="#Q34-半夜告警：RDS-磁盘空间使用率-99-，马上要满，你怎么办？（只能现场处理）" class="headerlink" title="Q34. 半夜告警：RDS 磁盘空间使用率 99%，马上要满，你怎么办？（只能现场处理）"></a>Q34. 半夜告警：RDS 磁盘空间使用率 99%，马上要满，你怎么办？（只能现场处理）</h3><ul>
+<li>【考察点】真实急症处理：顺序、止血、根治</li>
+<li>【参考回答】按”先止血、后根治”来：第一步，确认——登录 RDS 控制台看磁盘空间构成（RDS 有空间分析：数据、日志、临时文件各占多少），这一步决定后面怎么动手。第二步，止血——如果 binlog 占大头（常见），确认 binlog 保留策略后手动清理或缩短保留时长（RDS 支持设置 binlog 保留天数，马上生效）；如果是慢 SQL 产生了大量临时表&#x2F;排序文件，先杀掉那个会话；如果是大事务把 undo&#x2F;临时文件撑起来，等事务结束或谨慎 kill。第三步，根治——查慢日志和 SQL 洞察，找到写放大最狠的 SQL（比如全表 UPDATE、无索引的 DELETE），优化或加索引；数据量真涨上来的，考虑归档历史数据到 OSS、清理过期日志表。第四步，容量规划——磁盘升配（RDS 支持在线扩容，一般分钟级），同时把磁盘使用率告警阈值从 80% 提到 70%，留出处理窗口，并复盘为什么没在 85% 时被发现处理。注意：磁盘满对 RDS 是致命级——会直接导致实例只读或异常，所以这类告警一定最高优先级。</li>
+<li>【追问】磁盘空间分析显示”数据文件”占大头怎么办？答：说明数据真在涨，不能靠清日志解决，要做归档或分库分表规划，同时立刻扩容磁盘保证可用，别让实例挂掉。</li>
+<li>【追问】binlog 能随便删吗？答：不能乱删，删了就失去时间点恢复能力，正确做法是调短保留天数（比如从 7 天降到 2 天），并确认备份策略正常，核心库保留时长要谨慎。</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag"># 阿里云</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/rag-llm-interview/" rel="prev" title="LLM 与 RAG 面试问答（38 题）">
+                  <i class="fa fa-chevron-left"></i> LLM 与 RAG 面试问答（38 题）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/git-interview/" rel="next" title="Git 面试问答（26 题）">
+                  Git 面试问答（26 题） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="16bc111fc0e45d615a580f5119863528"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: '30px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
+
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
+
+  <div class="aplayer" 
+  data-id="18010222564" 
+  data-server="netease" 
+  data-type="playlist" 
+  data-fixed="true" 
+  data-autoplay="false" 
+  data-order="list" 
+  data-volume="0.5" 
+  data-theme="#1da496" 
+  data-preload="auto" >
+  </div>
+
+</body>
+</html>

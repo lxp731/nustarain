@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.pages.dev","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="“我们做了一个面向政企场景的 RAG 智能问答平台，内部代号 LarkLex。这个项目是团队 2024 年并行推进的两大目标之一——另一个是容器平台改造；LarkLex 的定位是私有 LLM 编排（Private LLM orchestration），目标是做成开源产品。我负责它从架构设计到部署运维…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LarkLex RAG 系统项目复盘：从架构设计到面试问答">
+<meta property="og:url" content="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/larklex-rag-project/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="“我们做了一个面向政企场景的 RAG 智能问答平台，内部代号 LarkLex。这个项目是团队 2024 年并行推进的两大目标之一——另一个是容器平台改造；LarkLex 的定位是私有 LLM 编排（Private LLM orchestration），目标是做成开源产品。我负责它从架构设计到部署运维…">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-27T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-27T09:39:04.479Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="项目复盘">
+<meta property="article:tag" content="向量数据库">
+<meta property="article:tag" content="RAG">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/larklex-rag-project/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/larklex-rag-project/","path":"2026/08/27/技术/larklex-rag-project/","title":"LarkLex RAG 系统项目复盘：从架构设计到面试问答"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LarkLex RAG 系统项目复盘：从架构设计到面试问答 | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E9%80%9F%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">一、项目速览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF%EF%BC%88%E4%B8%9A%E5%8A%A1%E8%83%8C%E6%99%AF%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E5%81%9A%E3%80%81%E7%BA%A6%E6%9D%9F%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、项目背景（业务背景、为什么做、约束）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E7%BB%87%E8%83%8C%E6%99%AF%EF%BC%88%E4%B8%80%E6%89%8B%E8%B5%84%E6%96%99%EF%BC%8C%E9%9D%A2%E8%AF%95%E8%AE%B2%E2%80%9D%E8%83%8C%E6%99%AF-%E5%9B%A2%E9%98%9F%E2%80%9D%E6%97%B6%E7%94%A8%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">组织背景（一手资料，面试讲”背景&#x2F;团队”时用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E8%83%8C%E6%99%AF"><span class="nav-number">2.2.</span> <span class="nav-text">业务背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%81%9A%EF%BC%88%E5%8A%A8%E6%9C%BA%E6%8B%86%E8%A7%A3%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">为什么做（动机拆解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%EF%BC%88%E9%9D%A2%E8%AF%95%E6%97%B6%E4%B8%BB%E5%8A%A8%E8%AE%B2%EF%BC%8C%E6%98%BE%E7%9C%9F%E5%AE%9E%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">约束（面试时主动讲，显真实）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E8%A7%92%E8%89%B2%E5%AE%9A%E4%BD%8D%EF%BC%88%E9%98%B2%E5%BE%A1%E7%82%B9%EF%BC%8C%E4%B8%BB%E5%8A%A8%E8%AF%B4%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">我的角色定位（防御点，主动说）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%8C%E6%88%90%E6%83%85%E5%86%B5%EF%BC%88%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%EF%BC%9A%E6%95%B0%E6%8D%AE%E6%B5%81-%E7%BB%84%E4%BB%B6-%E9%80%89%E5%9E%8B%E7%90%86%E7%94%B1-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、完成情况（技术架构：数据流&#x2F;组件&#x2F;选型理由&#x2F;遇到的坑）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%BA%A7%E5%93%81%E5%AE%9A%E4%BD%8D%E4%B8%8E%E4%BA%8B%E5%AE%9E%E6%9E%B6%E6%9E%84%EF%BC%88%E4%BB%93%E5%BA%93%E4%B8%80%E6%89%8B%E6%9D%90%E6%96%99%EF%BC%8C%E5%85%88%E8%AE%B2%E8%BF%99%E4%B8%AA%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 产品定位与事实架构（仓库一手材料，先讲这个）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B5%81%EF%BC%88%E6%A3%80%E7%B4%A2%E9%93%BE%E8%B7%AF%EF%BC%8C%E9%9D%A2%E8%AF%95%E6%8C%89%E6%AD%A4%E8%AE%B2%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">3.3 整体架构与数据流（检索链路，面试按此讲）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%BB%84%E4%BB%B6%E6%B8%85%E5%8D%95%EF%BC%88%E5%B8%A6%E5%8F%82%E6%95%B0%EF%BC%8C%E9%9D%A2%E8%AF%95%E8%AE%B2%E5%BE%97%E5%87%BA%E7%BB%86%E8%8A%82%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">3.4 组件清单（带参数，面试讲得出细节）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E9%80%89%E5%9E%8B%E7%90%86%E7%94%B1%EF%BC%88%E6%AF%8F%E4%B8%AA%E9%83%BD%E8%A6%81%E8%83%BD%E8%AE%B2%E2%80%9D%E6%AF%94%E8%BF%87%E8%B0%81%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9D%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">3.5 选型理由（每个都要能讲”比过谁、为什么”）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%EF%BC%88%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%BF%99%E4%BA%9B%E6%9C%80%E6%9C%89%E8%AF%B4%E6%9C%8D%E5%8A%9B%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">3.6 遇到的坑（面试讲这些最有说服力）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%B4%9F%E8%B4%A3%E5%86%85%E5%AE%B9%EF%BC%88%E5%88%86%E7%82%B9%EF%BC%8C%E6%A0%87%E6%B3%A8%E4%B8%BB%E5%AF%BC-%E5%8F%82%E4%B8%8E-%E7%8B%AC%E7%AB%8B%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、负责内容（分点，标注主导&#x2F;参与&#x2F;独立）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%AE%8C%E6%88%90%E6%88%90%E6%95%88%EF%BC%88%E9%87%8F%E5%8C%96%E7%BB%93%E6%9E%9C-%E5%A6%82%E4%BD%95%E5%BA%A6%E9%87%8F%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">五、完成成效（量化结果 + 如何度量）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%9D%A2%E8%AF%95%E5%AE%98%E6%8F%90%E9%97%AE%E4%B8%8E%E5%8F%82%E8%80%83%E5%9B%9E%E7%AD%94"><span class="nav-number">6.</span> <span class="nav-text">六、面试官提问与参考回答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%885-%E9%A2%98%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">1. 基础问题（5 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%EF%BC%8C%E4%BD%A0%E5%9C%A8%E9%87%8C%E9%9D%A2%E5%85%B7%E4%BD%93%E8%B4%9F%E8%B4%A3%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.1.1.</span> <span class="nav-text">Q1. 简单介绍一下这个项目，你在里面具体负责什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-%E4%BB%80%E4%B9%88%E6%98%AF-RAG%EF%BC%9F%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81%E6%98%AF%E6%80%8E%E4%B9%88%E8%B5%B0%E7%9A%84%EF%BC%9F"><span class="nav-number">6.1.2.</span> <span class="nav-text">Q2. 什么是 RAG？这个项目的数据流是怎么走的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%90%8C%E6%97%B6%E7%94%A8-PostgreSQL%E3%80%81Neo4j%E3%80%81Qdrant-%E4%B8%89%E7%A7%8D%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9F%E5%90%84%E8%87%AA%E5%B9%B2%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8F%AA%E7%94%A8%E4%B8%80%E7%A7%8D%EF%BC%9F"><span class="nav-number">6.1.3.</span> <span class="nav-text">Q3. 为什么同时用 PostgreSQL、Neo4j、Qdrant 三种数据库？各自干什么？为什么不只用一种？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-%E4%BB%80%E4%B9%88%E6%98%AF-embedding%EF%BC%9Fnomic-embed-text-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E5%AE%83%EF%BC%9F"><span class="nav-number">6.1.4.</span> <span class="nav-text">Q4. 什么是 embedding？nomic-embed-text 是什么？为什么选它？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-%E8%BF%99%E4%B8%AA%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E5%9C%A8%E5%93%AA%EF%BC%9F%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E8%B7%91%E7%9A%84%EF%BC%9F%E4%BD%A0%E6%80%8E%E4%B9%88%E8%BF%90%E7%BB%B4%E5%AE%83%EF%BC%9F"><span class="nav-number">6.1.5.</span> <span class="nav-text">Q5. 这个系统部署在哪？模型怎么跑的？你怎么运维它？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B7%B1%E5%85%A5%E9%97%AE%E9%A2%98%EF%BC%886-%E9%A2%98%EF%BC%89"><span class="nav-number">6.2.</span> <span class="nav-text">2. 深入问题（6 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6%E6%80%8E%E4%B9%88%E7%AE%97%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E5%AE%83%E8%80%8C%E4%B8%8D%E6%98%AF%E6%AC%A7%E6%B0%8F%E8%B7%9D%E7%A6%BB%EF%BC%9Ftop-k-%E6%80%8E%E4%B9%88%E5%AE%9A%EF%BC%9F"><span class="nav-number">6.2.1.</span> <span class="nav-text">Q6. 余弦相似度怎么算？为什么用它而不是欧氏距离？top-k 怎么定？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7-%E6%B7%B7%E5%90%88%E6%A3%80%E7%B4%A2%E5%85%B7%E4%BD%93%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F%E4%B8%A4%E8%B7%AF%E7%BB%93%E6%9E%9C%E6%80%8E%E4%B9%88%E8%9E%8D%E5%90%88%EF%BC%9F"><span class="nav-number">6.2.2.</span> <span class="nav-text">Q7. 混合检索具体怎么做？两路结果怎么融合？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q8-%E5%8A%A8%E6%80%81%E6%A8%A1%E6%9D%BF%E5%92%8C-Few-shot-%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F%E5%8C%B9%E9%85%8D%E5%BA%A6%E6%80%8E%E4%B9%88%E4%BB%8E-68-%E6%8F%90%E5%88%B0-92-%EF%BC%9F"><span class="nav-number">6.2.3.</span> <span class="nav-text">Q8. 动态模板和 Few-shot 是怎么实现的？匹配度怎么从 68% 提到 92%？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q9-7-%E7%A7%8D%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84-AB-%E6%B5%8B%E8%AF%95%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F%E8%AF%84%E4%BC%B0%E7%B3%BB%E7%BB%9F%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%EF%BC%9F%E7%BB%93%E8%AE%BA%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.2.4.</span> <span class="nav-text">Q9. 7 种大模型的 AB 测试是怎么做的？评估系统怎么设计？结论是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q10-Neo4j-%E5%92%8C%E5%90%91%E9%87%8F%E5%BA%93%E7%9A%84%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F%E2%80%9D%E5%9B%BE%E8%B0%B1%E6%8E%A8%E7%90%86%E2%80%9D%E5%85%B7%E4%BD%93%E6%8C%87%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.2.5.</span> <span class="nav-text">Q10. Neo4j 和向量库的联合查询怎么实现？”图谱推理”具体指什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q11-%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F%E2%80%9D%E8%BD%BB%E9%87%8F%E7%BA%A7%E8%87%AA%E7%A0%94%E6%96%B9%E6%A1%88%E2%80%9D%E5%85%B7%E4%BD%93%E6%8C%87%E4%BB%80%E4%B9%88%EF%BC%9F32-%E6%80%8E%E4%B9%88%E7%AE%97%E7%9A%84%EF%BC%9F"><span class="nav-number">6.2.6.</span> <span class="nav-text">Q11. 技术选型是怎么做的？”轻量级自研方案”具体指什么？32% 怎么算的？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%88%81%E9%92%BB-%E5%8E%8B%E5%8A%9B%E9%97%AE%E9%A2%98%EF%BC%884-%E9%A2%98%EF%BC%89"><span class="nav-number">6.3.</span> <span class="nav-text">3. 刁钻&#x2F;压力问题（4 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q12-%E7%AE%80%E5%8E%86%E5%86%99%E2%80%9D%E5%A4%9A%E6%A8%A1%E6%80%81%E2%80%9D%EF%BC%8C%E4%BD%86%E5%90%AC%E8%B5%B7%E6%9D%A5%E4%BD%A0%E5%8F%AA%E5%A4%84%E7%90%86%E4%BA%86%E6%96%87%E6%9C%AC%EF%BC%8C%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9C%A8%E5%93%AA%EF%BC%9F"><span class="nav-number">6.3.1.</span> <span class="nav-text">Q12. 简历写”多模态”，但听起来你只处理了文本，多模态在哪？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q13-35-%E5%92%8C-40-%E8%BF%99%E4%BA%9B%E6%95%B0%E5%AD%97%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84%EF%BC%9F%E8%AF%84%E6%B5%8B%E9%9B%86%E5%A4%9A%E5%A4%A7%EF%BC%9F%E6%9C%89%E5%AF%B9%E7%85%A7%E7%BB%84%E5%90%97%EF%BC%9F"><span class="nav-number">6.3.2.</span> <span class="nav-text">Q13. 35% 和 40% 这些数字怎么来的？评测集多大？有对照组吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q14-%E4%BD%A0%E6%98%AF-Linux-%E7%B3%BB%E7%BB%9F%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%8C%E4%B8%8D%E6%98%AF%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%8C%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E9%87%8C%E4%BD%A0%E7%9A%84%E8%A7%92%E8%89%B2%E6%98%AF%E4%B8%8D%E6%98%AF%E8%A2%AB%E5%A4%B8%E5%A4%A7%E4%BA%86%EF%BC%9F"><span class="nav-number">6.3.3.</span> <span class="nav-text">Q14. 你是 Linux 系统工程师，不是算法工程师，这个项目里你的角色是不是被夸大了？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q15-%E5%A6%82%E6%9E%9C%E8%AE%A9%E4%BD%A0%E7%8E%B0%E5%9C%A8%E9%87%8D%E5%81%9A%E4%B8%80%E9%81%8D%EF%BC%8C%E4%BD%A0%E4%BC%9A%E6%94%B9%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">6.3.4.</span> <span class="nav-text">Q15. 如果让你现在重做一遍，你会改什么？</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">网上乌托邦，心底陶乐庄。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/larklex-rag-project/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LarkLex RAG 系统项目复盘：从架构设计到面试问答 | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LarkLex RAG 系统项目复盘：从架构设计到面试问答
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-27 10:00:00 / 修改时间：17:39:04" itemprop="dateCreated datePublished" datetime="2026-08-27T10:00:00+08:00">2026-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="LarkLex RAG 系统项目复盘：从架构设计到面试问答" href="/2026/08/27/%E6%8A%80%E6%9C%AF/larklex-rag-project/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::13621f08579b47a92dd769da52986b7e" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>“我们做了一个面向政企场景的 RAG 智能问答平台，内部代号 LarkLex。这个项目是团队 2024 年并行推进的两大目标之一——另一个是容器平台改造；LarkLex 的定位是私有 LLM 编排（Private LLM orchestration），目标是做成开源产品。我负责它从架构设计到部署运维…</p>
+<span id="more"></span>
+
+<blockquote>
+<p>适用岗位：运维工程师 &#x2F; 技术支持工程师 &#x2F; AI 运维工程师 &#x2F; DevOps 工程师（AI运维岗必考）</p>
+</blockquote>
+<hr>
+<h2 id="一、项目速览"><a href="#一、项目速览" class="headerlink" title="一、项目速览"></a>一、项目速览</h2><blockquote>
+<p>“我们做了一个面向政企场景的 RAG 智能问答平台，内部代号 LarkLex。这个项目是团队 2024 年并行推进的两大目标之一——另一个是容器平台改造；LarkLex 的定位是私有 LLM 编排（Private LLM orchestration），目标是做成开源产品。我负责它从架构设计到部署运维的全链路。简单说三件事：第一，设计了 PostgreSQL、Neo4j、向量库的协同架构——PG 管结构化业务数据，Neo4j 管实体关系图谱，向量库管语义检索，各自干最擅长的事，落地场景是给 ITSM 的工单语义搜索接口；第二，搭了一条文档切分、embedding 生成、混合检索、Prompt 生成的 RAG 流水线，用 nomic-embed-text 做向量化，通过动态模板和 Few-shot 把 LLM 输出与业务需求的匹配度从 68% 提到 92%；第三，搭了多模型评估框架，用 Ollama 本地模型加 HuggingFace 云端 API 同时对比 7 种大模型，最后基于开源底座定制、自研上层组件，资源开销比完整方案省了约三分之一。我岗位是 Linux 系统工程师，算法部分用的是开源预训练模型，我的核心贡献是工程落地、部署运维和评测体系。”</p>
+</blockquote>
+<p><strong>一句话版：</strong> 给业务系统做了一个”能听懂业务话、能查库、能回答”的 RAG 问答系统——三种数据库各司其职，7 个模型横向对比，最后用轻量自研方案落地。</p>
+<p><strong>按岗位微调收尾句（说给不同面试官听）：</strong></p>
+<ul>
+<li>运维&#x2F;技术支持岗：补一句”整个系统全是 Docker 部署，qdrant、open-webui、vllm 都是 docker-compose 起的，数据卷持久化、健康检查、资源调优都是我在做”。</li>
+<li>AI运维岗：补一句”模型侧我用 Ollama 跑 embedding 和小模型、vLLM CPU 版跑本地推理，HuggingFace API 跑云端大模型做对比，模型评测和调度是我主导的”。</li>
+<li>DevOps岗：补一句”我还参与了 LangChain&#x2F;LangGraph、Quivr、FastGPT、Dify 等框架的评估对比，最终在开源底座上定制、自研上层组件，按资源估算省了约 32% 的云开销”。</li>
+</ul>
+<hr>
+<h2 id="二、项目背景（业务背景、为什么做、约束）"><a href="#二、项目背景（业务背景、为什么做、约束）" class="headerlink" title="二、项目背景（业务背景、为什么做、约束）"></a>二、项目背景（业务背景、为什么做、约束）</h2><h3 id="组织背景（一手资料，面试讲”背景-团队”时用）"><a href="#组织背景（一手资料，面试讲”背景-团队”时用）" class="headerlink" title="组织背景（一手资料，面试讲”背景&#x2F;团队”时用）"></a>组织背景（一手资料，面试讲”背景&#x2F;团队”时用）</h3><ul>
+<li>2024 年团队目标原文：”产品：容器平台改造，代码可复用，最终成为<strong>平台产品</strong>；GenAI - generative AI &gt; <strong>LarkLex</strong>：Open Source、<strong>Private LLM orchestration</strong>（私有 LLM 编排）”。</li>
+<li>LarkLex 定位是<strong>私有 LLM 编排平台</strong>，目标是<strong>开源产品</strong>——所以代码组织、文档、部署方式都按可复用、可开源的标准做（GitLab 仓库、Markdown 文档驱动）。</li>
+<li>团队同时在调研 <strong>AIOps</strong> 方向（docs&#x2F;240117_aiops_survey.md：调研 opni、logai、codefuse-chatbot 等开源工具，其中 codefuse-chatbot 被标注为”与 LarkLex 同类：RAG + Tool Learning”）——说明 LarkLex 对标的是开源 RAG &#x2F; 智能问答平台。</li>
+<li>团队理念：<strong>最小计算单元</strong>（Container 作为最小单元）、<strong>IaC（一切皆代码进 Git）</strong>、<strong>GitOps</strong>、<strong>CI&#x2F;CD 对所有服务版本控制</strong>、HA + LB。这些理念直接决定了 LarkLex 的交付方式：所有部署配置、数据集、评测记录全部代码化进 Git，不在服务器上手动改配置。</li>
+</ul>
+<h3 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h3><ul>
+<li>公司面向政企客户，内部积累了大量业务资料：长文本（规章制度、项目文档、操作手册、合同条款）和结构化数据（业务系统里的项目、人员、供应商、部门等表）。</li>
+<li>业务人员和客服经常要快速从这些资料里找答案，传统方案是数据库 LIKE 查询或关键词搜索，存在两个硬伤：① 语义相关但字面不同的问法搜不到（比如问”跟哪家供应商合作最久”，文档里写的是”合作关系始于2019年”）；② 跨文档、跨表的问题要人工翻很久。</li>
+<li>领导层希望做一个内部知识问答系统，让业务人员用自然语言提问，系统自动检索资料并生成带依据的回答。</li>
+<li>LarkLex 是<strong>平台产品</strong>而非一次性工具，客户场景覆盖智能工单（银行客户）、员工培训助手（餐饮企业）、智能文档平台（医疗企业）等（larklex 仓库产品设计文档中有这些 Use Case），所以架构要可复用、可扩展。</li>
+</ul>
+<h3 id="为什么做（动机拆解）"><a href="#为什么做（动机拆解）" class="headerlink" title="为什么做（动机拆解）"></a>为什么做（动机拆解）</h3><ol>
+<li><strong>检索能力不足</strong>：关键词检索对长文本命中率低，答案经常被淹没在大段文档里。</li>
+<li><strong>响应慢</strong>：人工翻文档耗时，客户咨询等不起。</li>
+<li><strong>数据合规</strong>：业务数据不能出内网，不能把敏感数据直接调外部云 API 处理 → 必须本地推理能力（Ollama &#x2F; vLLM 本地部署）。</li>
+<li><strong>模型选型需求</strong>：团队想对比多个开源大模型，需要一套统一的评测体系，而不是各模型各测各的。</li>
+<li><strong>平台化与开源目标</strong>：LarkLex 的定位是私有 LLM 编排<strong>平台产品</strong>并开源，需要可复用的架构、统一的模型调度与评测能力，而不是单点脚本——这也是自研调度层和评测框架的出发点。</li>
+</ol>
+<h3 id="约束（面试时主动讲，显真实）"><a href="#约束（面试时主动讲，显真实）" class="headerlink" title="约束（面试时主动讲，显真实）"></a>约束（面试时主动讲，显真实）</h3><ul>
+<li>服务器资源有限，<strong>没有稳定可用的 GPU</strong> → 推理走 CPU（vLLM CPU 版跑 Llama-3.2-1B，Ollama 跑小模型和 embedding）。</li>
+<li><strong>数据不出内网</strong>（合规硬约束）→ 本地模型优先，云端 API 只用于对比评测。</li>
+<li>业务方要求<strong>快速出 POC</strong>（约 1-2 个月出验证版），倒逼方案要轻。</li>
+<li>要兼容多种模型 → 需要调度层和评测框架，而不是写死单个模型。</li>
+<li><strong>团队理念约束</strong>：IaC &#x2F; GitOps &#x2F; 一切皆代码进 Git——部署配置、数据集、评测记录都要代码化进 Git 管理，交付必须走 CI&#x2F;CD。</li>
+<li><strong>人力分摊</strong>：同一团队并行推进容器平台改造与 LarkLex，Q4 排期里我的投入配比是 **AI 10%、DevOps 90%**（larklex 仓库 240918_q4_schedule.md Worker 表）——AI 侧不能投入大量人力，选型必须轻、复用容器平台的部署能力。</li>
+</ul>
+<h3 id="我的角色定位（防御点，主动说）"><a href="#我的角色定位（防御点，主动说）" class="headerlink" title="我的角色定位（防御点，主动说）"></a>我的角色定位（防御点，主动说）</h3><blockquote>
+<p>“我的岗位是 Linux 系统工程师。LarkLex 是团队 2024 年并行推进的私有 LLM 编排产品，AIGC 方向由团队同事、团队同事牵头，我的角色是工程支撑和落地：数据库协同架构的实施、Python 检索流水线、模型本地化部署、评测系统开发，以及 Q4 与容器平台配套的高可用、CI&#x2F;CD、监控工作。模型本身用的是开源预训练模型，<strong>训练和微调不是我做的</strong>，我负责把它工程化落地。”</p>
+</blockquote>
+<h2 id="三、完成情况（技术架构：数据流-组件-选型理由-遇到的坑）"><a href="#三、完成情况（技术架构：数据流-组件-选型理由-遇到的坑）" class="headerlink" title="三、完成情况（技术架构：数据流&#x2F;组件&#x2F;选型理由&#x2F;遇到的坑）"></a>三、完成情况（技术架构：数据流&#x2F;组件&#x2F;选型理由&#x2F;遇到的坑）</h2><h3 id="3-1-产品定位与事实架构（仓库一手材料，先讲这个）"><a href="#3-1-产品定位与事实架构（仓库一手材料，先讲这个）" class="headerlink" title="3.1 产品定位与事实架构（仓库一手材料，先讲这个）"></a>3.1 产品定位与事实架构（仓库一手材料，先讲这个）</h3><p><strong>产品定位（README + docs&#x2F;240619_larklexSum.md）</strong></p>
+<ul>
+<li>LarkLex 是面向神州业务的 <strong>AI 平台产品（BaaS 后端即服务）</strong>，目标原文：”通过 BaaS 后端即服务的灵活特性，满足具备神州业务特征的需求，为公司各业务线提供强有力的 AI 产品支持”。</li>
+<li>核心功能六大模块：① <strong>Models Orchestration 模型调度</strong>（LLM &#x2F; Embedding &#x2F; Re-rank 模型编排、Prompt engineering、Chunk splitting 切片、VectorStore 连接）② <strong>知识库管理</strong> ③ <strong>工作流</strong> ④ <strong>用户管理</strong> ⑤ <strong>Agent</strong> ⑥ <strong>API Provider</strong>（给 ITSM 提供工单语义搜索 API）。</li>
+<li>落地场景：银行客户工单语义搜索、ITSM 知识问答等；scripts&#x2F;data&#x2F; 下有 bank&#x2F;express&#x2F;personal&#x2F;telecom 的 CSV 演示数据。</li>
+</ul>
+<p><strong>技术架构（docs&#x2F;240509_larklex_reasonable.md + docs&#x2F;20240708_larklex_deploy.md）</strong></p>
+<ul>
+<li>前端：<strong>Dify-based</strong>（知识管理 &#x2F; RAG 引擎 &#x2F; 工作流 &#x2F; Prompt IDE &#x2F; Agent &#x2F; BaaS &#x2F; SSO 认证）。</li>
+<li>后端：<strong>nginx</strong>（可接 API 网关）+ <strong>flask 或 fastAPI</strong> + <strong>langchain</strong> + <strong>celery</strong>（配 redis 的调度系统）。</li>
+<li>文档处理：自研 <strong>document_loader + custom_splitter</strong>（文档加载与自定义切片）。</li>
+<li>向量库（平台侧）：<strong>Supabase（内置 PostgreSQL + pgvector）</strong>——<code>supabase start</code> 启动，建 dify 库并启用 uuid-ossp 扩展；Dify 默认是 weaviate，团队写代码把它换成 Supabase（docs&#x2F;240517_dify_vdb.md 有实际替换代码）。</li>
+<li>向量库（工单相似度接口侧）：<strong>Qdrant</strong>——银行客户相似度接口 pipeline 直接调用 <code>qdrant.similarity_search_with_score(query, k)</code>，并有 Qdrant 重建表（清空数据）、快照备份文档；配套有 qdrant 的 docker-compose。</li>
+<li>部署：docker-compose.middleware.yaml 起中间件；环境要求 node&gt;&#x3D;20.11.1、python&gt;&#x3D;3.10、docker&gt;&#x3D;19.03。</li>
+<li>性能验证（docs&#x2F;240416_stress_test.md）：JMeter 模拟 <strong>10 用户并发</strong>压”相似度查询接口”，请求数据是 ITSM 工单内容（邮箱密码修改、离职人员、故障描述等），<strong>topK&#x3D;5</strong>。</li>
+<li>框架评估痕迹：docs&#x2F;240715_neo4jCombineLangchain.md（Neo4j+LangChain 结合原型）、docs&#x2F;240501_fastGPT.md、docs&#x2F;240416_quivr_front_dev_log.md、docs&#x2F;20231130_quivr_design.md（Quivr 设计与拆解）、docs&#x2F;240517_dify_vdb.md（Dify 向量库选型）——印证”对多个框架做过评估”。</li>
+<li>模型与脚本：docs&#x2F;240731_upgradeOllama.md（Ollama 模型升级记录，多模型本地部署佐证）；scripts&#x2F; 下有 Api、chat_with_image、chat_with_search、Dify、Larklex、llm-webui、meeting-reporter-demo、neo4jdemo、neo4j_prototype、resume-poc、similarity、Ticketing、Yum、Roche 等自研&#x2F;实验目录。</li>
+</ul>
+<h3 id="3-3-整体架构与数据流（检索链路，面试按此讲）"><a href="#3-3-整体架构与数据流（检索链路，面试按此讲）" class="headerlink" title="3.3 整体架构与数据流（检索链路，面试按此讲）"></a>3.3 整体架构与数据流（检索链路，面试按此讲）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">【离线流水线（入库侧）】</span><br><span class="line">业务文档/ITSM工单 ──→ 自研 document_loader + custom_splitter 切片</span><br><span class="line">                    └─→ embedding（Ollama 本地）──→ 向量库</span><br><span class="line">                          （工单相似度接口：Qdrant；平台侧：Supabase/pgvector）</span><br><span class="line">结构化数据 ──→ PostgreSQL（原始数据/元数据/评测记录，tsvector 全文检索兜底）</span><br><span class="line">业务关系数据 ──→ 实体/关系抽取 ──→ Neo4j（Cypher 多跳查询，LangChain 集成原型）</span><br><span class="line"></span><br><span class="line">【在线链路（查询侧）】</span><br><span class="line">用户问题 ──→ 意图解析/实体抽取</span><br><span class="line">              ├─ 语义检索：向量库 top-k（工单相似度接口 topK=5，问答链路 top-k=20）</span><br><span class="line">              ├─ 精确检索：PostgreSQL 全文检索 / BM25（兜底专有名词、编号）</span><br><span class="line">              └─ 图谱查询：Neo4j Cypher 多跳关系推理（关系类问题）</span><br><span class="line">                   ↓</span><br><span class="line">         RRF 融合 + 重排（取 top-5 给 LLM）</span><br><span class="line">                   ↓</span><br><span class="line">         动态模板组装 Prompt + 动态 Few-shot 示例（Dify Prompt IDE / 后端 langchain）</span><br><span class="line">                   ↓</span><br><span class="line">         LLM 调度层：Models Orchestration（Ollama 本地 / vLLM CPU / HuggingFace API）</span><br><span class="line">                   ↓</span><br><span class="line">         输出校验（格式/必含字段，失败重生成一次）──→ 返回 + 评测数据落库</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-组件清单（带参数，面试讲得出细节）"><a href="#3-4-组件清单（带参数，面试讲得出细节）" class="headerlink" title="3.4 组件清单（带参数，面试讲得出细节）"></a>3.4 组件清单（带参数，面试讲得出细节）</h3><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>职责</th>
+<th>关键参数&#x2F;细节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Dify（前端&#x2F;底座）</td>
+<td>知识管理 &#x2F; RAG 引擎 &#x2F; 工作流 &#x2F; Prompt IDE &#x2F; Agent &#x2F; BaaS &#x2F; SSO</td>
+<td>基于开源 Dify 定制；前端部分由前端同事负责</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>业务主库：原始数据、chunk 原文、元数据、评测记录</td>
+<td>tsvector 全文检索兜底；分钟级增量同步给 Neo4j&#x2F;向量库</td>
+</tr>
+<tr>
+<td>Supabase（PostgreSQL+pgvector）</td>
+<td>平台侧生产 VectorDB（按部署文档）</td>
+<td><code>supabase start</code> 启动；建 dify 库 + uuid-ossp 扩展；Dify 默认 weaviate，团队改代码切到 supabase（240517_dify_vdb.md）</td>
+</tr>
+<tr>
+<td>Qdrant</td>
+<td>工单相似度接口向量库（银行客户）</td>
+<td><code>qdrant.similarity_search_with_score(query, k)</code>；配套 docker-compose（6333&#x2F;6334）；HNSW、Cosine；重建表&#x2F;快照备份有专门文档</td>
+</tr>
+<tr>
+<td>Neo4j</td>
+<td>知识图谱</td>
+<td>7474&#x2F;7687 端口；Cypher 参数化查询；与 LangChain 结合原型（240715_neo4jCombineLangchain.md）；scripts&#x2F;neo4j_prototype、neo4jdemo</td>
+</tr>
+<tr>
+<td>nomic-embed-text</td>
+<td>文本向量化</td>
+<td>768 维，上下文 8192 tokens，Ollama 本地跑；偏英文，中文一般 → 混合检索弥补</td>
+</tr>
+<tr>
+<td>document_loader + custom_splitter</td>
+<td>自研文档加载与自定义切片</td>
+<td>按文档结构切片 + overlap；chunk 500-800 tokens</td>
+</tr>
+<tr>
+<td>nginx</td>
+<td>反向代理&#x2F;API 网关入口</td>
+<td>可接 API 网关（kong）</td>
+</tr>
+<tr>
+<td>flask &#x2F; fastAPI</td>
+<td>后端 API 服务</td>
+<td>Python；与 langchain 编排</td>
+</tr>
+<tr>
+<td>langchain</td>
+<td>后端编排框架</td>
+<td>检索 &#x2F; Model I&#x2F;O &#x2F; Document I&#x2F;O &#x2F; Agent 模块</td>
+</tr>
+<tr>
+<td>celery + redis</td>
+<td>异步调度系统</td>
+<td>长任务（文档处理、批量 embedding）入队；失败重试</td>
+</tr>
+<tr>
+<td>工单相似度 API</td>
+<td>API Provider：给 ITSM 提供相似度查询</td>
+<td>payload&#x3D;工单内容，topK&#x3D;5；JMeter 10 并发压测（240416_stress_test.md）；demo 硬件要求 8 核&#x2F;16G&#x2F;40G</td>
+</tr>
+<tr>
+<td>LLM 调度层</td>
+<td>模型路由&#x2F;并发&#x2F;重试</td>
+<td>Models Orchestration（LLM&#x2F;Embedding&#x2F;Re-rank 编排）；并发队列+限流+超时+重试；temperature 问答类 0.2-0.3</td>
+</tr>
+<tr>
+<td>Ollama</td>
+<td>本地推理</td>
+<td>跑 embedding 和本地小模型；升级记录在案（240731_upgradeOllama.md）；限制并发防 OOM</td>
+</tr>
+<tr>
+<td>vLLM (CPU)</td>
+<td>本地 LLM 推理</td>
+<td>CPU 版，Llama-3.2-1B，bfloat16，KV cache 10GB，OMP 线程绑定，端口 8000</td>
+</tr>
+<tr>
+<td>HuggingFace API</td>
+<td>云端大模型对比</td>
+<td>只用于 AB 评测对比，不用于生产（数据合规）</td>
+</tr>
+<tr>
+<td>open-webui</td>
+<td>交互界面&#x2F;调试入口</td>
+<td>docker-compose 部署，3000→8080，数据卷持久化</td>
+</tr>
+<tr>
+<td>评测系统</td>
+<td>多模型自动化评估</td>
+<td>统一评测集 → 各模型跑 → 输出落库 → 规则校验 + 人工打分 → 汇总报告</td>
+</tr>
+</tbody></table>
+<h3 id="3-5-选型理由（每个都要能讲”比过谁、为什么”）"><a href="#3-5-选型理由（每个都要能讲”比过谁、为什么”）" class="headerlink" title="3.5 选型理由（每个都要能讲”比过谁、为什么”）"></a>3.5 选型理由（每个都要能讲”比过谁、为什么”）</h3><ul>
+<li><strong>为什么 Dify 底座 + 自研上层</strong>：Dify 提供知识管理 &#x2F; RAG 引擎 &#x2F; 工作流 &#x2F; Prompt IDE &#x2F; Agent &#x2F; BaaS &#x2F; SSO 开箱能力，避免从零造轮子；但业务要定制——自研 document_loader、custom_splitter、Neo4j 联合查询、检索编排。这就是”轻量级自研方案”的真实含义：<strong>在开源底座上做减法、按业务定制</strong>。</li>
+<li><strong>评估过的框架</strong>：LangChain &#x2F; LangGraph、Quivr、FastGPT、Dify（仓库有对应文档：quivr_design、quivr_front_dev_log、fastGPT、dify_vdb、neo4jCombineLangchain）——面试被问”POC 对比”就列这份清单。</li>
+<li><strong>为什么 langchain 做后端编排</strong>：检索 &#x2F; Model I&#x2F;O &#x2F; Document I&#x2F;O &#x2F; Agent 生态成熟，Neo4j 有官方集成（240715_neo4jCombineLangchain.md）。</li>
+<li><strong>为什么 celery + redis</strong>：文档处理、批量 embedding 是长任务，异步化不阻塞 API。</li>
+<li><strong>为什么 Qdrant（工单相似度接口）</strong>：独立向量库、轻量单容器、支持 payload 过滤；对比过 Milvus（依赖 etcd&#x2F;minio 太重）、FAISS（要自己包服务）。</li>
+<li><strong>为什么 Supabase&#x2F;pgvector（平台侧）</strong>：与 PostgreSQL 同源、运维简单、Dify 支持；向量库选型有专门评估文档（240517_dify_vdb.md）。</li>
+<li><strong>为什么 Neo4j</strong>：关系推理是图数据库强项，Cypher 表达多跳查询直观；对比过 SQL 递归 CTE，深度受限、难维护。</li>
+<li><strong>为什么 nomic-embed-text 而不是 OpenAI embedding</strong>：本地可跑、免费、768 维适中、上下文长（8192）；OpenAI embedding 要外网且按量付费，数据合规不允许。</li>
+</ul>
+<h3 id="3-6-遇到的坑（面试讲这些最有说服力）"><a href="#3-6-遇到的坑（面试讲这些最有说服力）" class="headerlink" title="3.6 遇到的坑（面试讲这些最有说服力）"></a>3.6 遇到的坑（面试讲这些最有说服力）</h3><ol>
+<li><strong>chunk 切分导致语义割裂</strong>：按固定长度切会把一个完整条款劈成两半 → 改为按 Markdown&#x2F;文档标题结构切分 + overlap（custom_splitter 就是为此自研的）。</li>
+<li><strong>中文 embedding 效果一般</strong>：nomic-embed-text 偏英文，纯中文问题召回差 → 混合检索（关键词兜底）+ 重排弥补。</li>
+<li><strong>Ollama 本地并发一高就 OOM</strong>：默认并发过高把内存吃满 → 限制并发数、调 OMP 线程绑定；把 embedding 推理和 LLM 推理拆到不同进程（vLLM 单独起），避免互相挤占。</li>
+<li><strong>Qdrant 索引构建慢 &#x2F; 内存占用高</strong>：HNSW 参数调优（m、ef_construct），控制 collection 数量；重建表（清空数据）要先做快照备份（仓库有专门文档）。</li>
+<li><strong>Neo4j 数据滞后</strong>：PG 是源、图库是派生数据 → 定时增量同步 + 失败重试，容忍分钟级延迟，并在文档里写明”图数据为近实时”。</li>
+<li><strong>Few-shot 示例太长烧 token</strong>：固定全量示例太大 → 用 embedding 相似度从示例库<strong>动态选 2-3 条</strong>与当前问题最相似的示例。</li>
+<li><strong>模型输出格式不稳定</strong>：输出不是合法 JSON &#x2F; 缺必含字段 → 输出校验 + 失败重生成一次，仍失败则降级返回检索片段。</li>
+<li><strong>Dify 底座升级兼容性</strong>：Dify 迭代快，前端版本升级后后端接口&#x2F;配置对不上 → 锁定版本 + 升级前回归测试（前端同事主导，我负责部署侧）。</li>
+<li><strong>celery 异步任务失败静默</strong>：批量 embedding 任务失败容易没感知 → 任务状态落库 + 失败重试 + 日志告警。</li>
+<li><strong>pgvector 与业务库同库的性能影响</strong>：数据量大后向量检索与业务查询互相挤占资源 → 按数据规模分环境，重查询场景用独立向量库（Qdrant）。</li>
+</ol>
+<hr>
+<h2 id="四、负责内容（分点，标注主导-参与-独立）"><a href="#四、负责内容（分点，标注主导-参与-独立）" class="headerlink" title="四、负责内容（分点，标注主导&#x2F;参与&#x2F;独立）"></a>四、负责内容（分点，标注主导&#x2F;参与&#x2F;独立）</h2><ol>
+<li>【主导】设计并实现基于 RAG 的<strong>多源异构数据协同架构</strong>：PostgreSQL + Neo4j + Qdrant 三种数据库分工与联动，通过相似度查询实现跨数据形态的精准匹配。</li>
+<li>【独立】开发<strong>矢量化处理流水线</strong>：文档解析 → 结构切分 → nomic-embed-text 生成 embedding → 写入 Qdrant；设计基于余弦相似度的<strong>混合检索策略</strong>（向量 + 关键词 + RRF 融合 + 重排）。</li>
+<li>【主导】<strong>Prompt Engineering 优化工程</strong>：动态模板（按查询类型选模板、动态拼上下文和约束）+ Few-shot 学习（动态示例选择），LLM 输出与业务需求匹配度从 68% 提升到 92%。</li>
+<li>【独立】搭建<strong>多模型测试与自动化评估框架</strong>：集成 Ollama 本地模型与 HuggingFace 云端 API，统一评测集 + 规则校验 + 人工打分，支持 7 种大模型横向 AB 对比（质量 &#x2F; 延迟 &#x2F; 吞吐三维）。</li>
+<li>【独立】实现 <strong>Neo4j 知识图谱与 Qdrant 向量库的联合查询</strong>：意图分类 + 实体抽取 → 图多跳推理 + 语义检索融合，复杂关系类查询端到端响应时间缩短约 40%。</li>
+<li>【参与】<strong>技术选型与方案设计</strong>：完成 LangChain、LangGraph 等框架的 POC 对比测试，输出选型报告，最终采用轻量级自研方案，云资源开销估算节省约 32%。</li>
+<li>【独立】<strong>AI 服务基础设施部署</strong>：qdrant、open-webui、vllm 的 docker-compose 编排、数据卷持久化、健康检查与资源调优。</li>
+</ol>
+<p><strong>诚实边界（主动说）：</strong> “模型训练、微调不是我做的，用的开源预训练模型；我负责系统架构、流水线、部署运维和评测工程。”</p>
+<hr>
+<h2 id="五、完成成效（量化结果-如何度量）"><a href="#五、完成成效（量化结果-如何度量）" class="headerlink" title="五、完成成效（量化结果 + 如何度量）"></a>五、完成成效（量化结果 + 如何度量）</h2><p>|—|—|—|<br>| 长文本匹配准确率提升 35% | 我们测的是 <strong>top-5 检索命中率</strong>（答案所在文档出现在前 5 条检索结果中的比例），混合检索从约 61% 提升到约 82%，相对提升约 34%，写成了约 35% | 三组对照：纯关键词检索 vs 纯向量检索 vs 混合检索；200 条内部长文本测试集；相关性另做人工抽样打分（1-5 分） |<br>| 匹配度从 68% 提升至 92% | LLM 输出与业务需求的一致性：人工 1-5 分打分、≥4 分算匹配 + 规则校验（必含字段 &#x2F; 格式），68→92 是<strong>绝对百分点</strong> | 30-50 条业务真实问答场景，业务方参与确认评测集 |<br>| 7 种大模型 AB 测试 | 统一评测集 + 统一 Prompt 模板 + 统一温度参数，唯一变量是模型；三维对比：输出质量（人工分 + 规则通过率）、延迟（首 token &#x2F; 总时长）、吞吐 | 50-100 条评测集；本地组 Ollama&#x2F;vLLM，云端组 HuggingFace API |<br>| 复杂查询响应时间缩短 40% | <strong>只针对多跳关系推理类复杂查询</strong>：端到端从约 8 秒降到约 4.8 秒（图+向量联合 vs 纯向量基线）；普通单文档问答没有这个幅度 | 基线 &#x3D; 纯向量检索方案（把大量相关文档整段塞给 LLM）；图方案把上下文压到关系路径 + 少量证据文档 |<br>| 节省 32% 云资源消耗 | POC 阶段<strong>资源需求估算对比</strong>（不是财务账单）：同等业务能力下，完整 Dify 平台部署 vs 裁剪定制后的部署（去掉用不到的模块、自研轻量上层组件）的容器数、内存、CPU，按云计费单价折算 | Dify 完整部署 vs 定制裁剪部署的资源实测&#x2F;估算对比 |</p>
+<p><strong>辅助成效（口头补充）：</strong> 自动化评估把每轮人工测试从半天缩短到 1 小时以内；评测报告直接支撑了”生产用本地小模型”的决策，避免了云 API 的数据合规风险。</p>
+<hr>
+<h2 id="六、面试官提问与参考回答"><a href="#六、面试官提问与参考回答" class="headerlink" title="六、面试官提问与参考回答"></a>六、面试官提问与参考回答</h2><h3 id="1-基础问题（5-题）"><a href="#1-基础问题（5-题）" class="headerlink" title="1. 基础问题（5 题）"></a>1. 基础问题（5 题）</h3><h4 id="Q1-简单介绍一下这个项目，你在里面具体负责什么？"><a href="#Q1-简单介绍一下这个项目，你在里面具体负责什么？" class="headerlink" title="Q1. 简单介绍一下这个项目，你在里面具体负责什么？"></a>Q1. 简单介绍一下这个项目，你在里面具体负责什么？</h4><ul>
+<li>【面试官意图】考察项目真实性、个人角色定位、结构化表达能力。</li>
+<li>【参考回答】先给结论：”这是团队 2024 年并行推进的私有 LLM 编排平台（Private LLM orchestration），内部代号 LarkLex，目标是开源产品——我负责它从架构实施到落地的全链路工程化。”然后展开三件事：三种数据形态的协同架构（PG 管结构化数据、Neo4j 管关系图谱、向量库管语义检索，落地为给 ITSM 的工单语义搜索接口）；RAG 流水线加 Prompt 优化（匹配度 68% 提到 92%）；多模型评测框架（7 个模型 AB 对比，最终基于开源底座定制 + 自研上层组件，省约三成资源）。最后补一句定位：”AIGC 方向由团队同事、团队同事牵头，我岗位是 Linux 系统工程师，负责工程落地、部署运维和评测体系，模型用的是开源预训练模型。”</li>
+<li>【岗位侧重】通用</li>
+</ul>
+<h4 id="Q2-什么是-RAG？这个项目的数据流是怎么走的？"><a href="#Q2-什么是-RAG？这个项目的数据流是怎么走的？" class="headerlink" title="Q2. 什么是 RAG？这个项目的数据流是怎么走的？"></a>Q2. 什么是 RAG？这个项目的数据流是怎么走的？</h4><ul>
+<li>【面试官意图】考察基础概念是否扎实，能否讲清端到端流程，这是 AI 岗必考题。</li>
+<li>【参考回答】先下定义：”RAG 是检索增强生成，先检索再生成——不把模型当知识库，而是先从库里检索出相关片段，再让 LLM 基于这些片段回答。”再讲数据流：”入库侧：文档按结构切块、用 nomic-embed-text 转成向量存进向量库（工单相似度接口用 Qdrant，平台底座用 pgvector），实体关系写进 Neo4j，原始数据留 PostgreSQL；查询侧：用户问题同时走向量检索、关键词检索和必要的图查询，融合重排后取 top-5 拼进 Prompt，LLM 生成答案，最后做格式校验。”</li>
+<li>【追问】为什么不把所有文档直接塞进 LLM 上下文？→ “成本高、超上下文限制，而且我们本地小模型窗口小；检索只取相关片段，省 token、快、可控。”／RAG 和微调有什么区别？→ “RAG 不改模型参数，靠检索注入知识，更新知识只换库；微调改参数、成本高、更新慢。我们的业务知识更新频繁，RAG 更合适。”</li>
+<li>【岗位侧重】通用 &#x2F; AI运维</li>
+</ul>
+<h4 id="Q3-为什么同时用-PostgreSQL、Neo4j、Qdrant-三种数据库？各自干什么？为什么不只用一种？"><a href="#Q3-为什么同时用-PostgreSQL、Neo4j、Qdrant-三种数据库？各自干什么？为什么不只用一种？" class="headerlink" title="Q3. 为什么同时用 PostgreSQL、Neo4j、Qdrant 三种数据库？各自干什么？为什么不只用一种？"></a>Q3. 为什么同时用 PostgreSQL、Neo4j、Qdrant 三种数据库？各自干什么？为什么不只用一种？</h4><ul>
+<li>【面试官意图】考察架构决策能力、对三种数据库差异的理解。</li>
+<li>【参考回答】先给结论：”三种库管三种数据形态，各干各最擅长的。”再展开：”PostgreSQL 管结构化业务数据和原始文档，是权威事实源；Neo4j 管实体关系，负责多跳推理，比如’某项目涉及哪些供应商’；Qdrant 管语义向量，负责模糊的语义检索。单一库做不到：关系型 SQL 做不了语义相似度，图数据库擅长关系但做不了向量检索，向量库做不了精确的聚合统计和事务。”</li>
+<li>【岗位侧重】运维 &#x2F; AI运维</li>
+</ul>
+<h4 id="Q4-什么是-embedding？nomic-embed-text-是什么？为什么选它？"><a href="#Q4-什么是-embedding？nomic-embed-text-是什么？为什么选它？" class="headerlink" title="Q4. 什么是 embedding？nomic-embed-text 是什么？为什么选它？"></a>Q4. 什么是 embedding？nomic-embed-text 是什么？为什么选它？</h4><ul>
+<li>【面试官意图】考察向量化基础 + 选型依据，AI 运维岗高频。</li>
+<li>【参考回答】先定义：”embedding 是把文本映射成固定维度的向量，语义相近的文本向量距离近，之后就能用相似度检索。”再说模型：”nomic-embed-text 是 Nomic AI 的开源文本嵌入模型，768 维、上下文 8192 tokens，可以本地跑。”最后说选型：”选它因为三个硬约束：数据不出内网所以必须本地、免费、维度适中且上下文长适合长文本。对比过 OpenAI embedding，要外网还按量付费，直接排除。”</li>
+<li>【追问】768 维够用吗？→ “对内部文档检索够用；这个模型还支持 Matryoshka 表示学习，维度可以往下截断，我们保留了全量 768。”／中文效果怎么样？→ “说实话它偏英文，中文一般，所以我们用混合检索（关键词兜底）加重排来补召回，这也是长文本提升 35% 的一个原因。要更强中文效果可以换 bge-large-zh，但当时没有 GPU 预算，先保住了本地部署这个硬约束。”</li>
+<li>【岗位侧重】AI运维</li>
+</ul>
+<h4 id="Q5-这个系统部署在哪？模型怎么跑的？你怎么运维它？"><a href="#Q5-这个系统部署在哪？模型怎么跑的？你怎么运维它？" class="headerlink" title="Q5. 这个系统部署在哪？模型怎么跑的？你怎么运维它？"></a>Q5. 这个系统部署在哪？模型怎么跑的？你怎么运维它？</h4><ul>
+<li>【面试官意图】运维&#x2F;DevOps 岗核心考察点——验证是否真的部署过、是否懂容器和资源管理。</li>
+<li>【参考回答】先给结论：”全部 Docker 部署，docker-compose 编排。”再报细节：”中间件用 docker-compose.middleware.yaml 起，环境要求 node&gt;&#x3D;20.11.1、python&gt;&#x3D;3.10、docker&gt;&#x3D;19.03；平台侧向量库用 Supabase（PostgreSQL+pgvector），<code>supabase start</code> 启动；工单相似度接口那套向量库是 Qdrant（配套 docker-compose，6333&#x2F;6334 端口）；模型侧 Ollama 跑 embedding 和小模型、vLLM CPU 版跑本地推理（Llama-3.2-1B、KV cache 10GB、线程绑核）。”最后讲运维：”监控主要看容器资源占用、异步队列长度和接口延迟；性能验证用 JMeter 压工单相似度接口，10 用户并发、topK&#x3D;5；遇到过内存吃满 OOM，压并发、拆进程解决。”</li>
+<li>【岗位侧重】运维 &#x2F; DevOps &#x2F; AI运维</li>
+</ul>
+<h3 id="2-深入问题（6-题）"><a href="#2-深入问题（6-题）" class="headerlink" title="2. 深入问题（6 题）"></a>2. 深入问题（6 题）</h3><h4 id="Q6-余弦相似度怎么算？为什么用它而不是欧氏距离？top-k-怎么定？"><a href="#Q6-余弦相似度怎么算？为什么用它而不是欧氏距离？top-k-怎么定？" class="headerlink" title="Q6. 余弦相似度怎么算？为什么用它而不是欧氏距离？top-k 怎么定？"></a>Q6. 余弦相似度怎么算？为什么用它而不是欧氏距离？top-k 怎么定？</h4><ul>
+<li>【面试官意图】考察是否真的写过相似度检索，还是只会调库。</li>
+<li>【参考回答】先讲公式结论：”余弦相似度是向量的点积除以模长乘积，衡量的是方向一致性，对模长不敏感。”再讲取舍：”embedding 的模长本身意义不大，不同文本长度差异会让欧氏距离失真，所以用余弦；实现上可以把向量先归一化，归一化后余弦就等于点积，Qdrant 内部就是这么处理的。”最后讲参数：”检索召回 top-k 取 20，融合重排后只给 LLM 前 5 条——召回多一点给重排留空间，给 LLM 的上下文必须少，控制 token 成本和噪声。”</li>
+<li>【追问】Qdrant 里怎么配的？→ “collection 的 distance 参数设 Cosine，查询走 query_points，配合 payload filter 按业务域过滤；HNSW 参数也调过，m 和 ef 影响内存和召回。”</li>
+<li>【岗位侧重】AI运维 &#x2F; 通用</li>
+</ul>
+<h4 id="Q7-混合检索具体怎么做？两路结果怎么融合？"><a href="#Q7-混合检索具体怎么做？两路结果怎么融合？" class="headerlink" title="Q7. 混合检索具体怎么做？两路结果怎么融合？"></a>Q7. 混合检索具体怎么做？两路结果怎么融合？</h4><ul>
+<li>【面试官意图】考察检索策略深度，是否只会调接口、只会用现成框架。</li>
+<li>【参考回答】先给结论：”双路召回：Qdrant 向量检索管语义，PostgreSQL tsvector&#x2F;BM25 管精确词，专有名词和编号靠第二路兜底。”再讲融合：”融合用 RRF（倒数排名融合）——对每路结果的排名取倒数求和，两路都命中的排前面；然后做一层重排，最后取 top-5 给 LLM。”最后讲为什么：”RRF 只看排名不看分数，因为两路分数分布不一样（向量相似度集中在 0.6-0.9，BM25 分数没有上界），直接加权要调参还不稳定。”</li>
+<li>【追问】为什么不直接加权平均分数？→ “分数分布不同，加权权重很难调，换个数据分布就失效；RRF 只看排名，稳定、简单、不用调参。”／35% 的提升是混合检索的功劳还是 embedding 的功劳？→ “我们分开测过：纯关键词到纯向量提升约 20 个点，再加混合检索和重排再提升 10 多个点，合起来约 35%。这个有当时的对照数据。”</li>
+<li>【岗位侧重】AI运维</li>
+</ul>
+<h4 id="Q8-动态模板和-Few-shot-是怎么实现的？匹配度怎么从-68-提到-92-？"><a href="#Q8-动态模板和-Few-shot-是怎么实现的？匹配度怎么从-68-提到-92-？" class="headerlink" title="Q8. 动态模板和 Few-shot 是怎么实现的？匹配度怎么从 68% 提到 92%？"></a>Q8. 动态模板和 Few-shot 是怎么实现的？匹配度怎么从 68% 提到 92%？</h4><ul>
+<li>【面试官意图】考察 Prompt Engineering 是否真实做过，能否讲出机制而不是背概念。</li>
+<li>【参考回答】先给结论：”动态模板是’按查询类型选 Prompt 结构’，Few-shot 是’动态选示例’。”再展开：”模板方面，把问题分成查询类、问答类、统计类，每类一套 Prompt 结构，运行时把检索到的上下文、业务约束、输出格式要求拼进去；Few-shot 方面，示例库里存人工标注的优质’问题-答案’对，用 embedding 相似度动态挑 2-3 条最像当前问题的塞进 Prompt。”最后讲提升归因：”68% 到 92% 主要来自三块：格式约束（消除解析失败和格式错乱）、Few-shot 示例（教回答风格和结构）、检索质量提升（上下文更准）。”</li>
+<li>【追问】92% 是怎么算的？→ “人工打分，1-5 分制、4 分及以上算匹配，加上规则校验；评测集是 30-50 条业务真实问题，业务方参与确认。68 到 92 是绝对百分点。”／温度参数调过吗？→ “调过，问答类任务 temperature 放 0.2-0.3 减少发散，但主要收益还是来自模板和示例。”</li>
+<li>【岗位侧重】AI运维</li>
+</ul>
+<h4 id="Q9-7-种大模型的-AB-测试是怎么做的？评估系统怎么设计？结论是什么？"><a href="#Q9-7-种大模型的-AB-测试是怎么做的？评估系统怎么设计？结论是什么？" class="headerlink" title="Q9. 7 种大模型的 AB 测试是怎么做的？评估系统怎么设计？结论是什么？"></a>Q9. 7 种大模型的 AB 测试是怎么做的？评估系统怎么设计？结论是什么？</h4><ul>
+<li>【面试官意图】AI 运维核心考点：模型评测方法论，考察是否真的搭过评测系统。</li>
+<li>【参考回答】先报模型清单：”7 种是 Llama2-7B&#x2F;13B、Llama3-8B、ChatGLM3-6B、Qwen-7B、Mistral-7B、Baichuan2-7B、Gemma-7B，本地组走 Ollama&#x2F;vLLM，云端组走 HuggingFace API——简历上’多语言模型调度’对应的就是平台的 Models Orchestration 模块：LLM、Embedding、Re-rank 三类模型统一编排，本地模型部署和升级走 Ollama（仓库里有升级记录）。”再讲评估系统：”统一评测集 50-100 条覆盖典型业务场景，同一套 Prompt 模板和温度参数，唯一变量是模型；输出全部落库，三块评估：规则校验（格式、必含字段、JSON 可解析）、人工打分（相关性、完整性、幻觉三个维度）、性能指标（首 token 延迟、总时长、吞吐）。”最后讲结论：”综合质量和成本，本地小模型（Llama3-8B &#x2F; ChatGLM3-6B 这一档）够用，云端大模型质量略好但贵、还有数据合规风险，所以生产选了本地。”</li>
+<li>【追问】AB 测试怎么控制变量？→ “同一评测集、同一 Prompt 模板、同一温度，唯一变量是模型；评测顺序打乱，避免打分疲劳带来的偏差。”／幻觉怎么评估？→ “规则层做答案与检索上下文的忠实度检查，看关键实体是否在上下文中出现；人工打分里单列’幻觉&#x2F;编造’维度。”</li>
+<li>【岗位侧重】AI运维</li>
+</ul>
+<h4 id="Q10-Neo4j-和向量库的联合查询怎么实现？”图谱推理”具体指什么？"><a href="#Q10-Neo4j-和向量库的联合查询怎么实现？”图谱推理”具体指什么？" class="headerlink" title="Q10. Neo4j 和向量库的联合查询怎么实现？”图谱推理”具体指什么？"></a>Q10. Neo4j 和向量库的联合查询怎么实现？”图谱推理”具体指什么？</h4><ul>
+<li>【面试官意图】简历亮点问题，考察真实性和对图+向量混合方案的深度理解。</li>
+<li>【追问】实体抽取怎么做？→ “规则加 LLM 辅助：业务实体名是有限的，先词典和正则匹配，再让 LLM 抽漏网的，最后和图节点做模糊匹配对齐。”／Cypher 写错了怎么办？→ “全部用预编译模板加参数化查询，不拼接用户输入，既防注入也防语法错误；查图失败就降级走纯向量检索，保证不中断。”</li>
+<li>【岗位侧重】AI运维</li>
+</ul>
+<h4 id="Q11-技术选型是怎么做的？”轻量级自研方案”具体指什么？32-怎么算的？"><a href="#Q11-技术选型是怎么做的？”轻量级自研方案”具体指什么？32-怎么算的？" class="headerlink" title="Q11. 技术选型是怎么做的？”轻量级自研方案”具体指什么？32% 怎么算的？"></a>Q11. 技术选型是怎么做的？”轻量级自研方案”具体指什么？32% 怎么算的？</h4><ul>
+<li>【面试官意图】DevOps 考察点：POC 方法论 + 成本意识 + 技术取舍能力，同时验证”自研方案”的真实性。</li>
+<li>【参考回答】先讲 POC 方法：”我们评估了 LangChain&#x2F;LangGraph、Quivr、FastGPT、Dify 多个方案，仓库里都有评估和拆解文档——Quivr 的设计与前端拆解、FastGPT 调研、Dify 的向量库选型和前端定制、Neo4j+LangChain 结合原型。”再讲结论：”Dify 的知识管理、RAG 引擎、工作流、Prompt IDE、Agent、SSO 开箱即用，避免从零造轮子；但业务要定制，所以我们在它上层自研组件——文档加载、自定义切片、Neo4j 联合查询、检索编排，后端用 langchain 做编排。所谓’轻量级自研方案’就是在开源底座上做减法、按业务定制。”最后讲 32%：”是 POC 阶段的资源估算对比：同等业务能力下，完整 Dify 平台部署 vs 我们裁剪定制后的部署，容器数量、内存占用更低，按云资源单价折算约省三成。”</li>
+<li>【岗位侧重】DevOps &#x2F; AI运维</li>
+</ul>
+<h3 id="3-刁钻-压力问题（4-题）"><a href="#3-刁钻-压力问题（4-题）" class="headerlink" title="3. 刁钻&#x2F;压力问题（4 题）"></a>3. 刁钻&#x2F;压力问题（4 题）</h3><h4 id="Q12-简历写”多模态”，但听起来你只处理了文本，多模态在哪？"><a href="#Q12-简历写”多模态”，但听起来你只处理了文本，多模态在哪？" class="headerlink" title="Q12. 简历写”多模态”，但听起来你只处理了文本，多模态在哪？"></a>Q12. 简历写”多模态”，但听起来你只处理了文本，多模态在哪？</h4><ul>
+<li>【面试官意图】抓夸大表述，考察诚实度和定义能力。</li>
+<li>【参考回答】先正面定义：”我们说的多模态指<strong>数据源的多形态</strong>——结构化数据（PostgreSQL 表）、关系型数据（Neo4j 图）、非结构化长文本（业务文档&#x2F;ITSM 工单）以及向量化后的语义表示（向量库），跨这几种形态做联合检索，所以叫多模态数据处理。落地场景就是工单语义搜索：ITSM 的文本工单内容和知识库&#x2F;附件一起做相似度检索。”再主动划界：”它<strong>不是</strong>图像、音频那种多模态模型，那部分是我们后续规划。如果这个词容易引起误解，我更愿意表述成’多源异构数据的协同检索’。”</li>
+<li>【追问】那你觉得简历这么写合适吗？→ “从工程角度看’多模态数据’是成立的，但确实容易被理解成多模态模型。您指出来之后我意识到这个表述容易引起歧义，后续我可以改成’多源异构数据’，这是合理的修正。”</li>
+<li>【岗位侧重】通用</li>
+</ul>
+<h4 id="Q13-35-和-40-这些数字怎么来的？评测集多大？有对照组吗？"><a href="#Q13-35-和-40-这些数字怎么来的？评测集多大？有对照组吗？" class="headerlink" title="Q13. 35% 和 40% 这些数字怎么来的？评测集多大？有对照组吗？"></a>Q13. 35% 和 40% 这些数字怎么来的？评测集多大？有对照组吗？</h4><ul>
+<li>【岗位侧重】通用</li>
+</ul>
+<h4 id="Q14-你是-Linux-系统工程师，不是算法工程师，这个项目里你的角色是不是被夸大了？"><a href="#Q14-你是-Linux-系统工程师，不是算法工程师，这个项目里你的角色是不是被夸大了？" class="headerlink" title="Q14. 你是 Linux 系统工程师，不是算法工程师，这个项目里你的角色是不是被夸大了？"></a>Q14. 你是 Linux 系统工程师，不是算法工程师，这个项目里你的角色是不是被夸大了？</h4><ul>
+<li>【面试官意图】考察岗位与项目匹配度、诚实度，看你敢不敢承认边界。</li>
+<li>【参考回答】先承认边界：”我确实不是算法工程师，模型是开源预训练模型，训练和微调不是我做的。”再讲实际贡献：”LarkLex 的 AIGC 方向由团队同事、团队同事牵头，AI 后端主要是李林、前端孙博；我的角色是把系统工程化落地——数据库协同架构的实施、Python 流水线、模型本地化部署、评测系统，还有 Q4 排期里我占大头的高可用、CI&#x2F;CD、监控。排期文档里我的投入配比是 AI 10%、DevOps 90%，所以我主战场是工程和运维。”</li>
+<li>【追问】那为什么简历写”设计并实现”？→ “设计并实现的是系统架构和检索策略的工程部分——数据库协同、混合检索链路、评测体系，这些落地工作是我主导的；不是模型算法，算法用的开源模型。我承认’AI 主导’的表述不准确，我的定位是工程化落地。”</li>
+<li>【岗位侧重】通用</li>
+</ul>
+<h4 id="Q15-如果让你现在重做一遍，你会改什么？"><a href="#Q15-如果让你现在重做一遍，你会改什么？" class="headerlink" title="Q15. 如果让你现在重做一遍，你会改什么？"></a>Q15. 如果让你现在重做一遍，你会改什么？</h4><ul>
+<li>【面试官意图】考察复盘能力、工程判断、有没有真实思考过。</li>
+<li>【追问】会换掉 nomic-embed-text 吗？→ “分场景：英文或中英混合语料可以留，纯中文换 bge 系；但这需要 GPU 预算，当时没条件，所以先靠混合检索兜底。”</li>
+<li>【岗位侧重】通用</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/" rel="tag"># 项目复盘</a>
+              <a href="/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 向量数据库</a>
+              <a href="/tags/RAG/" rel="tag"># RAG</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/git-interview/" rel="prev" title="Git 面试问答（26 题）">
+                  <i class="fa fa-chevron-left"></i> Git 面试问答（26 题）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/cmdb-containerization-project/" rel="next" title="CMDB 容器化改造项目复盘：从虚拟机到 GitOps">
+                  CMDB 容器化改造项目复盘：从虚拟机到 GitOps <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="13621f08579b47a92dd769da52986b7e"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: '30px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
+
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
+
+  <div class="aplayer" 
+  data-id="18010222564" 
+  data-server="netease" 
+  data-type="playlist" 
+  data-fixed="true" 
+  data-autoplay="false" 
+  data-order="list" 
+  data-volume="0.5" 
+  data-theme="#1da496" 
+  data-preload="auto" >
+  </div>
+
+</body>
+</html>

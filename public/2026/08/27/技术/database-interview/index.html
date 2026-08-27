@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.pages.dev","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文整理了数据库面试问答：MySQL &#x2F; PostgreSQL &#x2F; Neo4j &#x2F; Qdrant（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖MySQL、Redis、存储、向量数据库等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库面试问答：MySQL &#x2F; PostgreSQL &#x2F; Neo4j &#x2F; Qdrant（34 题）">
+<meta property="og:url" content="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/database-interview/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="本文整理了数据库面试问答：MySQL &#x2F; PostgreSQL &#x2F; Neo4j &#x2F; Qdrant（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖MySQL、Redis、存储、向量数据库等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-27T01:35:00.000Z">
+<meta property="article:modified_time" content="2026-08-27T09:39:04.479Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="存储">
+<meta property="article:tag" content="向量数据库">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/database-interview/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/database-interview/","path":"2026/08/27/技术/database-interview/","title":"数据库面试问答：MySQL / PostgreSQL / Neo4j / Qdrant（34 题）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据库面试问答：MySQL / PostgreSQL / Neo4j / Qdrant（34 题） | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B2%97%E4%BD%8D%E9%AB%98%E9%A2%91%E9%80%9F%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">一、岗位高频速查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、基础篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-MySQL-%E7%9A%84%E7%B4%A2%E5%BC%95%E5%BA%95%E5%B1%82%E7%94%A8%E7%9A%84%E4%BB%80%E4%B9%88%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8-B-%E6%A0%91%E4%B8%8D%E7%94%A8%E5%93%88%E5%B8%8C%E6%88%96-B-%E6%A0%91%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">Q1. MySQL 的索引底层用的什么数据结构？为什么用 B+ 树不用哈希或 B 树？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E4%B8%80%E6%9D%A1-SELECT-%E8%AF%AD%E5%8F%A5%E5%9C%A8-MySQL-%E9%87%8C%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">Q2. 一条 SELECT 语句在 MySQL 里是怎么执行的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-EXPLAIN-%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%AD%97%E6%AE%B5%E6%9C%80%E5%85%B3%E9%94%AE%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">Q3. EXPLAIN 怎么看？哪些字段最关键？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E7%94%9F%E4%BA%A7%E4%B8%8A%E6%80%8E%E4%B9%88%E5%AE%9A%E4%BD%8D%E6%85%A2%E6%9F%A5%E8%AF%A2%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">Q4. 生产上怎么定位慢查询？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-%E4%BA%8B%E5%8A%A1%E7%9A%84-ACID-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9FMySQL-%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">Q5. 事务的 ACID 是什么？MySQL 是怎么实现的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-MySQL-%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E9%BB%98%E8%AE%A4%E6%98%AF%E5%93%AA%E4%B8%AA%EF%BC%9F%E5%B9%BB%E8%AF%BB%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">Q6. MySQL 的隔离级别有哪些？默认是哪个？幻读怎么解决？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-MySQL-%E6%9C%89%E5%93%AA%E4%BA%9B%E9%94%81%EF%BC%9F%E9%97%B4%E9%9A%99%E9%94%81%E5%92%8C%E6%AD%BB%E9%94%81%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">Q7. MySQL 有哪些锁？间隙锁和死锁是怎么回事？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-MySQL-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fbinlog-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.8.</span> <span class="nav-text">Q8. MySQL 主从复制的原理是什么？binlog 是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%8E%E4%B9%88%E5%A4%87%E4%BB%BD%E5%92%8C%E6%81%A2%E5%A4%8D%EF%BC%9Fmysqldump-%E5%92%8C-xtrabackup-%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F"><span class="nav-number">2.9.</span> <span class="nav-text">Q9. 数据库怎么备份和恢复？mysqldump 和 xtrabackup 怎么选？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">Q10. 数据库出现乱码怎么排查和处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E8%BF%9E%E6%8E%A5%E6%B1%A0%E6%98%AF%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%89%93%E6%BB%A1%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">2.11.</span> <span class="nav-text">Q11. 连接池是干什么的？连接数打满怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-PostgreSQL-%E5%92%8C-MySQL-%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.12.</span> <span class="nav-text">Q12. PostgreSQL 和 MySQL 的主要区别？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、进阶篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9C%80%E5%B7%A6%E5%89%8D%E7%BC%80%E5%8E%9F%E5%88%99%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">Q1. 联合索引的最左前缀原则是什么？怎么设计联合索引？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%9E%E8%A1%A8%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">Q2. 什么是回表？什么是覆盖索引？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-MVCC-%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%BF%AB%E7%85%A7%E8%AF%BB%E5%92%8C%E5%BD%93%E5%89%8D%E8%AF%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">Q3. MVCC 的原理是什么？快照读和当前读有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E7%BA%BF%E4%B8%8A%E6%AD%BB%E9%94%81%E6%80%8E%E4%B9%88%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9F%E7%BB%99%E4%B8%AA%E5%85%B7%E4%BD%93%E4%BE%8B%E5%AD%90%E3%80%82"><span class="nav-number">3.4.</span> <span class="nav-text">Q4. 线上死锁怎么定位和处理？给个具体例子。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E4%B8%80%E8%88%AC%E4%BB%80%E4%B9%88%E5%8E%9F%E5%9B%A0%EF%BC%9F%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">3.5.</span> <span class="nav-text">Q5. 主从延迟一般什么原因？怎么处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-PostgreSQL-%E7%9A%84-WAL-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9FJSONB-%E6%80%8E%E4%B9%88%E7%94%A8%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">3.6.</span> <span class="nav-text">Q6. PostgreSQL 的 WAL 是什么？JSONB 怎么用索引？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-Neo4j-%E9%80%82%E5%90%88%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%EF%BC%9F%E5%92%8C%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%AF%94%E6%9C%89%E4%BB%80%E4%B9%88%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB%EF%BC%9FCypher-%E6%80%8E%E4%B9%88%E5%86%99%EF%BC%9F"><span class="nav-number">3.7.</span> <span class="nav-text">Q7. Neo4j 适合什么场景？和关系型数据库比有什么本质区别？Cypher 怎么写？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9Fembedding-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.8.</span> <span class="nav-text">Q8. 向量数据库的原理是什么？embedding 是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-%E4%BD%99%E5%BC%A6%E7%9B%B8%E4%BC%BC%E5%BA%A6%E3%80%81%E7%82%B9%E7%A7%AF%E3%80%81L2-%E8%B7%9D%E7%A6%BB%E5%88%86%E5%88%AB%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F"><span class="nav-number">3.9.</span> <span class="nav-text">Q9. 余弦相似度、点积、L2 距离分别怎么选？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-HNSW-%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E8%B0%83%EF%BC%9F"><span class="nav-number">3.10.</span> <span class="nav-text">Q10. HNSW 索引的原理是什么？参数怎么调？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-Qdrant-%E7%9A%84-collection-%E5%92%8C-segment-%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F%E8%BF%87%E6%BB%A4%E6%9D%A1%E4%BB%B6%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">3.11.</span> <span class="nav-text">Q11. Qdrant 的 collection 和 segment 是什么关系？过滤条件怎么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-pgvector%E3%80%81FAISS%E3%80%81Qdrant-%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9FLarklex-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E6%90%AD%EF%BC%9F"><span class="nav-number">3.12.</span> <span class="nav-text">Q12. pgvector、FAISS、Qdrant 怎么选？Larklex 为什么这么搭？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%94%9F%E4%BA%A7%E5%AE%9E%E6%88%98%C2%B7%E5%88%81%E9%92%BB%E7%AF%87%EF%BC%8810-%E9%A2%98%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、生产实战·刁钻篇（10 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E7%BA%BF%E4%B8%8A%E4%B8%80%E6%9D%A1-SQL-%E5%8E%9F%E6%9D%A5-10ms%EF%BC%8C%E7%8E%B0%E5%9C%A8%E7%AA%81%E7%84%B6-10-%E7%A7%92%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">Q1. 线上一条 SQL 原来 10ms，现在突然 10 秒，怎么排查？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E5%AF%BC%E8%87%B4%E4%B8%9A%E5%8A%A1%E8%AF%BB%E5%88%B0%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">Q2. 主从延迟导致业务读到旧数据，怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-%E5%8D%8A%E5%A4%9C%E4%B8%BB%E5%BA%93%E6%8C%82%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%88%87%E6%8D%A2%EF%BC%9F%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">Q3. 半夜主库挂了，怎么切换？要注意什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E6%9C%89%E4%BA%BA%E6%89%8B%E6%BB%91-DELETE-%E5%88%A0%E4%BA%86%E6%95%B4%E5%BC%A0%E8%A1%A8%E7%9A%84%E7%BA%BF%E4%B8%8A%E6%95%B0%E6%8D%AE%EF%BC%8C%E6%80%8E%E4%B9%88%E6%81%A2%E5%A4%8D%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">Q4. 有人手滑 DELETE 删了整张表的线上数据，怎么恢复？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-%E7%BA%BF%E4%B8%8A%E9%A2%91%E7%B9%81%E6%8A%A5%E6%AD%BB%E9%94%81%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E5%AE%9A%E4%BD%8D%E5%88%B0%E5%85%B7%E4%BD%93%E5%8E%9F%E5%9B%A0%EF%BC%9F"><span class="nav-number">4.5.</span> <span class="nav-text">Q5. 线上频繁报死锁，你怎么定位到具体原因？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-Qdrant-%E6%A3%80%E7%B4%A2%E7%AA%81%E7%84%B6%E5%8F%98%E6%85%A2%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-number">4.6.</span> <span class="nav-text">Q6. Qdrant 检索突然变慢，怎么排查和优化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-PG-%E5%92%8C-Qdrant-%E5%8F%8C%E5%86%99%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E4%B8%A4%E8%BE%B9%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%EF%BC%9F"><span class="nav-number">4.7.</span> <span class="nav-text">Q7. PG 和 Qdrant 双写，怎么保证两边数据一致？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-%E5%93%AA%E4%BA%9B%E5%86%99%E6%B3%95%E4%BC%9A%E5%AF%BC%E8%87%B4%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%EF%BC%9F%E7%BB%99%E5%87%A0%E4%B8%AA%E7%94%9F%E4%BA%A7%E5%B8%B8%E8%A7%81%E4%BE%8B%E5%AD%90%E3%80%82"><span class="nav-number">4.8.</span> <span class="nav-text">Q8. 哪些写法会导致索引失效？给几个生产常见例子。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-%E6%95%B0%E6%8D%AE%E5%BA%93-CPU-%E9%A3%99%E5%88%B0-100-%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E5%AE%9A%E4%BD%8D%EF%BC%9F"><span class="nav-number">4.9.</span> <span class="nav-text">Q9. 数据库 CPU 飙到 100%，你怎么定位？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-%E6%95%B0%E6%8D%AE%E9%87%8F-1000-%E4%B8%87%E8%A1%8C%EF%BC%8C%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2-LIMIT-100000-10-%E8%B6%8A%E6%9D%A5%E8%B6%8A%E6%85%A2%EF%BC%8C%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-number">4.10.</span> <span class="nav-text">Q10. 数据量 1000 万行，分页查询 LIMIT 100000, 10 越来越慢，怎么优化？</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">网上乌托邦，心底陶乐庄。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/database-interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据库面试问答：MySQL / PostgreSQL / Neo4j / Qdrant（34 题） | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据库面试问答：MySQL / PostgreSQL / Neo4j / Qdrant（34 题）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-27 09:35:00 / 修改时间：17:39:04" itemprop="dateCreated datePublished" datetime="2026-08-27T09:35:00+08:00">2026-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="数据库面试问答：MySQL / PostgreSQL / Neo4j / Qdrant（34 题）" href="/2026/08/27/%E6%8A%80%E6%9C%AF/database-interview/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::872e696608fc74dfa5a40bd81f6b45c6" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文整理了数据库面试问答：MySQL &#x2F; PostgreSQL &#x2F; Neo4j &#x2F; Qdrant（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖MySQL、Redis、存储、向量数据库等核心考点，每题附参考回答与追问，适合面试前系统复习。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>适用岗位：运维工程师 &#x2F; 技术支持工程师 &#x2F; AI 运维工程师 &#x2F; DevOps 工程师</p>
+</blockquote>
+<hr>
+<h2 id="一、岗位高频速查"><a href="#一、岗位高频速查" class="headerlink" title="一、岗位高频速查"></a>一、岗位高频速查</h2><table>
+<thead>
+<tr>
+<th>岗位</th>
+<th>必考问题</th>
+<th>一句话要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运维工程师</td>
+<td>① MySQL 主从复制原理与延迟处理 ② 慢查询定位与 EXPLAIN ③ 备份恢复（mysqldump&#x2F;xtrabackup）④ 连接数打满与参数调优</td>
+<td>主从、慢查询、备份是运维三件套，必须能背出具体命令和参数</td>
+</tr>
+<tr>
+<td>技术支持工程师</td>
+<td>① 数据库连不上的排查路径 ② 字符集乱码处理 ③ 权限与账号管理 ④ 死锁&#x2F;锁等待的定位</td>
+<td>以”能复现、能给出可执行命令”为准，重点讲排查思路</td>
+</tr>
+<tr>
+<td>AI 运维工程师</td>
+<td>① 向量数据库原理与相似度检索 ② HNSW 索引与参数调优 ③ Qdrant collection&#x2F;segment 管理 ④ PG+Neo4j+Qdrant 协同架构 ⑤ RAG 数据链路</td>
+<td>Qdrant&#x2F;向量库是 AI 运维岗重点，必须讲清 embedding、相似度计算、索引与过滤</td>
+</tr>
+<tr>
+<td>DevOps 工程师</td>
+<td>① 数据库容器化&#x2F;K8s 部署与高可用 ② 备份自动化与恢复演练 ③ 监控告警（连接数&#x2F;慢查询&#x2F;复制延迟）④ 数据库变更的 CI&#x2F;CD</td>
+<td>强调自动化、可观测性、故障演练，能说出具体工具链</td>
+</tr>
+<tr>
+<td>DBA（专职）</td>
+<td>低频，了解即可</td>
+<td>简历定位是运维&#x2F;技术支持，一般不会按专职 DBA 深挖内核</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、基础篇（12-题）"><a href="#二、基础篇（12-题）" class="headerlink" title="二、基础篇（12 题）"></a>二、基础篇（12 题）</h2><h3 id="Q1-MySQL-的索引底层用的什么数据结构？为什么用-B-树不用哈希或-B-树？"><a href="#Q1-MySQL-的索引底层用的什么数据结构？为什么用-B-树不用哈希或-B-树？" class="headerlink" title="Q1. MySQL 的索引底层用的什么数据结构？为什么用 B+ 树不用哈希或 B 树？"></a>Q1. MySQL 的索引底层用的什么数据结构？为什么用 B+ 树不用哈希或 B 树？</h3><ul>
+<li>【考察点】是否真懂索引原理，还是只会背”索引能加速”；能不能说出 B+ 树的两个关键特性</li>
+<li>【参考回答】InnoDB 索引底层是 B+ 树：主键索引是聚簇索引，叶子节点存整行数据；二级索引叶子只存索引列加主键值。选 B+ 树有两个核心原因：一是非叶子节点只存键不存数据，一个 16KB 的页能放下上千个键，树更矮、IO 次数更少，三层就能支撑千万级数据；二是叶子节点之间有双向链表，范围查询和排序特别顺。哈希索引只能等值匹配、做不了范围查询，所以 InnoDB 里只有自适应哈希索引做辅助加速。相比 B 树，B+ 树把数据全放叶子且叶子有链表，范围扫描和顺序 IO 都更好。</li>
+<li>【追问】<ul>
+<li>追问：为什么主键推荐自增整数、不推荐 UUID？→ 自增主键插入时只追加到 B+ 树最右叶子，几乎不触发页分裂；UUID 是随机的，插入要频繁分裂页、产生碎片，而且二级索引叶子存的是主键值，UUID 会让所有二级索引的存储翻倍。</li>
+<li>追问：三层 B+ 树大概能撑多少数据？→ 粗算：非叶子页一个键+指针约 10 字节，16KB 页能存约 1000 个键，叶子页一行约 1KB 能存约 16 行，1000×1000×16 约 1600 万行。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维</li>
+</ul>
+<h3 id="Q2-一条-SELECT-语句在-MySQL-里是怎么执行的？"><a href="#Q2-一条-SELECT-语句在-MySQL-里是怎么执行的？" class="headerlink" title="Q2. 一条 SELECT 语句在 MySQL 里是怎么执行的？"></a>Q2. 一条 SELECT 语句在 MySQL 里是怎么执行的？</h3><ul>
+<li>【考察点】是否了解 MySQL 的 Server 层 + 存储引擎层架构，能不能按顺序说清各组件</li>
+<li>【参考回答】我一般按五步讲：第一步连接器，建立连接、校验账号密码和权限，所以改权限后要重连才生效；第二步分析器，做词法语法解析，语法错误在这层报；第三步优化器，决定用哪个索引、多表 join 的顺序，这是我们调优的主要对象；第四步执行器，调用存储引擎接口取数，权限校验也在这层做；第五步 InnoDB 存储引擎真正读写数据。8.0 之前还有查询缓存，因为命中率低、维护代价大，8.0 直接移除了。</li>
+<li>【追问】<ul>
+<li>追问：优化器一定会选最优索引吗？→ 不一定，优化器按统计信息估算行数来选，统计信息过期（比如数据量暴涨）可能选错；常见做法是 ANALYZE TABLE 刷新统计，或者用 FORCE INDEX 强制指定。</li>
+<li>追问：UPDATE 的执行流程有什么不同？→ 流程类似，但 InnoDB 先查后改：定位行、加锁、写 undo log 记录旧值用于回滚，再更新，最后写 redo log 保证崩溃恢复。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维</li>
+</ul>
+<h3 id="Q3-EXPLAIN-怎么看？哪些字段最关键？"><a href="#Q3-EXPLAIN-怎么看？哪些字段最关键？" class="headerlink" title="Q3. EXPLAIN 怎么看？哪些字段最关键？"></a>Q3. EXPLAIN 怎么看？哪些字段最关键？</h3><ul>
+<li>【考察点】有没有真实排查过慢查询，还是只会说”explain 一下”</li>
+<li>【参考回答】我主要看四个字段：type 是访问类型，从好到坏大致是 system、const、eq_ref、ref、range、index、ALL，出现 ALL 就是全表扫描，是大问题；key 是实际用到的索引，key 为 NULL 说明没走索引；rows 是预估扫描行数，越大越危险；Extra 里出现 Using filesort（排序没走索引）、Using temporary（用了临时表）通常要优化。一条 SQL 如果 type 是 ALL、rows 上百万，基本就是问题 SQL，我会先看 type 和 rows，再决定是加索引还是改写法。</li>
+<li>【追问】<ul>
+<li>追问：type&#x3D;range 说明什么？→ 索引范围扫描，比如 BETWEEN、&gt;、&lt;、IN，属于可接受，但要关注 rows 别太大。</li>
+<li>追问：Extra 里 Using index 是什么意思？→ 覆盖索引，查询的列都在索引里不用回表，最理想的状态，可以刻意用联合索引去凑。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q4-生产上怎么定位慢查询？"><a href="#Q4-生产上怎么定位慢查询？" class="headerlink" title="Q4. 生产上怎么定位慢查询？"></a>Q4. 生产上怎么定位慢查询？</h3><ul>
+<li>【考察点】有没有在真实环境处理过性能问题，给的命令是否具体</li>
+<li>【参考回答】我分三步：第一步确保慢查询日志开着，<code>SET GLOBAL slow_query_log=ON</code>，long_query_time 设成 1（1 秒以上记录），生产更严格可以设 0.5；第二步用 <code>mysqldumpslow -s at -t 10 慢日志路径</code> 按平均耗时排序取前 10 条，或者用 pt-query-digest 做聚合分析；第三步对命中 SQL 跑 EXPLAIN 定位问题。实时出问题时直接 <code>SHOW PROCESSLIST</code> 看有没有长时间 Running 的语句，这个最快。</li>
+<li>【追问】<ul>
+<li>追问：long_query_time 设太小有没有副作用？→ 记录本身开销小，主要风险是日志文件增长快，要做好轮转归档，或者直接接入监控系统。</li>
+<li>追问：如果慢查询日志里都是同一条 SQL 怎么办？→ 优先查缺索引，再看统计信息是否过期，最后看锁等待——慢不一定在查，可能在等锁。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q5-事务的-ACID-是什么？MySQL-是怎么实现的？"><a href="#Q5-事务的-ACID-是什么？MySQL-是怎么实现的？" class="headerlink" title="Q5. 事务的 ACID 是什么？MySQL 是怎么实现的？"></a>Q5. 事务的 ACID 是什么？MySQL 是怎么实现的？</h3><ul>
+<li>【考察点】能不能把”背概念”升级为”讲机制”，特别是 undo log 和 redo log 的分工</li>
+<li>【参考回答】ACID 是原子性、一致性、隔离性、持久性。我的理解：原子性靠 undo log，事务失败或回滚时用 undo 里记录的旧值把数据改回去；一致性靠约束加事务机制共同保证；隔离性靠锁和 MVCC 多版本并发控制；持久性靠 redo log，而且是 WAL 机制——先写 redo log 再写数据文件，崩溃后重启用 redo 重放恢复没来得及落盘的数据，所以 InnoDB 崩了不会丢已提交事务。</li>
+<li>【追问】<ul>
+<li>追问：innodb_flush_log_at_trx_commit 三个取值分别是什么？→ 1 每次提交都刷盘，最安全但最慢；0 每秒刷一次，最快但可能丢 1 秒数据；2 提交时写到 OS 缓存、每秒刷盘，OS 崩了会丢。生产一般用 1，追求性能可折中用 2。</li>
+<li>追问：redo log 写满了会怎样？→ redo log 是环形写，写满必须触发 checkpoint 把脏页刷盘，刷盘跟不上写入就会被卡住，表现为”写入突然变慢”。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维</li>
+</ul>
+<h3 id="Q6-MySQL-的隔离级别有哪些？默认是哪个？幻读怎么解决？"><a href="#Q6-MySQL-的隔离级别有哪些？默认是哪个？幻读怎么解决？" class="headerlink" title="Q6. MySQL 的隔离级别有哪些？默认是哪个？幻读怎么解决？"></a>Q6. MySQL 的隔离级别有哪些？默认是哪个？幻读怎么解决？</h3><ul>
+<li>【考察点】隔离级别很多人背得出来，能说清 MVCC + 间隙锁组合的才是真懂</li>
+<li>【参考回答】四个级别：读未提交（有脏读）、读已提交（解决脏读，但不可重复读）、可重复读（MySQL 默认，解决不可重复读）、串行化（全部串行加锁）。MySQL 在可重复读下解决幻读是组合拳：普通查询走 MVCC 快照读，靠快照天然看不到别的事务新插入的行；当前读（SELECT … FOR UPDATE &#x2F; UPDATE &#x2F; DELETE）走行锁加间隙锁，也就是 next-key lock，把范围内和边界上的间隙都锁住，别的事务插不进新行，幻读就没了。</li>
+<li>【追问】<ul>
+<li>追问：为什么 MySQL 默认可重复读，而 Oracle 默认读已提交？→ 历史原因：MySQL 早期 binlog 用 statement 格式，读已提交下回放 binlog 可能产生数据不一致，可重复读配合 next-key lock 能保证 binlog 回放结果一致；后来 row 格式解决了这个问题，但默认值保留至今。</li>
+<li>追问：把隔离级别改成读已提交有什么好处？→ 间隙锁基本消失，死锁和锁冲突明显减少，很多高并发业务会主动降级到 RC。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q7-MySQL-有哪些锁？间隙锁和死锁是怎么回事？"><a href="#Q7-MySQL-有哪些锁？间隙锁和死锁是怎么回事？" class="headerlink" title="Q7. MySQL 有哪些锁？间隙锁和死锁是怎么回事？"></a>Q7. MySQL 有哪些锁？间隙锁和死锁是怎么回事？</h3><ul>
+<li>【考察点】锁是生产事故高发区，想确认你能不能讲清锁的粒度和死锁成因</li>
+<li>【参考回答】按粒度分表锁和行锁。InnoDB 的行锁有三种：记录锁（锁具体一行）、间隙锁（锁两个索引值之间的区间，防止插入）、next-key lock（记录锁+前向间隙锁，InnoDB 默认的区间锁形态）。死锁就是两个事务互相持有对方需要的锁，比如 A 锁了行 1 等行 2，B 锁了行 2 等行 1。MySQL 会自动检测死锁并回滚代价小的一方，报 ERROR 1213。我处理死锁的思路是：用 <code>SHOW ENGINE INNODB STATUS</code> 看 LATEST DETECTED DEADLOCK 部分，两个事务在哪些语句等哪些锁一目了然。</li>
+<li>【追问】<ul>
+<li>追问：怎么预防死锁？→ 三个常用手段：多行操作按固定顺序加锁（如按主键排序后更新）、事务尽量短（少做无关查询）、让锁粒度更小（走主键&#x2F;唯一索引，避免锁一大片范围）。</li>
+<li>追问：什么情况下行锁会变成锁一大片？→ 更新条件没走索引时，InnoDB 会锁住所有扫描到的行，等于全表锁，这是”慢 SQL 拖垮全库”的常见原因。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q8-MySQL-主从复制的原理是什么？binlog-是什么？"><a href="#Q8-MySQL-主从复制的原理是什么？binlog-是什么？" class="headerlink" title="Q8. MySQL 主从复制的原理是什么？binlog 是什么？"></a>Q8. MySQL 主从复制的原理是什么？binlog 是什么？</h3><ul>
+<li>【考察点】主从是运维岗必考核心，需要能画出完整链路并说出 binlog 格式</li>
+<li>【参考回答】主从复制是异步的，链路是：主库把变更写进 binlog → 从库的 IO 线程连上主库拉取 binlog 写入本地 relay log（中继日志）→ 从库的 SQL 线程把 relay log 重放执行。binlog 是 Server 层的逻辑日志，记录”做了什么”，三种格式：statement（记 SQL）、row（记行变更，5.7.7 起默认，最安全）、mixed（混合）。它是主从复制、增量备份、误删恢复的基础。</li>
+<li>【追问】<ul>
+<li>追问：主从之间会不会丢数据？→ 标准异步复制会丢：主库提交后、从库还没拉走就宕机，这部分数据就没了；所以有半同步复制（semi-sync），主库要等至少一个从库确认收到 binlog 才提交，RPO 接近 0，但会拖慢主库写入。</li>
+<li>追问：为什么从库要配只读（read_only）？→ 防止程序误写从库导致主从不一致；read_only 不影响主库复制线程写入。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q9-数据库怎么备份和恢复？mysqldump-和-xtrabackup-怎么选？"><a href="#Q9-数据库怎么备份和恢复？mysqldump-和-xtrabackup-怎么选？" class="headerlink" title="Q9. 数据库怎么备份和恢复？mysqldump 和 xtrabackup 怎么选？"></a>Q9. 数据库怎么备份和恢复？mysqldump 和 xtrabackup 怎么选？</h3><ul>
+<li>【考察点】备份恢复是运维底线技能，面试官会看你有没有实操细节和恢复演练意识</li>
+<li>【参考回答】两条路线：逻辑备份用 mysqldump，物理备份用 xtrabackup。mysqldump 适合中小库，关键参数是 <code>--single-transaction</code>（InnoDB 下做一致性快照不锁表）和 <code>--master-data=2</code>（记录备份时刻的 binlog 位置，方便做增量）；缺点是慢，恢复是逐条执行 SQL。xtrabackup 适合大库，命令是 <code>xtrabackup --backup --target-dir=...</code> 备份、<code>--prepare</code> 应用 redo log 使备份一致、<code>--copy-back</code> 恢复，直接拷数据文件加 redo log，速度快、几乎不停机。原则：大库用 xtrabackup、小库用 mysqldump，不管哪种，binlog 都要保留才能做时间点恢复。最重要的是定期做恢复演练——没验证过的备份等于没有。</li>
+<li>【追问】<ul>
+<li>追问：误删了一张表怎么恢复？→ 有全备就恢复全备+binlog 增量追到误删前的位置；没全备但 binlog 是 row 格式且还留着，可以用 mysqlbinlog 按 position 或时间点重放，把误删前的操作补回来。</li>
+<li>追问：mysqldump 为什么不锁表？→ 加 –single-transaction 后用 InnoDB 的 MVCC 快照做一致读，备份期间数据文件被改也没关系；但如果混着 MyISAM 表，MyISAM 还是要锁表。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q10-数据库出现乱码怎么排查和处理？"><a href="#Q10-数据库出现乱码怎么排查和处理？" class="headerlink" title="Q10. 数据库出现乱码怎么排查和处理？"></a>Q10. 数据库出现乱码怎么排查和处理？</h3><ul>
+<li>【考察点】技术支持岗高频真实问题，考排查顺序，以及”乱码可能已经写坏”这个坑</li>
+<li>【参考回答】我的排查顺序：先 <code>SHOW VARIABLES LIKE &#39;character_set%&#39;</code> 看 server、database、connection 的字符集是否统一；再看建表语句的 charset 和字段的 collation。乱码的本质是写入编码和读取编码不一致——如果是”客户端用 latin1&#x2F;GBK 写入、库里是 utf8”，数据可能已经被转错编码存进去了，这种光改连接参数救不回来，得用 CONVERT 或重新导入。正确姿势：库表统一 utf8mb4（能存 emoji 和生僻字），连接串显式指定编码，客户端 SET NAMES utf8mb4。</li>
+<li>【追问】<ul>
+<li>追问：utf8 和 utf8mb4 有什么区别？→ utf8 是 MySQL 的别名，最多 3 字节，存不了 emoji（4 字节）；utf8mb4 才是真正的 4 字节 UTF-8，MySQL 8.0 默认就是 utf8mb4。</li>
+<li>追问：已经乱码的数据怎么救？→ 判断是否可逆：如果只是显示层问题，改客户端连接编码即可；如果是入库时被双重转码写坏，要么用 CONVERT 反向转换尝试恢复，要么接受从源头重新导入，并立刻统一全链路字符集。</li>
+</ul>
+</li>
+<li>【岗位标注】技术支持 &#x2F; 运维</li>
+</ul>
+<h3 id="Q11-连接池是干什么的？连接数打满怎么办？"><a href="#Q11-连接池是干什么的？连接数打满怎么办？" class="headerlink" title="Q11. 连接池是干什么的？连接数打满怎么办？"></a>Q11. 连接池是干什么的？连接数打满怎么办？</h3><ul>
+<li>【考察点】高并发场景常识，考”连接是稀缺资源”的意识，以及具体排查命令</li>
+<li>【参考回答】建一个数据库连接要 TCP 握手加认证，开销很大，所以用连接池复用，程序侧是 HikariCP&#x2F;Druid，运维侧还可以用 ProxySQL 做连接池和读写分离。生产上连接数打满（报 Too many connections）我按这个顺序查：先 <code>SHOW PROCESSLIST</code> 看连接都在干嘛，八成是慢 SQL 或长事务把连接占住不释放；再看 <code>SHOW STATUS LIKE &#39;Threads_connected&#39;</code> 和 max_connections 的比值；最后看应用侧连接池是不是配大了。处理：临时 <code>SET GLOBAL max_connections</code> 调大应急，根治是杀慢 SQL、调连接池和超时参数。</li>
+<li>【追问】<ul>
+<li>追问：max_connections 默认多少？调太大有什么风险？→ 默认 151；调太大没意义，几千个连接同时干活上下文切换开销爆炸，更合理的是控制连接数、让每条 SQL 都快。</li>
+<li>追问：wait_timeout 是干嘛的？→ 控制空闲连接多久被断开，默认 8 小时；设太短连接容易被断导致程序报错，太长会占着连接池名额。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q12-PostgreSQL-和-MySQL-的主要区别？"><a href="#Q12-PostgreSQL-和-MySQL-的主要区别？" class="headerlink" title="Q12. PostgreSQL 和 MySQL 的主要区别？"></a>Q12. PostgreSQL 和 MySQL 的主要区别？</h3><ul>
+<li>【考察点】简历里两个都写了，面试官大概率对比着问，考是否真实用过 PG</li>
+<li>【参考回答】我理解的核心区别有三层：第一，MVCC 实现不同——MySQL 靠 undo log 存旧版本，PG 是多版本堆，旧版本行直接留在数据页里靠可见性判断，所以 PG 没有回滚段概念，但会带来表膨胀（dead tuple），要靠 autovacuum 清理；第二，功能上 PG 更”重”——原生支持 JSONB（有 GIN 索引，能在 JSON 内部走索引查询）、数组、全文检索、物化视图，SQL 标准遵守度更高；第三，日志——PG 的 WAL 是物理日志，wal_level、max_wal_size、pg_wal 目录这些运维时都要关注。MySQL 的优势是生态大、主从简单、运维资料多，读多写少的互联网场景很成熟。</li>
+<li>【追问】<ul>
+<li>追问：JSONB 和 MySQL 的 JSON 有什么区别？→ PG 的 JSONB 是二进制存储，支持 GIN 索引，<code>WHERE data-&gt;&gt;&#39;name&#39;=&#39;x&#39;</code> 可以走索引；MySQL 的 JSON 8.0 才有，功能相对简单，能用关系表还是用关系表。</li>
+<li>追问：PG 的 autovacuum 是什么？→ 自动清理 dead tuple 并更新统计信息的后台进程，配置不当（比如关掉）会导致表膨胀、查询变慢，是 PG 运维最常见的坑之一。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; AI 运维</li>
+</ul>
+<hr>
+<h2 id="三、进阶篇（12-题）"><a href="#三、进阶篇（12-题）" class="headerlink" title="三、进阶篇（12 题）"></a>三、进阶篇（12 题）</h2><h3 id="Q1-联合索引的最左前缀原则是什么？怎么设计联合索引？"><a href="#Q1-联合索引的最左前缀原则是什么？怎么设计联合索引？" class="headerlink" title="Q1. 联合索引的最左前缀原则是什么？怎么设计联合索引？"></a>Q1. 联合索引的最左前缀原则是什么？怎么设计联合索引？</h3><ul>
+<li>【考察点】索引设计是 MySQL 核心实践题，考能不能结合业务场景设计索引</li>
+<li>【参考回答】联合索引 (a,b,c) 本质是先按 a 排、a 相同再按 b 排、再按 c 排，所以查询必须从最左的 a 开始连续使用索引列才能命中：能走 (a)、(a,b)、(a,b,c)，单独查 b 或 c 走不了。设计口诀是”等值在前、范围在后、区分度高的放前面”：比如 WHERE a&#x3D;? AND b&gt;10，索引应建 (a,b) 而不是 (b,a)；范围条件后面的列索引就失效了。还要想能不能做成覆盖索引，把高频查询的列都塞进索引避免回表。</li>
+<li>【追问】<ul>
+<li>追问：WHERE a&#x3D;? AND c&#x3D;? 能用到 (a,b,c) 索引吗？→ 能用到 a 这一个列定位，但 c 用不上，中间隔着 b；除非单独建 (a,c)，或利用 8.0 的索引跳跃扫描（Skip Scan）。</li>
+<li>追问：索引建得越多越好吗？→ 不是，每个索引都有写放大和存储成本，更新表时要同步维护；一般单表控制在 5 个以内，用慢查询日志驱动加索引，而不是拍脑袋。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q2-什么是回表？什么是覆盖索引？"><a href="#Q2-什么是回表？什么是覆盖索引？" class="headerlink" title="Q2. 什么是回表？什么是覆盖索引？"></a>Q2. 什么是回表？什么是覆盖索引？</h3><ul>
+<li>【考察点】考对 InnoDB 聚簇索引结构的理解，以及用索引优化查询的实战意识</li>
+<li>【参考回答】InnoDB 里主键索引的叶子存整行数据，叫聚簇索引；二级索引的叶子只存索引列加主键值。如果查询的列二级索引里没有，就要拿主键回主键索引查一次整行，这就是回表。覆盖索引就是查询所需的所有列都包含在某个索引里，比如建了 (name, age)，查 SELECT name, age FROM t WHERE name&#x3D;’x’，直接从二级索引叶子拿数据，Extra 显示 Using index，不用回表，省一次随机 IO。</li>
+<li>【追问】<ul>
+<li>追问：为什么回表慢？→ 回表是按主键做一次随机 IO，数据量大时几百万次回表就是几百万次磁盘随机读，比顺序扫索引慢一个数量级。</li>
+<li>追问：怎么判断有没有回表？→ 看 EXPLAIN 的 Extra 字段，有 Using index 就是覆盖，没有就可能回表。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维</li>
+</ul>
+<h3 id="Q3-MVCC-的原理是什么？快照读和当前读有什么区别？"><a href="#Q3-MVCC-的原理是什么？快照读和当前读有什么区别？" class="headerlink" title="Q3. MVCC 的原理是什么？快照读和当前读有什么区别？"></a>Q3. MVCC 的原理是什么？快照读和当前读有什么区别？</h3><ul>
+<li>【考察点】事务隔离的核心机制，想确认你不是只会背隔离级别名字</li>
+<li>【参考回答】MVCC 就是多版本并发控制：每行数据有隐藏的 trx_id 记录最后修改它的事务，还有 roll_pointer 指向 undo log 里的旧版本链。事务开始时会生成一个 ReadView（活跃事务列表），快照读根据 ReadView 判断行版本是否可见，读到一个一致的历史快照，读不加锁，所以并发读不阻塞。可重复读和读已提交的区别就在于 ReadView 是事务开始就固定、还是每条语句都新建。当前读（SELECT … FOR UPDATE、UPDATE、DELETE）必须读最新版本，所以要加锁。</li>
+<li>【追问】<ul>
+<li>追问：为什么可重复读下快照读看不到别的事务新插入的行？→ 因为 ReadView 固定了，新插入行的 trx_id 大于 ReadView 的最大活跃事务，判定不可见，这就是快照读层面幻读的解法。</li>
+<li>追问：长事务会有什么问题？→ undo log 版本链会很长、占空间、清理不掉，MySQL 里还可能导致历史版本太多，purge 线程来不及清，表空间膨胀。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维</li>
+</ul>
+<h3 id="Q4-线上死锁怎么定位和处理？给个具体例子。"><a href="#Q4-线上死锁怎么定位和处理？给个具体例子。" class="headerlink" title="Q4. 线上死锁怎么定位和处理？给个具体例子。"></a>Q4. 线上死锁怎么定位和处理？给个具体例子。</h3><ul>
+<li>【考察点】能不能给出完整的排查闭环：定位、看懂、解决</li>
+<li>【参考回答】定位就一条命令：<code>SHOW ENGINE INNODB STATUS</code>，看 LATEST DETECTED DEADLOCK 段，里面有两条 SQL 和各自持有的锁、等待的锁。我举个真实例子：事务 A 执行 <code>UPDATE t SET x=1 WHERE id&gt;10 AND id&lt;20</code>，锁住该区间的 next-key lock；事务 B 先 <code>INSERT INTO t VALUES (15,...)</code> 等间隙锁，同时事务 A 也想 INSERT 15，于是 A 等 B 的插入意向锁、B 等 A 的间隙锁，死锁。处理：报 ERROR 1213 回滚一边，业务重试即可恢复；根治是把隔离级别降到读已提交（间隙锁基本消失），或让事务按固定顺序、缩短事务范围。</li>
+<li>【追问】<ul>
+<li>追问：死锁和锁等待超时是一回事吗？→ 不是，死锁是循环等待，MySQL 主动检测并回滚；锁等待超时是单方面等一把锁超过 innodb_lock_wait_timeout（默认 50 秒）直接报错。</li>
+<li>追问：死锁频繁怎么办？→ 优先查是不是索引没走对导致锁范围过大，其次看是不是多个事务都做大范围区间更新，改成按主键小批量处理。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q5-主从延迟一般什么原因？怎么处理？"><a href="#Q5-主从延迟一般什么原因？怎么处理？" class="headerlink" title="Q5. 主从延迟一般什么原因？怎么处理？"></a>Q5. 主从延迟一般什么原因？怎么处理？</h3><ul>
+<li>【考察点】主从延迟是运维高频事故，考对复制架构的深度理解，包括 5.7 之后的并行复制</li>
+<li>【参考回答】延迟的本质是从库回放赶不上主库写入。常见原因和对应处理：第一，大事务，一条 UPDATE 影响几十万行，回放很久，处理是拆小事务；第二，从库单线程回放（老版本），主库并发一高就跟不上，5.7 之后开多线程复制 MTS（slave_parallel_workers&#x3D;4~8）按库或按事务并行；第三，从库上有慢查询或锁冲突抢资源；第四，网络带宽。监控用 <code>SHOW SLAVE STATUS</code>（8.0 是 SHOW REPLICA STATUS）的 Seconds_Behind_Master，但这个值不准——主库写入停了它也会归零，真正准的是比较主从的 binlog 位置差或 GTID 差。</li>
+<li>【追问】<ul>
+<li>追问：GTID 是什么？有什么用？→ 全局事务标识符，主从切换、追增量、复制排错时不用手动对 binlog 文件名和位置，靠 GTID 自动定位，8.0 默认开启。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q6-PostgreSQL-的-WAL-是什么？JSONB-怎么用索引？"><a href="#Q6-PostgreSQL-的-WAL-是什么？JSONB-怎么用索引？" class="headerlink" title="Q6. PostgreSQL 的 WAL 是什么？JSONB 怎么用索引？"></a>Q6. PostgreSQL 的 WAL 是什么？JSONB 怎么用索引？</h3><ul>
+<li>【考察点】PG 运维的核心机制，考 WAL 和 JSONB 这两个最能代表”会用 PG”的点</li>
+<li>【参考回答】WAL 是写前日志，PG 所有数据修改先写 WAL 再落数据页，崩溃后靠 WAL 重放恢复，是 PG 不丢数据的基础。运维相关参数：wal_level（默认 replica，流复制要求不能低于它）、max_wal_size（默认 1GB，控制 checkpoint 触发频率）、pg_wal 目录大小要监控，WAL 增长异常一般是长事务或大写入。JSONB 建 GIN 索引：<code>CREATE INDEX idx ON t USING GIN (data)</code>，然后 <code>WHERE data @&gt; &#39;&#123;&quot;name&quot;:&quot;x&quot;&#125;&#39;</code> 这种包含查询就能走索引；单键等值可以用 <code>data-&gt;&gt;&#39;name&#39;</code> 配合表达式索引。</li>
+<li>【追问】<ul>
+<li>追问：checkpoint 是什么？→ 把 WAL 里已确认的变更刷到数据文件的动作；checkpoint 太频繁说明 max_wal_size 太小会拖慢写入，太少则崩溃恢复时间变长。</li>
+<li>追问：pgvector 是什么？→ PG 的向量扩展，加 vector 类型，支持 L2&#x2F;内积&#x2F;余弦距离，还有 IVFFlat 和 HNSW 索引，等于把向量检索塞进 PG，小规模 RAG 场景很实用，也是我们项目里对比过的方案。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q7-Neo4j-适合什么场景？和关系型数据库比有什么本质区别？Cypher-怎么写？"><a href="#Q7-Neo4j-适合什么场景？和关系型数据库比有什么本质区别？Cypher-怎么写？" class="headerlink" title="Q7. Neo4j 适合什么场景？和关系型数据库比有什么本质区别？Cypher 怎么写？"></a>Q7. Neo4j 适合什么场景？和关系型数据库比有什么本质区别？Cypher 怎么写？</h3><ul>
+<li>【考察点】考简历里”图数据库协同架构”是不是真落地过，以及能不能说清图的本质优势</li>
+<li>【参考回答】Neo4j 适合关系密集型场景：社交网络好友关系、知识图谱、权限体系、风控反欺诈关系链、推荐系统。它和关系型数据库的本质区别：关系是一等公民，存储上是邻接表结构，节点直接持有指向邻居的指针，遍历多跳关系是局部访问；而关系型数据库查”3 跳以内的朋友”要做三次 self-join，几百万节点的图基本跑不动。Cypher 是声明式语言，比如查”张三 3 跳内认识的李四”：<code>MATCH (a:Person &#123;name:&#39;张三&#39;&#125;)-[:KNOWS*1..3]-(b:Person &#123;name:&#39;李四&#39;&#125;) RETURN a,b</code>；建关系：<code>MATCH (a:Person),(b:Person) WHERE ... CREATE (a)-[:KNOWS &#123;since:2020&#125;]-&gt;(b)</code>；索引用 <code>CREATE INDEX FOR (p:Person) ON (p.name)</code>。</li>
+<li>【追问】<ul>
+<li>追问：什么情况下图数据库反而不合适？→ 纯事务型、强一致、报表聚合类场景不合适，比如订单、账务还是要关系型；图库适合”关系查询深度大、单点写入不高”的场景。</li>
+<li>追问：Larklex 项目里 Neo4j 存什么？→ 实体与实体之间的关系图谱，比如文档、标签、知识条目之间的关联，配合 Qdrant 做”向量召回+图谱路径校验&#x2F;扩展”的知识增强，让 RAG 回答更准。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维 &#x2F; 通用</li>
+</ul>
+<h3 id="Q8-向量数据库的原理是什么？embedding-是什么？"><a href="#Q8-向量数据库的原理是什么？embedding-是什么？" class="headerlink" title="Q8. 向量数据库的原理是什么？embedding 是什么？"></a>Q8. 向量数据库的原理是什么？embedding 是什么？</h3><ul>
+<li>【考察点】AI 运维岗必考基础，考你能不能把”向量”讲得让不懂的人也能懂</li>
+<li>【参考回答】embedding 就是把文本、图片、音视频这类非结构化数据，用模型（比如 BGE、text-embedding-3）映射成高维向量（常见 768 或 1024 维），语义相近的内容向量距离就近，比如”苹果”和”水果”的向量比”苹果”和”汽车”近。向量数据库干的事就是存这些向量，并提供”给定查询向量，找出最相似的 K 个向量”的能力，底层是 ANN（近似最近邻）算法，因为高维空间做精确最近邻计算量太大。所以向量检索本质是语义搜索：不靠关键词匹配，靠语义相似度。</li>
+<li>【追问】<ul>
+<li>追问：向量维度是不是越大越好？→ 不是，维度越高表达越丰富，但存储和计算开销线性增长、检索变慢，768~1536 维是常用区间，够用就好。</li>
+<li>追问：向量检索的”召回”和”精排”是什么？→ 召回阶段用向量粗筛出 Top-K，精排阶段再用更重的模型（如 reranker）重排，RAG 链路里两者配合。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维 &#x2F; 通用</li>
+</ul>
+<h3 id="Q9-余弦相似度、点积、L2-距离分别怎么选？"><a href="#Q9-余弦相似度、点积、L2-距离分别怎么选？" class="headerlink" title="Q9. 余弦相似度、点积、L2 距离分别怎么选？"></a>Q9. 余弦相似度、点积、L2 距离分别怎么选？</h3><ul>
+<li>【考察点】向量检索选型的核心细节，考是否真配过 Qdrant 的 distance 参数</li>
+<li>【参考回答】Qdrant 创建 collection 时要指定 distance：Cosine、Dot、Euclid 三选一。我的选择逻辑：文本语义检索默认 Cosine（只关心方向、不关心长度，对长短文本差异不敏感）；如果 embedding 已归一化（模长为 1），Cosine 和 Dot 数学上等价，但 Dot 计算更快（少一次归一化），所以归一化场景选 Dot；Euclid（L2）适合图像类 embedding，因为图像模型训练时通常按欧氏距离优化。有个坑：distance 是建 collection 时定死的，后面不能改，只能重建 collection 重新导入，所以选型要想清楚。</li>
+<li>【追问】<ul>
+<li>追问：Qdrant 里 score 和距离是什么关系？→ Qdrant 返回的是 score，Cosine&#x2F;Dot 越大越相似，Euclid 越小越相似；文档统一叫 score 是为了语义一致，Euclid 时底层是距离转换。</li>
+<li>追问：换 embedding 模型要不要重建向量？→ 要，不同模型的向量空间不可比，换模型旧向量全部失效，必须用新模型全量重算，这通常是重建 collection 的时机。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维</li>
+</ul>
+<h3 id="Q10-HNSW-索引的原理是什么？参数怎么调？"><a href="#Q10-HNSW-索引的原理是什么？参数怎么调？" class="headerlink" title="Q10. HNSW 索引的原理是什么？参数怎么调？"></a>Q10. HNSW 索引的原理是什么？参数怎么调？</h3><ul>
+<li>【考察点】向量索引的深度题，考你对 HNSW 的理解不是停留在”知道名字”</li>
+<li>【参考回答】HNSW 是分层可导航小世界图：按层级组织，上层是稀疏的长程连接（用来快速跳到目标区域），下层是密集的短程连接（精细查找），搜索时从顶层逐层往下，每层做贪婪最近邻游走，不需要全量扫描，所以查询是亚线性复杂度。Qdrant 里关键参数：M 是每个节点的最大连接数（默认 16，越大越准但内存越多）、ef_construct 是建图候选数（默认 100，越大图质量越高建库越慢）、ef 是查询候选数（请求级参数，越大越准越慢）。调优思路：先跑 baseline，再逐步提高 ef 观察召回率和延迟的 trade-off，别一上来就拉到最大。</li>
+<li>【追问】<ul>
+<li>追问：HNSW 和暴力检索差距多大？→ 百万级向量下暴力检索要算一百万个点积，从毫秒级变秒级；HNSW 通常几毫秒到几十毫秒，代价是少量召回损失（一般 95%+ 没问题）。</li>
+<li>追问：HNSW 内存占用为什么高？→ 每个节点的邻居列表要常驻内存，M 越大图越密内存越多；超大数据集要考虑内存成本，Qdrant 支持 mmap 让部分数据落盘。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维 &#x2F; 运维</li>
+</ul>
+<h3 id="Q11-Qdrant-的-collection-和-segment-是什么关系？过滤条件怎么用？"><a href="#Q11-Qdrant-的-collection-和-segment-是什么关系？过滤条件怎么用？" class="headerlink" title="Q11. Qdrant 的 collection 和 segment 是什么关系？过滤条件怎么用？"></a>Q11. Qdrant 的 collection 和 segment 是什么关系？过滤条件怎么用？</h3><ul>
+<li>【考察点】考 Qdrant 的实际运维细节，没真用过的人答不出 segment 和 payload 索引</li>
+<li>【参考回答】collection 是逻辑上的数据集，创建时定向量维度、distance 和 HNSW 参数；一个 collection 内部会被拆成多个 segment 存储，每个 segment 是独立存储单元（有自己的 HNSW 图），新数据先进内存段，达到阈值（默认 20000 点）后优化器自动合并&#x2F;固化到磁盘段，要监控 segment 数量——段太多会拖慢检索。过滤是 Qdrant 的杀手锏：点可以带 payload（元数据），检索时用 filter 先圈定范围，<code>POST /collections/&#123;name&#125;/points/search</code> 带 <code>&quot;filter&quot;:&#123;&quot;must&quot;:[&#123;&quot;key&quot;:&quot;tenant_id&quot;,&quot;match&quot;:&#123;&quot;value&quot;:&quot;a&quot;&#125;&#125;]&#125;</code>，配合 payload 索引（KEYWORD&#x2F;INTEGER 等类型）才能快，否则过滤会全段扫描。</li>
+<li>【追问】<ul>
+<li>追问：多租户场景怎么设计？→ 经典做法是每个租户的 payload 带 tenant_id 并建 KEYWORD 索引，检索时强制 filter；隔离要求高、量大的也可以一租户一 collection。</li>
+<li>追问：怎么检查 collection 的健康状态？→ <code>GET /collections/&#123;name&#125;</code> 看 status（green&#x2F;yellow）、points_count、indexed_points、segments_count；indexed_points 远小于 points_count 说明向量还没全建索引，检索会偏慢。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维</li>
+</ul>
+<h3 id="Q12-pgvector、FAISS、Qdrant-怎么选？Larklex-为什么这么搭？"><a href="#Q12-pgvector、FAISS、Qdrant-怎么选？Larklex-为什么这么搭？" class="headerlink" title="Q12. pgvector、FAISS、Qdrant 怎么选？Larklex 为什么这么搭？"></a>Q12. pgvector、FAISS、Qdrant 怎么选？Larklex 为什么这么搭？</h3><ul>
+<li>【考察点】几乎必考，因为简历原文写了”协同架构设计”，面试官就是要听选型论证</li>
+<li>【参考回答】三者定位不同：pgvector 是 PG 扩展，优势是零额外组件、和业务 SQL 在一起、事务里能联合查询，适合百万级以下、原型验证、运维简单的场景；FAISS 是库不是服务，性能最好最灵活，但持久化、并发、过滤、高可用全要自己写，不适合团队直接上生产；Qdrant 是独立向量数据库服务，开箱即用有 REST&#x2F;gRPC、payload 过滤、HNSW 成熟、快照备份、支持集群分片，运维成本可控。Larklex 的搭法：PG 存业务主数据和元数据（结构化、强一致）、Neo4j 存实体关系图谱、Qdrant 存跨模态 embedding 向量——检索时先 Qdrant 向量召回，再 Neo4j 关系信息校验&#x2F;扩展，最后 PG 回填业务详情，各司其职。</li>
+<li>【追问】<ul>
+<li>追问：为什么不用 pgvector 一个搞定？→ 项目里向量量级和过滤复杂度超出 pgvector 的舒适区，Qdrant 的 payload 过滤、快照、独立扩缩容更适合生产；pgvector 我们做了对比验证，结论是”原型可以，生产选 Qdrant”。</li>
+<li>追问：这三个库的数据怎么保持一致？→ 向量和元数据天然是最终一致：业务写 PG 成功后异步写 Qdrant（消息队列兜底重试），定期全量对账，删除时两边都要清；Neo4j 图谱更新同理，事件驱动。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维 &#x2F; 通用</li>
+</ul>
+<hr>
+<h2 id="四、生产实战·刁钻篇（10-题）"><a href="#四、生产实战·刁钻篇（10-题）" class="headerlink" title="四、生产实战·刁钻篇（10 题）"></a>四、生产实战·刁钻篇（10 题）</h2><h3 id="Q1-线上一条-SQL-原来-10ms，现在突然-10-秒，怎么排查？"><a href="#Q1-线上一条-SQL-原来-10ms，现在突然-10-秒，怎么排查？" class="headerlink" title="Q1. 线上一条 SQL 原来 10ms，现在突然 10 秒，怎么排查？"></a>Q1. 线上一条 SQL 原来 10ms，现在突然 10 秒，怎么排查？</h3><ul>
+<li>【考察点】综合排查能力，考排查顺序和分诊思路，没实操过的人给不出完整链路</li>
+<li>【参考回答】我不会一上来就加索引，按这个顺序分诊：第一步看慢查询日志和监控，确认是这条 SQL 变慢还是整库变慢（整库变慢多半是资源或锁，单条变慢多半是执行计划问题）；第二步 <code>SHOW PROCESSLIST</code> 看它是不是在等锁（State 是 Waiting for lock 还是 executing）；第三步 EXPLAIN 看 type&#x2F;rows 是否变化，检查索引是否失效、统计信息是否过期（<code>ANALYZE TABLE</code> 刷新）；第四步看数据量是不是涨了数量级，或索引被 DDL 重建过；最后看 IO&#x2F;CPU 有没有被打满。最常踩的坑：表加了新字段导致查询从覆盖索引变成回表，或者隐式类型转换让索引失效。</li>
+<li>【追问】<ul>
+<li>追问：怎么判断是”查得慢”还是”等锁等得慢”？→ 看 PROCESSLIST 的 State：executing 是真正在查，Waiting for lock 是等锁；等锁的锅在别的事务身上，查 Information_schema.INNODB_TRX 找持锁事务。</li>
+<li>追问：统计信息没问题、索引也在，还是慢呢？→ 看返回行数和回表量，可能数据在磁盘、缓存命中率低（Buffer Pool 命中率低于 95%），这时扩大 innodb_buffer_pool_size 比加索引有效。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q2-主从延迟导致业务读到旧数据，怎么办？"><a href="#Q2-主从延迟导致业务读到旧数据，怎么办？" class="headerlink" title="Q2. 主从延迟导致业务读到旧数据，怎么办？"></a>Q2. 主从延迟导致业务读到旧数据，怎么办？</h3><ul>
+<li>【考察点】考读写分离架构下的”一致性兜底”设计，是架构思维题</li>
+<li>【参考回答】先明确业务容忍度，再分层处理：第一，强一致的读（比如”我刚下的单立刻要看到”）强制走主库，写后 1 秒内的读都路由主库；第二，可容忍的读接受延迟并设置告警（Seconds_Behind_Master 超 30s 报警），延迟超阈值时把流量切回主库兜底；第三，根因治理——拆大事务、开并行复制、从库加索引让回放变快、避免从库跑重报表任务。架构上更彻底的是半同步复制，或用中间件做”读己之写”路由。</li>
+<li>【追问】<ul>
+<li>追问：为什么从库回放会比主库执行慢？→ 主库是并发执行，从库串行重放（或并行度低），一条大事务在从库是单线程跑完；另外从库通常还扛着读流量，资源互相挤占。</li>
+<li>追问：有没有监控延迟更准的方法？→ 比较主从的 GTID 或 binlog 位置差（主库 SHOW MASTER STATUS 的 File&#x2F;Position 与从库 SHOW SLAVE STATUS 对比），比 Seconds_Behind_Master 可靠。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q3-半夜主库挂了，怎么切换？要注意什么？"><a href="#Q3-半夜主库挂了，怎么切换？要注意什么？" class="headerlink" title="Q3. 半夜主库挂了，怎么切换？要注意什么？"></a>Q3. 半夜主库挂了，怎么切换？要注意什么？</h3><ul>
+<li>【考察点】应急预案题，考流程完整性和”丢数据”意识，最喜欢追问细节</li>
+<li>【参考回答】我的切换流程：第一步确认主库确实不可用（网络、进程、磁盘都看一遍，别误判）；第二步看有没有现成的 MHA&#x2F;Orchestrator 自动切换，没有就手动：选一个 relay log 追得最接近主库的从库，<code>SHOW SLAVE STATUS</code> 确认后 <code>STOP SLAVE</code>、<code>RESET SLAVE ALL</code>，<code>SET GLOBAL read_only=OFF</code> 提升为主；第三步改应用连接（DNS&#x2F;配置中心&#x2F;代理层切流量），从库们重新 <code>CHANGE MASTER TO</code> 指向新主；第四步原主库恢复后不要直接加回集群，先作为从库追数据，追平再转正。最重要的提醒：异步复制下主库宕机必然可能丢最后一点数据，切换前评估 RPO 能不能接受，接受不了就要上半同步；而且切换一定要有预案演练，没演练过的手动切换最容易出事故。</li>
+<li>【追问】<ul>
+<li>追问：怎么选”最接近主库”的从库？→ 看 relay log 回放进度，选 IO 线程拉到最新、SQL 线程追得最紧的；GTID 环境下看 gtid_executed 集合的差异。</li>
+<li>追问：切换后原来的主库怎么办？→ 清掉旧 binlog 身份，作为新主的从库重新建复制，先追平再让读流量慢慢回来，别立刻加回。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q4-有人手滑-DELETE-删了整张表的线上数据，怎么恢复？"><a href="#Q4-有人手滑-DELETE-删了整张表的线上数据，怎么恢复？" class="headerlink" title="Q4. 有人手滑 DELETE 删了整张表的线上数据，怎么恢复？"></a>Q4. 有人手滑 DELETE 删了整张表的线上数据，怎么恢复？</h3><ul>
+<li>【考察点】备份恢复的真实演练题，考有没有完整恢复 SOP 和”时间点恢复”的实操</li>
+<li>【参考回答】先说结论：能不能恢复取决于有没有备份和 binlog。标准流程：第一步立刻冻结写入（避免新数据污染），确认删除时间点；第二步找最近的 xtrabackup 全备或 mysqldump 全备，恢复到临时实例（先 –prepare 使备份一致）；第三步用 binlog 增量追到误删前一刻：<code>mysqlbinlog --start-position=全备binlog位置 --stop-datetime=&#39;2024-xx-xx xx:xx:xx&#39; binlog.000xxx | mysql -h 临时实例</code>；第四步把恢复出的表导出导回生产，或直接切换临时实例。前提是 binlog_format&#x3D;row 且 binlog 还留着，否则只能恢复到全备时刻，会丢中间数据。所以我的原则：备份天天有，恢复演练季季做，binlog 保留周期对齐 RPO 要求。</li>
+<li>【追问】<ul>
+<li>追问：为什么用 binlog 而不是直接看数据？→ DELETE 不留”回收站”，row 格式 binlog 记录每行删除前的完整值，<code>mysqlbinlog -vv</code> 能看到，理论上能反向拼出被删数据，这也是 row 格式比 statement 安全的原因。</li>
+<li>追问：如果没有 binlog 呢？→ 只能恢复到全备时刻，损失全备之后到删除之间的所有变更；所以关键业务表可以配延迟从库（故意延迟回放 1~2 小时），出事直接从这个延迟从库捞数据，是很实用的兜底手段。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q5-线上频繁报死锁，你怎么定位到具体原因？"><a href="#Q5-线上频繁报死锁，你怎么定位到具体原因？" class="headerlink" title="Q5. 线上频繁报死锁，你怎么定位到具体原因？"></a>Q5. 线上频繁报死锁，你怎么定位到具体原因？</h3><ul>
+<li>【考察点】把死锁从”知道概念”拉到”能处理线上事故”的题，考具体命令和案例复现能力</li>
+<li>【参考回答】第一步 <code>SHOW ENGINE INNODB STATUS</code> 看 LATEST DETECTED DEADLOCK，里面有两条 SQL、持锁和等待锁的详细信息，这是最直接的现场；第二步 <code>SHOW PROCESSLIST</code> 看还在跑的连接，找出同类事务的高频入口；第三步看这两条 SQL 的执行计划，核心是检查锁的范围——如果 UPDATE&#x2F;INSERT 的条件没走索引，锁的就是大范围甚至全表，两个事务必然互相踩。我遇到过一个典型：两个任务都先 <code>SELECT ... FOR UPDATE</code> 查同一张表的区间，再反向更新另一张表，顺序不一致导致循环等待。解决：统一加锁顺序+让条件走索引缩小锁范围+事务里去掉不必要的大区间扫描。</li>
+<li>【追问】<ul>
+<li>追问：死锁检测本身会不会影响性能？→ MySQL 每次加锁失败都会检查等待图，并发高时有开销，但通常远小于死锁本身的代价；可以调 innodb_deadlock_detect 关闭检测靠锁超时兜底，但一般不建议关。</li>
+<li>追问：为什么说”回滚代价小的事务”？→ InnoDB 按每个事务修改的行数估算回滚代价，回滚行数少的那个，把锁让出来让另一个继续。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q6-Qdrant-检索突然变慢，怎么排查和优化？"><a href="#Q6-Qdrant-检索突然变慢，怎么排查和优化？" class="headerlink" title="Q6. Qdrant 检索突然变慢，怎么排查和优化？"></a>Q6. Qdrant 检索突然变慢，怎么排查和优化？</h3><ul>
+<li>【考察点】向量库运维的实战题，考对 segment、索引状态、内存这些细节的掌握</li>
+<li>【参考回答】按这个顺序查：第一步 <code>GET /collections/&#123;name&#125;</code> 看 status 和 indexed_points vs points_count——如果向量导入后还没建完索引，检索会退化到暴力扫描，这是最常见的”突然变慢”原因；第二步看 segments_count，段太多（比如几十个）说明优化器没及时合并，检索要跨段查，可以调 optimizer 的合并目标或手动合并；第三步看 filter 的 payload 字段有没有建索引，没索引的过滤会全段扫描 payload；第四步看 HNSW 参数，ef、ef_construct、M 调太大都会拖慢；最后看机器资源——内存不足时 segment 落到磁盘（mmap），IO 打满就慢。优化动作：等&#x2F;触发索引完成、合并段、给过滤字段建 payload 索引、必要时加副本分担查询。</li>
+<li>【追问】<ul>
+<li>追问：怎么触发向量索引？→ Qdrant 默认向量数超过 20000 会自动开始建索引（indexing_threshold），可以调小阈值或手动触发；索引过程本身吃 CPU，要避开业务高峰。</li>
+<li>追问：查询量上来了怎么扩容？→ Qdrant 集群模式按 collection 分片（shard），可以加副本（replication factor）做读写分离——写入走主分片、查询均摊到副本；注意分片数创建后不能改，一开始就要按预估规模规划。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维</li>
+</ul>
+<h3 id="Q7-PG-和-Qdrant-双写，怎么保证两边数据一致？"><a href="#Q7-PG-和-Qdrant-双写，怎么保证两边数据一致？" class="headerlink" title="Q7. PG 和 Qdrant 双写，怎么保证两边数据一致？"></a>Q7. PG 和 Qdrant 双写，怎么保证两边数据一致？</h3><ul>
+<li>【考察点】RAG 架构的工程细节题，考对分布式系统”最终一致性”的落地能力，这是简历亮点的高频追问</li>
+<li>【参考回答】我明确先说结论：这种跨库架构做不到强一致，目标就是”最终一致+对账兜底”。落地分三层：第一层写入顺序，业务事务只写 PG（源数据），成功后发消息到消息队列（Kafka&#x2F;RabbitMQ），消费者异步写 Qdrant，写失败自动重试，重试还失败进死信队列人工处理；第二层补偿，删除&#x2F;更新同样走异步，保证两边同生共死；第三层对账，定期（比如每小时）按主键清单比对 PG 和 Qdrant，发现缺失或过期向量就重算补写。注意：embedding 计算是重操作，别放在业务请求链路里同步做，应该异步化。这样 PG 的强一致性和事务能力不受影响，向量库的延迟写入被队列削峰。</li>
+<li>【追问】<ul>
+<li>追问：业务已写 PG 但向量没写成功，检索会怎样？→ 新数据短时间搜不到，属于可接受的最终一致窗口；对实时性要求高的可以读时兜底（检索没命中再查 PG 补算），一般没必要。</li>
+<li>追问：为什么不用 CDC（如 Debezium）？→ CDC 更优雅，监听 binlog&#x2F;WAL 自动同步，不需要业务改代码；但引入组件和运维复杂度，数据量小时消息队列方案更简单可控，量大了再迁 CDC。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q8-哪些写法会导致索引失效？给几个生产常见例子。"><a href="#Q8-哪些写法会导致索引失效？给几个生产常见例子。" class="headerlink" title="Q8. 哪些写法会导致索引失效？给几个生产常见例子。"></a>Q8. 哪些写法会导致索引失效？给几个生产常见例子。</h3><ul>
+<li>【参考回答】常见六种：第一，对索引列用函数或运算，<code>WHERE YEAR(create_time)=2024</code> 不走索引，改成 <code>create_time BETWEEN &#39;2024-01-01&#39; AND &#39;2024-12-31&#39;</code> 就能走；第二，隐式类型转换，字符串列和数字比 <code>WHERE phone=138xxxx</code>（phone 是 varchar），MySQL 会把列转成数字导致索引失效，统一类型或加引号；第三，前导模糊 <code>WHERE name LIKE &#39;%张&#39;</code> 走不了，’张%’ 可以；第四，OR 连接的条件有一个没索引，整个查询可能全表扫，改成 UNION ALL 或都建索引；第五，联合索引不满足最左前缀；第六，排序和索引顺序不一致导致 filesort。排查就盯 EXPLAIN 的 type 是不是从 ref&#x2F;range 掉到了 ALL。</li>
+<li>【追问】<ul>
+<li>追问：为什么对列做函数就失效？→ 索引里存的是原始值，函数运算后没法直接二分定位，等于要对每一行的值都算一遍函数，MySQL 只能放弃索引（8.0 支持函数索引&#x2F;表达式索引可以绕开）。</li>
+<li>追问：LIKE ‘%张%’ 真的完全没救吗？→ 右侧通配符 ‘张%’ 可以走索引；两侧都有只能全扫，或考虑全文索引、前缀索引，或者用 ES&#x2F;向量检索这类更适合模糊搜索的组件。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q9-数据库-CPU-飙到-100-，你怎么定位？"><a href="#Q9-数据库-CPU-飙到-100-，你怎么定位？" class="headerlink" title="Q9. 数据库 CPU 飙到 100%，你怎么定位？"></a>Q9. 数据库 CPU 飙到 100%，你怎么定位？</h3><ul>
+<li>【考察点】生产应急响应题，考命令链路和”先止血再根治”的思路</li>
+<li>【参考回答】止血优先：第一步 <code>top</code> 确认是 mysqld 进程吃 CPU，还是备份（xtrabackup）、监控 agent 之类抢的；第二步 <code>SHOW PROCESSLIST</code> 看有没有一堆长时间 Running 的 SQL，有就是它们——直接 KILL 掉最凶的几条先止血；第三步开慢查询日志或抓 performance_schema 确认是同一类 SQL 还是多类，对命中 SQL 做 EXPLAIN 找索引问题或全表扫描；第四步看资源层面：Buffer Pool 太小导致频繁刷盘、连接数暴涨（连接风暴）、swap 抖动。根治是优化对应 SQL、加索引、或者给大查询分流（只读从库跑分析任务）。我的习惯是平时就把慢查询日志和 processlist 采样接入监控，出事 5 分钟内能定位。</li>
+<li>【追问】<ul>
+<li>追问：怎么确认是不是”连接风暴”？→ <code>SHOW STATUS LIKE &#39;Threads_connected&#39;</code> 看连接数暴涨曲线，配合应用日志看是不是发版后连接池配置变了或某服务批量重连。</li>
+<li>追问：KILL 掉 SQL 会不会有问题？→ 会回滚它所在的事务，正在写数据的话有短暂影响，但比让全库卡死强；KILL 前看一眼是 SELECT 还是长事务 UPDATE，长事务要谨慎，先评估再动手。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q10-数据量-1000-万行，分页查询-LIMIT-100000-10-越来越慢，怎么优化？"><a href="#Q10-数据量-1000-万行，分页查询-LIMIT-100000-10-越来越慢，怎么优化？" class="headerlink" title="Q10. 数据量 1000 万行，分页查询 LIMIT 100000, 10 越来越慢，怎么优化？"></a>Q10. 数据量 1000 万行，分页查询 LIMIT 100000, 10 越来越慢，怎么优化？</h3><ul>
+<li>【考察点】反直觉题：加了索引分页还是慢，考对深分页原理的理解和常用优化手法</li>
+<li>【参考回答】深分页慢的本质：<code>LIMIT 100000, 10</code> 要先把前 100010 行都查出来再丢掉前 10 万行，扫描量固定，索引只能加速定位、不能加速”跳过”。三个方案：第一，游标分页（推荐）：<code>WHERE id &gt; 上次返回的最大id ORDER BY id LIMIT 10</code>，靠主键定位，不管翻到第几页都只扫 10 行，但只支持”下一页”不支持跳页；第二，延迟关联：先 <code>SELECT id FROM t ORDER BY id LIMIT 100000, 10</code> 只查主键（能走覆盖索引），再 JOIN 原表取整行，把大扫描留在索引层；第三，跳页是硬需求就物化排序键或接受用缓存。生产上我一般直接推游标分页，配合前端”加载更多”的交互。</li>
+<li>【追问】<ul>
+<li>追问：为什么先查 id 再 join 就快了？→ 第一步只扫索引叶子，10 万行扫描发生在索引里（内存友好、IO 少），最后只回表 10 行；直接 LIMIT 是回表 10 万行。</li>
+<li>追问：排序字段不是主键怎么办？→ 游标分页要求排序字段唯一且稳定，可以在排序列上建联合索引让排序走索引，游标条件改成 (id, 排序列) 组合比较。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; DevOps</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/%E5%AD%98%E5%82%A8/" rel="tag"># 存储</a>
+              <a href="/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 向量数据库</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/shell-python-interview/" rel="prev" title="Shell 与 Python 面试问答（34 题）">
+                  <i class="fa fa-chevron-left"></i> Shell 与 Python 面试问答（34 题）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/rag-llm-interview/" rel="next" title="LLM 与 RAG 面试问答（38 题）">
+                  LLM 与 RAG 面试问答（38 题） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="872e696608fc74dfa5a40bd81f6b45c6"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: '30px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
+
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
+
+  <div class="aplayer" 
+  data-id="18010222564" 
+  data-server="netease" 
+  data-type="playlist" 
+  data-fixed="true" 
+  data-autoplay="false" 
+  data-order="list" 
+  data-volume="0.5" 
+  data-theme="#1da496" 
+  data-preload="auto" >
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.pages.dev","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文整理了CI&#x2F;CD 面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖CI&#x2F;CD、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CI&#x2F;CD 面试问答（34 题）">
+<meta property="og:url" content="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ci-cd-interview/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="本文整理了CI&#x2F;CD 面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖CI&#x2F;CD、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-27T01:25:00.000Z">
+<meta property="article:modified_time" content="2026-08-27T09:39:04.478Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="CI&#x2F;CD">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ci-cd-interview/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ci-cd-interview/","path":"2026/08/27/技术/ci-cd-interview/","title":"CI/CD 面试问答（34 题）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CI/CD 面试问答（34 题） | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B2%97%E4%BD%8D%E9%AB%98%E9%A2%91%E9%80%9F%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">一、岗位高频速查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、基础篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E4%BB%80%E4%B9%88%E6%98%AF-CI-CD%EF%BC%9F%E5%AE%83%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">Q1. 什么是 CI&#x2F;CD？它的核心价值是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E4%BD%A0%E4%BB%AC-CI-%E5%92%8C-CD-%E5%88%86%E5%88%AB%E6%98%AF%E5%93%AA%E9%83%A8%E5%88%86%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F%E5%90%84%E8%87%AA%E8%B4%9F%E8%B4%A3%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">Q2. 你们 CI 和 CD 分别是哪部分技术实现的？各自负责什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-GitLab-CI-%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F-gitlab-ci-yml-%E9%87%8C%E7%9A%84-stages%E3%80%81jobs-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">Q3. GitLab CI 是怎么工作的？.gitlab-ci.yml 里的 stages、jobs 是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-GitLab-Runner-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E5%93%AA%E4%BA%9B%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%89%A7%E8%A1%8C%E5%99%A8%EF%BC%9F%E6%80%8E%E4%B9%88%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">Q4. GitLab Runner 是什么？有哪些类型和执行器？怎么注册一个？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-GitLab-CI-%E7%9A%84-cache-%E5%92%8C-artifacts-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%93%AA%E4%B8%AA%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">Q5. GitLab CI 的 cache 和 artifacts 有什么区别？什么时候用哪个？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-GitLab-CI-%E9%87%8C%E7%9A%84%E5%8F%98%E9%87%8F%E5%92%8C-secrets-%E6%80%8E%E4%B9%88%E7%AE%A1%E7%90%86%EF%BC%9F%E5%AF%86%E7%A0%81%E8%83%BD%E7%9B%B4%E6%8E%A5%E5%86%99%E5%9C%A8-yml-%E9%87%8C%E5%90%97%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">Q6. GitLab CI 里的变量和 secrets 怎么管理？密码能直接写在 yml 里吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-Harbor-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%AE%8C%E6%95%B4%E7%9A%84%E9%95%9C%E5%83%8F%E6%8E%A8%E9%80%81-%E6%8B%89%E5%8F%96%E6%B5%81%E7%A8%8B%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">Q7. Harbor 是什么？完整的镜像推送&#x2F;拉取流程怎么走？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-Harbor-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BB%93%E5%BA%93%E7%AD%96%E7%95%A5%EF%BC%9F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%88GC%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.8.</span> <span class="nav-text">Q8. Harbor 有哪些常用的仓库策略？垃圾回收（GC）是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-Docker-%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E5%AE%83%EF%BC%9F%E9%95%9C%E5%83%8F%E4%BC%98%E5%8C%96%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%89%8B%E6%AE%B5%EF%BC%9F"><span class="nav-number">2.9.</span> <span class="nav-text">Q9. Docker 多阶段构建是什么？为什么要用它？镜像优化还有哪些手段？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-Argo-CD-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9FGitOps-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E2%80%9D%E5%A3%B0%E6%98%8E%E5%BC%8F%E2%80%9D%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">Q10. Argo CD 是什么？GitOps 是什么？为什么说”声明式”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E9%83%A8%E7%BD%B2%E7%AD%96%E7%95%A5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E6%BB%9A%E5%8A%A8%E3%80%81%E8%93%9D%E7%BB%BF%E3%80%81%E9%87%91%E4%B8%9D%E9%9B%80%E3%80%81%E7%81%B0%E5%BA%A6%E5%90%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F"><span class="nav-number">2.11.</span> <span class="nav-text">Q11. 部署策略有哪些？滚动、蓝绿、金丝雀、灰度各是什么？怎么选？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-GitLab-CI-%E5%92%8C-Jenkins-%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F%E4%BD%A0%E5%AE%9E%E9%99%85%E7%94%A8%E8%BF%87%E5%93%AA%E4%B8%AA%EF%BC%9F"><span class="nav-number">2.12.</span> <span class="nav-text">Q12. GitLab CI 和 Jenkins 怎么选？你实际用过哪个？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、进阶篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E6%80%8E%E4%B9%88%E7%BB%84%E7%BB%87-gitlab-ci-yml-%E6%89%8D%E5%8F%AF%E7%BB%B4%E6%8A%A4%EF%BC%9Finclude-%E5%92%8C-rules-%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">Q1. 怎么组织 .gitlab-ci.yml 才可维护？include 和 rules 怎么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E6%85%A2%E6%80%8E%E4%B9%88%E4%BC%98%E5%8C%96%EF%BC%9FBuildKit%E3%80%81%E6%9E%84%E5%BB%BA%E7%BC%93%E5%AD%98%E3%80%81registry-%E5%8A%A0%E9%80%9F%E5%88%86%E5%88%AB%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">Q2. 镜像构建慢怎么优化？BuildKit、构建缓存、registry 加速分别怎么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-%E9%95%9C%E5%83%8F%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%80%8E%E4%B9%88%E8%90%BD%E5%9C%B0%EF%BC%9Ftrivy-%E5%92%8C-Clair-%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">Q3. 镜像漏洞扫描怎么落地？trivy 和 Clair 怎么选？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-Harbor-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%9D%91%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">Q4. Harbor 垃圾回收的原理是什么？有什么坑？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-%E7%A6%BB%E7%BA%BF-%E5%86%85%E7%BD%91%E7%8E%AF%E5%A2%83%E6%80%8E%E4%B9%88%E9%83%A8%E7%BD%B2-Harbor-%E5%92%8C%E6%95%B4%E5%A5%97-CI-CD%EF%BC%9F%E9%95%9C%E5%83%8F%E6%80%8E%E4%B9%88%E5%90%8C%E6%AD%A5%E8%BF%9B%E5%8E%BB%EF%BC%9F"><span class="nav-number">3.5.</span> <span class="nav-text">Q5. 离线&#x2F;内网环境怎么部署 Harbor 和整套 CI&#x2F;CD？镜像怎么同步进去？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-Argo-CD-%E7%9A%84-Application-%E6%80%8E%E4%B9%88%E5%AE%9A%E4%B9%89%EF%BC%9F%E5%A4%9A%E7%8E%AF%E5%A2%83%E3%80%81%E5%A4%9A%E9%9B%86%E7%BE%A4%E6%80%8E%E4%B9%88%E7%AE%A1%E7%90%86%EF%BC%9F"><span class="nav-number">3.6.</span> <span class="nav-text">Q6. Argo CD 的 Application 怎么定义？多环境、多集群怎么管理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-GitOps-%E7%9A%84%E5%9B%9E%E6%BB%9A%E5%88%B0%E5%BA%95%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9Fgit-revert%E3%80%81argocd-rollback%E3%80%81reset-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.7.</span> <span class="nav-text">Q7. GitOps 的回滚到底怎么做？git revert、argocd rollback、reset 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-GitOps-%E5%92%8C%E4%BC%A0%E7%BB%9F-CD%EF%BC%88Jenkins-%E7%9B%B4%E6%8E%A5%E9%83%A8%E7%BD%B2%EF%BC%89%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.8.</span> <span class="nav-text">Q8. GitOps 和传统 CD（Jenkins 直接部署）的本质区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-Cert-Manager-Let%E2%80%99s-Encrypt-%E8%87%AA%E5%8A%A8%E8%AF%81%E4%B9%A6%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9FHTTP-01-%E5%92%8C-DNS-01-%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">3.9.</span> <span class="nav-text">Q9. Cert-Manager + Let’s Encrypt 自动证书是怎么实现的？HTTP-01 和 DNS-01 区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-%E9%87%91%E4%B8%9D%E9%9B%80-%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83%E5%9C%A8-K8s-%E9%87%8C%E6%80%8E%E4%B9%88%E7%9C%9F%E6%AD%A3%E8%90%BD%E5%9C%B0%EF%BC%9FArgo-Rollouts-%E7%94%A8%E8%BF%87%E5%90%97%EF%BC%9F"><span class="nav-number">3.10.</span> <span class="nav-text">Q10. 金丝雀&#x2F;灰度发布在 K8s 里怎么真正落地？Argo Rollouts 用过吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E5%A4%9A%E7%8E%AF%E5%A2%83%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%88dev-staging-prod%EF%BC%89%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%EF%BC%9F%E7%8E%AF%E5%A2%83%E6%99%8B%E5%8D%87%EF%BC%88promotion%EF%BC%89%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-number">3.11.</span> <span class="nav-text">Q11. 多环境流水线（dev&#x2F;staging&#x2F;prod）怎么设计？环境晋升（promotion）怎么做？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-GitOps-%E9%87%8C%E5%AF%86%E9%92%A5%EF%BC%88secrets%EF%BC%89%E6%80%8E%E4%B9%88%E7%AE%A1%E7%90%86%EF%BC%9F%E4%BB%93%E5%BA%93%E9%87%8C%E8%83%BD%E6%94%BE-Secret-%E5%90%97%EF%BC%9F"><span class="nav-number">3.12.</span> <span class="nav-text">Q12. GitOps 里密钥（secrets）怎么管理？仓库里能放 Secret 吗？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%94%9F%E4%BA%A7%E5%AE%9E%E6%88%98%C2%B7%E5%88%81%E9%92%BB%E7%AF%87%EF%BC%8810-%E9%A2%98%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、生产实战·刁钻篇（10 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E7%AE%80%E5%8E%86%E5%86%99%E2%80%9D%E9%83%A8%E7%BD%B2%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87-60-%E2%80%9D%EF%BC%8C%E8%BF%99%E4%B8%AA-60-%E6%98%AF%E6%80%8E%E4%B9%88%E7%AE%97%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">Q1. 简历写”部署效率提升 60%”，这个 60% 是怎么算出来的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E7%94%9F%E4%BA%A7%E4%B8%8A%E9%95%9C%E5%83%8F-push-%E4%B8%80%E7%9B%B4%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%8A%A5-413-Request-Entity-Too-Large%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">Q2. 生产上镜像 push 一直失败，报 413 Request Entity Too Large，怎么排查？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-%E7%94%9F%E4%BA%A7%E5%8F%91%E5%B8%83%E5%A4%B1%E8%B4%A5%E4%BA%86%EF%BC%8C%E4%BD%A0%E7%9A%84%E5%AE%8C%E6%95%B4%E5%9B%9E%E6%BB%9A%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BB%8E%E5%8F%91%E7%8E%B0%E5%88%B0%E6%81%A2%E5%A4%8D%E5%A4%9A%E4%B9%85%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">Q3. 生产发布失败了，你的完整回滚流程是什么？从发现到恢复多久？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E9%95%9C%E5%83%8F-tag-%E7%94%A8%E7%9A%84%E6%98%AF-latest%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88-Argo-CD-%E6%B0%B8%E8%BF%9C%E6%98%BE%E7%A4%BA-Synced%E3%80%81%E6%96%B0%E4%BB%A3%E7%A0%81%E6%A0%B9%E6%9C%AC%E6%B2%A1%E4%B8%8A%E7%BA%BF%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">Q4. 镜像 tag 用的是 latest，为什么 Argo CD 永远显示 Synced、新代码根本没上线？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%B6%8A%E6%9D%A5%E8%B6%8A%E6%85%A2%EF%BC%8C%E4%BB%8E%E5%93%AA%E4%BA%9B%E7%BB%B4%E5%BA%A6%E6%8E%92%E6%9F%A5%E5%92%8C%E4%BC%98%E5%8C%96%EF%BC%9F%E7%BB%99%E4%B8%AA%E6%8E%92%E6%9F%A5%E9%A1%BA%E5%BA%8F%E3%80%82"><span class="nav-number">4.5.</span> <span class="nav-text">Q5. 流水线越来越慢，从哪些维度排查和优化？给个排查顺序。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-trivy-%E6%89%AB%E5%87%BA%E9%AB%98%E5%8D%B1%E6%BC%8F%E6%B4%9E%EF%BC%8C%E4%BD%86%E4%B8%9A%E5%8A%A1%E7%9D%80%E6%80%A5%E4%B8%8A%E7%BA%BF%EF%BC%8C%E4%BD%A0%E4%BD%9C%E4%B8%BA%E8%BF%90%E7%BB%B4%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">4.6.</span> <span class="nav-text">Q6. trivy 扫出高危漏洞，但业务着急上线，你作为运维怎么处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-GitOps-%E6%A8%A1%E5%BC%8F%E4%B8%8B%EF%BC%8C%E8%B0%81%E8%83%BD%E6%94%B9%E7%94%9F%E4%BA%A7%EF%BC%9F%E6%80%8E%E4%B9%88%E9%98%B2%E6%AD%A2%E6%9C%89%E4%BA%BA%E7%9B%B4%E6%8E%A5-kubectl-%E6%94%B9%E9%9B%86%E7%BE%A4%E6%88%96%E8%80%85%E6%94%B9%E5%9D%8F-Git%EF%BC%9F"><span class="nav-number">4.7.</span> <span class="nav-text">Q7. GitOps 模式下，谁能改生产？怎么防止有人直接 kubectl 改集群或者改坏 Git？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-Argo-CD-%E6%88%96-Harbor-%E6%9C%AC%E8%BA%AB%E6%8C%82%E4%BA%86%EF%BC%8C%E5%8F%91%E5%B8%83%E4%BD%93%E7%B3%BB%E7%98%AB%E7%97%AA%E4%BA%86%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E6%81%A2%E5%A4%8D%EF%BC%9F%E5%B9%B3%E6%97%B6%E5%81%9A%E4%BB%80%E4%B9%88%E5%87%86%E5%A4%87%EF%BC%9F"><span class="nav-number">4.8.</span> <span class="nav-text">Q8. Argo CD 或 Harbor 本身挂了，发布体系瘫痪了，你怎么恢复？平时做什么准备？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-%E8%AF%81%E4%B9%A6%E4%B8%80%E7%9B%B4%E6%B2%A1%E7%AD%BE%E5%8F%91%EF%BC%8C%E6%88%96%E8%80%85-Let%E2%80%99s-Encrypt-%E6%8A%A5-rate-limit-429%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E5%92%8C%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">4.9.</span> <span class="nav-text">Q9. 证书一直没签发，或者 Let’s Encrypt 报 rate limit 429，怎么排查和处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-%E9%87%91%E4%B8%9D%E9%9B%80%E6%94%BE%E9%87%8F%E5%88%B0-50-%E6%97%B6%E6%8C%87%E6%A0%87%E5%BC%82%E5%B8%B8%EF%BC%8C%E4%BD%A0%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E5%A4%84%E7%90%86%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E7%9B%B4%E6%8E%A5-kubectl-delete-%E6%96%B0%E7%89%88%E6%9C%AC%EF%BC%9F"><span class="nav-number">4.10.</span> <span class="nav-text">Q10. 金丝雀放量到 50% 时指标异常，你怎么快速处理？为什么不是直接 kubectl delete 新版本？</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">网上乌托邦，心底陶乐庄。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/ci-cd-interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CI/CD 面试问答（34 题） | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CI/CD 面试问答（34 题）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-27 09:25:00 / 修改时间：17:39:04" itemprop="dateCreated datePublished" datetime="2026-08-27T09:25:00+08:00">2026-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="CI/CD 面试问答（34 题）" href="/2026/08/27/%E6%8A%80%E6%9C%AF/ci-cd-interview/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::0ccbd36ac743d12b8cbbb75c37bcc81f" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文整理了CI&#x2F;CD 面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖CI&#x2F;CD、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>适用岗位：运维工程师 &#x2F; 技术支持工程师 &#x2F; AI 运维工程师 &#x2F; DevOps 工程师</p>
+</blockquote>
+<hr>
+<h2 id="一、岗位高频速查"><a href="#一、岗位高频速查" class="headerlink" title="一、岗位高频速查"></a>一、岗位高频速查</h2><table>
+<thead>
+<tr>
+<th>岗位</th>
+<th>必考问题（3-5 个）</th>
+<th>一句话要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运维工程师</td>
+<td>1. GitLab Runner 怎么注册、用哪种执行器？<br>2. Harbor 镜像推送失败怎么排查？垃圾回收怎么做？<br>3. Argo CD 同步失败&#x2F;OutOfSync 怎么处理？<br>4. 发布失败怎么回滚？<br>5. Cert-Manager 证书没签发&#x2F;过期怎么办？</td>
+<td>偏”跑得起来 + 出问题能救”：注册命令、排查命令、回滚命令张口就来</td>
+</tr>
+<tr>
+<td>技术支持工程师</td>
+<td>1. CI&#x2F;CD 是什么？能解决什么问题？<br>2. 代码提交到线上部署的完整流程讲一遍？<br>3. 部署效率提升 60% 是怎么衡量的？</td>
+<td>低频偏概念，能把”提交代码 → 构建 → 镜像 → 同步部署”的链路讲清楚即可，不问细节实现</td>
+</tr>
+<tr>
+<td>AI 运维工程师</td>
+<td>1. 大模型&#x2F;推理服务的镜像怎么构建推送（GPU 基础镜像、体积大）？<br>2. 镜像仓库大镜像拉取慢&#x2F;超时怎么办？<br>3. 模型版本怎么管理、怎么回滚到旧版本？<br>4. Argo CD 部署推理服务 + GPU 节点调度怎么配合？<br>5. 推理服务更新怎么做到少中断（滚动&#x2F;灰度）？</td>
+<td>重点在”大镜像、模型版本、服务不中断”，结合 K8S 调度回答更出彩</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、基础篇（12-题）"><a href="#二、基础篇（12-题）" class="headerlink" title="二、基础篇（12 题）"></a>二、基础篇（12 题）</h2><h3 id="Q1-什么是-CI-CD？它的核心价值是什么？"><a href="#Q1-什么是-CI-CD？它的核心价值是什么？" class="headerlink" title="Q1. 什么是 CI&#x2F;CD？它的核心价值是什么？"></a>Q1. 什么是 CI&#x2F;CD？它的核心价值是什么？</h3><ul>
+<li>【考察点】面试官想验证你是不是只背了概念，能不能讲清楚 CI 和 CD 各解决什么问题、对团队意味着什么。</li>
+<li>【参考回答】先说结论：CI 是持续集成，代码一提交就自动触发构建、测试、静态检查，把”集成地狱”消灭在每次提交里；CD 是持续交付&#x2F;持续部署，把构建产物自动发布到环境甚至生产。核心价值就三个词：自动化、快速反馈、质量门禁。自动化省的是人工操作和等待时间；快速反馈是让问题在提交后几分钟内暴露，而不是上线当天爆炸；质量门禁是把 lint、单测、镜像扫描做成流水线里的关卡，不合格直接拦下。我在公司做 CMDB 容器化时搭的就是这条链路：git push 触发 GitLab CI 构建镜像推到 Harbor，Argo CD 检测到清单变更自动同步到集群。</li>
+<li>【追问 1】CI 和 CD 的边界在哪？——CI 到”产出可交付的制品（镜像）”为止，CD 从”拿到制品部署到环境”开始。我们流水线里 build&#x2F;push 阶段属于 CI，Argo CD 同步属于 CD。</li>
+<li>【追问 2】没有 CI&#x2F;CD 之前团队是怎么发布的？——手动 ssh 上服务器、手动改配置、手动拉镜像 restart，发布一次半小时起步，还经常有人漏步骤，这就是为什么我把”从代码提交到镜像构建”自动化后，发布耗时降了 60%。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持 &#x2F; AI 运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q2-你们-CI-和-CD-分别是哪部分技术实现的？各自负责什么？"><a href="#Q2-你们-CI-和-CD-分别是哪部分技术实现的？各自负责什么？" class="headerlink" title="Q2. 你们 CI 和 CD 分别是哪部分技术实现的？各自负责什么？"></a>Q2. 你们 CI 和 CD 分别是哪部分技术实现的？各自负责什么？</h3><ul>
+<li>【参考回答】我这边 CI 用的是 GitLab CI：GitLab 托管代码，GitLab Runner 负责执行流水线，流水线里做编译、单元测试、Docker 多阶段构建、trivy 镜像扫描，最后把镜像 push 到 Harbor 私有仓库；CD 用的是 Argo CD 做 GitOps：应用清单（Deployment、Service、Ingress）都存在 Git 仓库里，Argo CD 持续对比 Git 和集群实际状态，有差异就自动同步。所以分工很明确：CI 管”代码变成镜像”，CD 管”镜像按声明的方式跑到集群里”。中间靠镜像 tag 衔接——CI 把 tag 写进 Git 里的清单文件，Argo CD 感知到变化就发版。</li>
+<li>【追问】镜像 tag 是怎么从 CI 传到 CD 的？——我们 Jenkins 流水线（后来迁移到 GitLab CI）构建完镜像后，用 <code>yq</code> 命令把新 tag 写回仓库里 <code>argocd_yaml/base/nginx-deployment.yaml</code> 的 image 字段，然后 <code>git push</code>，Argo CD 轮询到仓库变更自动同步。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q3-GitLab-CI-是怎么工作的？-gitlab-ci-yml-里的-stages、jobs-是什么？"><a href="#Q3-GitLab-CI-是怎么工作的？-gitlab-ci-yml-里的-stages、jobs-是什么？" class="headerlink" title="Q3. GitLab CI 是怎么工作的？.gitlab-ci.yml 里的 stages、jobs 是什么？"></a>Q3. GitLab CI 是怎么工作的？.gitlab-ci.yml 里的 stages、jobs 是什么？</h3><ul>
+<li>【考察点】基础中的基础，验证是否真的写过流水线。</li>
+<li>【参考回答】GitLab CI 的核心是仓库根目录的 <code>.gitlab-ci.yml</code>：push 代码后 GitLab 根据它生成 pipeline，pipeline 按 stages（阶段）串行执行，每个 stage 里可以有多个 job（任务），同 stage 的 job 可以并行。我写的最简例子：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">stages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">build</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">push</span></span><br><span class="line"></span><br><span class="line"><span class="attr">build:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">docker</span> <span class="string">build</span> <span class="string">-t</span> <span class="string">harbor.example.com/library/my-app:$CI_COMMIT_SHA</span> <span class="string">.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">docker-runner</span></span><br><span class="line"></span><br><span class="line"><span class="attr">push:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">push</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">docker</span> <span class="string">push</span> <span class="string">harbor.example.com/library/my-app:$CI_COMMIT_SHA</span></span><br></pre></td></tr></table></figure>
+
+<p>  job 必须有 <code>script</code>，<code>tags</code> 用来指定由哪类 Runner 执行，<code>image</code> 指定跑这个 job 的容器镜像，<code>only/except</code> 或新版 <code>rules</code> 控制触发条件。</p>
+<ul>
+<li>【追问 1】如果 build 失败了，push 会执行吗？——不会，同一 stage 的 job 都成功才进入下一 stage，失败默认整个 pipeline 红掉，这也是质量门禁的基础。</li>
+<li>【追问 2】怎么让某个 job 只在 main 分支触发？——<code>rules: - if: &#39;$CI_COMMIT_BRANCH == &quot;main&quot;&#39;</code>，旧写法是 <code>only: - main</code>。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q4-GitLab-Runner-是什么？有哪些类型和执行器？怎么注册一个？"><a href="#Q4-GitLab-Runner-是什么？有哪些类型和执行器？怎么注册一个？" class="headerlink" title="Q4. GitLab Runner 是什么？有哪些类型和执行器？怎么注册一个？"></a>Q4. GitLab Runner 是什么？有哪些类型和执行器？怎么注册一个？</h3><ul>
+<li>【考察点】Runner 是流水线的执行引擎，运维岗必问。</li>
+<li>【参考回答】Runner 是真正跑 job 的程序，可以注册成三种作用域：shared（全局共享）、group（组内项目共享）、project（单项目）。执行器我主要用两种：shell 和 docker。shell 直接在宿主机上跑，快但污染环境；docker 每个 job 起一个容器、用完即弃，隔离干净，构建镜像时用 <code>docker</code> executor + <code>docker:dind</code> 服务（docker-in-docker）。注册命令是：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gitlab-runner register \</span><br><span class="line">  --url http://gitlab.example.com \</span><br><span class="line">  --token &lt;项目/组/全局的注册token&gt; \</span><br><span class="line">  --executor docker \</span><br><span class="line">  --docker-image docker:24 \</span><br><span class="line">  --docker-privileged</span><br></pre></td></tr></table></figure>
+
+<p>  token 在 GitLab 项目 Settings → CI&#x2F;CD → Runners 里拿，<code>--docker-privileged</code> 是 dind 跑 Docker 构建必需的。</p>
+<ul>
+<li>【追问 1】dind 是什么坑？——dind 里构建的镜像在容器内，job 结束就没了，所以要把镜像 push 到 Harbor；privileged 有安全风险，生产上可以换成 kaniko（不需要 privileged 也能构建）。</li>
+<li>【追问 2】Runner 资源不够怎么办？——多注册几台、给 job 打不同 tag 分流，或者用 Kubernetes executor 让 Runner 自动弹 pod。</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q5-GitLab-CI-的-cache-和-artifacts-有什么区别？什么时候用哪个？"><a href="#Q5-GitLab-CI-的-cache-和-artifacts-有什么区别？什么时候用哪个？" class="headerlink" title="Q5. GitLab CI 的 cache 和 artifacts 有什么区别？什么时候用哪个？"></a>Q5. GitLab CI 的 cache 和 artifacts 有什么区别？什么时候用哪个？</h3><ul>
+<li>【考察点】高频考点，区分不清说明流水线实践经验不足。</li>
+<li>【参考回答】一句话：cache 是给”依赖”加速的，artifacts 是给”产物”传参的。cache 存的是依赖包（npm 的 node_modules、Maven 的 .m2、pip 缓存），下次构建直接复用，省的是下载依赖的时间，它不保证一定被用上；artifacts 是 job 的产出文件，传给后面的 job 用，比如编译出的 jar、构建出的镜像清单、测试报告，只在 job 成功时默认上传，可以在 GitLab 界面下载。例子：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">build:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">npm</span> <span class="string">ci</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">key:</span> <span class="string">npm-cache</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">node_modules/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">test:</span></span><br><span class="line">  <span class="attr">script:</span> <span class="string">./run-tests.sh</span></span><br><span class="line">  <span class="attr">artifacts:</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">reports/</span></span><br><span class="line">    <span class="attr">expire_in:</span> <span class="number">7</span> <span class="string">days</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>【追问】cache 常见问题？——key 设置不当导致缓存失效或串用（不同分支要分开 key），cache 满了不清理、构建机磁盘爆掉。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q6-GitLab-CI-里的变量和-secrets-怎么管理？密码能直接写在-yml-里吗？"><a href="#Q6-GitLab-CI-里的变量和-secrets-怎么管理？密码能直接写在-yml-里吗？" class="headerlink" title="Q6. GitLab CI 里的变量和 secrets 怎么管理？密码能直接写在 yml 里吗？"></a>Q6. GitLab CI 里的变量和 secrets 怎么管理？密码能直接写在 yml 里吗？</h3><ul>
+<li>【考察点】安全意识 + 变量作用域、优先级等细节。</li>
+<li>【参考回答】绝对不能明文写在 .gitlab-ci.yml 里——仓库是共享的，历史里还能翻出来。正确做法是在 GitLab 项目的 Settings → CI&#x2F;CD → Variables 里配置，CI 里用 <code>$VAR</code> 引用。有两个关键开关：Masked（脱敏，日志里自动打码）和 Protected（只给受保护分支用）。比如 Harbor 的账号密码我一般配成 <code>HARBOR_USER</code>&#x2F;<code>HARBOR_PASSWORD</code>，Robot 账号最安全。优先级从低到高：项目变量 &lt; 组变量（覆盖项目）&lt; 流水线级变量 &lt; job 内 <code>variables:</code> 关键字。还有内置的 <code>CI_REGISTRY_USER</code>、<code>CI_REGISTRY_PASSWORD</code>（deploy token）可以直接登 GitLab 自带 registry。</li>
+<li>【追问 1】Masked 变量有什么限制？——变量值太短或含特殊格式（如 JSON）可能无法脱敏；脱敏只在 GitLab 日志展示层做，命令里不要 echo 打印。</li>
+<li>【追问 2】更高级的密钥管理？——和 Vault 集成（<code>vault:</code> 关键字）或 CI 里调用 Vault API 取密钥，不落盘、不落日志。</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q7-Harbor-是什么？完整的镜像推送-拉取流程怎么走？"><a href="#Q7-Harbor-是什么？完整的镜像推送-拉取流程怎么走？" class="headerlink" title="Q7. Harbor 是什么？完整的镜像推送&#x2F;拉取流程怎么走？"></a>Q7. Harbor 是什么？完整的镜像推送&#x2F;拉取流程怎么走？</h3><ul>
+<li>【考察点】Harbor 是简历明确写的技能，推送拉取是基本功。</li>
+<li>【参考回答】Harbor 是开源的私有镜像仓库，支持项目隔离、权限控制、镜像复制、漏洞扫描、配额和垃圾回收。我这边是 <code>harbor.internal</code>，项目按团队分（如 library、ai、ops），普通用户只能 pull，CI 用 Robot 账号 push。推送流程：先配好登录（推荐用 robot account）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker login harbor.example.com -u <span class="string">&#x27;robot$ci+build&#x27;</span> -p <span class="string">&#x27;&lt;token&gt;&#x27;</span></span><br><span class="line">docker tag my-app:latest harbor.example.com/library/my-app:v1.0.0</span><br><span class="line">docker push harbor.example.com/library/my-app:v1.0.0</span><br></pre></td></tr></table></figure>
+
+<p>  拉取分两种情况：本机能 <code>docker login</code> 后 <code>docker pull</code>；K8s 节点需要先建 <code>docker-registry</code> 类型的 Secret 挂到 Pod 的 <code>imagePullSecrets</code>，或者用 K8s 1.24+ 的 <code>kubernetes.io/dockerconfigjson</code> Secret，配合 ServiceAccount 自动注入。内网机器如果没配证书，要在每台机器的 <code>/etc/docker/daemon.json</code> 加 <code>&quot;insecure-registries&quot;: [&quot;harbor.example.com&quot;]</code> 并重启 docker。</p>
+<ul>
+<li>【追问】生产环境镜像拉不下来常见原因？——认证过期（Secret 里密码是老的）、insecure-registries 没配、节点 DNS 解析不到 Harbor 域名、Harbor 磁盘满了、网络策略挡了 443 端口。</li>
+<li>【岗位标注】运维 &#x2F; AI 运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q8-Harbor-有哪些常用的仓库策略？垃圾回收（GC）是什么？"><a href="#Q8-Harbor-有哪些常用的仓库策略？垃圾回收（GC）是什么？" class="headerlink" title="Q8. Harbor 有哪些常用的仓库策略？垃圾回收（GC）是什么？"></a>Q8. Harbor 有哪些常用的仓库策略？垃圾回收（GC）是什么？</h3><ul>
+<li>【考察点】不只是会用，还要懂仓库治理；运维岗会深入问。</li>
+<li>【参考回答】常用策略四件套：保留策略（Retention）、配额（Quota）、复制（Replication）、垃圾回收（GC）。保留策略按规则自动删旧 tag，比如”每个仓库保留最近 10 个 tag”或”按正则保留 release-.*”、按保留天数删——不然每次发版都留 tag，仓库很快爆掉。配额是按项目限制存储上限。复制是把镜像同步到灾备仓库或离线环境。GC 回收的是”没有被任何 tag 引用的 blob”：先删 tag，blob 失去引用，再跑 GC 才能真正释放磁盘空间。Harbor 2.x 支持在线 GC（旧版要停服务），在 System Settings 里可以配置定时任务。</li>
+<li>【追问 1】GC 跑的时候能 push 吗？——Harbor 2.4+ 的在线 GC 不影响正常 push&#x2F;pull；但要注意 GC 只删”无引用 blob”，如果所有 tag 都指向同一层，那层不会被删，所以先确认 tag 删干净了。</li>
+<li>【追问 2】怎么验证 GC 真的释放了空间？——在 Harbor 管理界面看存储统计，或者 <code>du -sh /data/registry/docker/registry/v2</code> 对比前后大小。</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q9-Docker-多阶段构建是什么？为什么要用它？镜像优化还有哪些手段？"><a href="#Q9-Docker-多阶段构建是什么？为什么要用它？镜像优化还有哪些手段？" class="headerlink" title="Q9. Docker 多阶段构建是什么？为什么要用它？镜像优化还有哪些手段？"></a>Q9. Docker 多阶段构建是什么？为什么要用它？镜像优化还有哪些手段？</h3><ul>
+<li>【考察点】镜像构建是 CI 的核心环节，多阶段构建几乎必问。</li>
+<li>【参考回答】多阶段构建就是一个 Dockerfile 里多个 FROM，前一阶段负责编译，后一阶段只拷贝产物，最终镜像只保留运行时需要的东西。以 Go 服务为例：</li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> golang:<span class="number">1.21</span>-alpine AS builder</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /src</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> go.mod go.sum ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> go mod download</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> CGO_ENABLED=0 go build -o app .</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> alpine:<span class="number">3.19</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /src/app /usr/local/bin/app</span></span><br><span class="line"><span class="keyword">USER</span> nobody</span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;/usr/local/bin/app&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>  好处是最终镜像里没有编译器、源码、依赖缓存，体积能小 80% 以上，攻击面也小。其他优化手段：基础镜像选 alpine 或 distroless（甚至 scratch）、<code>.dockerignore</code> 排除 .git 和 node_modules、层顺序把”不常变的依赖拷贝”放前面利用缓存、用 <code>--mount=type=cache</code> 缓存 apt&#x2F;go mod 下载。</p>
+<ul>
+<li>【追问】镜像大小为什么重要？——拉取快（尤其离线环境）、启动快、漏洞少、磁盘占用低；我们离线部署场景里镜像从几个 G 压到几百 M，部署效率提升明显。</li>
+<li>【岗位标注】通用 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q10-Argo-CD-是什么？GitOps-是什么？为什么说”声明式”？"><a href="#Q10-Argo-CD-是什么？GitOps-是什么？为什么说”声明式”？" class="headerlink" title="Q10. Argo CD 是什么？GitOps 是什么？为什么说”声明式”？"></a>Q10. Argo CD 是什么？GitOps 是什么？为什么说”声明式”？</h3><ul>
+<li>【考察点】简历核心技能，必须讲清原理而不是只会点按钮。</li>
+<li>【参考回答】GitOps 的核心思想：Git 仓库是应用状态的唯一事实来源（Single Source of Truth），一切变更先改 Git，然后有个控制器把 Git 里的状态”拉”到集群并保持两者一致。Argo CD 就是这个控制器：它持续对比 Git 仓库里的清单（Deployment、Service、Ingress 等）和集群当前状态，不一致就标记 OutOfSync，配了自动同步就执行同步。声明式就是”我只描述想要什么（desired state），不关心怎么达到”——比如我写”副本数 3”，Argo CD 负责把集群调成 3，而不是我手动 <code>kubectl scale</code>。我在容器化改造里就是把 nginx 等服务的清单放到 <code>argocd_yaml/base/</code> 目录（配合 kustomize），建了 Application 指向那个路径，之后的发布全是”改 Git → 自动同步”。</li>
+<li>【追问 1】Argo CD 怎么发现 Git 有变化？——默认每 3 分钟轮询一次 repo，也可以配 GitLab webhook 触发即时刷新。</li>
+<li>【追问 2】OutOfSync 和 Healthy 分别什么意思？——OutOfSync 是”Git 声明和集群实际不一致”（待同步）；Healthy 是”应用运行健康”（Pod 就绪等）。两者独立：可能 Git 同步了但应用运行不健康（Degraded）。</li>
+<li>【岗位标注】DevOps &#x2F; 运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q11-部署策略有哪些？滚动、蓝绿、金丝雀、灰度各是什么？怎么选？"><a href="#Q11-部署策略有哪些？滚动、蓝绿、金丝雀、灰度各是什么？怎么选？" class="headerlink" title="Q11. 部署策略有哪些？滚动、蓝绿、金丝雀、灰度各是什么？怎么选？"></a>Q11. 部署策略有哪些？滚动、蓝绿、金丝雀、灰度各是什么？怎么选？</h3><ul>
+<li>【考察点】发布体系的核心知识，DevOps 必问，回答要能落到 K8s 配置。</li>
+<li>【参考回答】四种主流策略。滚动更新（Rolling）是 K8s 默认：新 Pod 逐个替换旧 Pod，通过 <code>maxUnavailable</code> 和 <code>maxSurge</code> 控制节奏，比如 <code>maxSurge: 1, maxUnavailable: 0</code> 保证始终有完整容量，平滑但出问题回滚要等滚动完成。蓝绿（Blue&#x2F;Green）：两套 Deployment 同时存在，Service 的 selector 指向哪套就发布到哪套，切 selector 瞬间切换、回滚也是瞬间切回，代价是双倍资源。金丝雀（Canary）：新版本先放 5%-10% 流量，观察指标没问题再逐步放大到 100%，用 nginx-ingress 的 <code>nginx.ingress.kubernetes.io/canary: &quot;true&quot;</code> + <code>canary-weight: &quot;10&quot;</code> 注解实现。灰度（Gray）和金丝雀常混用，但灰度更偏”按用户分组&#x2F;比例放量”，可以按 header、cookie、地域分，支持 A&#x2F;B 测试。选型看场景：核心无状态服务用蓝绿保证秒级回滚；大版本不确定用金丝雀；资源紧张就滚动。</li>
+<li>【追问】你线上主要用哪种？——多数服务滚动+不可变 tag；关键变更用金丝雀先放量观察；配合 Argo CD 的 sync 策略做自动发布。</li>
+<li>【岗位标注】DevOps &#x2F; 运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q12-GitLab-CI-和-Jenkins-怎么选？你实际用过哪个？"><a href="#Q12-GitLab-CI-和-Jenkins-怎么选？你实际用过哪个？" class="headerlink" title="Q12. GitLab CI 和 Jenkins 怎么选？你实际用过哪个？"></a>Q12. GitLab CI 和 Jenkins 怎么选？你实际用过哪个？</h3><ul>
+<li>【参考回答】两者我都接触过，公司老流水线有 Jenkinsfile，新的 CI&#x2F;CD 工具链用的 GitLab CI。选型看场景：Jenkins 生态老、插件多（2 千多个）、自由风格项目上手快、适合异构环境复杂编排，缺点是维护重、Master 单点、Pipeline as Code 是后补的；GitLab CI 最大的优势是”和代码仓库一体”——MR 里直接看到流水线结果、天然做合并门禁、yaml 即配置、Runner 弹性伸缩、内置 registry，对”Git 驱动”的团队来说心智负担小很多。我新搭的链路上 GitLab CI + Harbor + Argo CD 三个组件职责干净：代码托管&#x2F;流水线、制品仓库、GitOps 发布。</li>
+<li>【追问】Jenkins 和 Argo CD 能配合吗？——能，老项目就是 Jenkins 构建推 Harbor，再更新 Git 清单，Argo CD 同步（我们早期 Jenkinsfile 就是这套模式，用 yq 改 yaml 后 push），所以 Jenkins 不是被淘汰，是职责收窄到”构建制品”。</li>
+<li>【岗位标注】通用 &#x2F; DevOps &#x2F; 运维</li>
+</ul>
+<hr>
+<h2 id="三、进阶篇（12-题）"><a href="#三、进阶篇（12-题）" class="headerlink" title="三、进阶篇（12 题）"></a>三、进阶篇（12 题）</h2><h3 id="Q1-怎么组织-gitlab-ci-yml-才可维护？include-和-rules-怎么用？"><a href="#Q1-怎么组织-gitlab-ci-yml-才可维护？include-和-rules-怎么用？" class="headerlink" title="Q1. 怎么组织 .gitlab-ci.yml 才可维护？include 和 rules 怎么用？"></a>Q1. 怎么组织 .gitlab-ci.yml 才可维护？include 和 rules 怎么用？</h3><ul>
+<li>【考察点】考察流水线工程化能力——小项目一个文件搞定，生产环境文件会爆炸。</li>
+<li>【参考回答】核心是”模板化 + 复用 + 按环境收敛”。做法：把公共的 job 定义抽到仓库根的 <code>ci/templates.yml</code>，用 <code>include</code> 引入：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ci/templates.yml</span></span><br><span class="line"><span class="string">.build-job:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">docker:24</span></span><br><span class="line">  <span class="attr">services:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">docker:24-dind</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">docker</span> <span class="string">build</span> <span class="string">-t</span> <span class="string">$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA</span> <span class="string">.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># .gitlab-ci.yml</span></span><br><span class="line"><span class="attr">include:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">local:</span> <span class="string">ci/templates.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">build-app:</span></span><br><span class="line">  <span class="attr">extends:</span> <span class="string">.build-job</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_PIPELINE_SOURCE == &quot;merge_request_event&quot;&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_COMMIT_BRANCH == &quot;main&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>  <code>extends</code> 继承模板，job 里可以覆盖部分字段；<code>rules</code> 比旧版 <code>only/except</code> 强大得多，支持条件组合、<code>when: manual</code>（人工触发）、<code>allow_failure</code>（允许失败不阻塞）。还可以 <code>include: project</code> 跨项目引用公共模板（比如公司统一的 trivy 扫描 job）。生产建议：分支合并前必须流水线绿（MR 门禁），main 分支的 job 要加 <code>when: manual</code> 的人工审批再发生产。</p>
+<ul>
+<li>【追问】rules 里 <code>when: manual</code> 有什么用？——发生产前人工点一下确认，既是审批又是审计留痕，配合 <code>allow_failure: false</code> 强制通过。</li>
+<li>【岗位标注】DevOps</li>
+</ul>
+<h3 id="Q2-镜像构建慢怎么优化？BuildKit、构建缓存、registry-加速分别怎么用？"><a href="#Q2-镜像构建慢怎么优化？BuildKit、构建缓存、registry-加速分别怎么用？" class="headerlink" title="Q2. 镜像构建慢怎么优化？BuildKit、构建缓存、registry 加速分别怎么用？"></a>Q2. 镜像构建慢怎么优化？BuildKit、构建缓存、registry 加速分别怎么用？</h3><ul>
+<li>【考察点】生产真实痛点，考察是否踩过坑。</li>
+<li>【参考回答】构建慢主要三个原因：拉基础镜像慢、依赖下载慢、层缓存不生效。解法：一是开 BuildKit（Dockerfile 顶部 <code># syntax=docker/dockerfile:1</code>，构建时 <code>DOCKER_BUILDKIT=1</code>），支持 <code>RUN --mount=type=cache,target=/var/cache/apt</code> 这类挂载缓存，<code>COPY --link</code> 不依赖前面层缓存；二是 GitLab CI 里配 <code>cache</code> 缓存依赖目录（go mod、npm），或把构建缓存 push 到 registry 用 <code>--cache-from</code> 复用；三是内网环境用 Harbor 的 Proxy Cache 项目或搭建 registry mirror——我们离线部署时就是镜像缓存到本地，断网环境也能快速拉取。还要注意 Dockerfile 层顺序：COPY 依赖文件（go.mod）放前面，源码放最后，这样源码变了依赖层还能命中缓存。</li>
+<li>【追问】dind 构建的缓存为什么不生效？——dind 每次 job 起全新容器，本地层缓存全丢，所以要么 push 镜像时连带 cache manifest，要么改用 kaniko 挂 PVC 缓存。</li>
+<li>【岗位标注】DevOps &#x2F; 运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q3-镜像漏洞扫描怎么落地？trivy-和-Clair-怎么选？"><a href="#Q3-镜像漏洞扫描怎么落地？trivy-和-Clair-怎么选？" class="headerlink" title="Q3. 镜像漏洞扫描怎么落地？trivy 和 Clair 怎么选？"></a>Q3. 镜像漏洞扫描怎么落地？trivy 和 Clair 怎么选？</h3><ul>
+<li>【参考回答】我这边两种方式都用过：CI 阶段用 Trivy 扫描阻断，Harbor 侧接扫描器做持续巡检。Trivy 在流水线里加一个 stage：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">scan:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">trivy</span> <span class="string">image</span> <span class="string">--exit-code</span> <span class="number">1</span> <span class="string">--severity</span> <span class="string">HIGH,CRITICAL</span> <span class="string">--ignore-unfixed</span> <span class="string">harbor.example.com/library/my-app:$CI_COMMIT_SHA</span></span><br></pre></td></tr></table></figure>
+
+<p>  <code>--exit-code 1</code> 让高危漏洞使 job 失败、流水线红掉，实现”带漏洞不放行”；<code>--ignore-unfixed</code> 是只报有修复版本的漏洞，避免被无解的系统漏洞卡死。Harbor 里在 Interrogation Services 添加 Trivy&#x2F;Clair 适配器，推送镜像后自动扫描，页面上按 severity 排序，还能配 CVE allowlist（白名单）豁免。选型：Trivy 轻量、离线可用（下载 db）、扫描快，适合 CI 内嵌；Clair 是传统方案、依赖 API 解析，现在新项目一般用 Trivy。</p>
+<ul>
+<li>【追问】高危漏洞很多、项目又要上线怎么办？——先看是否”可利用 + 是否公网暴露 + 是否有缓解措施”，能豁免的走评审流程记录到 allowlist，不能豁免的必须修；禁止为赶进度把 <code>--exit-code 1</code> 全局去掉。</li>
+<li>【岗位标注】DevOps &#x2F; 运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q4-Harbor-垃圾回收的原理是什么？有什么坑？"><a href="#Q4-Harbor-垃圾回收的原理是什么？有什么坑？" class="headerlink" title="Q4. Harbor 垃圾回收的原理是什么？有什么坑？"></a>Q4. Harbor 垃圾回收的原理是什么？有什么坑？</h3><ul>
+<li>【考察点】简历写了 Harbor，GC 是运维最常踩坑的点之一，容易暴露”只点过按钮”。</li>
+<li>【参考回答】原理：镜像存储是内容寻址的，一个 tag 指向 manifest，manifest 引用一堆 blob（层）。删 tag 只删引用，blob 还在，GC 就是扫描 registry 找出”没有任何 tag 引用的 blob”并删除，释放磁盘。所以正确顺序是：先跑保留策略或手动删 tag → 再触发 GC。坑有三个：第一，旧版 Harbor GC 要停写（只读模式）才能跑，2.x 以后有在线 GC；第二，GC 期间如果还有并发 push 可能误判删除，官方建议低峰期跑；第三，GC 不是万能的——如果 manifest 还在（tag 没删），对应 blob 永远不会被清，磁盘满要先查”是不是 tag 堆太多”而不是只怪 GC。</li>
+<li>【追问】GC 后镜像还能正常拉吗？——能，GC 只删无引用 blob，被引用的层不动；如果出现拉取 404，基本是并发删除场景误判，需要从复制规则或备份恢复。</li>
+<li>【岗位标注】运维</li>
+</ul>
+<h3 id="Q5-离线-内网环境怎么部署-Harbor-和整套-CI-CD？镜像怎么同步进去？"><a href="#Q5-离线-内网环境怎么部署-Harbor-和整套-CI-CD？镜像怎么同步进去？" class="headerlink" title="Q5. 离线&#x2F;内网环境怎么部署 Harbor 和整套 CI&#x2F;CD？镜像怎么同步进去？"></a>Q5. 离线&#x2F;内网环境怎么部署 Harbor 和整套 CI&#x2F;CD？镜像怎么同步进去？</h3><ul>
+<li>【考察点】简历明确写了”全套离线部署方案”，这是差异化亮点，面试官会深挖。</li>
+<li>【参考回答】离线部署的核心是”内容本地化 + 无外网可运维”。我们当时的做法分四层：一是依赖本地化，所有 rpm&#x2F;deb、容器镜像、Helm chart、安装包都提前下载好放进离线包；二是镜像缓存，用 Harbor 的复制规则（Replication）把外网或源仓库的镜像拉到离线 Harbor——配 push 模式规则，源端是 <code>docker.io</code> 白名单代理或者用 <code>skopeo copy</code> 批量同步，支持按 tag 正则过滤（比如只同步 <code>release-.*</code>）；三是离线安装，Harbor 本身用 <code>./install.sh --offline</code>（离线安装包预置了所有依赖镜像），K8s 侧镜像通过 <code>docker save/load</code> 或让节点从内网 Harbor 拉；四是断网验证，全部装完断掉外网跑一遍全流程，确保没有任何隐式外网依赖。另外离线环境强烈建议配 DNS 或 <code>/etc/hosts</code> + insecure-registries，不然每台机器拉镜像都要改 daemon.json。</li>
+<li>【追问】离线环境镜像拉取慢怎么办？——内网带宽不够就做节点本地镜像缓存（containerd 的 image store 或每节点预拉），或按批次错峰拉取。</li>
+<li>【岗位标注】运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q6-Argo-CD-的-Application-怎么定义？多环境、多集群怎么管理？"><a href="#Q6-Argo-CD-的-Application-怎么定义？多环境、多集群怎么管理？" class="headerlink" title="Q6. Argo CD 的 Application 怎么定义？多环境、多集群怎么管理？"></a>Q6. Argo CD 的 Application 怎么定义？多环境、多集群怎么管理？</h3><ul>
+<li>【考察点】简历写”Argo CD GitOps”，多环境管理是生产必然场景，考察真实落地深度。</li>
+<li>【参考回答】Application 是一个 CRD，声明”哪个仓库、哪个路径、同步到哪个集群的哪个命名空间”。我管理多环境用两个手段：一是按路径分环境，<code>config/dev/</code>、<code>config/prod/</code> 两个目录，dev 的 Application 开自动同步，prod 的 Application 用 <code>automated</code> + <code>prune</code> 但发版走人工确认；二是环境差异用 Kustomize 的 overlay 或 Helm values 解决——同一套 base 清单，dev&#x2F;prod 覆盖不同镜像、副本数、资源限制。多集群用 ApplicationSet（git generator 或 list generator）批量生成 Application。一个关键的 sync 细节是 <code>syncOptions</code> 里 <code>CreateNamespace=true</code>（自动建命名空间）、<code>Prune=true</code>（删除 Git 里删掉的资源）、<code>SelfHeal=true</code>（发现集群被手改自动纠正回来）。同步顺序用 sync-waves 注解：先 CRD、再 ConfigMap、最后 Deployment。</li>
+<li>【追问 1】selfHeal 有什么风险？——集群上有人 <code>kubectl patch</code> 应急改的东西会被 Argo CD 5 分钟内改回去，所以生产要明确纪律：应急操作必须同时改 Git，否则会被”纠正”；实在要手动干预可以先暂停自动同步。</li>
+<li>【追问 2】Application 删了资源会没吗？——<code>kubectl delete application</code> 默认不级联删除资源（cascade 要显式开），但重建 Application 指向同路径会重新接管，所以一般先恢复 Application 再看资源。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q7-GitOps-的回滚到底怎么做？git-revert、argocd-rollback、reset-有什么区别？"><a href="#Q7-GitOps-的回滚到底怎么做？git-revert、argocd-rollback、reset-有什么区别？" class="headerlink" title="Q7. GitOps 的回滚到底怎么做？git revert、argocd rollback、reset 有什么区别？"></a>Q7. GitOps 的回滚到底怎么做？git revert、argocd rollback、reset 有什么区别？</h3><ul>
+<li>【考察点】回滚是 CD 的灵魂问题，面试官几乎必问，且最容易答得含糊。</li>
+<li>【参考回答】GitOps 回滚的本质是”把 Git 里的声明改回旧版本”，Argo CD 感知后把集群也拉回去。三条路径：第一，<code>git revert</code> 上一个提交，推上去自动同步——推荐，因为保留历史、可审计、符合 GitOps 原则；第二，<code>argocd app rollback &lt;app&gt; &lt;历史版本号&gt;</code>——它把集群状态回退到之前某个已同步版本，但不改 Git 仓库，会造成”集群和 Git 不一致”，只适合紧急止血；第三，<code>git reset --force</code> 强推——会重写历史，多人在用时不推荐。我生产上的标准流程是：紧急情况先 <code>argocd app rollback</code> 止血（或直接把 Deployment 的 image tag 改回旧 tag 推 Git），事后补 <code>git revert</code> 让 Git 和集群重新一致。</li>
+<li>【追问】回滚能成功的前提是什么？——镜像 tag 必须是不可变的（用 commit SHA 或构建号做 tag），如果 tag 是 <code>latest</code>，旧清单指向的镜像可能已经被新镜像覆盖，回滚等于白回。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q8-GitOps-和传统-CD（Jenkins-直接部署）的本质区别是什么？"><a href="#Q8-GitOps-和传统-CD（Jenkins-直接部署）的本质区别是什么？" class="headerlink" title="Q8. GitOps 和传统 CD（Jenkins 直接部署）的本质区别是什么？"></a>Q8. GitOps 和传统 CD（Jenkins 直接部署）的本质区别是什么？</h3><ul>
+<li>【考察点】考察原理理解深度，只会”会操作”答不好这题。</li>
+<li>【参考回答】本质区别四点：一是驱动方向，传统 CD 是 push 模式——CI 服务器主动 ssh 到目标机或调 kubeconfig 执行部署；GitOps 是 pull 模式——集群里的控制器主动从 Git 拉取声明。二是状态管理，传统 CD 部署完就完了，集群实际状态没人持续校验，谁手改了没人知道；GitOps 里 Argo CD 持续对比 Git 与集群，漂移（drift）会被标记 OutOfSync，配 selfHeal 自动纠正。三是回滚，传统 CD 回滚靠重跑旧脚本&#x2F;旧制品，容易”脚本对不上当前环境”；GitOps 回滚就是改 Git。四是权限与审计，传统 CD 通常要一个”能操作所有集群的凭证”，泄露风险大；GitOps 里改集群的入口收敛为”改 Git + 仓库权限 + MR 评审”，谁改了什么、为什么，git log 一目了然，符合等保审计要求。</li>
+<li>【追问】pull 模式有什么缺点？——多了一层组件（Argo CD 本身要维护、要高可用）；Git 与集群网络必须通；对”非声明式”的临时操作（调试、数据修复）不友好。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q9-Cert-Manager-Let’s-Encrypt-自动证书是怎么实现的？HTTP-01-和-DNS-01-区别？"><a href="#Q9-Cert-Manager-Let’s-Encrypt-自动证书是怎么实现的？HTTP-01-和-DNS-01-区别？" class="headerlink" title="Q9. Cert-Manager + Let’s Encrypt 自动证书是怎么实现的？HTTP-01 和 DNS-01 区别？"></a>Q9. Cert-Manager + Let’s Encrypt 自动证书是怎么实现的？HTTP-01 和 DNS-01 区别？</h3><ul>
+<li>【考察点】简历明确写了 Cert-Manager，必须能讲出完整机制而不是”装了个工具”。</li>
+<li>【参考回答】原理：Cert-Manager 是 K8s 里的证书控制器，我配了一个 ClusterIssuer 对接 Let’s Encrypt ACME 服务，然后给 Ingress 加注解，它自动申请、签发、注入、续期证书。核心配置：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">cert-manager.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterIssuer</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">letsencrypt-prod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">acme:</span></span><br><span class="line">    <span class="attr">server:</span> <span class="string">https://acme-v02.api.letsencrypt.org/directory</span></span><br><span class="line">    <span class="attr">email:</span> <span class="string">ops@example.com</span></span><br><span class="line">    <span class="attr">privateKeySecretRef:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">letsencrypt-prod-account</span></span><br><span class="line">    <span class="attr">solvers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">http01:</span></span><br><span class="line">          <span class="attr">ingress:</span></span><br><span class="line">            <span class="attr">class:</span> <span class="string">nginx</span></span><br></pre></td></tr></table></figure>
+
+<p>  Ingress 加注解 <code>cert-manager.io/cluster-issuer: letsencrypt-prod</code>，证书自动写到指定 Secret，nginx 自动加载。HTTP-01 是”Let’s Encrypt 访问你的域名 <code>/.well-known/acme-challenge/</code> 验证域名归属”，要求 80 端口公网可达；DNS-01 是”往 DNS 加一条 TXT 记录验证”，不依赖 80 端口，适合内网&#x2F;端口受限场景，阿里云用 <code>cert-manager-webhook-aliyun</code> 这类 webhook 自动加记录。续期是自动的：证书有效期 90 天，Cert-Manager 在剩余约 1&#x2F;3 时自动 renew，全程无感。</p>
+<ul>
+<li>【追问】证书没签发怎么排查？——<code>kubectl get certificate</code> 看状态，<code>kubectl describe certificate</code>、查 CertificateRequest 和 Order&#x2F;Challenge 的 events：HTTP-01 不通多是 ingress class 不匹配或 80 端口没通；DNS-01 失败多是 webhook 的 accessKey 权限不够。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q10-金丝雀-灰度发布在-K8s-里怎么真正落地？Argo-Rollouts-用过吗？"><a href="#Q10-金丝雀-灰度发布在-K8s-里怎么真正落地？Argo-Rollouts-用过吗？" class="headerlink" title="Q10. 金丝雀&#x2F;灰度发布在 K8s 里怎么真正落地？Argo Rollouts 用过吗？"></a>Q10. 金丝雀&#x2F;灰度发布在 K8s 里怎么真正落地？Argo Rollouts 用过吗？</h3><ul>
+<li>【考察点】从”知道策略名词”到”能落地”，这是运维和 DevOps 的分水岭问题。</li>
+<li>【参考回答】落地有两条路。轻量方案：nignx-ingress 的金丝雀注解，新版本 Deployment 先起少量副本，ingress 按权重切流量：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">networking.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Ingress</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/canary:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line">    <span class="attr">nginx.ingress.kubernetes.io/canary-weight:</span> <span class="string">&quot;10&quot;</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+<p>  观察 10% 流量没问题，把 weight 改成 30、50、100 逐步放量；出问题改回 0。这个方案简单，但”观察 + 决策 + 改注解”还是人工的。进阶方案：Argo Rollouts，它把 Deployment 换成 Rollout 资源，用 steps 定义放量节奏，还能配 Analysis（对接 Prometheus 指标自动判断成败）：指标异常自动 abort 回滚到 stable 版本，全程不需要人盯着。我实际用的更多是前者（配合 Argo CD 管理清单），理解思路比背工具重要。</p>
+<ul>
+<li>【追问】金丝雀和蓝绿能结合吗？——能，Argo Rollouts 支持 canary 里带蓝绿语义（先起全套新版本、切流量、保留旧版本若干时间），关键是大流量服务要保证新旧版本同时在线时的容量。</li>
+<li>【岗位标注】DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q11-多环境流水线（dev-staging-prod）怎么设计？环境晋升（promotion）怎么做？"><a href="#Q11-多环境流水线（dev-staging-prod）怎么设计？环境晋升（promotion）怎么做？" class="headerlink" title="Q11. 多环境流水线（dev&#x2F;staging&#x2F;prod）怎么设计？环境晋升（promotion）怎么做？"></a>Q11. 多环境流水线（dev&#x2F;staging&#x2F;prod）怎么设计？环境晋升（promotion）怎么做？</h3><ul>
+<li>【考察点】生产级流水线设计，考察是否只管过单环境。</li>
+<li>【参考回答】我的设计原则：”一次构建、多处部署”——同一 commit 只构建一次镜像，tag 用 <code>$CI_COMMIT_SHA</code>，dev&#x2F;staging&#x2F;prod 只是把同一个镜像按各自环境配置部署。流水线分三段：dev 全自动（提交即构建即部署）；staging 自动部署但接自动化冒烟测试，测试挂了流水线红；prod 用 <code>when: manual</code> 人工点击 + 环境变量控制：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy-prod:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_COMMIT_BRANCH == &quot;main&quot;&#x27;</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">manual</span></span><br><span class="line">  <span class="attr">variables:</span></span><br><span class="line">    <span class="attr">ENV:</span> <span class="string">prod</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">./deploy.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>  promotion（晋升）的核心是”制品不可变 + 环境配置分离”：镜像只有一个，各环境差异（域名、副本数、资源配置）全部收在各自的 values&#x2F;overlay 里，谁晋升只是把同一镜像指到下一环境，这样 staging 测过的东西 prod 一定一样，杜绝”prod 又拉了个新镜像”的经典事故。Argo CD 侧就是三个 Application 指向三个目录，手动晋升 &#x3D; 触发 prod 目录的同步。</p>
+<ul>
+<li>【追问】人工审批除了手动 job 还有什么做法？——GitLab 的 Environment Approval（环境审批规则）、或者 MR 评审本身作为门槛。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q12-GitOps-里密钥（secrets）怎么管理？仓库里能放-Secret-吗？"><a href="#Q12-GitOps-里密钥（secrets）怎么管理？仓库里能放-Secret-吗？" class="headerlink" title="Q12. GitOps 里密钥（secrets）怎么管理？仓库里能放 Secret 吗？"></a>Q12. GitOps 里密钥（secrets）怎么管理？仓库里能放 Secret 吗？</h3><ul>
+<li>【考察点】安全敏感点：Git 是版本库，把 Secret 明文放进去等于把密钥写进历史，面试官必挖。</li>
+<li>【参考回答】原则：明文 Secret 绝对不能进 Git 仓库，哪怕私有仓库也不行——历史删不掉、权限难收。成熟方案三种：Sealed Secrets（Bitnami）：把 Secret 用公钥加密成 SealedSecret 存进 Git，集群内控制器私钥解密生成真 Secret，仓库里只有密文，简单好用；External Secrets Operator：Git 里只放一个”引用”（SecretStore + ExternalSecret），真正密钥存在 Vault&#x2F;AWS Secrets Manager&#x2F;阿里云 KMS 里，控制器运行时拉取，密钥轮换不用改 Git；SOPS：配合 age&#x2F;PGP 加密 YAML 里的敏感字段。我这边密钥少，用的 External Secrets + Vault 思路，Harbor&#x2F;镜像仓库这类凭证走 GitLab CI&#x2F;CD Variables 的 protected + masked，不进 yml。如果发现历史里已经放过明文，用 <code>git filter-repo</code> 或 BFG 清理并强制轮换密钥。</li>
+<li>【追问 1】Sealed Secrets 和 External Secrets 怎么选？——密钥改动频繁、要轮换选 External Secrets；就想”把加密后的 Secret 版本化管理”选 Sealed Secrets。</li>
+<li>【追问 2】Pod 里挂载 Secret 有什么注意？——Secret 更新后默认不会自动重载到已运行的 Pod，要么滚动重启，要么用 reloader 组件监听自动滚动。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<hr>
+<h2 id="四、生产实战·刁钻篇（10-题）"><a href="#四、生产实战·刁钻篇（10-题）" class="headerlink" title="四、生产实战·刁钻篇（10 题）"></a>四、生产实战·刁钻篇（10 题）</h2><h3 id="Q1-简历写”部署效率提升-60-”，这个-60-是怎么算出来的？"><a href="#Q1-简历写”部署效率提升-60-”，这个-60-是怎么算出来的？" class="headerlink" title="Q1. 简历写”部署效率提升 60%”，这个 60% 是怎么算出来的？"></a>Q1. 简历写”部署效率提升 60%”，这个 60% 是怎么算出来的？</h3><ul>
+<li>【追问 1】20 分钟里能不能再优化？——能，构建的 15 分钟主要是冷缓存编译，上构建缓存和并行 stage 后能再压缩 30%。</li>
+<li>【追问 2】有没有反面指标？——有，早期 Argo CD 自动同步刚开时出过一次”同步删掉了不该删的资源”的教训，后来加了 prune 白名单和评审，这是后话了。</li>
+<li>【岗位标注】通用 &#x2F; DevOps &#x2F; 运维 &#x2F; 技术支持 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q2-生产上镜像-push-一直失败，报-413-Request-Entity-Too-Large，怎么排查？"><a href="#Q2-生产上镜像-push-一直失败，报-413-Request-Entity-Too-Large，怎么排查？" class="headerlink" title="Q2. 生产上镜像 push 一直失败，报 413 Request Entity Too Large，怎么排查？"></a>Q2. 生产上镜像 push 一直失败，报 413 Request Entity Too Large，怎么排查？</h3><ul>
+<li>【考察点】真实故障场景，考察排查思路是否成体系（链路式排查），而不是背命令。</li>
+<li>【参考回答】413 是”请求体太大”，说明请求到达了某个反代&#x2F;网关但被大小限制拦了。链路排查：先是哪一层报的——如果 <code>docker push</code> 直接报 413，通常是 Harbor 前面 nginx 的 <code>client_max_body_size</code> 限制，默认配置对大镜像（几个 G 的 AI 推理镜像常见）不够，改 <code>/etc/nginx/nginx.conf</code> 里 <code>client_max_body_size 0;</code>（不限）或调大到 8g 后 reload；如果经过了自己的网关&#x2F;负载均衡，还要检查那一层的 body 限制（如云 SLB、Ingress 的 <code>proxy-body-size</code> 注解）。同时配合其他可能：401 是认证问题（robot 账号过期、权限只给了 pull）、500&#x2F;502 是 Harbor 后端故障（看 <code>/var/log/harbor/</code> 日志）、超时是网络。还有一个高频坑是磁盘满——Harbor 数据盘满时 push 会报 500 或空间不足，先 <code>df -h</code> 看数据盘，配合前面的保留策略 + GC 清理。</li>
+<li>【追问】排查时先看什么日志？——先看报错输出本身（docker push 的 stderr 是分层的，能定位到第几层失败），再看 Harbor core&#x2F;nginx 容器日志，最后看数据盘和 Harbor 健康检查页。</li>
+<li>【岗位标注】运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q3-生产发布失败了，你的完整回滚流程是什么？从发现到恢复多久？"><a href="#Q3-生产发布失败了，你的完整回滚流程是什么？从发现到恢复多久？" class="headerlink" title="Q3. 生产发布失败了，你的完整回滚流程是什么？从发现到恢复多久？"></a>Q3. 生产发布失败了，你的完整回滚流程是什么？从发现到恢复多久？</h3><ul>
+<li>【考察点】刁钻点：面试官要的是”操作序列 + 决策点”，不是”我会回滚”。</li>
+<li>【参考回答】我的标准动作分三步。第一步止血判定：同步或部署失败、应用不可用时，先确认是”新版本自身问题”还是”环境问题”——看 Argo CD 的 Sync&#x2F;Health 状态和 Pod 日志，1 分钟内判断。第二步回滚：优先 <code>git revert</code> 上一个发布提交并推送（Argo CD 自动同步回旧声明，干净、留痕）；如果判断是紧急服务不可用，直接 <code>argocd app rollback &lt;app&gt; &lt;上上个同步版本&gt;</code> 秒级拉回，同时知会团队”集群与 Git 暂时不一致，稍后补 revert”。第三步验证与复盘：<code>argocd app get</code> 确认 Healthy、拨测接口确认恢复，然后排查根因（镜像问题？配置问题？依赖不兼容？），补测试用例，必要时把失败版本做成不可变 tag 保留供分析。恢复时间：蓝绿&#x2F;回滚操作本身 1-2 分钟，加上判定时间一般 5 分钟内恢复。</li>
+<li>【追问】如果回滚的旧版本镜像已经没了怎么办？——说明镜像保留策略把旧 tag 清了，这是教训：生产镜像保留策略要保留足够历史（比如最近 30 个 tag 或 90 天），否则”回滚没有弹药”。我们的保留策略就是为此设计的。</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q4-镜像-tag-用的是-latest，为什么-Argo-CD-永远显示-Synced、新代码根本没上线？"><a href="#Q4-镜像-tag-用的是-latest，为什么-Argo-CD-永远显示-Synced、新代码根本没上线？" class="headerlink" title="Q4. 镜像 tag 用的是 latest，为什么 Argo CD 永远显示 Synced、新代码根本没上线？"></a>Q4. 镜像 tag 用的是 latest，为什么 Argo CD 永远显示 Synced、新代码根本没上线？</h3><ul>
+<li>【考察点】经典生产事故：把 GitOps”只认清单”的特性当 bug 考你。</li>
+<li>【参考回答】因为 Argo CD 对比的是”Git 清单”和”集群状态”，而清单里 image 写的是 <code>nginx:latest</code>——latest 变了，但清单文本一个字没变，Git 没有新提交，Argo CD 认为声明没变化，自然不触发同步，也不会标记 OutOfSync。这是 immutable tag 问题的根源：latest 是”可变的引用”，不是版本。解决方案是强制不可变 tag：CI 里用 <code>$CI_COMMIT_SHA</code>（前 7 位）或构建号做 tag，并且 CI 要把新 tag 写回 Git 清单并提交（我们就是 Jenkinsfile 里用 yq 把 image 字段改成 <code>harbor.internal/library/my-nginx:0.$&#123;BUILD_NUMBER&#125;</code> 再 push 仓库，触发 Argo CD）。配套还可以上 Argo CD Image Updater 自动检测新镜像更新清单，但前提也是 tag 有语义（不可变 + 可排序）。</li>
+<li>【追问】还想用 latest 的话怎么兜底？——可以用 <code>argocd-image-updater</code> 的 tag 策略（semver&#x2F;最新）定期比对 registry，但它解决不了”镜像已覆盖、历史不可追溯”的根本问题，生产还是建议不可变 tag。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q5-流水线越来越慢，从哪些维度排查和优化？给个排查顺序。"><a href="#Q5-流水线越来越慢，从哪些维度排查和优化？给个排查顺序。" class="headerlink" title="Q5. 流水线越来越慢，从哪些维度排查和优化？给个排查顺序。"></a>Q5. 流水线越来越慢，从哪些维度排查和优化？给个排查顺序。</h3><ul>
+<li>【考察点】面试官模拟你接手一条老流水线，考察系统性思维。</li>
+<li>【参考回答】按”先定位再优化”排：第一步看 pipeline 耗时分解（GitLab 界面每个 job 的耗时），找出最慢的 stage——是构建、测试还是 push？第二步看是否”每个 job 都在拉大基础镜像”：把 <code>image: golang:1.21</code> 换成预装了缓存的镜像，或用 Harbor 代理缓存 docker.io，内网拉取能省几十秒到几分钟。第三步看构建缓存：无缓存构建是大头，检查 BuildKit 缓存、依赖目录 cache、<code>--cache-from</code>，一般能砍 40% 以上。第四步看并行度：同 stage 的 job 是否串行了（没并行的话把能拆的 job 拆开、配置足够的 Runner 并发）；是否所有 job 挤在一个 Runner 上。第五步看 artifacts&#x2F;日志：大 artifacts 上传下载慢，<code>expire_in</code> 和路径裁剪；日志太多也拖慢。最后看 Runner 本身：磁盘 IO、内存、docker 镜像存储清理（<code>docker system prune</code>）。优化顺序永远是”先测耗时分布 → 打最大的点”，不要盲目上缓存。</li>
+<li>【追问】Runner 队列堵了怎么判断？——GitLab 的 CI&#x2F;CD → Jobs 里 pending 的 job 数量，pending 多说明 Runner 并发不足或 tag 匹配不上（注册的 tag 和 job 的 tags 对不上，job 会一直 pending）。</li>
+<li>【岗位标注】DevOps &#x2F; 运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q6-trivy-扫出高危漏洞，但业务着急上线，你作为运维怎么处理？"><a href="#Q6-trivy-扫出高危漏洞，但业务着急上线，你作为运维怎么处理？" class="headerlink" title="Q6. trivy 扫出高危漏洞，但业务着急上线，你作为运维怎么处理？"></a>Q6. trivy 扫出高危漏洞，但业务着急上线，你作为运维怎么处理？</h3><ul>
+<li>【考察点】安全 vs 业务的真实博弈，考察原则性 + 可操作性（不是无脑放行也不是无脑卡死）。</li>
+<li>【参考回答】我的处理是”分层决策 + 留痕豁免”，而不是一刀切。第一步评估严重性：<code>trivy image --severity HIGH,CRITICAL --ignore-unfixed</code> 看具体 CVE——是否可远程利用？是否暴露在公网入口？目标端口是否被防火墙挡了？很多高危漏洞在网络层面就被隔离了，风险可控。第二步找修复路径：基础镜像升级能不能解（比如换 alpine 小版本）？能解就花 10 分钟重构建，这通常是最优解。第三步确需紧急上线：走豁免流程——在 Harbor 项目的 CVE allowlist 里加白名单并填备注（关联 ticket），或 CI 里用 <code>.trivyignore</code> 文件按 CVE ID 豁免，同时必须记录：上线窗口、责任人、修复计划日期、事后补发修复版本。绝不允许的做法：为上线临时把扫描 stage 删掉或把 <code>--exit-code</code> 去掉——那是把安全门禁整个拆了。</li>
+<li>【追问】Harbor 的 allowlist 和 CI 的 ignore 有什么区别？——allowlist 管”仓库侧扫描结果展示与拦截”，ignore 管”CI 门禁是否放行”，生产上建议两者都用且都留痕，单一处豁免容易被绕过。</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q7-GitOps-模式下，谁能改生产？怎么防止有人直接-kubectl-改集群或者改坏-Git？"><a href="#Q7-GitOps-模式下，谁能改生产？怎么防止有人直接-kubectl-改集群或者改坏-Git？" class="headerlink" title="Q7. GitOps 模式下，谁能改生产？怎么防止有人直接 kubectl 改集群或者改坏 Git？"></a>Q7. GitOps 模式下，谁能改生产？怎么防止有人直接 kubectl 改集群或者改坏 Git？</h3><ul>
+<li>【考察点】治理问题：GitOps 不是”装个 Argo CD 就完事”，权限设计才是落地难点。</li>
+<li>【参考回答】三层治理。第一层 Git 侧：生产清单在 protected branch 上，所有变更走 Merge Request，必须 code review + 流水线通过才能合并——改生产 &#x3D; 过评审，这是第一道闸。第二层 Argo CD 侧：RBAC 用 policy.csv 控制谁能 sync&#x2F;rollback 哪个项目，比如 <code>p, role:admin, applications, *, *, allow</code>，普通开发者只给 view 权限；Application 之间的 Project 隔离，生产项目只有运维角色能操作。第三层集群侧：Argo CD 的 ServiceAccount 只给需要的 namespace 最小权限（不要给 cluster-admin），甚至 <code>projects</code> 里限制 <code>destinations</code>（只能部署到指定集群&#x2F;命名空间）；<code>kubectl apply -f</code> 直连集群的权限收拢到运维专用账号。防止”改坏 Git”靠的是：revert 而非 reset（不重写历史）、push 前本地 <code>git diff</code> 检查、CI 里加清单校验（<code>kubectl apply --dry-run=client</code> 或 kubeconform 校验 yaml 合法性）。</li>
+<li>【追问】有人直接在集群里改了资源（漂移）怎么办？——自愈（selfHeal）开着就会自动纠正回去，同时可以配 webhook 告警提醒”检测到漂移已纠正”，从流程上杜绝”绕过 Git”。</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q8-Argo-CD-或-Harbor-本身挂了，发布体系瘫痪了，你怎么恢复？平时做什么准备？"><a href="#Q8-Argo-CD-或-Harbor-本身挂了，发布体系瘫痪了，你怎么恢复？平时做什么准备？" class="headerlink" title="Q8. Argo CD 或 Harbor 本身挂了，发布体系瘫痪了，你怎么恢复？平时做什么准备？"></a>Q8. Argo CD 或 Harbor 本身挂了，发布体系瘫痪了，你怎么恢复？平时做什么准备？</h3><ul>
+<li>【考察点】”运维自己也是要运维的”，考察高可用意识和灾备实操。</li>
+<li>【参考回答】分两个层面。平时准备：Argo CD 和 Harbor 都以多副本高可用部署（Argo CD 2+ 副本 + repo-server 扩容，Harbor 前面负载均衡 + 数据盘定期快照 + 复制规则把镜像同步到灾备仓库），关键配置 <code>argocd-cm</code>、<code>argocd-rbac-cm</code>、<code>argocd-secret</code>、Harbor 的配置和数据目录做定期备份，并演练过恢复流程。故障恢复：Argo CD 挂了不影响已部署应用（它只是控制器，Pod 照跑），影响的是”新发布”——此时可以先手动 <code>kubectl apply</code> 应急，Argo CD 恢复后如果清单一致会自动接管；Argo CD 应用本身崩溃就 <code>kubectl -n argocd rollout restart deployment/argocd-server</code> 或看 argocd-repo-server 日志。Harbor 挂了影响构建推镜像，应急办法是让 CI 暂时推到备用仓库（提前配好镜像同步&#x2F;备用地址），Harbor 恢复后补同步；数据盘坏了就从快照恢复，镜像丢了靠复制规则从灾备拉回。</li>
+<li>【追问】为什么 Argo CD 挂了应用还能跑？——Argo CD 只是”声明与集群状态的调解器”，它不在应用的数据路径上；只要集群 API 正常，已创建的 Deployment 由 kubelet&#x2F;controller-manager 继续维护。</li>
+<li>【岗位标注】运维</li>
+</ul>
+<h3 id="Q9-证书一直没签发，或者-Let’s-Encrypt-报-rate-limit-429，怎么排查和处理？"><a href="#Q9-证书一直没签发，或者-Let’s-Encrypt-报-rate-limit-429，怎么排查和处理？" class="headerlink" title="Q9. 证书一直没签发，或者 Let’s Encrypt 报 rate limit 429，怎么排查和处理？"></a>Q9. 证书一直没签发，或者 Let’s Encrypt 报 rate limit 429，怎么排查和处理？</h3><ul>
+<li>【考察点】Cert-Manager 真实排障，考察事件链（Certificate → CertificateRequest → Order → Challenge）是否熟悉。</li>
+<li>【参考回答】排查按事件链走：<code>kubectl get certificate</code> 看状态，不是 Ready 就看 <code>kubectl describe certificate</code> 里的事件，会指到 CertificateRequest；再 <code>kubectl get certificaterequest</code>、<code>kubectl get order</code>、<code>kubectl get challenge</code> 逐层看，每一层的 reason&#x2F;events 都能定位问题。常见三类：HTTP-01 失败——ingress class 和 Issuer solver 里写的 class 不一致（或挑战路径被网关拦）、80 端口没通、域名解析到别处；DNS-01 失败——webhook 的 accessKey 权限不足、TXT 记录没生效（等 DNS 传播）；rate limit——Let’s Encrypt 每个注册域名每周 50 张证书、重复证书每周 5 张，429 说明触发限流，处理：换测试用 staging issuer（<code>https://acme-staging-v02.api.letsencrypt.org</code>），别用生产环境反复试错；生产 429 只能等窗口期，期间临时用自签证书顶一下并通知用户。另外记得检查是不是”每个 Ingress 都独立申请了证书”导致数量爆炸——同域名用同一 Secret 复用证书。</li>
+<li>【追问】怎么监控证书快过期？——cert-manager 会自动续期（剩余 1&#x2F;3 生命周期时），但要做兜底告警：Prometheus 的 <code>certmanager_certificate_expiration_timestamp_seconds</code> 指标，剩余 7 天告警；也有 blackbox 探测 HTTPS 证书过期时间。</li>
+<li>【岗位标注】运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q10-金丝雀放量到-50-时指标异常，你怎么快速处理？为什么不是直接-kubectl-delete-新版本？"><a href="#Q10-金丝雀放量到-50-时指标异常，你怎么快速处理？为什么不是直接-kubectl-delete-新版本？" class="headerlink" title="Q10. 金丝雀放量到 50% 时指标异常，你怎么快速处理？为什么不是直接 kubectl delete 新版本？"></a>Q10. 金丝雀放量到 50% 时指标异常，你怎么快速处理？为什么不是直接 kubectl delete 新版本？</h3><ul>
+<li>【考察点】应急决策 + 对发布体系机制的理解，考察”治标”和”治本”。</li>
+<li>【参考回答】快速处理三步：第一步止损——金丝雀流量权重立刻改回 0（ingress 注解 <code>canary-weight: &quot;0&quot;</code> 或删 canary 注解），流量全部回到稳定版本；如果是 Argo Rollouts，执行 <code>kubectl argo rollouts abort &lt;rollout&gt;</code>，它会自动切回 stable 版本。第二步保留现场——新版本 Deployment&#x2F;Rollout 先不删，保留 Pod 抓日志、看监控、dump 现场，方便定位根因；直接 <code>kubectl delete</code> 会把证据一起删了，这是为什么不建议直接删。第三步复盘——定位是代码问题还是配置问题，修好后走完整发布流程重新金丝雀。同时要把这次异常沉淀成 Analysis 规则：Argo Rollouts 里可以配 Prometheus 查询（错误率、P99 延迟）作为自动判断条件，下次指标一超直接自动 abort，不需要人盯着。</li>
+<li>【追问】为什么金丝雀要用独立 Deployment 而不是改原 Deployment 的镜像？——独立 Deployment 才能让新旧版本并行、互不干扰，回滚时旧版本副本还在；改原 Deployment 镜像等于直接全量替换，就失去金丝雀的意义了。</li>
+<li>【岗位标注】DevOps &#x2F; AI 运维 &#x2F; 运维</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+              <a href="/tags/CI-CD/" rel="tag"># CI/CD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/terraform-interview/" rel="prev" title="Terraform 面试问答（26 题）">
+                  <i class="fa fa-chevron-left"></i> Terraform 面试问答（26 题）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/shell-python-interview/" rel="next" title="Shell 与 Python 面试问答（34 题）">
+                  Shell 与 Python 面试问答（34 题） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="0ccbd36ac743d12b8cbbb75c37bcc81f"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: '30px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
+
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
+
+  <div class="aplayer" 
+  data-id="18010222564" 
+  data-server="netease" 
+  data-type="playlist" 
+  data-fixed="true" 
+  data-autoplay="false" 
+  data-order="list" 
+  data-volume="0.5" 
+  data-theme="#1da496" 
+  data-preload="auto" >
+  </div>
+
+</body>
+</html>

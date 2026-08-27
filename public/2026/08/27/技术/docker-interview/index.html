@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"nustarain.pages.dev","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文整理了Docker 面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖Docker、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 面试问答（34 题）">
+<meta property="og:url" content="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/docker-interview/index.html">
+<meta property="og:site_name" content="Leo Blog">
+<meta property="og:description" content="本文整理了Docker 面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖Docker、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-27T01:05:00.000Z">
+<meta property="article:modified_time" content="2026-08-27T09:39:04.479Z">
+<meta property="article:author" content="Burgess Leo">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/docker-interview/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/docker-interview/","path":"2026/08/27/技术/docker-interview/","title":"Docker 面试问答（34 题）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Docker 面试问答（34 题） | Leo Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}.beian img{display:inline-block!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Leo Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">刘晓鹏的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-house fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tag fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-folder fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-box-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B2%97%E4%BD%8D%E9%AB%98%E9%A2%91%E9%80%9F%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">一、岗位高频速查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E7%A1%80%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、基础篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E4%BB%80%E4%B9%88%E6%98%AF-Docker%EF%BC%9F%E5%AE%B9%E5%99%A8%E5%92%8C%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">Q1. 什么是 Docker？容器和虚拟机有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E9%95%9C%E5%83%8F%E5%92%8C%E5%AE%B9%E5%99%A8%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">Q2. 镜像和容器是什么关系？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-docker-run-%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">Q3. docker run 最常用的参数有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E9%95%9C%E5%83%8F%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">Q4. 镜像相关的常用命令有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-%E5%AE%B9%E5%99%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9Fdocker-stop-%E5%92%8C-docker-kill-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">Q5. 容器的生命周期命令有哪些？docker stop 和 docker kill 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-docker-exec-%E5%92%8C-docker-attach-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">Q6. docker exec 和 docker attach 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%9A%84%E7%8A%B6%E6%80%81%E3%80%81%E8%B5%84%E6%BA%90%E5%8D%A0%E7%94%A8%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">Q7. 如何查看容器的状态、资源占用和进程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-%E6%95%B0%E6%8D%AE%E5%8D%B7%EF%BC%88volume%EF%BC%89%E5%92%8C-bind-mount-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F%E6%80%8E%E4%B9%88%E9%80%89%EF%BC%9F"><span class="nav-number">2.8.</span> <span class="nav-text">Q8. 数据卷（volume）和 bind mount 有什么区别？怎么选？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-Dockerfile-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9FCOPY-%E5%92%8C-ADD%E3%80%81CMD-%E5%92%8C-ENTRYPOINT-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.9.</span> <span class="nav-text">Q9. Dockerfile 常用指令有哪些？COPY 和 ADD、CMD 和 ENTRYPOINT 有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F-p-%E5%92%8C-P-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.10.</span> <span class="nav-text">Q10. 端口映射怎么做？-p 和 -P 的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E5%AE%B9%E5%99%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E6%80%8E%E4%B9%88%E4%BC%A0%EF%BC%9FENV-%E5%92%8C-ARG-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">2.11.</span> <span class="nav-text">Q11. 容器环境变量怎么传？ENV 和 ARG 的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-docker-build-%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F-dockerignore-%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">2.12.</span> <span class="nav-text">Q12. docker build 的流程是什么？.dockerignore 有什么用？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%BF%9B%E9%98%B6%E7%AF%87%EF%BC%8812-%E9%A2%98%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、进阶篇（12 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E9%95%9C%E5%83%8F%E5%88%86%E5%B1%82%E5%92%8C%E8%81%94%E5%90%88%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%88overlay2%EF%BC%89%E7%9A%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">Q1. 镜像分层和联合文件系统（overlay2）的原理是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-Dockerfile-%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">Q2. Dockerfile 的最佳实践有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E7%94%A8%E6%B3%95%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">Q3. 多阶段构建的原理和用法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E9%95%9C%E5%83%8F%E7%98%A6%E8%BA%AB%E6%9C%89%E5%93%AA%E4%BA%9B%E6%89%8B%E6%AE%B5%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">Q4. 镜像瘦身有哪些手段？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-Docker-%E7%9A%84%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%90%84%E8%87%AA%E9%80%82%E7%94%A8%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="nav-number">3.5.</span> <span class="nav-text">Q5. Docker 的网络模式有哪些？各自适用什么场景？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-%E5%AE%B9%E5%99%A8%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F%E2%80%93memory-%E5%92%8C-%E2%80%93cpus-%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">3.6.</span> <span class="nav-text">Q6. 容器资源限制怎么做？–memory 和 –cpus 怎么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%92%8C-cgroup-%E5%88%86%E5%88%AB%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">3.7.</span> <span class="nav-text">Q7. 命名空间和 cgroup 分别解决什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-HEALTHCHECK-%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E5%A4%B1%E8%B4%A5%E4%BC%9A%E6%80%8E%E4%B9%88%E6%A0%B7%EF%BC%9F"><span class="nav-number">3.8.</span> <span class="nav-text">Q8. HEALTHCHECK 怎么用？健康检查失败会怎么样？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E5%AD%98%E5%9C%A8%E5%93%AA%EF%BC%9F%E6%97%A5%E5%BF%97%E9%A9%B1%E5%8A%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E6%80%8E%E4%B9%88%E9%98%B2%E6%AD%A2%E6%97%A5%E5%BF%97%E8%86%A8%E8%83%80%EF%BC%9F"><span class="nav-number">3.9.</span> <span class="nav-text">Q9. 容器日志存在哪？日志驱动有哪些？怎么防止日志膨胀？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-docker-compose-%E6%80%8E%E4%B9%88%E7%BC%96%E6%8E%92%EF%BC%9Fdepends-on-%E8%83%BD%E4%BF%9D%E8%AF%81%E4%BE%9D%E8%B5%96%E5%B0%B1%E7%BB%AA%E5%90%97%EF%BC%9F"><span class="nav-number">3.10.</span> <span class="nav-text">Q10. docker-compose 怎么编排？depends_on 能保证依赖就绪吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E6%80%8E%E4%B9%88%E5%81%9A%E7%A7%81%E6%9C%89%E5%8C%96%EF%BC%9FHarbor-%E6%9C%89%E5%93%AA%E4%BA%9B%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B%EF%BC%9F"><span class="nav-number">3.11.</span> <span class="nav-text">Q11. 镜像仓库怎么做私有化？Harbor 有哪些核心能力？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-Docker-%E5%92%8C-Kubernetes-%E8%BF%90%E8%A1%8C%E6%97%B6%EF%BC%88containerd-CRI%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9FK8s-%E4%B8%8D%E7%94%A8-Docker-%E4%BA%86%E5%90%97%EF%BC%9F"><span class="nav-number">3.12.</span> <span class="nav-text">Q12. Docker 和 Kubernetes 运行时（containerd&#x2F;CRI）是什么关系？K8s 不用 Docker 了吗？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%94%9F%E4%BA%A7%E5%AE%9E%E6%88%98%C2%B7%E5%88%81%E9%92%BB%E7%AF%87%EF%BC%8810-%E9%A2%98%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、生产实战·刁钻篇（10 题）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-%E5%AE%B9%E5%99%A8%E5%86%85-PID1-%E5%92%8C%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%E9%97%AE%E9%A2%98%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B%EF%BC%9F%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">Q1. 容器内 PID1 和僵尸进程问题是怎么回事？怎么解决？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E5%AE%B9%E5%99%A8%E6%97%B6%E5%8C%BA%E9%97%AE%E9%A2%98%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%97%B6%E9%97%B4%E6%AF%94%E5%8C%97%E4%BA%AC%E6%97%B6%E9%97%B4%E5%B7%AE-8-%E5%B0%8F%E6%97%B6%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">Q2. 容器时区问题：为什么容器日志时间比北京时间差 8 小时？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-%E5%AE%B9%E5%99%A8%E9%87%8C-dev-shm-%E5%A4%AA%E5%B0%8F%E5%AF%BC%E8%87%B4%E5%BA%94%E7%94%A8%E6%8A%A5%E9%94%99%EF%BC%8C%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">Q3. 容器里 &#x2F;dev&#x2F;shm 太小导致应用报错，怎么处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E8%8A%82%E7%82%B9%E7%A3%81%E7%9B%98%E8%A2%AB%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%89%93%E6%BB%A1%EF%BC%8C%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E6%AD%A2%E8%A1%80%E5%92%8C%E6%A0%B9%E6%B2%BB%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">Q4. 节点磁盘被容器日志打满，怎么快速止血和根治？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-docker-stop-%E6%9D%80%E4%B8%8D%E6%8E%89%E8%BF%9B%E7%A8%8B-%E6%9C%8D%E5%8A%A1%E4%B8%8D%E4%BC%98%E9%9B%85%E9%80%80%E5%87%BA%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E5%92%8C%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-number">4.5.</span> <span class="nav-text">Q5. docker stop 杀不掉进程&#x2F;服务不优雅退出，怎么排查和解决？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-var-lib-docker-overlay2-%E5%8D%A0%E6%BB%A1%E7%A3%81%E7%9B%98%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%E5%92%8C%E6%B8%85%E7%90%86%EF%BC%9F"><span class="nav-number">4.6.</span> <span class="nav-text">Q6. &#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2 占满磁盘，怎么排查和清理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-%E4%BD%A0%E8%AF%B4%E2%80%9D100-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96%E2%80%9D%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E6%9C%89%E7%8A%B6%E6%80%81%E6%9C%8D%E5%8A%A1%E3%80%81%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E4%B9%9F%E5%AE%B9%E5%99%A8%E5%8C%96%E4%BA%86%E5%90%97%EF%BC%9F%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E4%B8%8D%E4%B8%A2%EF%BC%9F"><span class="nav-number">4.7.</span> <span class="nav-text">Q7. 你说”100% 服务容器化”——数据库、有状态服务、定时任务也容器化了吗？怎么保证数据不丢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-%E7%94%9F%E4%BA%A7%E6%95%85%E9%9A%9C%EF%BC%9A%E5%AE%B9%E5%99%A8%E7%AA%81%E7%84%B6%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E5%A4%96%E7%BD%91-%E6%9C%8D%E5%8A%A1%E9%97%B4%E4%B8%8D%E9%80%9A%EF%BC%8C%E6%80%8E%E4%B9%88%E6%8E%92%E6%9F%A5%EF%BC%9F"><span class="nav-number">4.8.</span> <span class="nav-text">Q8. 生产故障：容器突然访问不了外网&#x2F;服务间不通，怎么排查？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-%E5%AE%B9%E5%99%A8%E4%B8%80%E7%9B%B4%E5%9C%A8%E9%87%8D%E5%90%AF%EF%BC%88restarting%EF%BC%89%EF%BC%8C%E9%80%80%E5%87%BA%E7%A0%81%E6%80%8E%E4%B9%88%E8%A7%A3%E8%AF%BB%EF%BC%9F%E6%80%8E%E4%B9%88%E5%AE%9A%E4%BD%8D%EF%BC%9F"><span class="nav-number">4.9.</span> <span class="nav-text">Q9. 容器一直在重启（restarting），退出码怎么解读？怎么定位？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-%E5%AE%B9%E5%99%A8%E9%87%8D%E5%BB%BA%E5%90%8E%E7%AB%AF%E5%8F%A3%E5%86%B2%E7%AA%81-%E6%95%B0%E6%8D%AE%E2%80%9D%E4%B8%A2%E4%BA%86%E2%80%9D%EF%BC%8C%E5%88%86%E5%88%AB%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-number">4.10.</span> <span class="nav-text">Q10. 容器重建后端口冲突&#x2F;数据”丢了”，分别怎么处理？</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Burgess Leo"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Burgess Leo</p>
+  <div class="site-description" itemprop="description">网上乌托邦，心底陶乐庄。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/burgess-5" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;burgess-5" rel="noopener me" target="_blank">知乎</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/191948068/?_i=1723803500_oqk" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;191948068&#x2F;?_i&#x3D;1723803500_oqk" rel="noopener me" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxp731" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxp731" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/7840418804" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;7840418804" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/docker-interview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Burgess Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Leo Blog">
+      <meta itemprop="description" content="网上乌托邦，心底陶乐庄。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Docker 面试问答（34 题） | Leo Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker 面试问答（34 题）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-08-27 09:05:00 / 修改时间：17:39:04" itemprop="dateCreated datePublished" datetime="2026-08-27T09:05:00+08:00">2026-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Docker 面试问答（34 题）" href="/2026/08/27/%E6%8A%80%E6%9C%AF/docker-interview/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::f7b584ff8def0d365bae811c6e3bdea1" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文整理了Docker 面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖Docker、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>适用岗位：运维工程师 &#x2F; 技术支持工程师 &#x2F; AI 运维工程师 &#x2F; DevOps 工程师</p>
+</blockquote>
+<hr>
+<h2 id="一、岗位高频速查"><a href="#一、岗位高频速查" class="headerlink" title="一、岗位高频速查"></a>一、岗位高频速查</h2><table>
+<thead>
+<tr>
+<th>岗位</th>
+<th>必考问题（3-5 个）</th>
+<th>一句话要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运维工程师</td>
+<td>① 容器与虚拟机区别 ② 镜像分层与 overlay2 ③ 资源限制（–memory&#x2F;–cpus）与 OOM 排查 ④ 日志膨胀与日志轮转 ⑤ Docker 与 containerd&#x2F;CRI 的关系</td>
+<td>侧重生产排障与资源管理，会被追问”100% 容器化”里数据库、存储怎么处理</td>
+</tr>
+<tr>
+<td>技术支持工程师</td>
+<td>① docker run 常用参数 ② 如何进容器排查（exec&#x2F;logs）③ 端口映射与卷挂载 ④ docker-compose 启动一套服务 ⑤ 容器起不来的常见原因</td>
+<td>侧重能上手操作、帮客户定位问题，深度要求低但命令必须熟</td>
+</tr>
+<tr>
+<td>AI 运维工程师</td>
+<td>① 容器资源限制与 GPU 共享（–cpus&#x2F;–memory&#x2F;–gpus）② &#x2F;dev&#x2F;shm 太小与多进程共享内存 ③ 镜像瘦身与模型镜像（几个 GB 的 PyTorch 镜像）④ 日志与监控采集 ⑤ 用 compose&#x2F;K8s 部署 LLM 推理服务</td>
+<td>侧重内存&#x2F;性能&#x2F;大镜像，会被追问数据加载、共享内存、OOM 场景</td>
+</tr>
+<tr>
+<td>DevOps 工程师</td>
+<td>① Dockerfile 最佳实践与多阶段构建 ② CI&#x2F;CD 中镜像构建（GitLab CI + Harbor）③ docker-compose 编排与依赖 ④ HEALTHCHECK 与优雅停机 ⑤ 镜像安全（扫描、签名、不可变 tag）</td>
+<td>侧重构建流程、流水线、仓库管理与发布，会被追问缓存与瘦身细节</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、基础篇（12-题）"><a href="#二、基础篇（12-题）" class="headerlink" title="二、基础篇（12 题）"></a>二、基础篇（12 题）</h2><h3 id="Q1-什么是-Docker？容器和虚拟机有什么区别？"><a href="#Q1-什么是-Docker？容器和虚拟机有什么区别？" class="headerlink" title="Q1. 什么是 Docker？容器和虚拟机有什么区别？"></a>Q1. 什么是 Docker？容器和虚拟机有什么区别？</h3><ul>
+<li>【考察点】基本概念是否清楚，能否一句话讲清”进程级隔离 vs 硬件级虚拟化”</li>
+<li>【参考回答】我理解容器本质上是”被隔离的一组进程”：它和宿主机共享内核，通过命名空间做隔离、cgroup 做资源限制，所以启动只要秒级、镜像只要几十 MB。虚拟机则是硬件级虚拟化，有完整的 Guest OS，隔离更彻底但启动要几十秒、占用几个 GB。所以我们的选型原则是：需要内核隔离、要跑不可信代码、要独立内核的场景用虚拟机；普通业务服务全部容器化，资源利用率高、交付快。Docker 本身 &#x3D; 镜像 + 容器 + 仓库 + 客户端&#x2F;守护进程这一整套。</li>
+<li>【追问】既然共享内核，为什么容器里能跑 CentOS、Ubuntu 不同发行版？<ul>
+<li>答：共享的是内核，不是用户态。不同 base image 只是用户态的工具链和 glibc 版本不同，最终系统调用都走宿主机内核。反过来也说明：如果应用依赖特定内核版本、内核模块或设备驱动，容器就跑不了，这是容器化的边界。</li>
+</ul>
+</li>
+<li>【追问】什么场景下容器不如虚拟机？<ul>
+<li>答：跑不可信代码、需要强隔离、需要独立内核（比如老内核模块依赖）时；还有 Windows 容器在 Linux 宿主上跑不了这种平台限制。</li>
+</ul>
+</li>
+<li>【岗位标注】通用</li>
+</ul>
+<h3 id="Q2-镜像和容器是什么关系？"><a href="#Q2-镜像和容器是什么关系？" class="headerlink" title="Q2. 镜像和容器是什么关系？"></a>Q2. 镜像和容器是什么关系？</h3><ul>
+<li>【考察点】是否理解”镜像&#x3D;只读模板，容器&#x3D;可写运行实例”</li>
+<li>【参考回答】镜像是分层的只读模板，由 Dockerfile 一步步构建出来，可以 push 到仓库分发；容器是镜像启动后的运行实例，等于”镜像只读层 + 一个容器可写层 + 运行时状态（进程、网络、挂载）”。同一个镜像可以同时起几十个互不影响的容器。排查问题常会用到：把容器文件系统打包成镜像用 docker commit，但生产发布我从来不用它，因为不可复现，只用来临时保存排障现场。</li>
+<li>【追问】docker commit 和 docker build 有什么区别？<ul>
+<li>答：commit 是把某个容器的可写层直接提交成新镜像，黑盒、不可复现；build 是按 Dockerfile 从零构建，可审计可缓存，才是正规发布路径。</li>
+</ul>
+</li>
+<li>【岗位标注】通用</li>
+</ul>
+<h3 id="Q3-docker-run-最常用的参数有哪些？"><a href="#Q3-docker-run-最常用的参数有哪些？" class="headerlink" title="Q3. docker run 最常用的参数有哪些？"></a>Q3. docker run 最常用的参数有哪些？</h3><ul>
+<li>【考察点】基本功是否扎实，能否一口气说出常用参数并解释含义</li>
+<li>【参考回答】我常用的：<code>-d</code> 后台运行、<code>-p 宿主机端口:容器端口</code> 端口映射、<code>-v 宿主机路径:容器路径</code> 挂载卷、<code>-e KEY=VALUE</code> 传环境变量、<code>--name</code> 命名、<code>-it</code> 交互式终端（进容器调试）、<code>--rm</code> 退出即删（临时容器）、<code>--restart=always</code> 设置重启策略、<code>--network</code> 指定网络、<code>--memory/--cpus</code> 资源限制。举个例子：<code>docker run -d --name nginx --restart=always -p 80:80 -e TZ=Asia/Shanghai nginx:1.25</code>。</li>
+<li>【追问】–rm 和 -d 能一起用吗？–rm 配合 –restart 有意义吗？<ul>
+<li>答：–rm 和 -d 可以一起用，容器退出时自动删除；但 –rm 和 –restart 一起用没有意义，重启策略是让容器退出后重新拉起，而 –rm 是退出就删，语义冲突，实际以 –restart 为准、–rm 被忽略。</li>
+</ul>
+</li>
+<li>【追问】–restart&#x3D;always 和 unless-stopped 的区别？<ul>
+<li>答：都是退出后自动重启；区别在 Docker 守护进程重启后：always 会把之前手动 stop 的容器也重新拉起，unless-stopped 尊重手动 stop 的状态不拉起。生产上我一般用 unless-stopped，避免维护时重启 docker 把不该起的容器带起来。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q4-镜像相关的常用命令有哪些？"><a href="#Q4-镜像相关的常用命令有哪些？" class="headerlink" title="Q4. 镜像相关的常用命令有哪些？"></a>Q4. 镜像相关的常用命令有哪些？</h3><ul>
+<li>【考察点】镜像管理命令是否熟练，是否知道 save&#x2F;load 与 export&#x2F;import 的区别</li>
+<li>【参考回答】构建 <code>docker build</code>、打 tag <code>docker tag</code>、推送&#x2F;拉取 <code>docker push/pull</code>、查看 <code>docker images</code>、删除 <code>docker rmi</code>、查看构建历史 <code>docker history</code>、导出导入 <code>docker save -o x.tar</code> &#x2F; <code>docker load -i x.tar</code>。save&#x2F;load 保留镜像分层和构建历史，是官方推荐的迁移方式；export&#x2F;import 是导容器的文件系统，分层全丢，一般不用。另外 <code>docker image prune</code> 清理悬空镜像，<code>docker system df</code> 看磁盘占用分布。</li>
+<li>【追问】离线环境怎么把镜像带进去？<ul>
+<li>答：<code>docker save</code> 打成 tar 拷进去 <code>docker load</code>；更规范的是起一个私有 Harbor&#x2F;registry，离线预先把镜像 push 进去，节点从内网拉。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q5-容器的生命周期命令有哪些？docker-stop-和-docker-kill-有什么区别？"><a href="#Q5-容器的生命周期命令有哪些？docker-stop-和-docker-kill-有什么区别？" class="headerlink" title="Q5. 容器的生命周期命令有哪些？docker stop 和 docker kill 有什么区别？"></a>Q5. 容器的生命周期命令有哪些？docker stop 和 docker kill 有什么区别？</h3><ul>
+<li>【考察点】生命周期管理细节，是否知道 stop 是”先 SIGTERM 后 SIGKILL”</li>
+<li>【参考回答】创建 <code>create</code>、启动 <code>start</code>、停止 <code>stop</code>、重启 <code>restart</code>、暂停 <code>pause/unpause</code>、强杀 <code>kill</code>、删除 <code>rm</code>、进容器 <code>exec</code>、看日志 <code>logs</code>、看资源 <code>stats</code>、看进程 <code>top</code>、看配置 <code>inspect</code>。核心区别：<code>docker stop</code> 先发 SIGTERM 给主进程，默认等 10 秒（可用 <code>-t</code> 改），超时才发 SIGKILL；<code>docker kill</code> 默认直接 SIGKILL（可以 <code>-s SIGTERM</code> 指定信号）。pause 是发 SIGSTOP，进程还在、资源不释放。</li>
+<li>【追问】生产上服务要优雅停机，你会怎么配合？<ul>
+<li>答：应用注册 shutdown hook（Java 的 <code>@PreDestroy</code>&#x2F;Spring graceful shutdown），入口脚本用 <code>exec</code> 让主进程成为 PID1 接收信号；把 <code>STOPSIGNAL</code> 设成应用真正监听的信号，必要时 <code>docker stop -t 30</code> 放宽超时。上线前用 <code>docker kill -s SIGTERM &lt;id&gt;</code> 实测一遍。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维</li>
+</ul>
+<h3 id="Q6-docker-exec-和-docker-attach-有什么区别？"><a href="#Q6-docker-exec-和-docker-attach-有什么区别？" class="headerlink" title="Q6. docker exec 和 docker attach 有什么区别？"></a>Q6. docker exec 和 docker attach 有什么区别？</h3><ul>
+<li>【考察点】是否踩过 attach 的坑</li>
+<li>【参考回答】attach 是连接到容器主进程的 stdin&#x2F;stdout&#x2F;stderr，相当于把自己接到主进程终端上，按 Ctrl+C 会给主进程发 SIGINT，可能把容器带崩；exec 是在容器里新起一个进程。所以日常调试我只用 <code>docker exec -it &lt;容器&gt; sh</code>（容器里没有 bash 就用 sh），不会用 attach。批量操作脚本里常用 <code>docker exec &lt;id&gt; cmd</code> 非交互执行。</li>
+<li>【追问】容器里连 sh 都没有怎么办？<ul>
+<li>答：<code>docker cp</code> 拷一个静态 busybox 进去，或者看是不是 distroless 镜像（本来就无 shell，设计如此），这种情况就靠 logs 和外部观测，不要硬进。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q7-如何查看容器的状态、资源占用和进程？"><a href="#Q7-如何查看容器的状态、资源占用和进程？" class="headerlink" title="Q7. 如何查看容器的状态、资源占用和进程？"></a>Q7. 如何查看容器的状态、资源占用和进程？</h3><ul>
+<li>【考察点】排障基本功：ps&#x2F;stats&#x2F;top&#x2F;inspect&#x2F;logs 各看什么</li>
+<li>【参考回答】<code>docker ps -a</code> 看状态（Up&#x2F;Exited&#x2F;restarting）、退出码和启动时间；<code>docker stats</code> 实时看 CPU&#x2F;内存&#x2F;网络，能直接发现谁在吃资源；<code>docker top &lt;id&gt;</code> 看容器内进程；<code>docker inspect &lt;id&gt;</code> 看完整配置，我用 <code>--format</code> 提取字段，比如 <code>docker inspect -f &#39;&#123;&#123;.State.ExitCode&#125;&#125; &#123;&#123;.State.OOMKilled&#125;&#125;&#39; &lt;id&gt;</code>；<code>docker port &lt;id&gt;</code> 看端口映射；<code>docker logs -f &lt;id&gt;</code> 看输出。</li>
+<li>【追问】docker stats 里的内存和宿主机 free 对不上，为什么？<ul>
+<li>答：stats 显示的是容器 cgroup 的 usage，里面包含了页缓存 page cache；看真实进程占用要 <code>docker top</code> 后按 RSS 算，或者看 cgroup 的 memory.stat。这也是排查”容器显示内存 1G 但实际没那么多”的关键。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q8-数据卷（volume）和-bind-mount-有什么区别？怎么选？"><a href="#Q8-数据卷（volume）和-bind-mount-有什么区别？怎么选？" class="headerlink" title="Q8. 数据卷（volume）和 bind mount 有什么区别？怎么选？"></a>Q8. 数据卷（volume）和 bind mount 有什么区别？怎么选？</h3><ul>
+<li>【考察点】持久化方案是否清楚，是否踩过权限坑</li>
+<li>【参考回答】volume 是 Docker 管理的目录，存在 <code>/var/lib/docker/volumes/&lt;名字&gt;/_data</code>，用 <code>docker volume create</code> 或 compose 里声明；bind mount 直接映射宿主机路径：<code>-v /opt/data:/app/data</code>。volume 更”docker 原生”：权限自动处理、跨容器共享方便、备份迁移用 <code>docker run --volumes-from</code> 或直接拷 _data；bind mount 适合挂配置文件（nginx.conf）、开发热更新代码，但权限完全看宿主机文件，容器里是 root 或非 root 用户时容易遇到 Permission denied。生产持久化数据我优先用命名 volume，配置文件用 bind mount 只读挂载。</li>
+<li>【追问】容器删了，数据还在吗？<ul>
+<li>答：命名 volume 和 bind mount 都在，容器删除不影响；但匿名卷（<code>-v /data</code> 不写名字）在 <code>docker rm -v</code> 时会被删，不带 -v 删容器会留下悬空卷。所以重要数据必须用命名卷或 bind mount，并且做备份，这是生产教训。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 运维</li>
+</ul>
+<h3 id="Q9-Dockerfile-常用指令有哪些？COPY-和-ADD、CMD-和-ENTRYPOINT-有什么区别？"><a href="#Q9-Dockerfile-常用指令有哪些？COPY-和-ADD、CMD-和-ENTRYPOINT-有什么区别？" class="headerlink" title="Q9. Dockerfile 常用指令有哪些？COPY 和 ADD、CMD 和 ENTRYPOINT 有什么区别？"></a>Q9. Dockerfile 常用指令有哪些？COPY 和 ADD、CMD 和 ENTRYPOINT 有什么区别？</h3><ul>
+<li>【考察点】Dockerfile 基本功，两个最常问的对比</li>
+<li>【参考回答】常用：<code>FROM</code> 基础镜像、<code>RUN</code> 执行构建命令、<code>COPY/ADD</code> 复制文件、<code>CMD/ENTRYPOINT</code> 定义启动命令、<code>ENV/ARG</code> 变量、<code>WORKDIR</code> 工作目录、<code>EXPOSE</code> 声明端口、<code>USER</code> 指定运行用户、<code>HEALTHCHECK</code> 健康检查、<code>VOLUME</code> 声明卷。COPY 只做纯复制；ADD 多了解压 tar 包和拉远程 URL 两个能力，但行为隐式、不推荐，一律用 COPY。CMD 是默认启动命令，能被 <code>docker run</code> 后面的参数覆盖；ENTRYPOINT 是固定入口，覆盖不了。最佳实践：<code>ENTRYPOINT [&quot;nginx&quot;]</code> + <code>CMD [&quot;-g&quot;,&quot;daemon off;&quot;]</code> 组合，两者都写成 exec 形式（JSON 数组），不要写 shell 形式，否则信号转发会有问题。</li>
+<li>【追问】为什么建议 exec 形式而不是 shell 形式？<ul>
+<li>答：shell 形式实际执行的是 <code>/bin/sh -c &quot;命令&quot;</code>，sh 成为 PID1，SIGTERM 发给 sh 它不一定转发给子进程，导致优雅停机失效、僵尸进程堆积；exec 形式直接 exec 目标程序，信号直达。这正好对应生产里”docker stop 杀不掉进程”的常见根因。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q10-端口映射怎么做？-p-和-P-的区别？"><a href="#Q10-端口映射怎么做？-p-和-P-的区别？" class="headerlink" title="Q10. 端口映射怎么做？-p 和 -P 的区别？"></a>Q10. 端口映射怎么做？-p 和 -P 的区别？</h3><ul>
+<li>【考察点】网络基础，是否知道 EXPOSE 只是声明</li>
+<li>【参考回答】<code>-p 8080:80</code> 把宿主机 8080 映射到容器 80，<code>-p 127.0.0.1:8080:80</code> 限制只监听本机回环，<code>-P</code> 把所有 EXPOSE 的端口随机映射到宿主机高位端口（<code>docker port</code> 可查）。注意 EXPOSE 只是文档性声明，不映射任何端口，真正生效的是 -p 和 dockerd 维护的 iptables DNAT 规则。host 网络模式没有映射概念，直接用宿主机端口。</li>
+<li>【追问】端口冲突报 bind: address already in use 怎么排查？<ul>
+<li>答：<code>ss -lntp</code> 看宿主机端口被谁占用，<code>docker ps</code> 看现有映射，换端口或停掉占用进程；容器内进程监听问题用 <code>docker exec &lt;id&gt; ss -lntp</code>（容器里没有 ss 就用 netstat 或 &#x2F;proc）。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q11-容器环境变量怎么传？ENV-和-ARG-的区别？"><a href="#Q11-容器环境变量怎么传？ENV-和-ARG-的区别？" class="headerlink" title="Q11. 容器环境变量怎么传？ENV 和 ARG 的区别？"></a>Q11. 容器环境变量怎么传？ENV 和 ARG 的区别？</h3><ul>
+<li>【考察点】构建期&#x2F;运行期变量体系是否清楚，是否有安全意识</li>
+<li>【参考回答】运行时用 <code>-e KEY=VALUE</code> 或 <code>--env-file .env</code> 传入，<code>docker inspect</code> 里能看到，compose 里用 <code>environment:</code> 或 <code>env_file:</code>。Dockerfile 里 ENV 是运行期环境变量（会被 -e 覆盖），ARG 是构建期参数（<code>--build-arg</code> 传入）。关键安全点：ENV 会留在镜像历史里，<code>docker history</code> 一查就能看到明文密码，所以密码这类敏感信息我从不写进 Dockerfile，用运行时注入或 secret（BuildKit 的 <code>--mount=type=secret</code>）。</li>
+<li>【追问】Compose 里 .env 和 env_file 有什么区别？<ul>
+<li>答：<code>.env</code> 是给 compose 文件本身做变量替换用的（<code>$&#123;VAR&#125;</code>），<code>env_file:</code> 是把文件内容注入容器环境变量；两者用途不同，别混。</li>
+</ul>
+</li>
+<li>【岗位标注】通用 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q12-docker-build-的流程是什么？-dockerignore-有什么用？"><a href="#Q12-docker-build-的流程是什么？-dockerignore-有什么用？" class="headerlink" title="Q12. docker build 的流程是什么？.dockerignore 有什么用？"></a>Q12. docker build 的流程是什么？.dockerignore 有什么用？</h3><ul>
+<li>【考察点】构建原理是否理解，是否知道”上下文”概念</li>
+<li>【参考回答】<code>docker build -t name:tag .</code> 时，docker 会把 . 目录作为构建上下文发给守护进程（传统模式），然后按 Dockerfile 逐条指令执行，每条指令产出一个镜像层；指令和上下文文件没变就命中缓存复用。<code>.dockerignore</code> 排除 <code>node_modules</code>、<code>.git</code>、<code>*.log</code>、<code>target/</code> 这类目录，作用有三：上下文变小、构建更快、避免缓存被无关文件破坏，还能防止把密钥文件打进镜像。</li>
+<li>【追问】为什么我只改了一行代码，前面好多步骤都重新跑了？<ul>
+<li>答：因为缓存 key 是”指令本身 + 上游层 + 该指令 COPY 的文件变化”。比如你先 <code>COPY . .</code> 再 <code>RUN make</code>，那 COPY 这一层因为整个目录内容变了就失效，后面全失效。所以 Dockerfile 的经典顺序是：先 COPY 依赖清单（requirements.txt&#x2F;package.json）装依赖，最后再 COPY 业务代码。</li>
+</ul>
+</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<hr>
+<h2 id="三、进阶篇（12-题）"><a href="#三、进阶篇（12-题）" class="headerlink" title="三、进阶篇（12 题）"></a>三、进阶篇（12 题）</h2><h3 id="Q1-镜像分层和联合文件系统（overlay2）的原理是什么？"><a href="#Q1-镜像分层和联合文件系统（overlay2）的原理是什么？" class="headerlink" title="Q1. 镜像分层和联合文件系统（overlay2）的原理是什么？"></a>Q1. 镜像分层和联合文件系统（overlay2）的原理是什么？</h3><ul>
+<li>【考察点】是否真懂”分层”，而不是只背概念</li>
+<li>【参考回答】镜像由若干只读层叠加，每层对应 Dockerfile 一条指令产生的变更；overlay2 把镜像各层作为 lowerdir，容器可写层是 upperdir，叠加出一个 merged 视图给容器看。读文件时如果 lower 有就直接读；第一次写某个文件会触发 copy-up，把文件从 lower 层拷到 upper 层再改（写时复制），所以”改一个文件”实际是”复制+改”，对小文件没感觉，对超大文件是性能陷阱。删除 lower 层的文件时会在 upper 层打 whiteout 标记。分层让多个镜像共享底层（比如都基于同一个 base），磁盘占用小、pull 只拉差量。</li>
+<li>【追问】overlay2 目录在哪？怎么确认当前用的存储驱动？<ul>
+<li>答：在 <code>/var/lib/docker/overlay2/</code>，<code>docker info | grep &quot;Storage Driver&quot;</code> 查看，也可以 <code>docker inspect &lt;id&gt;</code> 看 <code>GraphDriver</code> 字段的 lowerdir&#x2F;upperdir&#x2F;merged 路径。存储驱动选型依赖内核支持，主流发行版默认 overlay2，老的 aufs 已经很少见了。</li>
+</ul>
+</li>
+<li>【追问】写超大文件时 copy-up 性能很差，生产怎么规避？<ul>
+<li>答：把大数据放在卷里而不是打进镜像层；写操作多的目录（日志、缓存）挂 volume 或 tmpfs，避免反复 copy-up。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q2-Dockerfile-的最佳实践有哪些？"><a href="#Q2-Dockerfile-的最佳实践有哪些？" class="headerlink" title="Q2. Dockerfile 的最佳实践有哪些？"></a>Q2. Dockerfile 的最佳实践有哪些？</h3><ul>
+<li>【考察点】生产级 Dockerfile 素养：体积、缓存、安全</li>
+<li>【参考回答】我总结几条硬规则：① 基础镜像固定 tag，绝不裸用 latest；② 尽量合并 RUN（<code>RUN apt-get update &amp;&amp; apt-get install -y xxx &amp;&amp; rm -rf /var/lib/apt/lists/*</code>），装完就清包管理器缓存；③ COPY 顺序按”变化频率从小到大”排，依赖清单在前、业务代码最后，最大化缓存命中；④ 用多阶段构建，运行镜像里不残留编译器；⑤ 用非 root 用户（<code>USER</code>），避免容器内 root 权限过大；⑥ 一个容器一个主进程；⑦ 加 HEALTHCHECK；⑧ .dockerignore 排除无关文件。</li>
+<li>【追问】有人把 apt-get update 和 install 拆成两个 RUN 想利用缓存，你怎么看？<ul>
+<li>答：这个其实踩过坑——apt-get update 和 install 拆开，update 层被缓存后，如果源仓库更新了，install 可能装到过期或损坏的包（经典的 “stale apt cache” 问题）。所以必须写在一起，这也说明”合并 RUN”不只是为了省层数。</li>
+</ul>
+</li>
+<li>【追问】USER 非 root 后权限问题怎么处理？<ul>
+<li>答：COPY 时用 <code>--chown=app:app</code>，挂载卷注意宿主机目录属主，不然会报 Permission denied；实在要写特定目录就在 RUN 里 mkdir 并 chown。</li>
+</ul>
+</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q3-多阶段构建的原理和用法？"><a href="#Q3-多阶段构建的原理和用法？" class="headerlink" title="Q3. 多阶段构建的原理和用法？"></a>Q3. 多阶段构建的原理和用法？</h3><ul>
+<li>【考察点】是否用过、能否手写一个</li>
+<li>【参考回答】核心：Dockerfile 里可以有多个 FROM，只有最后一个阶段的产物进最终镜像，前面阶段（build 阶段）用完即弃。举例 Go 项目：<code>FROM golang:1.21 AS build</code> 里 go build，然后 <code>FROM alpine:3.19</code> 里 <code>COPY --from=build /app/server /app/server</code>，最终镜像只有编译好的二进制和运行时依赖，没有 Go 工具链和源码。Java 类似：maven 阶段编译打包，运行阶段用 JRE 基础镜像只拷 jar。好处：镜像从 1GB 级降到几十 MB，且构建机上的依赖不泄露进运行环境。</li>
+<li>【追问】–from 除了阶段名还能引用什么？<ul>
+<li>答：能直接引用外部镜像，比如 <code>COPY --from=nginx:alpine /etc/nginx/nginx.conf /etc/nginx/nginx.conf</code>，不用先 pull 成阶段；还能用 <code>--from=0</code> 按序号引用。多阶段也常用来做”构建完拷证书&#x2F;时区数据”这种小文件提取。</li>
+</ul>
+</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q4-镜像瘦身有哪些手段？"><a href="#Q4-镜像瘦身有哪些手段？" class="headerlink" title="Q4. 镜像瘦身有哪些手段？"></a>Q4. 镜像瘦身有哪些手段？</h3><ul>
+<li>【考察点】实战经验：能不能说出可落地的组合拳</li>
+<li>【参考回答】按效果排序：① 多阶段构建，把编译产物单独打包（最常见，见效最大）；② 基础镜像换 alpine（约 5MB，相对 ubuntu 的 70MB+）或 distroless（无 shell，更安全）；③ 清理包管理器缓存和临时文件，合并 RUN；④ .dockerignore 别把垃圾打进去；⑤ 静态编译语言直接上 scratch。我用 <code>docker images</code> 对比各版本大小、<code>docker history</code> 看哪一层大，定位”元凶层”。要注意：alpine 是 musl libc，某些 glibc 二进制（Oracle JDK、部分原生 .so）跑不了，这种情况换 distroless 或 ubuntu 更稳。</li>
+<li>【追问】–squash 为什么你不太推荐？<ul>
+<li>答：–squash 把多层压成一层，能减体积但会破坏层缓存（任何变更整个镜像重建），而且它是实验特性、各版本行为不一致；我更愿意从”少产生垃圾”入手而不是事后压层。</li>
+</ul>
+</li>
+<li>【追问】大模型&#x2F;AI 场景镜像特别大怎么办？<ul>
+<li>答：模型权重不打包进镜像（几百 GB 不现实），通过卷或对象存储挂载；镜像里只放推理框架和代码，用多阶段把 pip 缓存、训练代码剔除；GPU 场景选带 CUDA 运行库的专用基础镜像（如 nvidia&#x2F;cuda 的 runtime 版，不要 devel 版）。</li>
+</ul>
+</li>
+<li>【岗位标注】DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q5-Docker-的网络模式有哪些？各自适用什么场景？"><a href="#Q5-Docker-的网络模式有哪些？各自适用什么场景？" class="headerlink" title="Q5. Docker 的网络模式有哪些？各自适用什么场景？"></a>Q5. Docker 的网络模式有哪些？各自适用什么场景？</h3><ul>
+<li>【考察点】网络模型是否成体系，能不能讲清 DNS 和互通</li>
+<li>【参考回答】四种基础模式加一种自定义：① bridge（默认），容器接在 docker0 网桥上（默认 172.17.0.0&#x2F;16），靠 iptables 做 NAT 和外网通信，容器间通过网桥互通；② host，直接用宿主机网络栈，无 NAT 无隔离，性能最好但端口冲突、没隔离，适合对性能敏感或需要绑定固定端口连本机服务的场景（如监控 agent）；③ none，只有回环，跑隔离任务用；④ container:<id>，和另一个容器共享网络栈；⑤ 自定义 bridge（<code>docker network create</code>），生产主力——它自带嵌入式 DNS，容器能用<strong>服务名&#x2F;容器名</strong>互相访问，还能设置 <code>--internal</code> 完全隔离外网。跨主机通信单靠 docker 默认网桥不行，需要 overlay 网络或交给 K8s 的 CNI（calico&#x2F;flannel）解决。</id></li>
+<li>【追问】两个容器为什么不能用容器名互访？<ul>
+<li>答：默认 bridge 网络不带 DNS 解析，容器名解析是自定义网络的特性；这是很多人踩的坑——compose 里服务名能用是因为 compose 自动建了自定义网络。</li>
+</ul>
+</li>
+<li>【追问】容器访问外网的原理？为什么有人说”别乱清 iptables”？<ul>
+<li>答：出站靠 docker0 上 MASQUERADE 做 SNAT，入站端口映射靠 DOCKER 链的 DNAT；手动 <code>iptables -F</code> 清掉 FORWARD&#x2F;DOCKER 链，所有容器的网络就断了，重启 dockerd 会重建。排查”容器突然没网”第一件事就是看 iptables 的 FORWARD 策略是不是被 firewall 工具改成了 DROP。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q6-容器资源限制怎么做？–memory-和-–cpus-怎么用？"><a href="#Q6-容器资源限制怎么做？–memory-和-–cpus-怎么用？" class="headerlink" title="Q6. 容器资源限制怎么做？–memory 和 –cpus 怎么用？"></a>Q6. 容器资源限制怎么做？–memory 和 –cpus 怎么用？</h3><ul>
+<li>【考察点】cgroup 理解 + 实战参数 + OOM 排查</li>
+<li>【参考回答】<code>--memory/-m 512m</code> 是硬限制，超了直接被内核 OOM Killer 杀掉（退出码 137，State.OOMKilled&#x3D;true）；<code>--memory-swap 1g</code> 是”内存+swap”总量，不设的话默认是内存的 2 倍（swap 部分&#x3D;1 倍内存）；<code>--cpus 1.5</code> 限制最多用 1.5 个核（对应 cgroup v2 的 cpu.max），<code>--cpu-shares</code> 是相对权重不是硬限制；<code>--pids-limit 100</code> 限制进程数防 fork 炸弹；<code>--ulimit nofile=65535</code> 调文件句柄。生产上我每个服务都设 -m 和 –cpus，防止一个服务把节点打爆。验证是否生效：容器内看 <code>/sys/fs/cgroup/memory.max</code>、<code>cpu.max</code>（cgroup v2），宿主机 <code>systemd-cgls</code> 或 <code>docker inspect</code>。</li>
+<li>【追问】OOMKilled 的排查步骤？<ul>
+<li>答：① <code>docker inspect -f &#39;&#123;&#123;.State.OOMKilled&#125;&#125;&#39; &lt;id&gt;</code> 确认；② 宿主机 <code>dmesg | grep -i oom</code> 看谁被杀了；③ <code>docker stats</code> 看峰值内存，跟 -m 对比；④ 调整：加内存、优化应用内存（JVM 的 -Xmx 要小于容器 -m，这是经典坑）、或加 swap。特别提醒：JVM 容器里 -Xmx 设得比容器内存还大会被 OOM 杀，要留出堆外内存余量。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q7-命名空间和-cgroup-分别解决什么问题？"><a href="#Q7-命名空间和-cgroup-分别解决什么问题？" class="headerlink" title="Q7. 命名空间和 cgroup 分别解决什么问题？"></a>Q7. 命名空间和 cgroup 分别解决什么问题？</h3><ul>
+<li>【考察点】底层原理，判断是”会用”还是”懂”</li>
+<li>【参考回答】一句话：命名空间负责”看得见什么”（隔离），cgroup 负责”能用多少”（限制）。命名空间有：PID（进程表隔离，容器里 ps 只看到自己）、NET（独立网络栈）、MNT（挂载点视图）、UTS（hostname）、IPC（信号量&#x2F;消息队列）、USER（UID 映射，容器内 root 映射到宿主机非 root）、CGROUP（1.10+）。cgroup 负责 CPU、内存、PID 数、IO 的资源限制和统计。容器本质 &#x3D; 被命名空间隔离 + 被 cgroup 限制的一组进程，所以它比 VM 轻。</li>
+<li>【追问】容器里 ps 为什么只能看到自己的进程？<ul>
+<li>答：PID 命名空间隔离了进程表；如果想看宿主全部进程或做进程级监控，可以 <code>--pid=host</code>（要特权）或挂载 &#x2F;proc。</li>
+</ul>
+</li>
+<li>【追问】USER namespace 有什么用？为什么 K8s 默认不开？<ul>
+<li>答：它能把容器内 root 映射成宿主机普通 UID，即使容器逃逸也不是真 root，能显著降风险；但很多能力（挂载、设备、部分卷驱动）在 USER ns 下不兼容，所以 K8s 默认关闭，属于”知道但默认不开”的权衡点。</li>
+</ul>
+</li>
+<li>【岗位标注】运维</li>
+</ul>
+<h3 id="Q8-HEALTHCHECK-怎么用？健康检查失败会怎么样？"><a href="#Q8-HEALTHCHECK-怎么用？健康检查失败会怎么样？" class="headerlink" title="Q8. HEALTHCHECK 怎么用？健康检查失败会怎么样？"></a>Q8. HEALTHCHECK 怎么用？健康检查失败会怎么样？</h3><ul>
+<li>【考察点】是否真在生产里配置过，是否知道 start-period 的作用</li>
+<li>【参考回答】两种方式：Dockerfile 里 <code>HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 CMD curl -fsS http://localhost:8080/health || exit 1</code>，或运行时 <code>docker run --health-cmd=&quot;curl -fsS http://localhost:8080/health&quot;</code>。状态用 <code>docker inspect -f &#39;&#123;&#123;.State.Health.Status&#125;&#125;&#39; &lt;id&gt;</code> 看，starting&#x2F;healthy&#x2F;unhealthy 三态。start-period 很关键：给应用启动留缓冲，避免启动慢被误判。<strong>注意</strong>：健康检查失败本身不会重启容器，只是标记 unhealthy，要配合 <code>--restart</code>（restart 只在进程退出时生效，unhealthy 不会触发）或编排层（compose 的 depends_on condition、K8s 的 livenessProbe）才有动作。</li>
+<li>【追问】镜像里没有 curl 怎么办？<ul>
+<li>答：常见坑。可以装 curl（alpine 下 <code>apk add curl</code> 会增加体积），或用 wget，或用 Python <code>python -c</code>，或用 shell 的 <code>/dev/tcp</code> 探测；distroless 镜像就用 <code>CMD-SHELL</code> 配合 wget 或者干脆不配、交给 K8s probe。</li>
+</ul>
+</li>
+<li>【追问】K8s 的 livenessProbe 和 readinessProbe 有什么区别？<ul>
+<li>答：liveness 失败&#x3D;容器坏了要重启；readiness 失败&#x3D;还没就绪、从 Service 摘流量但不重启。对应”探活”和”流量开关”两个意图，和 Docker HEALTHCHECK（只有一态）不完全等价。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q9-容器日志存在哪？日志驱动有哪些？怎么防止日志膨胀？"><a href="#Q9-容器日志存在哪？日志驱动有哪些？怎么防止日志膨胀？" class="headerlink" title="Q9. 容器日志存在哪？日志驱动有哪些？怎么防止日志膨胀？"></a>Q9. 容器日志存在哪？日志驱动有哪些？怎么防止日志膨胀？</h3><ul>
+<li>【考察点】日志体系：存储位置、驱动、轮转，以及”docker logs 的限制”</li>
+<li>【参考回答】默认驱动 json-file，日志在 <code>/var/lib/docker/containers/&lt;容器ID&gt;/&lt;容器ID&gt;-json.log</code>，<strong>默认不轮转，会无限增长</strong>直到撑爆磁盘。全局配置在 <code>/etc/docker/daemon.json</code>：<code>&#123;&quot;log-driver&quot;:&quot;json-file&quot;,&quot;log-opts&quot;:&#123;&quot;max-size&quot;:&quot;10m&quot;,&quot;max-file&quot;:&quot;3&quot;&#125;&#125;</code>，改完重启 dockerd 只对新容器生效，老容器要重建。其他驱动：local（20.10+，自带压缩轮转，性能好）、journald（走系统日志）、syslog&#x2F;fluentd&#x2F;gelf&#x2F;splunk&#x2F;awslogs（转发到日志平台）。注意：<code>docker logs</code> 只对 json-file、journald、local（及 gelf）有效，fluentd&#x2F;syslog 等转发型驱动下 docker logs 是空的，很多人在这踩坑。</li>
+<li>【追问】生产日志方案怎么设计？<ul>
+<li>答：应用只往 stdout 打结构化日志（JSON），容器侧用 local 驱动或 max-size 限制本地量，采集端 filebeat&#x2F;fluentd 读 json.log 或直接接 journald 转发到 ELK&#x2F;Loki，日志平台做保留策略。禁止应用在容器内写大文件日志，一是占可写层、二是采集麻烦。</li>
+</ul>
+</li>
+<li>【追问】compose 里怎么配？<ul>
+<li>答：service 下加 <code>logging: driver: json-file, options: &#123;max-size: &quot;10m&quot;, max-file: &quot;3&quot;&#125;</code>。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q10-docker-compose-怎么编排？depends-on-能保证依赖就绪吗？"><a href="#Q10-docker-compose-怎么编排？depends-on-能保证依赖就绪吗？" class="headerlink" title="Q10. docker-compose 怎么编排？depends_on 能保证依赖就绪吗？"></a>Q10. docker-compose 怎么编排？depends_on 能保证依赖就绪吗？</h3><ul>
+<li>【考察点】编排实战：依赖控制、网络、卷、多环境</li>
+<li>【参考回答】compose 文件三个顶层：services&#x2F;volumes&#x2F;networks。核心点：① 服务之间自动建自定义网络，服务名就是 DNS，<code>web</code> 访问 <code>db:3306</code> 不用配 IP；② <code>depends_on</code> 只保证<strong>启动顺序</strong>，不保证就绪——数据库容器起来了但 MySQL 还没监听，应用连不上照样崩，正确做法是配合 healthcheck：<code>depends_on: db: condition: service_healthy</code>；③ 卷用顶层 <code>volumes:</code> 声明命名卷；④ 多环境用多个文件叠加：<code>docker compose -f base.yml -f prod.yml up -d</code>，变量用 <code>.env</code> 的 <code>$&#123;VAR&#125;</code> 替换；⑤ 常用命令 <code>docker compose up -d / down / ps / logs -f / exec / config</code>（v2 是 docker 子命令，v1 的 <code>docker-compose</code> 独立二进制已停止维护）。</li>
+<li>【追问】应用侧还需要做什么？depends_on 配了就万事大吉吗？<ul>
+<li>答：不行，网络抖动、重启都会导致依赖瞬时不可用，应用必须自己带重试和退避（数据库连接池配置、启动重试），healthcheck 只是把”大概率可用”提前，不能替代应用容错。</li>
+</ul>
+</li>
+<li>【追问】一个 compose 里几十个服务，怎么按环境只起一部分？<ul>
+<li>答：compose profiles，给服务标 <code>profiles: [dev]</code>，<code>--profile dev up</code> 按需启动；或者拆多个 compose 文件按环境叠加。</li>
+</ul>
+</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q11-镜像仓库怎么做私有化？Harbor-有哪些核心能力？"><a href="#Q11-镜像仓库怎么做私有化？Harbor-有哪些核心能力？" class="headerlink" title="Q11. 镜像仓库怎么做私有化？Harbor 有哪些核心能力？"></a>Q11. 镜像仓库怎么做私有化？Harbor 有哪些核心能力？</h3><ul>
+<li>【考察点】私有化落地能力（简历里有 Harbor + 离线部署）</li>
+<li>【参考回答】我主导的容器化项目里私有仓库用的 Harbor。它比裸 registry 强的点：① 项目级隔离 + RBAC，不同团队各自 project；② 镜像复制（push&#x2F;pull 两种模式），多机房就近同步，离线网络环境从中心仓库拉到边缘；③ 漏洞扫描（集成 Trivy），流水线里扫出高危就拦截；④ 不可变 tag，防止生产 tag 被覆盖（踩过”线上 tag 被冲”的坑）；⑤ 垃圾回收 GC 清理被删镜像占的空间；⑥ Robot 账号给 CI 用，不暴露个人密码；⑦ Webhook 通知下游。部署：官方 install.sh 离线装（依赖镜像提前打好 tar 导入），域名走 HTTPS 自签证书，各节点配置 insecure-registries 或信任 CA。使用流程：<code>docker tag img harbor.local/cmdb:v1.2 &amp;&amp; docker login harbor.local &amp;&amp; docker push harbor.local/cmdb:v1.2</code>。</li>
+<li>【追问】镜像仓库磁盘涨得很快怎么治理？<ul>
+<li>答：<code>docker system df</code> 只能看本机；仓库侧治理三板斧：tag 保留策略（只留最近 N 个）、定期跑 GC、命名规范（dev&#x2F;prod 分 project 分 tag）。CI 里顺手清理过期 tag。</li>
+</ul>
+</li>
+<li>【追问】内网 pull 慢、外网要加速怎么解？<ul>
+<li>答：节点配置 <code>registry-mirrors</code>（如阿里云加速器）拉公网镜像；内网统一从 Harbor 拉，Harbor 的复制能力把公网镜像同步进内网，业务完全离线。</li>
+</ul>
+</li>
+<li>【岗位标注】DevOps &#x2F; 运维</li>
+</ul>
+<h3 id="Q12-Docker-和-Kubernetes-运行时（containerd-CRI）是什么关系？K8s-不用-Docker-了吗？"><a href="#Q12-Docker-和-Kubernetes-运行时（containerd-CRI）是什么关系？K8s-不用-Docker-了吗？" class="headerlink" title="Q12. Docker 和 Kubernetes 运行时（containerd&#x2F;CRI）是什么关系？K8s 不用 Docker 了吗？"></a>Q12. Docker 和 Kubernetes 运行时（containerd&#x2F;CRI）是什么关系？K8s 不用 Docker 了吗？</h3><ul>
+<li>【考察点】”熟悉 K8S”的含金量，是否跟得上生态演进</li>
+<li>【参考回答】先说结论：K8s 从 1.24 起移除了 dockershim，默认不再通过 Docker Engine 创建容器，而是通过 CRI（容器运行时接口）对接 containerd 或 CRI-O；但<strong>镜像格式没变</strong>（OCI 标准），现有 Docker 镜像直接就能用，不用重新构建。再讲链路：Docker 内部其实早就集成了 containerd——<code>docker CLI → dockerd → containerd → containerd-shim → runc</code>；K8s 侧是 <code>kubelet → CRI(containerd cri 插件) → runc</code>。所以 containerd 既是 Docker 的底层，也是 K8s 的直接运行时，它是 CNCF 毕业项目。工具上：<code>ctr</code> 是 containerd 原生 CLI、<code>crictl</code> 是 CRI 标准 CLI（K8s 节点排障用）、<code>nerdctl</code> 是兼容 docker 语法的 CLI。</li>
+<li>【追问】节点上排查容器用 docker 命令不行吗？为什么用 crictl？<ul>
+<li>答：K8s 节点没装 dockerd 的话 docker 命令根本不可用；crictl 是节点排障标准：<code>crictl ps/exec/logs/inspect</code>，<code>crictl info</code> 看运行时。如果节点是通过 cri-dockerd 兼容层跑 Docker，那 crictl 和 docker 都看得到容器，但要搞清楚你在操作哪一层。</li>
+</ul>
+</li>
+<li>【追问】那 K8s 里的容器和 Docker 容器有什么本质区别？<ul>
+<li>答：底层都是 containerd+runc 起的 OCI 容器，区别在上层：K8s 有 Pod（一个 Pod 里多个容器共享网络栈和存储卷，对应 pause 沙箱容器）、有 CNI 网络插件管跨节点网络、kubelet 通过 CRI 下发生命周期指令，和 docker 单机模型完全不同。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps &#x2F; AI 运维</li>
+</ul>
+<hr>
+<h2 id="四、生产实战·刁钻篇（10-题）"><a href="#四、生产实战·刁钻篇（10-题）" class="headerlink" title="四、生产实战·刁钻篇（10 题）"></a>四、生产实战·刁钻篇（10 题）</h2><h3 id="Q1-容器内-PID1-和僵尸进程问题是怎么回事？怎么解决？"><a href="#Q1-容器内-PID1-和僵尸进程问题是怎么回事？怎么解决？" class="headerlink" title="Q1. 容器内 PID1 和僵尸进程问题是怎么回事？怎么解决？"></a>Q1. 容器内 PID1 和僵尸进程问题是怎么回事？怎么解决？</h3><ul>
+<li>【考察点】这是”熟练使用 vs 生产级”的分水岭，简历敢写精通必被问</li>
+<li>【参考回答】容器里 PID1 是主进程，它有两个隐藏职责：接收信号、回收孤儿进程（reap）。很多镜像的入口是 shell 或脚本，sh 起子进程后自己等在那里，子进程死了变僵尸没人 wait 回收，僵尸越堆越多，最终 <code>ps</code> 里全是 Z 状态，进程数吃满（配合 –pids-limit 直接触发限制）。我们生产上踩过，解决方案：① 最省事 <code>docker run --init</code>（Docker 内置 tini 作为 PID1）；② Dockerfile 里 <code>ENTRYPOINT [&quot;tini&quot;,&quot;--&quot;,&quot;你的程序&quot;]</code>；③ 自己写入口脚本时务必 <code>exec 程序</code> 让程序直接替换 shell 成为 PID1，同时循环 wait 回收子进程。</li>
+<li>【追问】怎么发现容器里有僵尸？<ul>
+<li>答：<code>docker exec &lt;id&gt; ps -ef | awk &#39;$3==1 &amp;&amp; $8~/Z/ &#123;print&#125;&#39;</code> 看状态为 Z 的进程；或者 <code>docker exec &lt;id&gt; top -b -n1 | grep zombie</code>。发现后不要幻想 kill 僵尸（杀不掉，它已经死了），要解决的是父进程的回收逻辑。</li>
+</ul>
+</li>
+<li>【追问】tini 的原理是什么？<ul>
+<li>答：tini 作为 PID1，主进程是它的子进程，它负责转发信号给主进程、并 wait 回收所有孤儿，主进程退出后它也退出，容器正常结束。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q2-容器时区问题：为什么容器日志时间比北京时间差-8-小时？"><a href="#Q2-容器时区问题：为什么容器日志时间比北京时间差-8-小时？" class="headerlink" title="Q2. 容器时区问题：为什么容器日志时间比北京时间差 8 小时？"></a>Q2. 容器时区问题：为什么容器日志时间比北京时间差 8 小时？</h3><ul>
+<li>【考察点】高频生产坑，几乎每个容器化项目都遇到</li>
+<li>【参考回答】因为容器镜像默认 UTC（很多基础镜像没装 tzdata），而业务在北京时间。排查链路：<code>date</code> 看容器内时间 → 确认 UTC → 修。修复三板斧：① 运行时注入 <code>-e TZ=Asia/Shanghai</code>（镜像要装 tzdata，alpine 需 <code>apk add tzdata</code>，Debian 系自带大部分情况生效）；② 挂载 <code>-v /etc/localtime:/etc/localtime:ro</code> 和 <code>/etc/timezone</code>；③ 最好在 Dockerfile 里固化。特别坑的是 Java：JVM 在启动时缓存默认时区，只改系统 TZ 不重启 JVM 不生效，要显式 <code>-Duser.timezone=Asia/Shanghai</code>；还有 Python 的某些日志库在 import 时缓存。教训：时区必须作为”镜像&#x2F;编排模板的标准项”固化，而不是每台机器手动改。</li>
+<li>【追问】线上已经跑着的容器怎么快速修？<ul>
+<li>答：<code>docker exec</code> 里改文件不持久，容器一重启就还原；正确做法是改 compose&#x2F;镜像配置重新部署。临时救火可以用 <code>-e TZ</code> 起新容器替换。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; AI 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q3-容器里-dev-shm-太小导致应用报错，怎么处理？"><a href="#Q3-容器里-dev-shm-太小导致应用报错，怎么处理？" class="headerlink" title="Q3. 容器里 &#x2F;dev&#x2F;shm 太小导致应用报错，怎么处理？"></a>Q3. 容器里 &#x2F;dev&#x2F;shm 太小导致应用报错，怎么处理？</h3><ul>
+<li>【考察点】AI 运维&#x2F;数据库场景的实战坑，简历里有 LLM 项目，大概率被问</li>
+<li>【参考回答】Docker 默认给容器 &#x2F;dev&#x2F;shm 只有 <strong>64MB</strong>，这是经典的”看着内存够却报错”的坑。典型症状：PostgreSQL 的并行查询&#x2F;会话内存、MySQL 临时表、Python multiprocessing 共享内存、PyTorch DataLoader 多进程 num_workers&gt;0 时疯狂报 “No space left on device” 或直接 OOM。解决：<code>docker run --shm-size=1g</code> 或 compose 里 <code>shm_size: 1g</code>；K8s 里用 <code>emptyDir: medium: Memory</code> 挂到 &#x2F;dev&#x2F;shm。定位方法：容器内 <code>df -h /dev/shm</code> 一看是 64M 基本就实锤了。</li>
+<li>【追问】为什么明明宿主内存充足，还报 No space left on device？<ul>
+<li>答：&#x2F;dev&#x2F;shm 是 tmpfs，容量上限就是挂载时定的大小，跟宿主剩余内存无关；超出就报磁盘满。这也是”内存限制没超、shm 却爆了”的迷惑性所在。</li>
+</ul>
+</li>
+<li>【追问】AI 推理服务一般设多大？<ul>
+<li>答：看并发和数据加载方式：DataLoader 多进程建议 2G 起步；PG 实例按 work_mem×连接数估；宁可给大（tmpfs 按需占内存）也别抠。</li>
+</ul>
+</li>
+<li>【岗位标注】AI 运维 &#x2F; 运维</li>
+</ul>
+<h3 id="Q4-节点磁盘被容器日志打满，怎么快速止血和根治？"><a href="#Q4-节点磁盘被容器日志打满，怎么快速止血和根治？" class="headerlink" title="Q4. 节点磁盘被容器日志打满，怎么快速止血和根治？"></a>Q4. 节点磁盘被容器日志打满，怎么快速止血和根治？</h3><ul>
+<li>【考察点】日志膨胀的完整处置流程（简历 100% 容器化改造必然涉及）</li>
+<li>【参考回答】处置分三步：<strong>止血</strong>：<code>df -h</code> 找到打满的挂载点，<code>du -sh /var/lib/docker/containers/*/*-json.log | sort -rh | head</code> 揪出大头，<code>truncate -s 0 &lt;该日志文件&gt;</code>（truncate 比 rm 安全，dockerd 还握着 fd，rm 后空间不释放）；如果连 docker 命令都跑不动，就直接 <code>truncate</code>。<strong>排查</strong>：<code>docker logs --tail 100 &lt;id&gt;</code> 看是不是死循环刷日志，应用层先停掉或限流。<strong>根治</strong>：daemon.json 全局配 <code>log-driver: json-file</code> + <code>log-opts: &#123;max-size: &quot;10m&quot;, max-file: &quot;3&quot;&#125;</code>，重启 dockerd；存量容器重建一次让配置生效；然后上日志采集（filebeat&#x2F;fluentd → ES&#x2F;Loki），本地只留小份。我还会把 <code>journald</code> 的 SystemMaxUse 一起限了，防止系统日志同样打满。</li>
+<li>【追问】docker logs –tail 能解决吗？<ul>
+<li>答：不能，–tail 只是不显示旧日志，json 文件还在继续涨；必须靠 max-size&#x2F;max-file 轮转或外部采集。–log-opt 的 max-file&#x3D;3 是”轮转保留 3 份 10M”，总共 30M 封顶。</li>
+</ul>
+</li>
+<li>【追问】为什么 rm 日志文件不释放空间？<ul>
+<li>答：因为 dockerd 仍持有该文件的写 fd，删除后 inode 还在被写，直到容器停止&#x2F;重启才释放；所以线上用 truncate 而不是 rm。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; AI 运维</li>
+</ul>
+<h3 id="Q5-docker-stop-杀不掉进程-服务不优雅退出，怎么排查和解决？"><a href="#Q5-docker-stop-杀不掉进程-服务不优雅退出，怎么排查和解决？" class="headerlink" title="Q5. docker stop 杀不掉进程&#x2F;服务不优雅退出，怎么排查和解决？"></a>Q5. docker stop 杀不掉进程&#x2F;服务不优雅退出，怎么排查和解决？</h3><ul>
+<li>【考察点】优雅停机：信号、PID1、shutdown hook 的完整链路</li>
+<li>【参考回答】反直觉点：<code>docker stop</code> 发 SIGTERM 后等 10 秒，超时 SIGKILL——如果你看到容器退出码 137，说明它根本没在 10 秒内处理 SIGTERM。常见原因：① 主进程是 shell（PID1&#x3D;sh），sh 不转发信号给子进程，应用没收到；② 应用忽略了 SIGTERM 或没注册 shutdown hook；③ 主进程在处理但 10 秒不够（大量连接要排空）。解决链：入口脚本用 <code>exec</code>、或用 <code>--init</code>&#x2F;tini、<code>STOPSIGNAL</code> 设成应用真正监听的信号（比如 Java 监听 SIGTERM 就不用改，但像 nginx 默认 SIGQUIT 才优雅退出，<code>STOPSIGNAL SIGQUIT</code>）、<code>docker stop -t 30</code> 放宽超时。验证：<code>docker kill -s SIGTERM &lt;id&gt;</code> 后看应用日志有没有优雅退出日志，再 <code>docker stop</code> 看退出码是否 0。</li>
+<li>【追问】优雅停机时如何做到流量不中断？<ul>
+<li>答：单容器做不到，要编排层：K8s 的 preStop hook + terminationGracePeriodSeconds + readiness 摘流量（先摘流量、再排空存量连接、最后 SIGTERM）；compose 场景配合负载均衡的健康检查摘除后端。</li>
+</ul>
+</li>
+<li>【追问】退出码 143 和 137 分别说明什么？<ul>
+<li>答：143 &#x3D; 128+15，收到 SIGTERM 后退出（说明信号到了）；137 &#x3D; 128+9，被 SIGKILL（可能是 stop 超时强杀，也可能是 OOMKilled，要用 <code>docker inspect</code> 的 OOMKilled 字段区分）。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q6-var-lib-docker-overlay2-占满磁盘，怎么排查和清理？"><a href="#Q6-var-lib-docker-overlay2-占满磁盘，怎么排查和清理？" class="headerlink" title="Q6. &#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2 占满磁盘，怎么排查和清理？"></a>Q6. &#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2 占满磁盘，怎么排查和清理？</h3><ul>
+<li>【考察点】磁盘治理：镜像层 vs 构建缓存 vs 悬空镜像的区分</li>
+<li>【参考回答】先 <code>docker system df</code> 看三类占用：Images（镜像层）、Build Cache（构建缓存，经常是隐形大头）、Containers（容器可写层+日志）。再 <code>du -sh /var/lib/docker/*</code> 定位。清理手段分阶梯：<code>docker image prune</code> 清悬空镜像、<code>docker builder prune -f</code> 清构建缓存（BuildKit 缓存有时候几十 GB）、<code>docker system prune -a</code> 清所有未使用镜像（<strong>慎用</strong>，会连带删掉不再被引用的历史镜像，需要确认回滚依赖）、删除长期不用的容器 <code>docker container prune</code>。<strong>千万不要</strong>直接 <code>rm -rf /var/lib/docker/overlay2/*</code>：会破坏 dockerd 的元数据和层引用，容器全部起不来，只能重置 &#x2F;var&#x2F;lib&#x2F;docker（数据全丢）。</li>
+<li>【追问】构建缓存为什么这么大？CI 里怎么控制？<ul>
+<li>答：每次构建变体都留缓存层；CI 里加定时 <code>docker builder prune</code>（保留最近 N 小时），或 GitLab Runner 的清理脚本；镜像 tag 只留 N 个版本，避免镜像仓库和节点双重膨胀。</li>
+</ul>
+</li>
+<li>【追问】怎么精确找到”哪个镜像最大”？<ul>
+<li>答：<code>docker images --format &#39;&#123;&#123;.Repository&#125;&#125;:&#123;&#123;.Tag&#125;&#125; &#123;&#123;.Size&#125;&#125;&#39;</code> 按大小排序，<code>docker history &lt;镜像&gt;</code> 看每层大小，配合 <code>docker image prune -f</code> 前先 <code>docker system df -v</code> 看明细。</li>
+</ul>
+</li>
+<li>【岗位标注】运维</li>
+</ul>
+<h3 id="Q7-你说”100-服务容器化”——数据库、有状态服务、定时任务也容器化了吗？怎么保证数据不丢？"><a href="#Q7-你说”100-服务容器化”——数据库、有状态服务、定时任务也容器化了吗？怎么保证数据不丢？" class="headerlink" title="Q7. 你说”100% 服务容器化”——数据库、有状态服务、定时任务也容器化了吗？怎么保证数据不丢？"></a>Q7. 你说”100% 服务容器化”——数据库、有状态服务、定时任务也容器化了吗？怎么保证数据不丢？</h3><ul>
+<li>【考察点】针对简历”100% 服务容器化”的必杀深挖，回答必须自圆其说（这是全场最可能翻车的点）</li>
+<li>【参考回答】我们改造时明确了”100% 容器化”的边界：<strong>无状态业务服务（应用、网关、worker）全部容器化</strong>，有状态组件（MySQL、Redis、CMDB 的附件存储）走”容器化 + 外部持久化”方案，不是裸容器跑在本地盘上。具体：MySQL&#x2F;Redis 用 StatefulSet 部署，数据盘挂 Longhorn 分布式存储（3 副本），通过 StorageClass 动态创建 PVC，节点挂了 Pod 漂移、数据不丢；Redis 做持久化（AOF）也落在 PV 上。定时任务不用容器内 crond（多副本会重复执行），改成 K8s CronJob，由调度器保证单实例。配置不走 IP（容器重建 IP 会变），全部走 ConfigMap&#x2F;Service 名。真正没有”硬容器化”的：依赖宿主机内核模块的采集 Agent、GPU 驱动版本不匹配的推理卡（这两类用宿主机进程或特权 DaemonSet 托管）——所以准确说法是”<strong>业务服务 100% 容器化，基础设施类按需宿主机化</strong>“，这也是运维选型该有的克制。</li>
+<li>【追问】容器化改造中你觉得最难的点是什么？<ul>
+<li>答：三个：① 日志和排障习惯转变（原来 ssh 上机器看文件，现在全靠 stdout 日志+集中采集，排障链路要先搭好）；② 有状态服务的网络身份（IP 漂移），所有依赖方必须从”配 IP”改成”配服务名&#x2F;DNS”，这个存量配置改造量最大；③ 无外网离线部署（我们要求离线），依赖包、镜像、Helm 包全量本地化，任何漏一个组件现场就卡住，所以离线方案要反复全流程演练。</li>
+</ul>
+</li>
+<li>【追问】数据备份怎么做？容器挂了恢复要多长时间？<ul>
+<li>答：PV 层的快照（Longhorn 快照&#x2F;备份到对象存储）+ 数据库逻辑备份（mysqldump 定时）双保险；恢复演练按 RTO 目标做，文档化恢复步骤，不能只备份不演练。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; DevOps</li>
+</ul>
+<h3 id="Q8-生产故障：容器突然访问不了外网-服务间不通，怎么排查？"><a href="#Q8-生产故障：容器突然访问不了外网-服务间不通，怎么排查？" class="headerlink" title="Q8. 生产故障：容器突然访问不了外网&#x2F;服务间不通，怎么排查？"></a>Q8. 生产故障：容器突然访问不了外网&#x2F;服务间不通，怎么排查？</h3><ul>
+<li>【考察点】网络排障实战：分层定位，能不能动手</li>
+<li>【参考回答】按层定位：① 先看是不是<strong>单容器</strong>问题：<code>docker exec &lt;id&gt; ping &lt;网关&gt;</code>（容器内可能没 ping，用 <code>getent hosts</code> 或直接看应用报错）；② 看<strong>宿主网络</strong>：<code>docker exec &lt;id&gt; ip addr</code> 看 eth0 是否有 IP、<code>docker network inspect</code> 看容器是否还挂在网上；③ 查 <strong>iptables</strong>：<code>iptables -L FORWARD -n</code> 看策略是不是被改成 DROP（常见元凶：firewalld 重启、安全加固脚本、别的工具清了规则），<code>iptables -t nat -L POSTROUTING -n</code> 看 MASQUERADE；Docker 的网络全靠自己维护的 iptables 链，被清基本就全网故障；④ 跨主机&#x2F;K8s 场景查 CNI（calico&#x2F;flannel）和 kube-proxy 状态。修复：规则被清就重启 dockerd 重建（先评估影响），或补上对应规则；K8s 场景重启 CNI DaemonSet。</li>
+<li>【追问】容器内 DNS 解析失败怎么查？<ul>
+<li>答：自定义网络里 Docker 注入 127.0.0.11 内嵌 DNS，<code>docker exec &lt;id&gt; cat /etc/resolv.conf</code> 看是否被覆写；<code>getent hosts &lt;域名&gt;</code> 测解析；宿主 <code>/etc/resolv.conf</code> 或 systemd-resolved 挂了也会传导；K8s 里查 CoreDNS Pod 是否正常。</li>
+</ul>
+</li>
+<li>【追问】两个容器互访时通时不通？<ul>
+<li>答：大概率是依赖了宿主 IP 或容器 IP（重建后漂移）而不是服务名；再就是跨节点时默认 bridge 不支持跨主机，要用自定义网络+overlay 或 K8s CNI。</li>
+</ul>
+</li>
+<li>【岗位标注】运维</li>
+</ul>
+<h3 id="Q9-容器一直在重启（restarting），退出码怎么解读？怎么定位？"><a href="#Q9-容器一直在重启（restarting），退出码怎么解读？怎么定位？" class="headerlink" title="Q9. 容器一直在重启（restarting），退出码怎么解读？怎么定位？"></a>Q9. 容器一直在重启（restarting），退出码怎么解读？怎么定位？</h3><ul>
+<li>【考察点】故障定位流程 + 退出码速查，几乎必考</li>
+<li>【参考回答】先看退出码：137 &#x3D; 128+9（SIGKILL：OOM 被杀或 stop 强杀）、143 &#x3D; 128+15（SIGTERM：收到终止信号）、139 &#x3D; 128+11（段错误，多半是程序 bug 或 glibc 不兼容，alpine 上跑 glibc 二进制常见）、1 &#x3D; 应用自身异常退出（看应用日志）、126&#x2F;127 &#x3D; 命令不可执行&#x2F;不存在（Dockerfile CMD 路径写错或没有执行权限）、125 &#x3D; docker run 阶段错误（如挂载参数错）。定位流程：<code>docker inspect -f &#39;&#123;&#123;.State.ExitCode&#125;&#125; &#123;&#123;.State.OOMKilled&#125;&#125; &#123;&#123;.State.Error&#125;&#125;&#39; &lt;id&gt;</code> → <code>dmesg | grep -i oom|segfault</code> → <code>docker logs --tail 200 &lt;id&gt;</code> → <code>docker events</code> 看事件流。排查时先 <code>docker stop</code> 停下来，别让 restart 策略无限拉起掩盖现场（会丢日志、反复打爆节点）。</li>
+<li>【追问】137 一定是内存超限吗？<ul>
+<li>答：不一定。137 只代表收到 SIGKILL，可能是 OOMKilled（查 OOMKilled 字段+dmesg），也可能是平台&#x2F;运维手动 kill 或 cgroup 之外被杀；要结合 OOMKilled 字段和 dmesg 综合判断，这是常见误判点。</li>
+</ul>
+</li>
+<li>【追问】配置了 –restart&#x3D;always，应用每次秒退，怎么处理？<ul>
+<li>答：先 <code>docker stop</code>，改配置或修复后再启动；临时调试用 <code>--restart=no</code>；生产上给 restart 加 backoff 场景由 K8s 的 CrashLoopBackOff 天然处理（会退避），单机 docker 要靠人及时介入。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; AI 运维 &#x2F; 技术支持</li>
+</ul>
+<h3 id="Q10-容器重建后端口冲突-数据”丢了”，分别怎么处理？"><a href="#Q10-容器重建后端口冲突-数据”丢了”，分别怎么处理？" class="headerlink" title="Q10. 容器重建后端口冲突&#x2F;数据”丢了”，分别怎么处理？"></a>Q10. 容器重建后端口冲突&#x2F;数据”丢了”，分别怎么处理？</h3><ul>
+<li>【考察点】两个高频事故：端口占用和持久化失守，考察”踩坑后如何系统化规避”</li>
+<li>【参考回答】端口冲突：<code>-p</code> 时报 <code>bind: address already in use</code>，<code>ss -lntp | grep &lt;端口&gt;</code> 找占用进程，可能是宿主进程或别的容器；处理是换端口或停占用方。数据丢失：十有八九是用了匿名卷或没挂卷——<code>docker rm</code> 不带 <code>-v</code> 匿名卷会残留（找不到名字），带了 <code>-v</code> 直接删数据，bind mount 路径写错导致数据写进容器可写层，容器一删就没了。系统化规避：① 所有持久化目录强制命名卷或 bind mount，compose 里顶层 volumes 声明，禁止裸 <code>-v /data</code>；② 重建&#x2F;升级前先 <code>docker cp</code> 或备份卷（<code>tar</code> 打包 _data）；③ <code>docker rm -v</code> 只在确认不需要数据时用；④ 数据库类永远走 PV 或外部实例，不要把数据当容器的一部分。</li>
+<li>【追问】容器重建后 IP 变了，依赖方全连不上了怎么办？<ul>
+<li>答：这就是”不要依赖容器 IP”的教训：单机用 docker 网络的服务名&#x2F;自定义网络，compose 自动处理；K8s 用 Service 的 ClusterIP&#x2F;DNS。改造存量系统时这是最大的迁移工作量，我们在容器化项目里专门做了一轮”IP 改服务名”的配置清理。</li>
+</ul>
+</li>
+<li>【追问】bind mount 挂载目录后容器内看不到文件&#x2F;权限不对？<ul>
+<li>答：先确认宿主机路径存在（目录不存在 docker 会帮你建，属主是 root）；再看 UID：容器内进程是普通用户时，宿主机目录属主要 chown 成对应 UID 或给 777（生产给最小权限 755&#x2F;目录属主调整）；SELinux 开启的系统还要加 <code>:Z</code> 或 <code>:z</code> 标记。</li>
+</ul>
+</li>
+<li>【岗位标注】运维 &#x2F; 技术支持</li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/linux-interview/" rel="prev" title="Linux 运维面试问答（34 题）">
+                  <i class="fa fa-chevron-left"></i> Linux 运维面试问答（34 题）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/27/%E6%8A%80%E6%9C%AF/kubernetes-interview/" rel="next" title="Kubernetes 面试问答（34 题）">
+                  Kubernetes 面试问答（34 题） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="f7b584ff8def0d365bae811c6e3bdea1"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script>
+
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Burgess Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div><script color="107,194,53" opacity="1.0" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/lxp731" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"forest","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '32px',
+  right: '30px',
+  left: 'unset',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cywM9Ru3s","appkey":"48aa50eb8472328cdd8ac2ab4d5350d7","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // 查找所有 div.table-container 元素
+    const tableContainers = document.querySelectorAll(".table-container");
+
+    // 遍历所有 div.table-container 元素
+    tableContainers.forEach(function(tableContainer) {
+      // 获取 div.table-container 内的 span 元素数量
+      const spanCount = tableContainer.querySelectorAll("tbody > tr > td.code > pre > span").length;
+
+      // 检查 span 元素数量是否 >= 3
+      if (spanCount >= 11) {
+        // 检查 div.table-container 前面是否有 figcaption 元素，如果没有则添加一个
+        const prevElement = tableContainer.previousElementSibling;
+        let figcaption;
+        let iElement;
+        if (!prevElement || prevElement.tagName.toLowerCase() !== "figcaption") {
+          // 在 div.table-container 前插入一个 figcaption 元素
+          figcaption = document.createElement("figcaption");
+
+          // 将 figcaption 插入到 DOM 中
+          tableContainer.parentNode.insertBefore(figcaption, tableContainer);
+        } else {
+          figcaption = prevElement;
+        }
+
+        // 创建一个 <i> 标签并添加功能
+        iElement = document.createElement("i");
+        iElement.className = "fas fa-angle-down";
+        // 插入一点空格
+        iElement.innerHTML = "&nbsp;&nbsp;&nbsp;";
+        figcaption.insertBefore(iElement, figcaption.firstChild);
+
+        // 为 <i> 标签添加点击事件
+        iElement.addEventListener("click", function() {
+          // 切换 tableContainer 的 "code-hidden" 类
+          tableContainer.classList.toggle("code-hidden");
+
+          // 切换 <i> 标签的类名
+          if (iElement.classList.contains("fa-angle-down")) {
+            iElement.classList.remove("fa-angle-down");
+            iElement.classList.add("fa-angle-right");
+          } else {
+            iElement.classList.remove("fa-angle-right");
+            iElement.classList.add("fa-angle-down");
+          }
+        });
+      }
+    });
+  });
+</script>
+
+  <div class="aplayer" 
+  data-id="18010222564" 
+  data-server="netease" 
+  data-type="playlist" 
+  data-fixed="true" 
+  data-autoplay="false" 
+  data-order="list" 
+  data-volume="0.5" 
+  data-theme="#1da496" 
+  data-preload="auto" >
+  </div>
+
+</body>
+</html>
