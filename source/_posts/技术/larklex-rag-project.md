@@ -2,12 +2,15 @@
 title: LarkLex RAG 系统项目复盘：从架构设计到面试问答
 date: 2026-08-27 10:00:00
 categories: 技术
+password: buzhidao
 tags:
   - LLM
   - RAG
   - 向量数据库
   - 项目复盘
   - 面试
+  - 私密
+
 ---
 
 "我们做了一个面向政企场景的 RAG 智能问答平台，内部代号 LarkLex。这个项目是团队 2024 年并行推进的两大目标之一——另一个是容器平台改造；LarkLex 的定位是私有 LLM 编排（Private LLM orchestration），目标是做成开源产品。我负责它从架构设计到部署运维…

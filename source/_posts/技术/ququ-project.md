@@ -2,10 +2,13 @@
 title: ququ 语音转文字项目复盘：开源免费的中文语音工作流
 date: 2026-08-27 10:15:00
 categories: 技术
+password: buzhidao
 tags:
   - LLM
   - 项目复盘
   - 面试
+  - 私密
+
 ---
 
 蛐蛐（ququ）是一个开源免费的桌面语音转文字工具，对标 Wispr Flow——你说话，文字直接上屏；语音识别在本地跑，数据不出本机。

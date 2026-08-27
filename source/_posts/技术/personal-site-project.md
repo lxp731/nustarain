@@ -2,11 +2,14 @@
 title: 个人网站与博客项目复盘：从 Docker 到 RKE2 的基础设施实践
 date: 2026-08-27 10:25:00
 categories: 技术
+password: buzhidao
 tags:
   - NGINX
   - Linux
   - 项目复盘
   - 面试
+  - 私密
+
 ---
 
 我有一套自己从零搭建、长期在线运行的个人基础设施——个人网站（Docker + Nginx + Certbot + systemd + Cloudflare DNS，跑在 CachyOS 上）和技术博客（Hexo + Cloudflare Pages，Markdown + Git 工作流），并基于这…

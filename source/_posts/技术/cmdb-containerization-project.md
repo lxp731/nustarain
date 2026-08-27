@@ -2,12 +2,15 @@
 title: CMDB 容器化改造项目复盘：从虚拟机到 GitOps
 date: 2026-08-27 10:05:00
 categories: 技术
+password: buzhidao
 tags:
   - K8S
   - Docker
   - CI/CD
   - 项目复盘
   - 面试
+  - 私密
+
 ---
 
 我在神州信息做 Linux 系统工程师期间，主导了公司 CMDB 系统的容器化改造。这套 CMDB 原来是 Tomcat + MySQL + Elasticsearch 的传统架构，跑在虚拟机上，环境不一致、手动发布、扩缩容难，而且客户机房是无外网环境，交付部署周期很长。我牵头做了整体方案：用 K3…

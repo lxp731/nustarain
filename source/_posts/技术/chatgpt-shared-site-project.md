@@ -2,11 +2,14 @@
 title: ChatGPT 共享站项目复盘：基于 new-api 的 AI 网关运维实践
 date: 2026-08-27 10:20:00
 categories: 技术
+password: buzhidao
 tags:
   - LLM
   - K8S
   - 项目复盘
   - 面试
+  - 私密
+
 ---
 
 我做了一个基于 new-api 的 AI 对话共享站：对外提供"聊天界面 + OpenAI 兼容 API"的统一 AI 服务。

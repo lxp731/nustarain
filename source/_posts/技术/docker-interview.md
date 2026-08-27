@@ -2,9 +2,12 @@
 title: Docker 面试问答（34 题）
 date: 2026-08-27 09:05:00
 categories: 技术
+password: buzhidao
 tags:
   - Docker
   - 面试
+  - 私密
+
 ---
 
 本文整理了Docker 面试问答（34 题）相关的 34 个高频面试问题，从基础到进阶再到生产实战层层递进，覆盖Docker、面试等核心考点，每题附参考回答与追问，适合面试前系统复习。
