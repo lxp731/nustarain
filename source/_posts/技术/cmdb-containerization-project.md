@@ -2,14 +2,12 @@
 title: CMDB 容器化改造项目复盘：从虚拟机到 GitOps
 date: 2026-08-27 10:05:00
 categories: 技术
-password: buzhidao
 tags:
   - K8S
   - Docker
   - CI/CD
   - 项目复盘
   - 面试
-  - 私密
 
 ---
 

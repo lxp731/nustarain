@@ -2,11 +2,9 @@
 title: Kubernetes 面试问答（34 题）
 date: 2026-08-27 09:10:00
 categories: 技术
-password: buzhidao
 tags:
   - K8S
   - 面试
-  - 私密
 
 ---
 

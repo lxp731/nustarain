@@ -2,11 +2,9 @@
 title: CI/CD 面试问答（34 题）
 date: 2026-08-27 09:25:00
 categories: 技术
-password: buzhidao
 tags:
   - CI/CD
   - 面试
-  - 私密
 
 ---
 

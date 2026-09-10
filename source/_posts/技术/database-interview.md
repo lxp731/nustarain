@@ -2,14 +2,12 @@
 title: 数据库面试问答：MySQL / PostgreSQL / Neo4j / Qdrant（34 题）
 date: 2026-08-27 09:35:00
 categories: 技术
-password: buzhidao
 tags:
   - MySQL
   - Redis
   - 存储
   - 向量数据库
   - 面试
-  - 私密
 
 ---
 

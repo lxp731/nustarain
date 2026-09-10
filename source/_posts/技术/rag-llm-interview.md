@@ -2,13 +2,11 @@
 title: LLM 与 RAG 面试问答（38 题）
 date: 2026-08-27 09:40:00
 categories: 技术
-password: buzhidao
 tags:
   - LLM
   - RAG
   - 向量数据库
   - 面试
-  - 私密
 
 ---
 

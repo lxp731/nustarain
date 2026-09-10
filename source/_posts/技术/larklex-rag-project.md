@@ -2,14 +2,12 @@
 title: LarkLex RAG 系统项目复盘：从架构设计到面试问答
 date: 2026-08-27 10:00:00
 categories: 技术
-password: buzhidao
 tags:
   - LLM
   - RAG
   - 向量数据库
   - 项目复盘
   - 面试
-  - 私密
 
 ---
 

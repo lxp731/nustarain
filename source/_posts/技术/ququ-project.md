@@ -2,12 +2,10 @@
 title: ququ 语音转文字项目复盘：开源免费的中文语音工作流
 date: 2026-08-27 10:15:00
 categories: 技术
-password: buzhidao
 tags:
   - LLM
   - 项目复盘
   - 面试
-  - 私密
 
 ---
 

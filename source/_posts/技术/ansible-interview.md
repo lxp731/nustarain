@@ -2,12 +2,10 @@
 title: Ansible 面试问答（34 题）
 date: 2026-08-27 09:15:00
 categories: 技术
-password: buzhidao
 tags:
   - Ansible
   - Linux
   - 面试
-  - 私密
 
 ---
 

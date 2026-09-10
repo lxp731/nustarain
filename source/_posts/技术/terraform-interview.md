@@ -2,11 +2,9 @@
 title: Terraform 面试问答（26 题）
 date: 2026-08-27 09:20:00
 categories: 技术
-password: buzhidao
 tags:
   - Terraform
   - 面试
-  - 私密
 
 ---
 

@@ -2,14 +2,12 @@
 title: NTFS 小文件快拷工具项目复盘：把随机 IO 变成顺序 IO
 date: 2026-08-27 10:10:00
 categories: 技术
-password: buzhidao
 tags:
   - python
   - Windows
   - 存储
   - 项目复盘
   - 面试
-  - 私密
 
 ---
 

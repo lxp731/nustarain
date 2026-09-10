@@ -2,12 +2,10 @@
 title: Shell 与 Python 面试问答（34 题）
 date: 2026-08-27 09:30:00
 categories: 技术
-password: buzhidao
 tags:
   - python
   - Linux
   - 面试
-  - 私密
 
 ---
 

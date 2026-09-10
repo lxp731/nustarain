@@ -2,13 +2,11 @@
 title: 个人网站与博客项目复盘：从 Docker 到 RKE2 的基础设施实践
 date: 2026-08-27 10:25:00
 categories: 技术
-password: buzhidao
 tags:
   - NGINX
   - Linux
   - 项目复盘
   - 面试
-  - 私密
 
 ---
 

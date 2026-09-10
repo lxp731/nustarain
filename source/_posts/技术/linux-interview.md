@@ -2,11 +2,9 @@
 title: Linux 运维面试问答（34 题）
 date: 2026-08-27 09:00:00
 categories: 技术
-password: buzhidao
 tags:
   - Linux
   - 面试
-  - 私密
 
 ---
 

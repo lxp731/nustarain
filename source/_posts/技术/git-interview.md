@@ -2,11 +2,9 @@
 title: Git 面试问答（26 题）
 date: 2026-08-27 09:50:00
 categories: 技术
-password: buzhidao
 tags:
   - Git
   - 面试
-  - 私密
 
 ---
 
