@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nustarain.pages.dev/2026/10/09/%E6%8A%80%E6%9C%AF/kubernetes-interview-practical/</loc>
+    
+    <lastmod>2026-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2026/10/09/%E6%8A%80%E6%9C%AF/kubernetes-interview-advanced/</loc>
+    
+    <lastmod>2026-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2026/10/09/%E6%8A%80%E6%9C%AF/kubernetes-interview-basic/</loc>
+    
+    <lastmod>2026-10-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/aliyun-interview/</loc>
     
     <lastmod>2026-09-10</lastmod>
@@ -74,15 +101,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/git-interview/</loc>
-    
-    <lastmod>2026-09-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/docker-interview/</loc>
     
     <lastmod>2026-09-10</lastmod>
@@ -92,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/kubernetes-interview/</loc>
+    <loc>https://nustarain.pages.dev/2026/08/27/%E6%8A%80%E6%9C%AF/git-interview/</loc>
     
     <lastmod>2026-09-10</lastmod>
     
@@ -272,24 +290,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2023/09/10/%E6%8E%A2%E7%B4%A2/OpenSourceSofts/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2023/03/24/%E6%8E%A2%E7%B4%A2/git-rollback/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.pages.dev/2024/01/14/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/frp/</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -309,6 +309,24 @@
   
   <url>
     <loc>https://nustarain.pages.dev/2024/04/27/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/windowscleaner/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2023/09/10/%E6%8E%A2%E7%B4%A2/OpenSourceSofts/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2023/03/24/%E6%8E%A2%E7%B4%A2/git-rollback/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -470,6 +488,15 @@
   </url>
   
   <url>
+    <loc>https://nustarain.pages.dev/about/index.html</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.pages.dev/archives/index.html</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -488,25 +515,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/about/index.html</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.pages.dev/tags/index.html</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2023/05/24/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/seliunx/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -533,6 +542,15 @@
   </url>
   
   <url>
+    <loc>https://nustarain.pages.dev/2023/05/24/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/seliunx/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.pages.dev/2025/06/23/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/system-harmor/</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -543,6 +561,33 @@
   
   <url>
     <loc>https://nustarain.pages.dev/2023/09/15/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/music-API-error/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2025/06/25/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/mysql-optimize/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2025/07/13/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/redis-optimaize/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2025/06/23/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/nginx-optimize/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -596,33 +641,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2025/06/25/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/mysql-optimize/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2025/06/23/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/nginx-optimize/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2025/07/13/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/redis-optimaize/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.pages.dev/2023/05/18/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/linux-tips/</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -668,6 +686,15 @@
   </url>
   
   <url>
+    <loc>https://nustarain.pages.dev/2023/10/14/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/fping/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.pages.dev/2023/03/13/%E6%8E%A2%E7%B4%A2/git-basic-operation/</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -686,7 +713,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2023/10/14/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/fping/</loc>
+    <loc>https://nustarain.pages.dev/2023/10/06/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/ftp/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -696,15 +723,6 @@
   
   <url>
     <loc>https://nustarain.pages.dev/2023/07/05/%E6%8A%80%E6%9C%AF/gfs/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2023/10/06/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/ftp/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -758,15 +776,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2023/08/06/%E6%8E%A2%E7%B4%A2/Remove-aptkey/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.pages.dev/2023/10/01/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/SUID-SGID/</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -777,6 +786,15 @@
   
   <url>
     <loc>https://nustarain.pages.dev/2023/10/14/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/SoucecodeInstallFping/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2023/08/06/%E6%8E%A2%E7%B4%A2/Remove-aptkey/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -812,33 +830,6 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2023/07/04/%E6%8A%80%E6%9C%AF/ISCSI/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2023/05/18/%E6%8A%80%E6%9C%AF/LVS-Nginx-DR/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2023/05/17/%E6%8A%80%E6%9C%AF/LVS-Nginx-NAT/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.pages.dev/2023/08/13/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/HasSlot/</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -858,6 +849,33 @@
   
   <url>
     <loc>https://nustarain.pages.dev/2023/07/04/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/LVM/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2023/07/04/%E6%8A%80%E6%9C%AF/ISCSI/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2023/05/18/%E6%8A%80%E6%9C%AF/LVS-Nginx-DR/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2023/05/17/%E6%8A%80%E6%9C%AF/LVS-Nginx-NAT/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -947,6 +965,24 @@
   </url>
   
   <url>
+    <loc>https://nustarain.pages.dev/2023/08/13/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/ConsistencyHashing/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/2023/10/06/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/DHCP-server/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://nustarain.pages.dev/2023/05/07/%E6%8A%80%E6%9C%AF/CVE-extend/</loc>
     
     <lastmod>2026-06-02</lastmod>
@@ -983,34 +1019,7 @@
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/2023/08/13/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/ConsistencyHashing/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2023/10/06/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/DHCP-server/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://nustarain.pages.dev/2023/07/17/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/BGPic/</loc>
-    
-    <lastmod>2026-06-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/2023/08/13/%E6%8A%80%E6%9C%AF/BuildRedis/</loc>
     
     <lastmod>2026-06-02</lastmod>
     
@@ -1036,10 +1045,19 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://nustarain.pages.dev/2023/08/13/%E6%8A%80%E6%9C%AF/BuildRedis/</loc>
+    
+    <lastmod>2026-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>https://nustarain.pages.dev/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -1047,217 +1065,217 @@
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E5%8D%9A%E5%AE%A2%E7%BE%8E%E5%8C%96/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/Docker/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/MySQL/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/Git/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/EVE/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/Linux/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E4%B8%8D%E8%89%AF%E4%BA%BA/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/tags/Ubuntu/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/Openstack/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://nustarain.pages.dev/tags/Linux/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/Windows/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/tags/Redis/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://nustarain.pages.dev/tags/Docker/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://nustarain.pages.dev/tags/MySQL/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/tags/python/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://nustarain.pages.dev/tags/Git/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/tags/Ansible/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://nustarain.pages.dev/tags/EVE/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/Ubuntu/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/Openstack/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/LLM/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/K8S/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/CI-CD/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/%E5%AD%98%E5%82%A8/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/NGINX/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/RAG/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://nustarain.pages.dev/tags/Redis/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/tags/Terraform/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/tags/%E7%94%B3%E8%AE%BA/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/python/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/LLM/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/K8S/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/%E9%A1%B9%E7%9B%AE%E5%A4%8D%E7%9B%98/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/Ansible/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/CI-CD/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/RAG/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/NGINX/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/tags/Terraform/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -1266,49 +1284,49 @@
   
   <url>
     <loc>https://nustarain.pages.dev/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/categories/%E5%A8%B1%E4%B9%90/</loc>
-    <lastmod>2026-09-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://nustarain.pages.dev/categories/%E6%8E%A2%E7%B4%A2/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F%E5%84%BF/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://nustarain.pages.dev/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://nustarain.pages.dev/categories/%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/categories/%E6%8E%A2%E7%B4%A2/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://nustarain.pages.dev/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://nustarain.pages.dev/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
