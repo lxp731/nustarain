@@ -48,9 +48,9 @@ tags:
   - Q：为什么更新后 Pod 版本没变？A：最常见是镜像 tag 用了 latest 且 imagePullPolicy 不是 Always，或者模板根本没变，Deployment 认为没有变更就不会触发新 RS。
 - 【岗位标注】通用 / DevOps
 
-#### 补充：怎么列出 Deployment 可回滚的版本并回滚到指定版本？
+**补充：怎么列出 Deployment 可回滚的版本并回滚到指定版本？**
 
-###### 一、列出可回滚的版本
+**一、列出可回滚的版本**
 
 ```bash
 kubectl rollout history deployment/<deployment-name>
@@ -75,7 +75,7 @@ kubectl rollout history deployment/my-app --revision=2
 
 如果 `CHANGE-CAUSE` 是空的，说明没记录变更原因。注意 K8s v1.26+ 已移除 `--record` 参数，需要手动加 annotation：`kubectl annotate deploy/nginx kubernetes.io/change-cause="升级nginx到1.21"`。
 
-###### 二、回滚到指定版本
+**二、回滚到指定版本**
 
 ```bash
 # 回滚到上一个版本
@@ -93,7 +93,7 @@ kubectl rollout undo deployment/my-app --to-revision=2
 kubectl rollout undo --dry-run=server deployment/my-app --to-revision=2
 ```
 
-###### 三、验证
+**三、验证**
 
 ```bash
 kubectl rollout status deployment/my-app
@@ -103,7 +103,7 @@ kubectl describe deployment/my-app
 
 回滚完成后用 `rollout status` 确认状态，再用 `get pods` 看 Pod 情况，必要时 `describe` 确认资源配置。
 
-###### 四、两个容易忽略的点
+**四、两个容易忽略的点**
 
 **1. 历史版本数量有限**
 
@@ -123,14 +123,14 @@ Kubernetes 默认保留 10 个修订历史，可通过 `spec.revisionHistoryLimi
 
 Kubernetes 里“更新策略”要分两层看： **Deployment 原生支持的** 和 **需要额外工具/其他控制器实现的**。
 
-##### Deployment 原生支持的策略
+**Deployment 原生支持的策略**
 
 | 策略 | 行为 | 适用场景 |
 | --- | --- | --- |
 | **RollingUpdate** | 逐步替换旧 Pod，新旧 Pod 会短暂共存 | 生产环境默认选择，追求零停机 |
 | **Recreate** | 先删掉所有旧 Pod，再创建新 Pod | 开发测试、单副本、不能新旧版本共存的应用 |
 
-###### Recreate
+**Recreate**
 
 `spec.strategy.type: Recreate` 时，Deployment 会：
 
@@ -140,13 +140,13 @@ Kubernetes 里“更新策略”要分两层看： **Deployment 原生支持的*
 
 更新期间会有短暂服务中断，所以生产环境一般不会随便用它，除非业务能接受停机，或者新旧版本不能同时运行。
 
-###### RollingUpdate
+**RollingUpdate**
 
 这是默认策略，通过 `maxSurge` 和 `maxUnavailable` 控制替换节奏。
 
 你前面问的 `maxSurge=0、maxUnavailable=1` 就是这种策略的一种保守形态。
 
-##### 其他控制器里的更新策略
+**其他控制器里的更新策略**
 
 | 控制器 | 策略 | 说明 |
 | --- | --- | --- |
@@ -155,7 +155,7 @@ Kubernetes 里“更新策略”要分两层看： **Deployment 原生支持的*
 
 StatefulSet 的 RollingUpdate 还支持 `partition`，可以只更新序号大于等于 partition 的 Pod，适合分批灰度。
 
-##### 需要借助 Ingress、Service Mesh 或发布工具实现的策略
+**需要借助 Ingress、Service Mesh 或发布工具实现的策略**
 
 这些不是 Deployment 原生的 `spec.strategy.type`，而是通过 **流量控制** 实现的发布方式：
 
@@ -166,11 +166,11 @@ StatefulSet 的 RollingUpdate 还支持 `partition`，可以只更新序号大�
 | **A/B 测试** | 同时运行多个版本，按用户特征分流 | Service Mesh、Ingress 权重/Header 路由 |
 | **影子部署** | 复制真实流量到新版本，但不影响真实用户响应 | Istio 流量镜像 |
 
-##### 还有一类：原地升级
+**还有一类：原地升级**
 
 **原地升级 / InPlaceUpdate** 不是标准 Deployment 的内置策略，通常由 OpenKruise 等扩展控制器实现。它不删除 Pod，只替换 Pod 里的容器镜像或资源，Pod IP、节点、同 Pod 内其他容器可以保持不变。
 
-##### 怎么选
+**怎么选**
 
 - **普通无状态服务**：优先用 `RollingUpdate`。
 - **不能新旧版本共存**：考虑 `Recreate`，但要接受短暂停机。
@@ -182,7 +182,7 @@ StatefulSet 的 RollingUpdate 还支持 `partition`，可以只更新序号大�
 
 Kubernetes 里 `imagePullPolicy` 主要有 **3 种正式值**，另外还有一个较少见的实验性值。
 
-##### 正式支持的取值
+**正式支持的取值**
 
 | 策略 | 行为 | 适用场景 |
 | --- | --- | --- |
@@ -190,11 +190,11 @@ Kubernetes 里 `imagePullPolicy` 主要有 **3 种正式值**，另外还有一�
 | `Always` | 每次启动容器都向仓库查询，必要时拉取 | 开发环境、CI/CD、`:latest` 镜像 |
 | `Never` | 不拉取远程镜像，只用本地已有镜像 | 离线环境、本地调试、预加载镜像 |
 
-##### 实验性取值
+**实验性取值**
 
 `OnFailure` 是 Kubernetes 1.19 引入的 Beta 特性：如果本地镜像存在，先尝试用本地镜像启动；如果启动失败，再尝试从远程仓库拉取。 它目前不是通用稳定特性，生产环境不建议依赖它。
 
-##### 不写 `imagePullPolicy` 时的默认行为
+**不写 `imagePullPolicy` 时的默认行为**
 
 如果你没有显式配置 `imagePullPolicy`，Kubernetes 会根据镜像标签自动选择：
 
@@ -207,7 +207,7 @@ Kubernetes 里 `imagePullPolicy` 主要有 **3 种正式值**，另外还有一�
 
 也就是说， **只有 `:latest` 或没有标签时才会默认 `Always`**；使用固定版本标签或摘要时，默认是 `IfNotPresent`。
 
-##### 几个容易踩坑的点
+**几个容易踩坑的点**
 
 - `:latest` 不是“最新版本”，它只是一个可变标签；生产环境建议用固定版本号或摘要。
 - `IfNotPresent` 不会检查远程仓库是否有新镜像，只看本地是否存在同名镜像。
@@ -215,7 +215,7 @@ Kubernetes 里 `imagePullPolicy` 主要有 **3 种正式值**，另外还有一�
 - `Never` 要求所有调度到的节点都已有镜像，否则 Pod 会启动失败。
 - 私有仓库镜像还需要配合 `imagePullSecrets`，否则可能拉取失败。
 
-##### 简单选择建议
+**简单选择建议**
 
 - **生产环境**：`imagePullPolicy: IfNotPresent` + 固定版本标签/摘要。
 - **开发/CI**：`imagePullPolicy: Always` + `:latest` 或分支标签。
@@ -245,14 +245,14 @@ Kubernetes 里 `imagePullPolicy` 主要有 **3 种正式值**，另外还有一�
 
 K8s 里挂载存储主要分三类： **Pod 级临时卷、节点本地卷、持久化存储卷**，另外还有专门用来挂配置和敏感信息的特殊卷。
 
-##### 1. 临时存储卷
+**1. 临时存储卷**
 
 | 类型 | 特点 | 场景 |
 | --- | --- | --- |
 | `emptyDir` | Pod 创建时生成，Pod 删除后数据丢失；可用磁盘或 `medium: Memory` | 容器间共享临时文件、缓存、中间计算结果 |
 | `genericEphemeralVolume` | 通过 PVC 模板创建的临时卷，Pod 删除后自动清理 | 需要特定存储类型但不需要长期保留 |
 
-##### 2. 节点本地存储
+**2. 节点本地存储**
 
 | 类型 | 特点 | 场景 |
 | --- | --- | --- |
@@ -261,7 +261,7 @@ K8s 里挂载存储主要分三类： **Pod 级临时卷、节点本地卷、持
 
 `hostPath` 生产环境要慎用，存在安全风险，而且跨节点部署时容易行为不一致。
 
-##### 3. 持久化存储卷：PV / PVC / StorageClass
+**3. 持久化存储卷：PV / PVC / StorageClass**
 
 这是生产环境最常用的方式。
 
@@ -278,7 +278,7 @@ K8s 里挂载存储主要分三类： **Pod 级临时卷、节点本地卷、持
 Pod → PVC → PV → StorageClass / CSI → 后端存储
 ```
 
-##### 4. 配置与敏感信息卷
+**4. 配置与敏感信息卷**
 
 | 类型 | 用途 |
 | --- | --- |
@@ -287,7 +287,7 @@ Pod → PVC → PV → StorageClass / CSI → 后端存储
 | `downwardAPI` | 把 Pod 元数据以文件形式注入容器 |
 | `projected` | 把多种来源合并到一个目录 |
 
-##### 挂载写法
+**挂载写法**
 
 Pod 里分两步：
 
@@ -306,7 +306,7 @@ spec:
 
 `volumes` 定义卷来源，`volumeMounts` 定义容器内的挂载路径。
 
-##### 怎么选
+**怎么选**
 
 - **临时缓存、容器间共享**：`emptyDir`。
 - **节点级日志/监控**：`hostPath`，生产慎用。
@@ -329,11 +329,11 @@ K8sVolume入门，10分钟搞定emptyDir和hostPath
   - Q：Pod 被重新调度到别的节点，PVC 里的数据还在吗？A：在。PV 是集群级资源，数据在存储端（Longhorn 的节点磁盘上），Pod 换节点后卷会被重新 attach 到新节点，这正是有状态应用容器化的前提。
 - 【岗位标注】通用 / 运维 / AI 运维
 
-#### 补充：PVC → PV → StorageClass 三者的关系是怎么配合的？
+**补充：PVC → PV → StorageClass 三者的关系是怎么配合的？**
 
 可以这样理解： **PVC 是“我要多大存储”，PV 是“集群里实际的一块存储”，StorageClass 是“自动创建 PV 的模板”。**
 
-###### 三者各自是什么
+**三者各自是什么**
 
 | 对象 | 角色 | 谁更关心 |
 | --- | --- | --- |
@@ -341,7 +341,7 @@ K8sVolume入门，10分钟搞定emptyDir和hostPath
 | **PV** | 集群里真实存在的一块存储资源 | 集群 / 存储系统 |
 | **StorageClass** | 定义“怎么自动创建 PV”的模板 | 集群管理员 |
 
-###### 它们怎么配合
+**它们怎么配合**
 
 一条完整链路是：
 
@@ -353,9 +353,9 @@ Pod 引用 PVC
   → Pod 挂载 PVC 使用存储
 ```
 
-###### 两种典型流程
+**两种典型流程**
 
-###### 1. 静态绑定：管理员先准备好 PV
+**1. 静态绑定：管理员先准备好 PV**
 
 管理员先手工创建 PV，比如一块 NFS 目录或一块云盘。
 
@@ -366,7 +366,7 @@ Pod 引用 PVC
   → PVC 和 PV 绑定
 ```
 
-###### 2. 动态创建：PVC 触发 StorageClass 自动创建 PV
+**2. 动态创建：PVC 触发 StorageClass 自动创建 PV**
 
 这是生产里更常用的方式。
 
@@ -379,7 +379,7 @@ Pod 引用 PVC
   → PV 和 PVC 绑定
 ```
 
-###### 举个生活化例子
+**举个生活化例子**
 
 假设你要租房子：
 
@@ -389,7 +389,7 @@ Pod 引用 PVC
 
 如果房东手里已经有合适房间，就直接给你用；如果没有，就按 StorageClass 模板自动建一间。
 
-###### 一句话记忆
+**一句话记忆**
 
 **Pod 消费 PVC，PVC 绑定 PV，PV 可以手工创建，也可以由 StorageClass 自动创建。**
 
@@ -407,7 +407,7 @@ kubectl describe sc <name>
 
 它和 PV、PVC 一样，都是 Kubernetes 持久化存储体系里的标准资源对象。
 
-##### 它在体系里的位置
+**它在体系里的位置**
 
 ```text
 Pod
@@ -421,7 +421,7 @@ StorageClass 本身不是存储，而是 **“PV 的创建模板”**。
 
 当一个 PVC 指定了 `storageClassName`，而集群里没有匹配的静态 PV 时，Kubernetes 会根据对应的 StorageClass 调用 Provisioner 动态创建 PV。
 
-##### 它主要定义什么
+**它主要定义什么**
 
 | 字段 | 作用 |
 | --- | --- |
@@ -432,7 +432,7 @@ StorageClass 本身不是存储，而是 **“PV 的创建模板”**。
 | `allowVolumeExpansion` | 是否允许 PVC 扩容 |
 | `mountOptions` | 挂载参数，比如 NFS 版本、挂载选项 |
 
-##### 它和 PV、PVC 的区别
+**它和 PV、PVC 的区别**
 
 - **PV**：集群里已经存在的一块存储资源。
 - **PVC**：应用申请存储的请求。
@@ -444,7 +444,7 @@ StorageClass 本身不是存储，而是 **“PV 的创建模板”**。
 
 这里给一个 **动态供给场景** 的完整案例：部署一个 Nginx Pod，并通过 PVC 自动创建 PV，把数据持久化到 NFS 存储上。
 
-##### 案例流程
+**案例流程**
 
 ```text
 管理员创建 StorageClass
@@ -454,7 +454,7 @@ StorageClass 本身不是存储，而是 **“PV 的创建模板”**。
   → Pod 挂载 PVC 使用存储
 ```
 
-##### 1. 创建 StorageClass
+**1. 创建 StorageClass**
 
 这里假设集群已经部署了 `nfs-subdir-external-provisioner`，它的 provisioner 名称是 `k8s-sigs.io/nfs-subdir-external-provisioner`。
 
@@ -468,7 +468,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ```
 
-##### 2. 创建 PVC
+**2. 创建 PVC**
 
 PVC 不需要写 PV 名字，只要指定 `storageClassName` 和容量即可。
 
@@ -486,7 +486,7 @@ spec:
       storage: 1Gi
 ```
 
-##### 3. 创建 Pod 并挂载 PVC
+**3. 创建 Pod 并挂载 PVC**
 
 ```yaml
 apiVersion: v1
@@ -506,7 +506,7 @@ spec:
         claimName: nginx-pvc
 ```
 
-##### 4. 验证结果
+**4. 验证结果**
 
 ```bash
 kubectl get sc
@@ -522,7 +522,7 @@ kubectl get pod nginx-pod
 - 自动出现一个 PV，状态也是 `Bound`；
 - `nginx-pod` 启动成功。
 
-##### 这个案例里三者的关系
+**这个案例里三者的关系**
 
 - **PVC**：应用说“我要 1Gi 存储”。
 - **StorageClass**：告诉 K8s “用 NFS Provisioner 自动创建 PV”。
@@ -555,7 +555,7 @@ kubectl get pod nginx-pod
 
 K8s 里 **污点 Taint 是打在节点上的“排斥标记”**， **容忍 Toleration 是写在 Pod 上的“通行证”**。
 
-##### 1. 给节点打污点
+**1. 给节点打污点**
 
 ```bash
 kubectl taint nodes <node-name> <key>=<value>:<effect>
@@ -581,7 +581,7 @@ kubectl taint nodes node1 dedicated=true:NoSchedule
 kubectl describe node <node-name>
 ```
 
-##### 2. 取消节点污点
+**2. 取消节点污点**
 
 在污点后面加一个 `-`：
 
@@ -603,7 +603,7 @@ kubectl taint nodes node1 dedicated-
 
 删除后可以用 `kubectl describe node node1` 确认 `Taints` 是否已经消失。
 
-##### 3. 给 Pod 配置容忍
+**3. 给 Pod 配置容忍**
 
 在 Pod、Deployment、StatefulSet 的 `spec.template.spec` 里加 `tolerations`：
 
@@ -642,7 +642,7 @@ tolerations:
 
 表示容忍 3600 秒，超过时间仍会被驱逐。
 
-##### 注意
+**注意**
 
 **容忍只是让 Pod 有资格调度到带污点的节点，并不保证一定调度上去。** 还要看节点资源、NodeSelector、亲和性、Pod 反亲和性等条件是否满足。
 
@@ -657,7 +657,7 @@ K8s 里没有单独的 `nodeAntiAffinity` 字段，通常分两种理解：
 | **Pod 反亲和** | 不和带某些标签的 Pod 放在同一个拓扑域 | `spec.affinity.podAntiAffinity` |
 | **节点反亲和** | 不调度到带某些标签的节点 | `nodeAffinity` 里用 `NotIn` / `DoesNotExist` |
 
-##### 1. Pod 反亲和：把副本打散
+**1. Pod 反亲和：把副本打散**
 
 这是最常见的用法。比如一个 Deployment 有 3 个副本，如果都落在同一台节点上，节点一挂，服务就全没了。
 
@@ -677,7 +677,7 @@ affinity:
 - `topologyKey: kubernetes.io/hostname` 表示按“节点”打散；
 - 如果改成 `topology.kubernetes.io/zone`，就是按“可用区”打散。
 
-##### 2. 硬约束 vs 软约束
+**2. 硬约束 vs 软约束**
 
 **硬约束**：`requiredDuringSchedulingIgnoredDuringExecution`
 
@@ -705,7 +705,7 @@ preferredDuringSchedulingIgnoredDuringExecution:
       topologyKey: kubernetes.io/hostname
 ```
 
-##### 3. 节点反亲和：避开某些节点
+**3. 节点反亲和：避开某些节点**
 
 比如不想让 Pod 调度到测试节点：
 
@@ -722,7 +722,7 @@ affinity:
 
 这表示：不要调度到 `env=test` 的节点上。
 
-##### 4. 一个容易踩的坑
+**4. 一个容易踩的坑**
 
 如果用硬反亲和要求“每个节点只能有一个副本”，那集群可用节点数必须 ≥ 副本数，否则 Pod 会调度失败。
 
@@ -741,7 +741,7 @@ affinity:
 - **nodeSelector / nodeAffinity**：让专用 Pod 必须或优先落到专用节点；
 - **标签**：给专用节点一个身份标识。
 
-##### 1. 给专用节点打标签
+**1. 给专用节点打标签**
 
 假设有一台专用节点 `node-dedicated-01`，专门跑高负载服务：
 
@@ -749,7 +749,7 @@ affinity:
 kubectl label nodes node-dedicated-01 workload=dedicated
 ```
 
-##### 2. 给专用节点打污点
+**2. 给专用节点打污点**
 
 这样普通业务 Pod 就不会被调度到这台节点上：
 
@@ -759,7 +759,7 @@ kubectl taint nodes node-dedicated-01 workload=dedicated:NoSchedule
 
 效果是：没有匹配容忍的 Pod 不能调度上来。
 
-##### 3. 给专用 Pod 配容忍和 nodeSelector
+**3. 给专用 Pod 配容忍和 nodeSelector**
 
 ```yaml
 apiVersion: apps/v1
@@ -802,7 +802,7 @@ spec:
 - 普通 Pod 没有容忍，进不来；
 - 专用 Pod 有容忍 + nodeSelector，会固定落到专用节点。
 
-##### 4. 更推荐的写法：用 nodeAffinity 替代 nodeSelector
+**4. 更推荐的写法：用 nodeAffinity 替代 nodeSelector**
 
 `nodeSelector` 是硬匹配，但表达能力比较弱。生产上更常用 `nodeAffinity`：
 
@@ -833,7 +833,7 @@ affinity:
                   - dedicated
 ```
 
-##### 5. 三者分工
+**5. 三者分工**
 
 | 机制 | 作用 | 放在哪里 |
 | --- | --- | --- |
@@ -842,7 +842,7 @@ affinity:
 | 容忍 | 允许专用 Pod 进入 | Pod |
 | nodeSelector / nodeAffinity | 让专用 Pod 落到指定节点 | Pod |
 
-##### 一个容易踩的坑
+**一个容易踩的坑**
 
 **只配容忍，不配 nodeSelector / nodeAffinity，Pod 不一定会落到专用节点。**
 
@@ -866,11 +866,11 @@ K8s调度三阶段，污点&容忍&亲和性
   - Q：删不掉 namespace 卡在 Terminating 怎么办？A：多半是有资源没清完或 finalizer 卡住，`kubectl get ns <ns> -o yaml` 看 finalizers，确认无业务后手动清掉 finalizer（这是下策，慎用）。
 - 【岗位标注】运维 / DevOps
 
-#### 补充：只配 limits 不配 requests 为什么会导致节点超卖？
+**补充：只配 limits 不配 requests 为什么会导致节点超卖？**
 
 "节点超卖"可以理解为： **调度器账本上看起来还有资源，但节点实际可能已经扛不住了。**
 
-###### 先澄清一个前提：只配 limits 不配 requests，request 通常不是 0
+**先澄清一个前提：只配 limits 不配 requests，request 通常不是 0**
 
 在 Kubernetes 里，如果你只写了 `limits` 没写 `requests`，API Server 的默认行为通常是把 `requests` 自动设成和 `limits` 一样。
 
@@ -882,7 +882,7 @@ K8s调度三阶段，污点&容忍&亲和性
 
 真正让 request 变成 0 的，通常是 **什么都没配**。
 
-###### 那"超卖"是怎么发生的？
+**那"超卖"是怎么发生的？**
 
 调度器只看 `requests` 记账。
 
@@ -914,7 +914,7 @@ K8s调度三阶段，污点&容忍&亲和性
 
 这就是 **超卖**：调度器按 requests 认为节点还能继续放 Pod，但所有 Pod 一旦同时忙起来，节点物理资源根本不够。
 
-###### 如果 request 真的是 0，问题会更严重
+**如果 request 真的是 0，问题会更严重**
 
 假设 Pod 没配 `requests`，调度器会认为它"不占资源"。
 
@@ -933,7 +933,7 @@ K8s调度三阶段，污点&容忍&亲和性
 - 低优先级 Pod 被驱逐；
 - 业务出现延迟升高、重启、503。
 
-###### 一句话理解
+**一句话理解**
 
 - **requests**：调度器记账用的"保底资源"。
 - **limits**：运行时不能超过的上限。
@@ -962,11 +962,11 @@ K8s调度三阶段，污点&容忍&亲和性
   - Q：没有 metrics-server 时 HPA 会怎样？A：HPA 一直 Unknown 状态，不扩缩容，所以排障时先 `kubectl top nodes` 验证 metrics-server 是否正常。
 - 【岗位标注】通用 / AI 运维 / DevOps
 
-#### 补充：HPA 的配置项、计算公式和排查方法？
+**补充：HPA 的配置项、计算公式和排查方法？**
 
 HPA 的核心思路是： **监控指标 → 计算期望副本数 → 更新 Deployment/StatefulSet 的 replicas**。它扩的是 Pod 副本数量，不是给单个 Pod 加 CPU/内存。
 
-###### 1. 前提条件
+**1. 前提条件**
 
 要让 HPA 正常工作，通常需要满足：
 
@@ -976,7 +976,7 @@ HPA 的核心思路是： **监控指标 → 计算期望副本数 → 更新 De
 
 如果 Pod 没有 `requests`，HPA 无法计算利用率，就不会基于 CPU/内存做扩缩。
 
-###### 2. 最基础的 HPA 配置
+**2. 最基础的 HPA 配置**
 
 一个基于 CPU 利用率的 HPA 示例：
 
@@ -1014,7 +1014,7 @@ spec:
 kubectl autoscale deployment myapp --cpu-percent=60 --min=2 --max=10
 ```
 
-###### 3. HPA 是怎么算副本数的
+**3. HPA 是怎么算副本数的**
 
 HPA 默认每 15 秒同步一次指标。
 
@@ -1040,7 +1040,7 @@ HPA 会把 Deployment 的 replicas 调整到 5。
 
 如果有多个指标，比如同时配置了 CPU 和内存，HPA 会分别计算，然后取 **最大的期望副本数**。
 
-###### 4. 支持哪些指标
+**4. 支持哪些指标**
 
 `autoscaling/v2` 支持四类指标：
 
@@ -1053,7 +1053,7 @@ HPA 会把 Deployment 的 replicas 调整到 5。
 
 如果要用自定义指标或外部指标，通常需要部署 **Prometheus Adapter**、 **KEDA** 之类的指标适配器。
 
-###### 5. 控制扩缩速度：behavior
+**5. 控制扩缩速度：behavior**
 
 生产上不建议只配阈值，否则容易频繁抖动。可以用 `behavior` 控制扩容和缩容行为。
 
@@ -1084,7 +1084,7 @@ behavior:
 - **policies**：限制每次扩/缩多少，比如每 15 秒最多加 4 个 Pod，或最多增加 100%。
 - **selectPolicy**：多条策略时选哪个。扩容常用 `Max`，缩容常用 `Min`。
 
-###### 6. 排查 HPA 是否正常
+**6. 排查 HPA 是否正常**
 
 ```bash
 kubectl get hpa
@@ -1100,7 +1100,7 @@ kubectl top pods
 
 如果 `TARGETS` 显示 `<unknown>`，多半是 Metrics Server 没装，或者 Pod 没配 `requests`。
 
-###### 生产建议
+**生产建议**
 
 - CPU 目标利用率一般设在 **50%–80%**，不要压到 90% 以上；
 - 缩容稳定窗口不要太短，避免流量波动时反复扩缩；
@@ -1127,7 +1127,7 @@ Kubernetes扩容，从手动到自动的玩法
 
 ---
 
-#### 补充：RBAC 的四类对象怎么配合使用？
+**补充：RBAC 的四类对象怎么配合使用？**
 
 K8s 的 RBAC 由四类对象组成： **Role、ClusterRole、RoleBinding、ClusterRoleBinding**。
 
@@ -1140,7 +1140,7 @@ K8s 的 RBAC 由四类对象组成： **Role、ClusterRole、RoleBinding、Clust
 对哪些资源执行哪些操作
 ```
 
-###### Role 和 ClusterRole 的区别
+**Role 和 ClusterRole 的区别**
 
 | 对象 | 作用范围 | 典型用途 |
 | --- | --- | --- |
@@ -1153,7 +1153,7 @@ K8s 的 RBAC 由四类对象组成： **Role、ClusterRole、RoleBinding、Clust
 
 ClusterRole 可以用来授权命名空间资源，也可以授权集群级资源，比如 Node、PV、Namespace。
 
-###### 1. 给命名空间内授权：Role + RoleBinding
+**1. 给命名空间内授权：Role + RoleBinding**
 
 比如只允许在 `dev` 命名空间里查看 Pod：
 
@@ -1189,7 +1189,7 @@ roleRef:
 
 这样 `alice` 只能在 `dev` 命名空间里读取 Pod，不能操作其他 namespace。
 
-###### 2. 给集群范围授权：ClusterRole + ClusterRoleBinding
+**2. 给集群范围授权：ClusterRole + ClusterRoleBinding**
 
 比如允许查看节点：
 
@@ -1223,7 +1223,7 @@ roleRef:
 
 这样 `alice` 可以查看整个集群的节点。
 
-###### 3. 常见组合：ClusterRole + RoleBinding
+**3. 常见组合：ClusterRole + RoleBinding**
 
 这个组合很实用： **用 ClusterRole 定义权限模板，再用 RoleBinding 限制生效范围。**
 
@@ -1260,7 +1260,7 @@ roleRef:
 
 这样 `dev-sa` 只能在 `dev` 命名空间里读 Pod，不会自动获得其他 namespace 权限。
 
-###### 4. 排查权限是否生效
+**4. 排查权限是否生效**
 
 可以用 `kubectl auth can-i` 验证：
 
@@ -1272,7 +1272,7 @@ kubectl auth can-i delete pods --as=alice -n dev
 
 如果返回 `yes`，说明有权限；返回 `no`，说明没有。
 
-###### 生产建议
+**生产建议**
 
 - 优先使用命名空间级别授权，少用 `ClusterRoleBinding`。
 - 避免 `resources: ["*"]`、`verbs: ["*"]` 这类通配符。

@@ -28,18 +28,18 @@ tags:
   - Q：回滚后 revisionHistoryLimit 有什么用？A：控制保留几个历史 RS 用于回滚，默认 10，太多占 etcd 和资源，太少回滚选项少。
 - 【岗位标注】DevOps / 运维
 
-#### 补充：maxSurge=0、maxUnavailable=1 这两个参数是怎么控制 Pod 的？
+**补充：maxSurge=0、maxUnavailable=1 这两个参数是怎么控制 Pod 的？**
 
 `maxSurge=0、maxUnavailable=1` 是 Deployment 滚动更新里一种 **“先删后建、不额外占用资源”** 的保守策略。
 
-###### 两个参数分别控制什么
+**两个参数分别控制什么**
 
 | 参数 | 含义 | `maxSurge=0` / `maxUnavailable=1` 的效果 |
 | --- | --- | --- |
 | `maxSurge` | 更新时最多允许 **超出期望副本数** 几个 Pod | 不允许临时多出新 Pod，更新期间总 Pod 数不会超过 `replicas` |
 | `maxUnavailable` | 更新时最多允许几个 Pod **不可用** | 每次最多先让 1 个旧 Pod 下线，再补 1 个新 Pod |
 
-###### 它具体怎么控制 Pod 替换
+**它具体怎么控制 Pod 替换**
 
 假设 `replicas=3`，当前有 3 个旧版本 Pod：
 
@@ -61,13 +61,13 @@ tags:
 → 循环直到全部替换完成
 ```
 
-###### 这个配置的特点
+**这个配置的特点**
 
 - **优点**：不会额外占用资源，更新期间 Pod 总数不会超过期望副本数。
 - **缺点**：更新过程中会短暂少一个可用 Pod，存在容量下降窗口。
 - **适用场景**：节点资源紧张、无法承受额外 Pod，但又不想完全停机。
 
-###### 和常见配置对比
+**和常见配置对比**
 
 | 配置 | 行为 | 特点 |
 | --- | --- | --- |
@@ -88,13 +88,13 @@ tags:
   - Q：调谐失败会怎样？A：会退避重试（指数退避），status 里记录 condition 和错误，比如 Deployment 的 Progressing condition 报错；不会无限快速重试把 apiserver 打爆。
 - 【岗位标注】通用 / 运维
 
-#### 补充：标签选择器写太宽为什么会命中多个控制器的 Pod？
+**补充：标签选择器写太宽为什么会命中多个控制器的 Pod？**
 
 这句话的意思是： **Kubernetes 控制器不是按“我创建的 Pod”来管，而是按“标签选择器匹配到的 Pod”来管。**
 
 如果你的选择器写得太宽，就可能把别的控制器、甚至手动创建的 Pod 也选进来，于是多个控制器会同时认为这些 Pod 归自己管。
 
-###### 什么是“标签选择器太宽”？
+**什么是“标签选择器太宽”？**
 
 比如你有一个 Deployment：
 
@@ -134,7 +134,7 @@ spec:
 
 这就叫 **选择器太宽**：它没有把“只属于我的 Pod”精确圈出来，而是圈了一大片。
 
-###### 为什么会出现“删了又出现”？
+**为什么会出现“删了又出现”？**
 
 控制器的工作方式是：
 
@@ -155,7 +155,7 @@ spec:
 
 于是 Pod 会不断被创建、删除，看起来就是 **删了又出现**。
 
-###### 为什么会有“两个控制器抢 Pod”？
+**为什么会有“两个控制器抢 Pod”？**
 
 因为 Kubernetes 的 ReplicaSet / Deployment 并不严格区分“这个 Pod 是不是我创建的”。
 
@@ -163,7 +163,7 @@ spec:
 
 所以一旦两个控制器的 selector 重叠，它们就会同时认为某些 Pod 属于自己，进而互相调整副本数。
 
-###### 怎么避免？
+**怎么避免？**
 
 - **Deployment 的 selector 要尽量精确**，不要只用一个很泛的 `app: web`。
 - 通常让 `selector.matchLabels` 和 `template.metadata.labels` 保持一致。
@@ -186,7 +186,7 @@ spec:
 
 在 Kubernetes 中创建一个 Pod，本质上是多个组件通过 **API Server + etcd + List-Watch 机制** 协作完成的。整体流程可以分成三大阶段：
 
-##### 1. 提交与持久化：用户 → API Server → etcd
+**1. 提交与持久化：用户 → API Server → etcd**
 
 用户通过 `kubectl apply -f pod.yaml` 提交 Pod 定义，kubectl 把 YAML 转成 JSON 发给 **API Server**。
 
@@ -199,7 +199,7 @@ API Server 会依次做：
 
 这一步完成后，Pod 还只是 etcd 里的一条记录，并没有真正运行。
 
-##### 2. 调度：Scheduler 选择节点并绑定
+**2. 调度：Scheduler 选择节点并绑定**
 
 **kube-scheduler** 通过 List-Watch 监听 API Server，发现 `nodeName` 为空、处于 Pending 状态的 Pod。
 
@@ -211,7 +211,7 @@ API Server 会依次做：
 
 Pod 在生命周期中只会被调度一次，绑定后不会重新调度到其他节点。
 
-##### 3. 节点执行：Kubelet 拉起 Pod
+**3. 节点执行：Kubelet 拉起 Pod**
 
 目标节点上的 **Kubelet** 监听到这个 Pod 被绑定到自己后，开始执行创建流程：
 
@@ -223,7 +223,7 @@ Pod 在生命周期中只会被调度一次，绑定后不会重新调度到其�
 6. **健康检查**：Kubelet 持续执行 StartupProbe、LivenessProbe、ReadinessProbe；
 7. **状态上报**：Kubelet 把 Pod 状态上报给 API Server，API Server 同步到 etcd，Pod 最终进入 **Running**。
 
-##### 简化流程
+**简化流程**
 
 ```text
 kubectl apply
@@ -273,14 +273,14 @@ kubectl apply
 
 CoreDNS 是 Kubernetes 集群里的 **DNS 服务器和服务发现组件**，核心作用是让 Pod 能用服务名访问其他服务，而不是写死容易变化的 Pod IP。
 
-##### 它主要做两件事
+**它主要做两件事**
 
 | 能力 | 说明 |
 | --- | --- |
 | **集群内服务发现** | 把 `my-service.default.svc.cluster.local` 解析成 Service 的 ClusterIP |
 | **外部域名解析** | 把 `www.example.com` 这类外部域名转发给上游 DNS，比如节点上的 `/etc/resolv.conf` |
 
-##### 它是怎么工作的
+**它是怎么工作的**
 
 1. CoreDNS 以 Deployment 形式运行在 `kube-system` 命名空间。
 2. 它对外暴露一个名为 `kube-dns` 的 Service，这个 Service 的 ClusterIP 就是集群 DNS 地址。
@@ -288,7 +288,7 @@ CoreDNS 是 Kubernetes 集群里的 **DNS 服务器和服务发现组件**，核
 4. Pod 访问 `database-svc` 时，会先向 CoreDNS 查询域名，拿到 ClusterIP 后再发起请求。
 5. CoreDNS 的 `kubernetes` 插件会监听 API Server，自动为 Service、Pod 生成 DNS 记录。
 
-##### 它的配置核心是 Corefile
+**它的配置核心是 Corefile**
 
 CoreDNS 基于插件链工作，常见插件有：
 
@@ -300,7 +300,7 @@ CoreDNS 基于插件链工作，常见插件有：
 - **reload**：支持配置热更新。
 - **loadbalance**：对多 IP 记录做轮询。
 
-##### 一个完整访问链路
+**一个完整访问链路**
 
 ```text
 Pod A 访问 database-svc
@@ -312,7 +312,7 @@ Pod A 访问 database-svc
 
 这里可以把它和前面聊到的网络组件串起来： **CNI 负责 Pod 之间能通，kube-proxy 负责把 Service 流量转到后端 Pod，CoreDNS 负责把服务名解析成 Service IP。**
 
-##### 几个容易混淆的点
+**几个容易混淆的点**
 
 - CoreDNS 的 Deployment 叫 `coredns`，但它暴露的 Service 叫 `kube-dns`，这是为了兼容旧组件。
 - Pod 默认 `dnsPolicy: ClusterFirst`，会优先使用 CoreDNS。
@@ -361,7 +361,7 @@ spec:
   dnsPolicy: ClusterFirst   # ❌ 这个位置无效
 ```
 
-##### 四种常用值
+**四种常用值**
 
 | 值 | 含义 | 典型场景 |
 | --- | --- | --- |
@@ -386,11 +386,11 @@ dnsConfig:
 
 简单记： **Deployment 不直接配 `dnsPolicy`，要写在 `spec.template.spec.dnsPolicy` 下面。**
 
-#### 补充：dnsPolicy 只有 ClusterFirst 和 Default 两种吗？
+**补充：dnsPolicy 只有 ClusterFirst 和 Default 两种吗？**
 
 不止，Kubernetes 里一共有 **4 种**`dnsPolicy`：`ClusterFirst`、`Default`、`ClusterFirstWithHostNet`、`None`。
 
-###### 四种策略对比
+**四种策略对比**
 
 | 策略 | 行为 | 适用场景 |
 | --- | --- | --- |
@@ -399,7 +399,7 @@ dnsConfig:
 | `ClusterFirstWithHostNet` | Pod 用了 `hostNetwork: true` 时仍走 CoreDNS | 网络插件、监控 Agent 等需要 hostNetwork 又要服务发现的场景 |
 | `None` | 完全不用集群默认 DNS，必须配合 `dnsConfig` 自定义 | 需要指定特定 nameserver、search 域或 ndots |
 
-###### 两个容易踩坑的点
+**两个容易踩坑的点**
 
 **1. `hostNetwork: true` 时不能用 `ClusterFirst`**
 
@@ -428,7 +428,7 @@ dnsConfig:
       value: "2"
 ```
 
-###### 怎么选
+**怎么选**
 
 - 绝大多数业务 Pod： **`ClusterFirst`**（默认，不用写）。
 - 用了 `hostNetwork` 又要服务发现： **`ClusterFirstWithHostNet`**。
@@ -439,7 +439,7 @@ dnsConfig:
 
 这两个参数都写在 Pod 的 `/etc/resolv.conf` 里，用来控制 **域名解析顺序** 和 **解析尝试路径**。
 
-##### `searches`：域名补全规则
+**`searches`：域名补全规则**
 
 `searches` 是 DNS 搜索域列表。Kubernetes 默认会给 Pod 配置：
 
@@ -460,7 +460,7 @@ redis                             ← 第4次尝试，最终成功
 
 这样你不需要写完整域名，直接访问 `redis` 就能解析到同命名空间下的 Service。
 
-##### `ndots`：决定"什么时候走 search"
+**`ndots`：决定"什么时候走 search"**
 
 `ndots` 是一个阈值，默认值是 **5**。
 
@@ -471,7 +471,7 @@ redis                             ← 第4次尝试，最终成功
 | 小于 `ndots` | `< 5` | **先** 拼 search 后缀尝试，全部失败后再用原始域名查 |
 | 大于等于 `ndots` | `≥ 5` | **先** 用原始域名直接查，失败后再拼 search 后缀 |
 
-##### 默认 `ndots:5` 的性能问题
+**默认 `ndots:5` 的性能问题**
 
 这是生产环境里一个经典的坑。
 
@@ -486,7 +486,7 @@ www.example.com                             → 成功
 
 **本来 1 次查询就能解决，实际发了 4 次**，每次 NXDOMAIN 都是一次完整的 DNS 往返。高并发场景下会显著拖慢请求，甚至打满 CoreDNS。
 
-##### 优化方案
+**优化方案**
 
 **方案一：降低 `ndots`**
 
@@ -511,7 +511,7 @@ www.example.com.                   ← 同样跳过 search
 
 末尾的 `.` 告诉解析器"这是完整域名，不要拼后缀"，一次查询搞定。
 
-##### 一句话总结
+**一句话总结**
 
 - **`searches`**：定义域名后缀补全规则，让你能用短名访问集群内服务。
 - **`ndots`**：定义"多少点以上才算完整域名"，默认 5 会导致外部域名解析被放大 34 倍。
@@ -527,11 +527,11 @@ www.example.com.                   ← 同样跳过 search
   - Q：Qdrant/Postgres 这类有状态服务在 K8s 上跑要注意什么？A：副本数固定、存储用 Longhorn 这类有副本保障的、节点维护前要 drain 保证数据副本健康、备份要另做。
 - 【岗位标注】运维 / AI 运维
 
-#### 补充：Headless Service 有什么用？和普通 ClusterIP 有什么区别？
+**补充：Headless Service 有什么用？和普通 ClusterIP 有什么区别？**
 
 Headless Service 的核心作用是： **不给 Service 分配 ClusterIP，让 DNS 直接返回后端 Pod 的真实 IP，从而让客户端能直接访问具体 Pod，而不是经过 kube-proxy 做负载均衡。**
 
-###### 和普通 Service 的区别
+**和普通 Service 的区别**
 
 | 对比项 | 普通 ClusterIP Service | Headless Service |
 | --- | --- | --- |
@@ -541,7 +541,7 @@ Headless Service 的核心作用是： **不给 Service 分配 ClusterIP，让 D
 | 访问方式 | 客户端访问 VIP，由 kube-proxy 转发 | 客户端直接访问 Pod IP 或 Pod 域名 |
 | 适用场景 | 无状态服务、微服务间调用 | 有状态服务、点对点通信、自定义负载均衡 |
 
-###### 配置方式
+**配置方式**
 
 ```yaml
 apiVersion: v1
@@ -562,7 +562,7 @@ spec:
 clusterIP: None
 ```
 
-###### DNS 行为
+**DNS 行为**
 
 普通 Service 的域名解析会得到一个 ClusterIP：
 
@@ -586,7 +586,7 @@ mysql-1.mysql-headless.default.svc.cluster.local → 10.244.0.6
 mysql-2.mysql-headless.default.svc.cluster.local → 10.244.0.7
 ```
 
-###### 典型场景
+**典型场景**
 
 **1. 有状态服务**
 
@@ -609,7 +609,7 @@ mysql-2.mysql-headless.default.svc.cluster.local → 10.244.0.7
 
 比如分布式缓存、P2P 集群、游戏服务器同步，节点之间需要直接互相访问。
 
-###### 一句话理解
+**一句话理解**
 
 普通 Service 像“总机”，你打过去，它帮你转接某个分机；
 
@@ -623,7 +623,7 @@ K8sService类型、场景和原理，今天全理清了
 
 可以，但要看你说的是哪种“接入”。
 
-##### 集群内 Pod 访问外部服务：Headless 可以配合用
+**集群内 Pod 访问外部服务：Headless 可以配合用**
 
 如果你是想让集群里的 Pod 访问集群外部的服务，比如外部 MySQL、Redis、Kafka、第三方 API，可以用 **无 selector Service + 手动 Endpoints/EndpointSlice**。
 
@@ -662,7 +662,7 @@ spec:
 
 但这里有个关键点： **Headless 只是改变了 DNS 解析方式，不会自动帮你把外部服务暴露出去。**
 
-##### 外部客户端访问 K8s 服务：Headless 不是主要方式
+**外部客户端访问 K8s 服务：Headless 不是主要方式**
 
 如果是想让外部客户端访问集群里的服务，Headless 通常不是直接方案。
 
@@ -678,7 +678,7 @@ spec:
 
 比如 Kafka 跑在 StatefulSet 里，内部用 Headless Service 让每个 broker 有稳定域名；但如果外部客户端要连 Kafka，还需要额外通过 NodePort、LoadBalancer 或外部域名来暴露。
 
-##### 怎么选
+**怎么选**
 
 - **外部服务有域名**：用 `ExternalName` 最简单。
 - **外部服务只有 IP，需要负载均衡或端口映射**：用无 selector Service + Endpoints。
@@ -699,17 +699,19 @@ spec:
   - Q：Longhorn 卷快照能当备份吗？A：快照在集群内，节点全挂就没了；要异地备份得配 backup target（S3/NFS），定期把快照推到远端，这才是真正的灾备。
 - 【岗位标注】运维 / AI 运维
 
-#### 补充：StorageClass 里 provisioner / reclaimPolicy / volumeBindingMode 是固定的吗？
+**补充：StorageClass 里 provisioner / reclaimPolicy / volumeBindingMode 是固定的吗？**
 
-> provisioner: [k8s-sigs.io/nfs-subdir-external-provisioner](https://k8s-sigs.io/nfs-subdir-external-provisioner)
-> reclaimPolicy: Delete
-> volumeBindingMode: Immediate
+> provisioner: [k8s-sigs.io/nfs-subdir-external-provisioner](https://k8s-sigs.io/nfs-subdir-external-provisioner)
+> reclaimPolicy: Delete
+> volumeBindingMode: Immediate
+>
 > ---
+>
 > 这三行配置都是固定的吗？
 
 这三个参数 **都不是固定的**，它们取决于你用的存储后端和运维需求。
 
-###### `provisioner`：取决于你装了什么存储驱动
+**`provisioner`：取决于你装了什么存储驱动**
 
 这个字段必须填集群里 **实际安装的 Provisioner 名称**，不同存储方案对应的值完全不同：
 
@@ -728,7 +730,7 @@ spec:
 
 所以 `provisioner` **不是固定的**，它必须和你集群里部署的 CSI Driver 或外部 Provisioner 一致。
 
-###### `reclaimPolicy`：三种策略可选
+**`reclaimPolicy`：三种策略可选**
 
 | 值 | 行为 | 适用场景 |
 | --- | --- | --- |
@@ -738,7 +740,7 @@ spec:
 
 默认值是 `Delete`，但生产环境数据库类服务通常设为 `Retain`。
 
-###### `volumeBindingMode`：两种模式可选
+**`volumeBindingMode`：两种模式可选**
 
 | 值 | 行为 | 适用场景 |
 | --- | --- | --- |
@@ -747,7 +749,7 @@ spec:
 
 `WaitForFirstConsumer` 的核心价值是 **延迟绑定**：PVC 创建后不会立刻去找 PV，而是等 Pod 调度到某个节点后，才根据 Pod 的节点亲和性、拓扑约束来选择最合适的 PV。比如 `local` PV 必须用这个模式，否则 Pod 可能被调度到没有对应本地盘的节点上。
 
-###### 总结
+**总结**
 
 | 参数 | 是否固定 | 说明 |
 | --- | --- | --- |
@@ -757,11 +759,11 @@ spec:
 
 另外提醒一点：`provisioner` 是 **必填** 的，不写的话 PVC 动态供给会失败；而 `reclaimPolicy` 和 `volumeBindingMode` 都有默认值，不写也能用，只是默认值不一定符合你的生产需求。
 
-#### 补充：provisioner 有哪些取值？这些参数去哪里查？
+**补充：provisioner 有哪些取值？这些参数去哪里查？**
 
 不用背，这类东西本来就是 **查出来的**。`provisioner` 的值取决于你集群里装了哪个存储驱动，所以最靠谱的办法是： **看集群里实际有哪些 StorageClass 和 CSI Driver**。
 
-###### 最实用的查法
+**最实用的查法**
 
 ```bash
 # 看集群里已经有哪些 StorageClass
@@ -776,7 +778,7 @@ kubectl get csidriver
 
 `provisioner` 必须和你集群里实际部署的 CSI Driver / External Provisioner 一致，不能凭空编。
 
-###### 去哪里查某个存储的 provisioner
+**去哪里查某个存储的 provisioner**
 
 | 你想用哪种存储 | 去哪里查 |
 | --- | --- |
@@ -792,7 +794,7 @@ kubectl get csidriver
 
 这两个名字不一样，是因为它们是不同组件。你写 StorageClass 时，必须和你实际部署的那个一致。
 
-###### 这几个字段怎么记
+**这几个字段怎么记**
 
 | 字段 | 要不要背 | 怎么确定 |
 | --- | --- | --- |
@@ -800,7 +802,7 @@ kubectl get csidriver
 | `reclaimPolicy` | 记两个值 | `Delete` 自动删，`Retain` 保留数据 |
 | `volumeBindingMode` | 记两个值 | `Immediate` 立即绑，`WaitForFirstConsumer` 等 Pod 调度后再绑 |
 
-###### 一个很稳的习惯
+**一个很稳的习惯**
 
 以后看到别人给的 StorageClass YAML，不要直接抄 `provisioner`。先确认三件事：
 
@@ -843,13 +845,13 @@ kubectl get csidriver
   - Q：快照恢复后 Rancher 里集群状态会怎样？A：恢复的是历史时间点的集群状态，之后新增的对象会丢，Rancher 的 cluster agent 可能要重建，所以恢复前要确认恢复到哪个时间点、丢多少数据可接受。
 - 【岗位标注】运维
 
-#### 补充：原生 K8s 和 RKE2 备份、恢复 etcd 的流程有什么不同？
+**补充：原生 K8s 和 RKE2 备份、恢复 etcd 的流程有什么不同？**
 
 两者本质上都是“给 etcd 做一致性快照”，但 **原生 K8s 没有内置自动备份机制，通常用 `etcdctl` 手动操作；RKE2 内置了 etcd 快照功能，默认就会定时生成快照**。
 
-###### 原生 K8s（kubeadm / 静态 Pod etcd）
+**原生 K8s（kubeadm / 静态 Pod etcd）**
 
-###### 备份流程
+**备份流程**
 
 在 master 节点执行：
 
@@ -876,7 +878,7 @@ kubectl -n kube-system exec -it etcd-<master> -- \
 
 备份文件最好再同步到集群外，比如 S3 / MinIO / NFS。
 
-###### 恢复流程
+**恢复流程**
 
 1. 停止 kube-apiserver 和 etcd：
 
@@ -912,9 +914,9 @@ kubectl get nodes
 etcdctl endpoint health
 ```
 
-###### RKE2
+**RKE2**
 
-###### 备份流程
+**备份流程**
 
 RKE2 默认会定时生成 etcd 快照，默认约 **12 小时一次**，保存在每个 server 节点上：
 
@@ -937,7 +939,7 @@ etcd-snapshot-retention: "6"
 
 还可以直接配置 S3 备份，这样即使 etcd 节点全部丢失，也能从对象存储恢复。
 
-###### 恢复流程
+**恢复流程**
 
 1. 停止所有 server 节点上的 RKE2：
 
@@ -974,7 +976,7 @@ systemctl start rke2-server
 kubectl get nodes
 ```
 
-###### 关键区别
+**关键区别**
 
 | 对比项 | 原生 K8s | RKE2 |
 | --- | --- | --- |
@@ -997,14 +999,14 @@ K8s高可用集群升级&etcd备份
 
 RKE2 本质上还是 **标准 Kubernetes**，API、对象模型、kubectl 用法、CNI/CSI/Ingress 插件生态都和原生 K8s 一致；差别主要在 **安装方式、控制平面形态、默认安全策略、容器运行时和运维模型**。
 
-##### 相同点
+**相同点**
 
 - **都是 CNCF 认证 Kubernetes**：RKE2 是完全兼容的 Kubernetes 发行版，不会改变你写 Deployment、Service、Ingress、Helm Chart 的方式。
 - **控制平面组件相同**：都有 API Server、Controller Manager、Scheduler、etcd、kubelet、kube-proxy、CoreDNS 等。
 - **工作负载可移植**：给原生 K8s 写的 YAML、Operator、CRD、Helm Chart，通常可以直接在 RKE2 上跑。
 - **集群能力相同**：RBAC、Namespace、NetworkPolicy、HPA、StatefulSet、DaemonSet、Job、CronJob 等都一样。
 
-##### 主要差异
+**主要差异**
 
 | 维度 | 原生 Kubernetes | RKE2 |
 | --- | --- | --- |
@@ -1018,7 +1020,7 @@ RKE2 本质上还是 **标准 Kubernetes**，API、对象模型、kubectl 用法
 | 升级方式 | kubeadm upgrade 或手工升级 | RKE2 版本升级、Rancher 托管升级 |
 | 运维复杂度 | 灵活，但需要更多手工配置 | 更“打包化”，适合标准化生产集群 |
 
-##### 关键区别：RKE2 不是“另一个 K8s”，而是“打包更完整的 K8s”
+**关键区别：RKE2 不是“另一个 K8s”，而是“打包更完整的 K8s”**
 
 原生 K8s 更像一个基础平台：你选 kubeadm、containerd、CNI、Ingress、etcd、证书管理、升级流程，然后自己拼装。
 
@@ -1033,7 +1035,7 @@ RKE2 则把这些东西打包好了：
 
 所以你在 RKE2 里看到的 `kubectl get nodes`、`kubectl get pods -n kube-system`、`kubectl apply -f`，和原生 K8s 几乎没有区别。
 
-##### 什么时候选 RKE2？
+**什么时候选 RKE2？**
 
 适合选 RKE2 的场景：
 
@@ -1049,7 +1051,7 @@ RKE2 则把这些东西打包好了：
 - 不想依赖特定发行版或供应商；
 - 希望完全按上游文档排查问题。
 
-##### 一句话总结
+**一句话总结**
 
 **原生 K8s 是“裸平台”，RKE2 是“加固版、打包版、运维友好版”的标准 Kubernetes。**
 
@@ -1059,7 +1061,7 @@ RKE2 则把这些东西打包好了：
 
 RKE2 对 etcd 的管理可以概括成一句话： **嵌入式 etcd + 静态 Pod 管理 + 内置快照 + 自动证书轮换**。
 
-##### 1. etcd 是“嵌入”的，但不是单独装一个 etcd 包
+**1. etcd 是“嵌入”的，但不是单独装一个 etcd 包**
 
 RKE2 的 etcd 数据目录默认在：
 
@@ -1076,7 +1078,7 @@ RKE2 的 etcd 数据目录默认在：
 - 手动管理 etcd 证书；
 - 自己处理 etcd 成员变更。
 
-##### 2. 高可用：Server 节点自动组成 etcd 集群
+**2. 高可用：Server 节点自动组成 etcd 集群**
 
 生产 HA 集群通常部署 3 或 5 个 RKE2 Server 节点，它们会同时承担 **control plane + etcd** 角色。
 
@@ -1091,7 +1093,7 @@ RKE2 会自动把它加入 etcd 集群。
 
 注意：etcd 节点数建议是奇数，3、5 比较常见，避免 Quorum 问题。
 
-##### 3. 备份：内置 etcd 快照
+**3. 备份：内置 etcd 快照**
 
 RKE2 默认会定期创建 etcd 快照，默认每 12 小时一次，快照保存在：
 
@@ -1107,7 +1109,7 @@ rke2 etcd-snapshot save --name pre-upgrade-snapshot
 
 快照可以存本地，也可以配置 S3。
 
-##### 4. 恢复：用 `--cluster-reset` 恢复快照
+**4. 恢复：用 `--cluster-reset` 恢复快照**
 
 恢复时通常要：
 
@@ -1123,17 +1125,17 @@ systemctl start rke2-server
 
 如果是多 Server 集群，恢复后其他 Server 节点通常需要清理旧 etcd 数据目录，再重新加入。
 
-##### 5. 成员变更：不建议手动操作 etcdctl
+**5. 成员变更：不建议手动操作 etcdctl**
 
 原生 K8s 里，etcd 成员变更常用 `etcdctl member add/remove`。
 
 RKE2 里更推荐通过 RKE2/Rancher 管理 Server 节点加入或移除，让 RKE2 自动处理 etcd 成员关系。手动改 etcd 成员容易和 RKE2 的引导数据不一致。
 
-##### 6. 证书：自动轮换
+**6. 证书：自动轮换**
 
 RKE2 会自动轮换 etcd 和控制平面证书，不需要像 kubeadm 那样经常手动 `kubeadm alpha certs renew`。
 
-##### 和原生 K8s 的主要区别
+**和原生 K8s 的主要区别**
 
 | 能力 | 原生 K8s | RKE2 |
 | --- | --- | --- |
@@ -1165,7 +1167,7 @@ RoleBinding：指定命名空间，并把这组权限绑定到某个主体
 最终效果：该主体在指定命名空间里拥有这些权限
 ```
 
-##### 举个例子
+**举个例子**
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1198,7 +1200,7 @@ roleRef:
 - `RoleBinding` 把这个权限绑定到 `dev` 命名空间里的 `dev-sa`；
 - 所以 `dev-sa` **只能在 `dev` 命名空间里读 Pod**，不能跨到其他 namespace。
 
-##### 四个对象的关系
+**四个对象的关系**
 
 | 对象 | 作用 | 范围 |
 | --- | --- | --- |
@@ -1207,7 +1209,7 @@ roleRef:
 | **RoleBinding** | 把 Role/ClusterRole 绑定到主体 | 命名空间 |
 | **ClusterRoleBinding** | 把 ClusterRole 绑定到主体 | 集群 |
 
-##### 关键组合
+**关键组合**
 
 - **Role + RoleBinding**：权限只在某个 namespace 内生效。
 - **ClusterRole + ClusterRoleBinding**：权限在整个集群生效。
@@ -1215,7 +1217,7 @@ roleRef:
 
 所以可以记成： **ClusterRole 负责“有什么权限”，RoleBinding 负责“谁在哪个命名空间里能用这些权限”。**
 
-### Q20. dev-sa 是指一个用户吗？
+### Q20. dev-sa 是指一个用户吗？
 
 `dev-sa` 不是人用的用户账号，而是一个 **ServiceAccount，也就是服务账号**。
 
@@ -1256,7 +1258,7 @@ subjects:
 
 但“关联 SA”不等于“要用它”。Pod 真正 **用到** ServiceAccount，通常是下面几类场景：
 
-##### 1. Pod 需要访问 Kubernetes API
+**1. Pod 需要访问 Kubernetes API**
 
 这是最常见、也最核心的场景。
 
@@ -1279,7 +1281,7 @@ subjects:
 
 Pod 里的程序可以用这个 token 向 API Server 认证。
 
-##### 2. 使用云厂商或外部服务时做身份标识
+**2. 使用云厂商或外部服务时做身份标识**
 
 有些场景下，ServiceAccount 会被当作 Pod 的身份标识：
 
@@ -1288,13 +1290,13 @@ Pod 里的程序可以用这个 token 向 API Server 认证。
 - CI/CD 流水线里的 Job Pod 需要认证到集群；
 - 第三方安全工具根据 SA 识别 Pod 身份。
 
-##### 3. 拉取私有镜像
+**3. 拉取私有镜像**
 
 ServiceAccount 可以配置 `imagePullSecrets`。
 
 如果 Pod 要从私有镜像仓库拉镜像，可以通过 SA 关联的 Secret 完成认证。
 
-##### 4. 需要给 Pod 做最小权限控制
+**4. 需要给 Pod 做最小权限控制**
 
 即使 Pod 暂时不调用 API Server，生产上也建议：
 
@@ -1302,7 +1304,7 @@ ServiceAccount 可以配置 `imagePullSecrets`。
 - 通过 RBAC 只授予它真正需要的权限；
 - 避免所有 Pod 都共用权限过大的 `default` SA。
 
-##### 5. 不需要访问 API 时，可以关闭自动挂载
+**5. 不需要访问 API 时，可以关闭自动挂载**
 
 如果 Pod 只是跑一个普通 Web 服务，完全不需要访问 API Server，可以关闭自动挂载：
 
@@ -1314,7 +1316,7 @@ spec:
 
 这样容器里就不会自动出现 API token，减少不必要的攻击面。
 
-##### 一句话总结
+**一句话总结**
 
 **所有 Pod 都有一个 ServiceAccount；只有当 Pod 需要访问 API Server、访问外部服务、拉私有镜像，或需要精细权限控制时，才会真正“用到”它。**
 
@@ -1330,7 +1332,7 @@ spec:
 | **Group** | 用户组 | dev-team、sre-team |
 | **ServiceAccount** | Pod / 程序 | Prometheus、ArgoCD、应用 Pod |
 
-##### 为什么大家常说“基于用户”？
+**为什么大家常说“基于用户”？**
 
 因为日常运维里，RBAC 最常见的用途就是：
 
@@ -1341,7 +1343,7 @@ spec:
 
 这些场景里，主体确实是“人”，所以大家会简化成“RBAC 是给不同用户分配不同权限”。
 
-##### 但 RBAC 也管 Pod 的权限
+**但 RBAC 也管 Pod 的权限**
 
 前面说的 `dev-sa` 就是典型例子。Pod 里的程序如果要访问 API Server，它需要一个身份，这个身份就是 ServiceAccount。然后通过 RBAC 给它授权：
 
@@ -1354,13 +1356,13 @@ subjects:
 
 这样，`dev-sa` 对应的 Pod 就能拥有 Role/ClusterRole 里定义的权限。
 
-##### 还有一个容易忽略的点
+**还有一个容易忽略的点**
 
 Kubernetes 里其实没有 `User` 这个 API 对象。User 通常来自外部系统，比如证书里的 CN、OIDC 身份提供方、企业账号系统。K8s 只是把这个用户名当作一个字符串，再交给 RBAC 判断有没有权限。
 
 而 ServiceAccount 是真正的 K8s API 对象，可以用 `kubectl get sa` 看到。
 
-##### 一句话总结
+**一句话总结**
 
 **RBAC 不是只控制“人”，而是控制“谁”。这个“谁”可以是人、用户组，也可以是 Pod 里的 ServiceAccount。**
 
@@ -1370,13 +1372,13 @@ Kubernetes 里其实没有 `User` 这个 API 对象。User 通常来自外部系
 
 蓝绿和金丝雀在 K8s 里有两条主流实现路径： **原生 Service/Ingress 手工控制**，或者用 **Argo Rollouts 自动化管理**。下面分别说。
 
-#### 一、蓝绿部署
+**一、蓝绿部署**
 
-##### 核心思路
+**核心思路**
 
 蓝绿发布是零停机策略，核心是同时维护两套环境（蓝=旧版本，绿=新版本），先部署绿环境并验证，验证通过后将流量从蓝切到绿，最后销毁蓝环境。蓝、绿使用独立的 Deployment，但共享同一个 Service，通过标签选择器控制流量指向；若绿环境异常，只需把 Service 的 selector 切回蓝环境标签即可快速回滚。
 
-##### 原生配置方式
+**原生配置方式**
 
 **1. 蓝环境 Deployment**
 
@@ -1441,7 +1443,7 @@ kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"v2"}}}'
 kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"v1"}}}'
 ```
 
-##### Argo Rollouts 的蓝绿配置
+**Argo Rollouts 的蓝绿配置**
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -1474,9 +1476,9 @@ spec:
 
 需要同时准备 active 和 preview 两个 Service。新版本启动后 preview Service 指向 v2，active Service 仍指向 v1，生产流量不受影响；可以先 port-forward 到 preview 手动验证，确认无误后用 `kubectl argo rollouts promote` 切换 active。
 
-#### 二、金丝雀发布
+**二、金丝雀发布**
 
-##### 方式一：Nginx Ingress 注解（轻量，无需额外组件）
+**方式一：Nginx Ingress 注解（轻量，无需额外组件）**
 
 关键注解包括 `nginx.ingress.kubernetes.io/canary: "true"`（启用灰度）、`nginx.ingress.kubernetes.io/canary-weight: "0-100"`（按权重切分流量）、`canary-by-header` 及 `canary-by-header-value`（基于请求头匹配）、`canary-by-cookie`（基于 Cookie 匹配），规则优先级为 Header > Cookie > Weight。
 
@@ -1506,7 +1508,7 @@ spec:
 
 如果想做定向灰度，可以用请求头匹配：`nginx.ingress.kubernetes.io/canary-by-header: "X-Canary"` 配合 `canary-by-header-value: "true"`，把带特定请求头的流量路由到新版本。
 
-##### 方式二：Argo Rollouts（适合需要自动判断的场景）
+**方式二：Argo Rollouts（适合需要自动判断的场景）**
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -1545,7 +1547,7 @@ spec:
 
 金丝雀 Ingress 由 Rollout 自动管理，不需要手动创建。
 
-##### 配合 Analysis 做自动判断
+**配合 Analysis 做自动判断**
 
 AnalysisTemplate 定义指标查询指令、阈值及成功/失败条件，AnalysisRun 是其运行时实例。Rollout 通过 `strategy.canary.analysis` 引用 AnalysisTemplate，可用 `startingStep` 指定分析开始的步骤；指标满足成功条件则继续发布，满足失败条件则自动回滚，无法判定则暂停发布。
 
@@ -1574,7 +1576,7 @@ spec:
 
 后台持续分析可以这样配：在 `strategy.canary.analysis` 中设置 `startingStep: 1`，表示从第 2 步开始后台持续分析，整个发布过程中会不断检查指标，任何一次失败都会触发回滚。
 
-#### 三、两者怎么选
+**三、两者怎么选**
 
 | 发布模式 | 流量比例 | 回滚速度 | 适用场景 |
 | --- | --- | --- | --- |
@@ -1596,11 +1598,11 @@ spec:
 
 ---
 
-#### 补充：minReadySeconds、preStop、terminationGracePeriodSeconds 分别确保什么？
+**补充：minReadySeconds、preStop、terminationGracePeriodSeconds 分别确保什么？**
 
 这三个参数分别管的是： **新 Pod 别太快接流量、旧 Pod 别立刻被杀、被杀时要留够收尾时间**。
 
-###### 三个参数的分工
+**三个参数的分工**
 
 | 参数 | 管什么 | 确保什么 |
 | --- | --- | --- |
@@ -1608,7 +1610,7 @@ spec:
 | `preStop` | Pod 被删除前执行一段收尾动作 | 让 Pod 主动摘流、等存量请求处理完，再真正退出 |
 | `terminationGracePeriodSeconds` | Pod 从开始终止到被强制杀掉的最大时间 | 保证 preStop + 应用优雅关闭有足够时间，超时会被 SIGKILL 强杀 |
 
-###### `minReadySeconds`：防止新 Pod 过早接流量
+**`minReadySeconds`：防止新 Pod 过早接流量**
 
 `readinessProbe` 通过只代表 Pod 已经 Ready，但有些应用还需要一点时间预热，比如连接池、缓存、路由表还没完全稳定。
 
@@ -1622,7 +1624,7 @@ minReadySeconds: 30
 
 表示新 Pod 通过就绪探针后，还要再稳定 30 秒，才允许继续替换下一个旧 Pod。
 
-###### `preStop`：让旧 Pod 优雅摘流
+**`preStop`：让旧 Pod 优雅摘流**
 
 `preStop` 是容器终止前执行的生命周期钩子。
 
@@ -1644,7 +1646,7 @@ lifecycle:
 
 注意，`preStop` 是同步执行的，Kubelet 会等它执行完才会继续发 SIGTERM。
 
-###### `terminationGracePeriodSeconds`：给优雅退出留总时间
+**`terminationGracePeriodSeconds`：给优雅退出留总时间**
 
 `terminationGracePeriodSeconds` 是 Pod 被终止后的总宽限时间，默认 30 秒。
 
@@ -1666,7 +1668,7 @@ preStop 执行时间 + 应用优雅关闭时间
 
 如果设得太短，preStop 还没跑完，或者应用还没处理完请求，Pod 就会被 SIGKILL 强制杀掉，可能出现 502、请求超时、数据不一致。
 
-###### 它们和 readinessProbe 怎么配合
+**它们和 readinessProbe 怎么配合**
 
 可以把滚动更新理解成一条时序链：
 
@@ -1726,25 +1728,27 @@ spec:
 
 简单记就是： **`readinessProbe` 管“什么时候接流量”，`minReadySeconds` 管“接流量后稳不稳”，`preStop` 管“怎么优雅摘流”，`terminationGracePeriodSeconds` 管“优雅退出有没有足够时间”。**
 
-#### 补充：preStop 只配 sleep 10 就能保证 Pod 退出前把流量摘干净吗？
+**补充：preStop 只配 sleep 10 就能保证 Pod 退出前把流量摘干净吗？**
 
 > lifecycle:
 > preStop:
 > exec:
-> command: ["sh", "-c", "sleep 10"]
+> command: ["sh", "-c", "sleep 10"]
+>
 > ---
-> 这一段配置就能保证pod 在推出前就能把流量摘干净吗？
+>
+> 这一段配置就能保证pod 在推出前就能把流量摘干净吗？
 
 **不能保证 100% 摘干净，但它是目前最实用的“兜底缓冲”**。`preStop: sleep 10` 的核心作用是给 **Endpoints 摘流、kube-proxy 更新 iptables/ipvs、Ingress/ALB 同步后端组** 留出传播时间，避免 Pod 在流量规则还没生效时就被 SIGTERM 杀掉。
 
-###### 为什么它不能“保证”
+**为什么它不能“保证”**
 
 - **摘流和终止是并发的**：Pod 被标记为 Terminating 后，Endpoint 摘流和 preStop 执行是两条并行线，K8s 不保证谁先完成。
 - **sleep 期间 Pod 仍在收流量**：`preStop` 执行时 Pod 还活着，如果负载均衡器或 kube-proxy 规则还没同步完，新请求仍可能打到这个 Pod。
 - **只解决“摘流延迟”，不管“在途请求”**：`sleep` 只是等规则生效，存量请求的完整处理要靠 SIGTERM 后应用自己的优雅关闭逻辑。
 - **Ingress 层是独立延迟**：即使 kube-proxy 规则更新了，ALB/Nginx Ingress 的后端组同步也是独立的，sleep 10 不一定够。
 
-###### 更稳妥的组合打法
+**更稳妥的组合打法**
 
 | 层次 | 配置 | 作用 |
 | --- | --- | --- |
@@ -1753,7 +1757,7 @@ spec:
 | **应用优雅关闭** | 应用捕获 SIGTERM，停止接新请求、处理在途请求 | 真正处理存量请求，不丢业务状态 |
 | **总时间兜底** | `terminationGracePeriodSeconds ≥ preStop + 应用关闭时间` | 防止被 SIGKILL 强杀 |
 
-###### 一个更完整的示例
+**一个更完整的示例**
 
 ```yaml
 spec:
@@ -1773,7 +1777,7 @@ spec:
             command: ["sh", "-c", "sleep 10"]
 ```
 
-###### 一句话总结
+**一句话总结**
 
 `preStop: sleep 10` **不能单独保证** 流量摘干净，它解决的是“摘流规则传播延迟”这个时间窗口。真正零中断需要四层配合： **readinessProbe 主动摘流 → preStop 等规则生效 → SIGTERM 后应用优雅关闭 → terminationGracePeriodSeconds 兜底不被强杀**。
 

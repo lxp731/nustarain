@@ -56,7 +56,7 @@ tags:
 
 ### Q5. 滚动更新卡住了，完整排查思路是什么？
 
-##### 一、先确认“卡住”这个事实
+**一、先确认“卡住”这个事实**
 
 `kubectl rollout status` 长时间不推进，典型输出是：
 
@@ -66,7 +66,7 @@ Waiting for deployment "nginx" rollout to finish: 1 out of 3 new replicas have b
 
 这时别急着改配置，先按层级往下走。
 
-##### 二、四步定位
+**二、四步定位**
 
 **Step 1：看 Deployment 的 Conditions**
 
@@ -120,13 +120,13 @@ kubectl describe pod/nginx-def-xxxxx
 | Pod CrashLoopBackOff | 新版本启动即崩溃（环境变量缺失、配置错误、依赖服务未就绪） |
 | 新 Pod 一直 Pending | 资源不足、节点亲和性不满足 |
 
-##### 三、为什么“卡住”其实不算坏事
+**三、为什么“卡住”其实不算坏事**
 
 最典型的场景是新版本镜像有 bug，启动后 Readiness Probe 一直失败 → 新 Pod 永远不就绪 → 滚动更新永远不会继续缩容旧 RS → 服务保持旧版本可用。这其实是滚动更新的设计优点：宁可卡住也不中断。
 
 所以排查时不要一上来就想“怎么让它过去”，先判断是 **该修** 还是 **该回滚**。
 
-##### 四、几个容易漏的排查点
+**四、几个容易漏的排查点**
 
 **Pending 的三板斧**：先看事件 `kubectl describe pod | grep -A 20 "Events:"`，再看调度失败原因 `grep -A 10 "FailedScheduling"`，最后 `kubectl top nodes` 检查节点资源。常见原因就那么几个：节点资源不足、镜像拉取失败、调度策略不匹配、InitContainer 卡死。
 
@@ -134,7 +134,7 @@ kubectl describe pod/nginx-def-xxxxx
 
 **探针与就绪的时序**：`minReadySeconds` 没配的话，K8s 只要 Pod 变成 Running 就可能认为就绪并开始删旧 Pod，忽略了应用实际完成初始化、具备服务能力所需的时间。
 
-##### 五、处置建议
+**五、处置建议**
 
 - 新版本确认有严重问题 → 直接 `kubectl rollout undo`，或改回旧镜像；
 - 只是想先拿到新版本日志排查 → 可以临时调 `maxUnavailable`，但这会短暂中断服务，等价于 Recreate 策略，生产慎用；
@@ -148,7 +148,7 @@ kubectl describe pod/nginx-def-xxxxx
 
 排查这类问题，核心思路是： **先用标签找到所有可能被选中的 Pod，再用 `ownerReferences` 确认每个 Pod 到底归谁管。**
 
-##### 1. 先确认哪些 Pod 被选中
+**1. 先确认哪些 Pod 被选中**
 
 比如你怀疑 `app=web` 这个选择器太宽：
 
@@ -158,7 +158,7 @@ kubectl get pods -l app=web --show-labels -n <namespace>
 
 如果输出里 Pod 的标签非常杂，说明这个选择器可能命中了多个控制器。
 
-##### 2. 看 Pod 到底属于哪个控制器
+**2. 看 Pod 到底属于哪个控制器**
 
 挑一个“删了又出现”的 Pod：
 
@@ -201,7 +201,7 @@ kubectl get pods -l app=web -n <namespace> \
 
 如果同一批 Pod 里出现多个 Deployment / ReplicaSet，基本就是选择器冲突。
 
-##### 3. 看控制器期望副本数
+**3. 看控制器期望副本数**
 
 ```bash
 kubectl get deployment -n <namespace>
@@ -210,9 +210,9 @@ kubectl get replicaset -l app=web -n <namespace>
 
 如果多个控制器都显示 `READY` 数量和实际 Pod 数量对不上，或者不断创建、删除，就说明它们在抢同一组 Pod。
 
-##### 4. 修复方法
+**4. 修复方法**
 
-###### 方法一：收紧选择器
+**方法一：收紧选择器**
 
 把宽泛的 `app: web` 改成更精确的组合，例如：
 
@@ -233,7 +233,7 @@ kubectl delete deployment <name> --cascade=orphan
 
 保留现有 Pod，再用新 selector 重新创建。
 
-###### 方法二：把误选的 Pod 从对方控制器里移出去
+**方法二：把误选的 Pod 从对方控制器里移出去**
 
 如果某个 Pod 被错误地打了标签，可以改标签：
 
@@ -243,7 +243,7 @@ kubectl label pod <pod-name> app=web- --overwrite -n <namespace>
 
 但更稳的做法是： **找到误配的 Deployment / ReplicaSet，直接删除或修正它。**
 
-###### 方法三：如果是 ArgoCD / Flux / Helm 重建
+**方法三：如果是 ArgoCD / Flux / Helm 重建**
 
 删完又出现，不一定只是 selector 冲突，也可能是 GitOps 工具或 Helm 在持续同步。
 
@@ -256,7 +256,7 @@ kubectl get app -A   # ArgoCD
 
 如果资源来自 GitOps，不要只手动删，要在 Git 仓库或 Helm Release 里修正配置。
 
-##### 排查顺序可以记成
+**排查顺序可以记成**
 
 ```text
 kubectl get pods -l <label> --show-labels
@@ -281,7 +281,7 @@ kubectl get pods -l <label> --show-labels
 
 高并发场景下 CoreDNS 被打满，排查思路可以按 **"Pod → CoreDNS → 节点网络"** 这条链走。
 
-##### 1. 先看 Pod 侧：确认是不是 DNS 解析慢
+**1. 先看 Pod 侧：确认是不是 DNS 解析慢**
 
 先进一个业务 Pod，看它的 DNS 配置和解析表现：
 
@@ -301,7 +301,7 @@ kubectl exec -it <pod> -- nslookup www.example.com
 
 如果外部域名解析明显慢，优先怀疑 **`ndots:5` 放大查询**。
 
-##### 2. 看 CoreDNS 本身：状态、资源、日志
+**2. 看 CoreDNS 本身：状态、资源、日志**
 
 ```bash
 kubectl get pods -n kube-system -l k8s-app=kube-dns
@@ -319,7 +319,7 @@ kubectl describe pod -n kube-system <coredns-pod>
 
 如果某个 Pod 特别忙，很可能是 **UDP 五元组哈希导致流量不均**，客户端复用源端口或连接池会把请求集中到同一个 CoreDNS Pod。
 
-##### 3. 看指标：QPS、错误率、延迟
+**3. 看指标：QPS、错误率、延迟**
 
 如果集群有 Prometheus，可以看这些指标：
 
@@ -330,7 +330,7 @@ kubectl describe pod -n kube-system <coredns-pod>
 
 如果 `NXDOMAIN` 很多，说明大量查询在拼 `search` 后缀；如果 `SERVFAIL` 多，说明 CoreDNS 自身或上游 DNS 出了问题。
 
-##### 4. 看节点网络：conntrack、kube-proxy、NetworkPolicy
+**4. 看节点网络：conntrack、kube-proxy、NetworkPolicy**
 
 如果 CoreDNS 看起来正常，但 Pod 解析偶发超时，要查节点层：
 
@@ -348,7 +348,7 @@ netstat -su
 - IPVS UDP 超时是否过长，导致 CoreDNS 重启后旧连接仍然复用；
 - 业务命名空间是否有 NetworkPolicy 阻断了到 `kube-dns` 的 53/UDP、53/TCP。
 
-##### 5. 常用优化手段
+**5. 常用优化手段**
 
 | 问题 | 处理办法 |
 | --- | --- |
@@ -361,7 +361,7 @@ netstat -su
 
 其中 **NodeLocal DNSCache** 是生产高并发场景里最推荐的手段之一。它会在每个节点上跑一个本地 DNS 缓存，Pod 先查本地缓存，命中就直接返回，没命中再走 CoreDNS，能明显降低 CoreDNS QPS 和 conntrack 压力。
 
-##### 排查顺序可以这样记
+**排查顺序可以这样记**
 
 ```text
 Pod resolv.conf / ndots
@@ -373,11 +373,11 @@ Pod resolv.conf / ndots
 
 如果你愿意，可以把你集群里 `kubectl get sc`、`kubectl get pods -n kube-system -l k8s-app=kube-dns`、以及某个业务 Pod 的 `/etc/resolv.conf` 贴出来，我可以帮你判断当前更可能是哪一类问题。
 
-#### 补充：UDP 五元组哈希为什么会导致 CoreDNS 流量不均？
+**补充：UDP 五元组哈希为什么会导致 CoreDNS 流量不均？**
 
 这个问题其实涉及两层： **kube-proxy 怎么做 UDP 负载均衡**，以及 **客户端怎么用 DNS 连接**。
 
-###### 先说“UDP 五元组哈希”
+**先说“UDP 五元组哈希”**
 
 五元组就是：
 
@@ -403,7 +403,7 @@ IPVS 对 UDP 流量做负载均衡时，常用的一种方式是按五元组哈�
 
 这本身是为了保证“同一条 UDP 流”稳定落在同一个后端上，避免来回跳。
 
-###### 为什么会导致流量不均？
+**为什么会导致流量不均？**
 
 问题在于： **DNS 查询是大量短 UDP 包，但五元组里能变化的空间很小。**
 
@@ -434,7 +434,7 @@ Pod A 发 10000 次 DNS 查询
 
 这就叫 **UDP 五元组哈希导致流量不均**。
 
-###### 再说“客户端复用源端口 / 连接池”
+**再说“客户端复用源端口 / 连接池”**
 
 DNS 本身是 UDP，严格说没有 TCP 那种“连接池”。但很多 DNS 客户端库、应用框架会做类似的事情：
 
@@ -450,7 +450,7 @@ DNS 本身是 UDP，严格说没有 TCP 那种“连接池”。但很多 DNS �
 
 但如果客户端复用 socket 或源端口，IPVS 会认为这是“同一条流”，于是继续打到同一个后端。
 
-###### 一个直观对比
+**一个直观对比**
 
 | 客户端行为 | 五元组变化 | 结果 |
 | --- | --- | --- |
@@ -458,7 +458,7 @@ DNS 本身是 UDP，严格说没有 TCP 那种“连接池”。但很多 DNS �
 | 复用同一个 socket / 源端口 | 五元组几乎不变 | 请求集中到同一个 CoreDNS Pod |
 | 连接池复用 DNS 通道 | 源端口长期固定 | 单个 CoreDNS Pod QPS 异常高 |
 
-###### 所以它为什么危险？
+**所以它为什么危险？**
 
 不是所有 CoreDNS Pod 都忙，而是 **某一个 CoreDNS Pod 先被打满**。
 
@@ -471,7 +471,7 @@ DNS 本身是 UDP，严格说没有 TCP 那种“连接池”。但很多 DNS �
 
 而其他 CoreDNS Pod 可能还很空闲。
 
-###### 怎么验证是不是这个问题？
+**怎么验证是不是这个问题？**
 
 可以开 CoreDNS 查询日志，看客户端来源 IP 和端口分布：
 
@@ -481,7 +481,7 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=200
 
 如果你反复看到同一个 Pod 日志里出现大量相同源 IP + 相同源端口，基本就能确认是流量不均。
 
-###### 怎么处理？
+**怎么处理？**
 
 常见做法有几类：
 
@@ -496,7 +496,7 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=200
 
 生产上遇到 CoreDNS 被打满， **不要一上来就重启 CoreDNS**，尤其是 IPVS 模式下，重启可能引发几分钟内集群范围解析异常。 更稳的止血顺序是： **先扩容打散，再降 QPS，再绕开 Service VIP，最后处理 conntrack / IPVS。**
 
-##### 第一步：先扩容 CoreDNS，把单 Pod 热点打散
+**第一步：先扩容 CoreDNS，把单 Pod 热点打散**
 
 如果某个 CoreDNS Pod 明显更忙，先把它从 2 个副本扩到 4、6 或更多，并且尽量打散到不同节点。
 
@@ -510,7 +510,7 @@ kubectl scale --replicas=6 deployment/coredns -n kube-system
 - 不要使用 HPA / CronHPA 自动伸缩 CoreDNS，频繁缩容会引发解析异常；
 - 如果节点资源紧张，先加节点或腾资源，否则扩副本也起不来。
 
-##### 第二步：快速降低 DNS 查询量
+**第二步：快速降低 DNS 查询量**
 
 如果业务里有大量外部域名调用，优先把 Pod 的 `ndots` 调低，或者改用 FQDN。
 
@@ -525,7 +525,7 @@ dnsConfig:
 
 如果改 Deployment 来不及，可以先让新发布的服务先生效，老服务逐步滚动更新。
 
-##### 第三步：绕开 Service VIP，直连健康 CoreDNS Pod
+**第三步：绕开 Service VIP，直连健康 CoreDNS Pod**
 
 如果走 `kube-dns` Service IP 解析不稳定，可以在关键 Pod 里临时把 nameserver 指向某个健康 CoreDNS Pod 的 Pod IP。
 
@@ -538,7 +538,7 @@ dnsConfig:
 
 这个办法适合临时止血，不适合长期用，因为 Pod IP 会变。
 
-##### 第四步：检查并缓解 conntrack 和 IPVS 问题
+**第四步：检查并缓解 conntrack 和 IPVS 问题**
 
 如果节点上出现：
 
@@ -557,7 +557,7 @@ sysctl net.netfilter.nf_conntrack_max
 
 如果之前刚重启过 CoreDNS，且集群用 IPVS，还要留意 UDP 会话保持默认 300 秒，可能导致短暂解析异常。 长期建议调小 IPVS UDP 超时，比如 10 秒，但这个操作影响面较大，生产上要谨慎。
 
-##### 第五步：定位热点客户端，必要时限制或打散
+**第五步：定位热点客户端，必要时限制或打散**
 
 如果 CoreDNS 日志里反复出现同一个客户端 IP + 同一个源端口，说明是 UDP 五元组哈希导致的单 Pod 过载。
 
@@ -572,7 +572,7 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=200
 - 降低该服务的 DNS 查询频率，增加本地域名缓存；
 - 后续推动应用随机化 DNS 源端口，减少 socket 复用。
 
-##### 生产止血优先级
+**生产止血优先级**
 
 | 动作 | 风险 | 止血效果 |
 | --- | --- | --- |
@@ -589,11 +589,11 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=200
 
 NodeLocal DNSCache 部署最复杂，要不要说说它的安装流程和 Pod 侧怎么配置才能生效？
 
-#### 补充：扩容 CoreDNS 后业务复用连接，会不会又打满单个 Pod？
+**补充：扩容 CoreDNS 后业务复用连接，会不会又打满单个 Pod？**
 
 你这个疑问其实很关键： **扩容 CoreDNS 并不能从根上解决“五元组哈希不均”，它只是先让那个被打满的 Pod 不那么容易挂。**
 
-###### 为什么扩容还是有意义？
+**为什么扩容还是有意义？**
 
 假设现在有 3 个 CoreDNS Pod，其中一个因为五元组哈希集中了大量请求，CPU 已经 90% 以上。
 
@@ -604,7 +604,7 @@ NodeLocal DNSCache 部署最复杂，要不要说说它的安装流程和 Pod �
 
 所以它不是“彻底修复不均”，而是 **先把单点过载风险降下来**，给后面排查、调 ndots、部署 NodeLocal DNSCache 争取时间。
 
-###### 但你说得对：扩容后仍然可能不均
+**但你说得对：扩容后仍然可能不均**
 
 如果业务 Pod 仍然复用同一个源端口、同一个 UDP socket，或者 DNS 客户端做了连接池，那它发出去的 DNS 请求五元组变化仍然很小。
 
@@ -622,7 +622,7 @@ IPVS 做 UDP 负载均衡时，会按五元组做哈希：
 
 所以扩容之后， **热点可能仍然存在**，只是从“快被打死”变成“还能扛一会儿”。
 
-###### 真正止血要配合这几步
+**真正止血要配合这几步**
 
 | 动作 | 作用 | 局限 |
 | --- | --- | --- |
@@ -635,7 +635,7 @@ IPVS 做 UDP 负载均衡时，会按五元组做哈希：
 
 这样一来，即使业务 Pod 仍然复用源端口，也不会把所有请求都砸到同一个 CoreDNS Pod 上，因为大部分查询已经被本地缓存消化了。
 
-###### 可以这样理解
+**可以这样理解**
 
 - **扩容 CoreDNS**：先把“单点被打爆”的风险降下来，是临时止血。
 - **降 ndots / 用 FQDN**：减少不必要的 DNS 放大查询，降低总 QPS。
@@ -686,7 +686,7 @@ IPVS 做 UDP 负载均衡时，会按五元组做哈希：
 
 默认之所以"什么都能做"，是因为你当前 kubectl 用的是 **集群管理员身份**，它通过 kubeconfig 里的客户端证书认证，被识别为 `system:masters` 组成员，而这个组绑定了内置的 `cluster-admin` ClusterRole，所以拥有全集群所有资源的完整权限。
 
-##### 默认管理员身份是怎么来的
+**默认管理员身份是怎么来的**
 
 以 `kubeadm` 搭建的集群为例，初始化后会生成 `/etc/kubernetes/admin.conf`，把它拷贝到 `~/.kube/config` 后，kubectl 就自动使用它。
 
@@ -719,7 +719,7 @@ kubectl config view --raw -o jsonpath='{.users[0].user.client-certificate-data}'
 kubectl get clusterrolebinding cluster-admin -o yaml
 ```
 
-##### 怎么切换/改变登录用户
+**怎么切换/改变登录用户**
 
 有几种方式：
 
@@ -765,7 +765,7 @@ kubectl get pods --as=alice --as-group=dev-team
 
 假设集群里有 `dev` 命名空间给开发用，运维需要看整个集群。可以这样配：
 
-##### 1. 给开发：只能管理 `dev` 命名空间
+**1. 给开发：只能管理 `dev` 命名空间**
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -795,7 +795,7 @@ roleRef:
 
 效果：`dev-user` 只能在 `dev` 命名空间里查看和管理 Pod、Deployment、Service、ConfigMap，不能访问 `prod` 等其他命名空间。
 
-##### 2. 给运维：可以查看整个集群
+**2. 给运维：可以查看整个集群**
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -826,7 +826,7 @@ roleRef:
 
 效果：`ops-user` 可以查看整个集群的节点、命名空间、Pod、Deployment 等，但不能删除资源。
 
-##### 3. 验证权限
+**3. 验证权限**
 
 ```bash
 kubectl auth can-i list pods --as=dev-user -n dev
@@ -844,7 +844,7 @@ kubectl auth can-i delete nodes --as=ops-user
 | 运维查看节点 | `yes` |
 | 运维删除节点 | `no` |
 
-##### 生产建议
+**生产建议**
 
 - 开发权限建议绑定到 **Group**，比如 `dev-team`，人员变动时不用改 RBAC。
 - 运维如果需要管理权限，可以直接用内置的 `admin` 或 `cluster-admin` ClusterRole，但 `cluster-admin` 权限过大，要慎用。

@@ -28,7 +28,7 @@
 <meta property="og:description" content="本文是《Kubernetes 面试问答》系列的基础篇，共 20 题，覆盖 K8s 架构与核心组件、Pod 生命周期、Deployment&#x2F;ReplicaSet 与滚动更新回滚、更新策略、Service 与 Ingress、ConfigMap&#x2F;Secret、存储挂载方式与 PV&#x2F;PVC&#x2F;StorageClass 动态供给、工作负载类型、调度控制（nodeSel">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-10-09T00:20:00.000Z">
-<meta property="article:modified_time" content="2026-10-09T00:59:39.970Z">
+<meta property="article:modified_time" content="2026-10-09T01:18:33.632Z">
 <meta property="article:author" content="Burgess Leo">
 <meta property="article:tag" content="面试">
 <meta property="article:tag" content="K8S">
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-Kubernetes-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%90%84%E8%87%AA%E8%B4%9F%E8%B4%A3%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">Q1. Kubernetes 是什么？核心组件有哪些，各自负责什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E4%BB%80%E4%B9%88%E6%98%AF-Pod%EF%BC%9FPod-%E6%9C%89%E5%93%AA%E4%BA%9B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Q2. 什么是 Pod？Pod 有哪些生命周期状态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-Deployment%E3%80%81ReplicaSet-%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%80%8E%E4%B9%88%E5%81%9A%E3%80%81%E6%80%8E%E4%B9%88%E5%9B%9E%E6%BB%9A%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">Q3. Deployment、ReplicaSet 是什么关系？滚动更新怎么做、怎么回滚？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E6%80%8E%E4%B9%88%E5%88%97%E5%87%BA-Deployment-%E5%8F%AF%E5%9B%9E%E6%BB%9A%E7%9A%84%E7%89%88%E6%9C%AC%E5%B9%B6%E5%9B%9E%E6%BB%9A%E5%88%B0%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">补充：怎么列出 Deployment 可回滚的版本并回滚到指定版本？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%97%E5%87%BA%E5%8F%AF%E5%9B%9E%E6%BB%9A%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">一、列出可回滚的版本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%9B%9E%E6%BB%9A%E5%88%B0%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">二、回滚到指定版本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%AA%8C%E8%AF%81"><span class="nav-number">3.1.0.3.</span> <span class="nav-text">三、验证</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%B8%A4%E4%B8%AA%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E7%82%B9"><span class="nav-number">3.1.0.4.</span> <span class="nav-text">四、两个容易忽略的点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E9%99%A4%E4%BA%86-RollingUpdate%EF%BC%8C%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">Q4. 除了 RollingUpdate，还有哪些更新策略？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Deployment-%E5%8E%9F%E7%94%9F%E6%94%AF%E6%8C%81%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">4.0.1.</span> <span class="nav-text">Deployment 原生支持的策略</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Recreate"><span class="nav-number">4.0.1.1.</span> <span class="nav-text">Recreate</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#RollingUpdate"><span class="nav-number">4.0.1.2.</span> <span class="nav-text">RollingUpdate</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%8E%A7%E5%88%B6%E5%99%A8%E9%87%8C%E7%9A%84%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5"><span class="nav-number">4.0.2.</span> <span class="nav-text">其他控制器里的更新策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%80%9F%E5%8A%A9-Ingress%E3%80%81Service-Mesh-%E6%88%96%E5%8F%91%E5%B8%83%E5%B7%A5%E5%85%B7%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">4.0.3.</span> <span class="nav-text">需要借助 Ingress、Service Mesh 或发布工具实现的策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%98%E6%9C%89%E4%B8%80%E7%B1%BB%EF%BC%9A%E5%8E%9F%E5%9C%B0%E5%8D%87%E7%BA%A7"><span class="nav-number">4.0.4.</span> <span class="nav-text">还有一类：原地升级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E9%80%89"><span class="nav-number">4.0.5.</span> <span class="nav-text">怎么选</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-imagePullPolicy-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%96%E5%80%BC%EF%BC%9F%E9%BB%98%E8%AE%A4%E8%A1%8C%E4%B8%BA%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">Q5. imagePullPolicy 有哪些取值？默认行为是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E5%BC%8F%E6%94%AF%E6%8C%81%E7%9A%84%E5%8F%96%E5%80%BC"><span class="nav-number">5.0.1.</span> <span class="nav-text">正式支持的取值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%80%A7%E5%8F%96%E5%80%BC"><span class="nav-number">5.0.2.</span> <span class="nav-text">实验性取值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E5%86%99-imagePullPolicy-%E6%97%B6%E7%9A%84%E9%BB%98%E8%AE%A4%E8%A1%8C%E4%B8%BA"><span class="nav-number">5.0.3.</span> <span class="nav-text">不写 imagePullPolicy 时的默认行为</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%AE%B9%E6%98%93%E8%B8%A9%E5%9D%91%E7%9A%84%E7%82%B9"><span class="nav-number">5.0.4.</span> <span class="nav-text">几个容易踩坑的点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E5%BB%BA%E8%AE%AE"><span class="nav-number">5.0.5.</span> <span class="nav-text">简单选择建议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-Service-%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B%EF%BC%9F%E5%92%8C-Ingress-%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">Q6. Service 有哪几种类型？和 Ingress 什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-ConfigMap-%E5%92%8C-Secret-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">Q7. ConfigMap 和 Secret 是什么？有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-K8s-%E4%B8%AD-Pod-%E6%8C%82%E8%BD%BD%E5%AD%98%E5%82%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">Q8. K8s 中 Pod 挂载存储有哪些方式？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E4%B8%B4%E6%97%B6%E5%AD%98%E5%82%A8%E5%8D%B7"><span class="nav-number">8.0.1.</span> <span class="nav-text">1. 临时存储卷</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%8A%82%E7%82%B9%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="nav-number">8.0.2.</span> <span class="nav-text">2. 节点本地存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8%E5%8D%B7%EF%BC%9APV-PVC-StorageClass"><span class="nav-number">8.0.3.</span> <span class="nav-text">3. 持久化存储卷：PV &#x2F; PVC &#x2F; StorageClass</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%8D%B7"><span class="nav-number">8.0.4.</span> <span class="nav-text">4. 配置与敏感信息卷</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E5%86%99%E6%B3%95"><span class="nav-number">8.0.5.</span> <span class="nav-text">挂载写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E9%80%89-1"><span class="nav-number">8.0.6.</span> <span class="nav-text">怎么选</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-PV%E3%80%81PVC%E3%80%81StorageClass-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8A%A8%E6%80%81%E4%BE%9B%E7%BB%99%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">Q9. PV、PVC、StorageClass 是什么？动态供给怎么工作的？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9APVC-%E2%86%92-PV-%E2%86%92-StorageClass-%E4%B8%89%E8%80%85%E7%9A%84%E5%85%B3%E7%B3%BB%E6%98%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%E7%9A%84%EF%BC%9F"><span class="nav-number">9.1.</span> <span class="nav-text">补充：PVC → PV → StorageClass 三者的关系是怎么配合的？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%89%E8%80%85%E5%90%84%E8%87%AA%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">9.1.0.1.</span> <span class="nav-text">三者各自是什么</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%83%E4%BB%AC%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88"><span class="nav-number">9.1.0.2.</span> <span class="nav-text">它们怎么配合</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E5%85%B8%E5%9E%8B%E6%B5%81%E7%A8%8B"><span class="nav-number">9.1.0.3.</span> <span class="nav-text">两种典型流程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%EF%BC%9A%E7%AE%A1%E7%90%86%E5%91%98%E5%85%88%E5%87%86%E5%A4%87%E5%A5%BD-PV"><span class="nav-number">9.1.0.4.</span> <span class="nav-text">1. 静态绑定：管理员先准备好 PV</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%EF%BC%9APVC-%E8%A7%A6%E5%8F%91-StorageClass-%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA-PV"><span class="nav-number">9.1.0.5.</span> <span class="nav-text">2. 动态创建：PVC 触发 StorageClass 自动创建 PV</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%BE%E4%B8%AA%E7%94%9F%E6%B4%BB%E5%8C%96%E4%BE%8B%E5%AD%90"><span class="nav-number">9.1.0.6.</span> <span class="nav-text">举个生活化例子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E8%AE%B0%E5%BF%86"><span class="nav-number">9.1.0.7.</span> <span class="nav-text">一句话记忆</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-StorageClass-%E4%B9%9F%E6%98%AF-K8s-%E7%9A%84%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E5%AE%83%E5%9C%A8%E4%BD%93%E7%B3%BB%E9%87%8C%E7%9A%84%E4%BD%8D%E7%BD%AE%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">Q10. StorageClass 也是 K8s 的定义对象吗？它在体系里的位置是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%83%E5%9C%A8%E4%BD%93%E7%B3%BB%E9%87%8C%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">10.0.1.</span> <span class="nav-text">它在体系里的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%83%E4%B8%BB%E8%A6%81%E5%AE%9A%E4%B9%89%E4%BB%80%E4%B9%88"><span class="nav-number">10.0.2.</span> <span class="nav-text">它主要定义什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%83%E5%92%8C-PV%E3%80%81PVC-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">10.0.3.</span> <span class="nav-text">它和 PV、PVC 的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E7%BB%99%E6%88%91%E4%B8%80%E4%B8%AA-StorageClass-%E5%8A%A8%E6%80%81%E4%BE%9B%E7%BB%99%E7%9A%84%E5%AE%8C%E6%95%B4%E6%A1%88%E4%BE%8B"><span class="nav-number">11.</span> <span class="nav-text">Q11. 给我一个 StorageClass 动态供给的完整案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%E6%B5%81%E7%A8%8B"><span class="nav-number">11.0.1.</span> <span class="nav-text">案例流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA-StorageClass"><span class="nav-number">11.0.2.</span> <span class="nav-text">1. 创建 StorageClass</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA-PVC"><span class="nav-number">11.0.3.</span> <span class="nav-text">2. 创建 PVC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA-Pod-%E5%B9%B6%E6%8C%82%E8%BD%BD-PVC"><span class="nav-number">11.0.4.</span> <span class="nav-text">3. 创建 Pod 并挂载 PVC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C"><span class="nav-number">11.0.5.</span> <span class="nav-text">4. 验证结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%99%E4%B8%AA%E6%A1%88%E4%BE%8B%E9%87%8C%E4%B8%89%E8%80%85%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">11.0.6.</span> <span class="nav-text">这个案例里三者的关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-StatefulSet%E3%80%81DaemonSet%E3%80%81Job%E3%80%81CronJob-%E5%88%86%E5%88%AB%E7%94%A8%E5%9C%A8%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">Q12. StatefulSet、DaemonSet、Job、CronJob 分别用在什么场景？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q13-%E6%80%8E%E4%B9%88%E6%8E%A7%E5%88%B6-Pod-%E8%B0%83%E5%BA%A6%E5%88%B0%E6%8C%87%E5%AE%9A%E8%8A%82%E7%82%B9%EF%BC%9FnodeSelector%E3%80%81%E4%BA%B2%E5%92%8C%E6%80%A7%E3%80%81%E6%B1%A1%E7%82%B9%E5%AE%B9%E5%BF%8D%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">Q13. 怎么控制 Pod 调度到指定节点？nodeSelector、亲和性、污点容忍区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q14-%E5%A6%82%E4%BD%95%E7%BB%99%E8%8A%82%E7%82%B9%E6%89%93%E6%B1%A1%E7%82%B9%E3%80%81%E5%8F%96%E6%B6%88%E6%B1%A1%E7%82%B9%EF%BC%8C%E5%B9%B6%E7%BB%99-Pod-%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%BF%8D%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">Q14. 如何给节点打污点、取消污点，并给 Pod 配置容忍？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%BB%99%E8%8A%82%E7%82%B9%E6%89%93%E6%B1%A1%E7%82%B9"><span class="nav-number">14.0.1.</span> <span class="nav-text">1. 给节点打污点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%8F%96%E6%B6%88%E8%8A%82%E7%82%B9%E6%B1%A1%E7%82%B9"><span class="nav-number">14.0.2.</span> <span class="nav-text">2. 取消节点污点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E7%BB%99-Pod-%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%BF%8D"><span class="nav-number">14.0.3.</span> <span class="nav-text">3. 给 Pod 配置容忍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">14.0.4.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q15-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%9F%E7%A1%AC%E7%BA%A6%E6%9D%9F%E5%92%8C%E8%BD%AF%E7%BA%A6%E6%9D%9F%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">Q15. 什么是反亲和性？硬约束和软约束怎么用？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Pod-%E5%8F%8D%E4%BA%B2%E5%92%8C%EF%BC%9A%E6%8A%8A%E5%89%AF%E6%9C%AC%E6%89%93%E6%95%A3"><span class="nav-number">15.0.1.</span> <span class="nav-text">1. Pod 反亲和：把副本打散</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%A1%AC%E7%BA%A6%E6%9D%9F-vs-%E8%BD%AF%E7%BA%A6%E6%9D%9F"><span class="nav-number">15.0.2.</span> <span class="nav-text">2. 硬约束 vs 软约束</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E8%8A%82%E7%82%B9%E5%8F%8D%E4%BA%B2%E5%92%8C%EF%BC%9A%E9%81%BF%E5%BC%80%E6%9F%90%E4%BA%9B%E8%8A%82%E7%82%B9"><span class="nav-number">15.0.3.</span> <span class="nav-text">3. 节点反亲和：避开某些节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E4%B8%80%E4%B8%AA%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E5%9D%91"><span class="nav-number">15.0.4.</span> <span class="nav-text">4. 一个容易踩的坑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q16-%E6%B1%A1%E7%82%B9-%E5%AE%B9%E5%BF%8D-NodeSelector-%E6%80%8E%E4%B9%88%E6%8A%8A%E6%9F%90%E7%B1%BB%E4%B8%9A%E5%8A%A1%E5%9B%BA%E5%AE%9A%E8%B0%83%E5%BA%A6%E5%88%B0%E4%B8%93%E7%94%A8%E8%8A%82%E7%82%B9%EF%BC%9F"><span class="nav-number">16.</span> <span class="nav-text">Q16. 污点+容忍+NodeSelector 怎么把某类业务固定调度到专用节点？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%BB%99%E4%B8%93%E7%94%A8%E8%8A%82%E7%82%B9%E6%89%93%E6%A0%87%E7%AD%BE"><span class="nav-number">16.0.1.</span> <span class="nav-text">1. 给专用节点打标签</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%BB%99%E4%B8%93%E7%94%A8%E8%8A%82%E7%82%B9%E6%89%93%E6%B1%A1%E7%82%B9"><span class="nav-number">16.0.2.</span> <span class="nav-text">2. 给专用节点打污点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E7%BB%99%E4%B8%93%E7%94%A8-Pod-%E9%85%8D%E5%AE%B9%E5%BF%8D%E5%92%8C-nodeSelector"><span class="nav-number">16.0.3.</span> <span class="nav-text">3. 给专用 Pod 配容忍和 nodeSelector</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E6%9B%B4%E6%8E%A8%E8%8D%90%E7%9A%84%E5%86%99%E6%B3%95%EF%BC%9A%E7%94%A8-nodeAffinity-%E6%9B%BF%E4%BB%A3-nodeSelector"><span class="nav-number">16.0.4.</span> <span class="nav-text">4. 更推荐的写法：用 nodeAffinity 替代 nodeSelector</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E4%B8%89%E8%80%85%E5%88%86%E5%B7%A5"><span class="nav-number">16.0.5.</span> <span class="nav-text">5. 三者分工</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E5%9D%91"><span class="nav-number">16.0.6.</span> <span class="nav-text">一个容易踩的坑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q17-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E3%80%81ResourceQuota%E3%80%81LimitRange-%E6%98%AF%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F"><span class="nav-number">17.</span> <span class="nav-text">Q17. 命名空间、ResourceQuota、LimitRange 是干什么的？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E5%8F%AA%E9%85%8D-limits-%E4%B8%8D%E9%85%8D-requests-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%AF%BC%E8%87%B4%E8%8A%82%E7%82%B9%E8%B6%85%E5%8D%96%EF%BC%9F"><span class="nav-number">17.1.</span> <span class="nav-text">补充：只配 limits 不配 requests 为什么会导致节点超卖？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%88%E6%BE%84%E6%B8%85%E4%B8%80%E4%B8%AA%E5%89%8D%E6%8F%90%EF%BC%9A%E5%8F%AA%E9%85%8D-limits-%E4%B8%8D%E9%85%8D-requests%EF%BC%8Crequest-%E9%80%9A%E5%B8%B8%E4%B8%8D%E6%98%AF-0"><span class="nav-number">17.1.0.1.</span> <span class="nav-text">先澄清一个前提：只配 limits 不配 requests，request 通常不是 0</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%82%A3%E2%80%9D%E8%B6%85%E5%8D%96%E2%80%9D%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%91%E7%94%9F%E7%9A%84%EF%BC%9F"><span class="nav-number">17.1.0.2.</span> <span class="nav-text">那”超卖”是怎么发生的？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C-request-%E7%9C%9F%E7%9A%84%E6%98%AF-0%EF%BC%8C%E9%97%AE%E9%A2%98%E4%BC%9A%E6%9B%B4%E4%B8%A5%E9%87%8D"><span class="nav-number">17.1.0.3.</span> <span class="nav-text">如果 request 真的是 0，问题会更严重</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%90%86%E8%A7%A3"><span class="nav-number">17.1.0.4.</span> <span class="nav-text">一句话理解</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q18-liveness%E3%80%81readiness%E3%80%81startup-%E4%B8%89%E7%A7%8D%E6%8E%A2%E9%92%88%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">18.</span> <span class="nav-text">Q18. liveness、readiness、startup 三种探针的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q19-HPA-%E6%80%8E%E4%B9%88%E5%81%9A%E6%B0%B4%E5%B9%B3%E6%89%A9%E7%BC%A9%E5%AE%B9%EF%BC%9F"><span class="nav-number">19.</span> <span class="nav-text">Q19. HPA 怎么做水平扩缩容？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9AHPA-%E7%9A%84%E9%85%8D%E7%BD%AE%E9%A1%B9%E3%80%81%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%E5%92%8C%E6%8E%92%E6%9F%A5%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="nav-number">19.1.</span> <span class="nav-text">补充：HPA 的配置项、计算公式和排查方法？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="nav-number">19.1.0.1.</span> <span class="nav-text">1. 前提条件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E6%9C%80%E5%9F%BA%E7%A1%80%E7%9A%84-HPA-%E9%85%8D%E7%BD%AE"><span class="nav-number">19.1.0.2.</span> <span class="nav-text">2. 最基础的 HPA 配置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-HPA-%E6%98%AF%E6%80%8E%E4%B9%88%E7%AE%97%E5%89%AF%E6%9C%AC%E6%95%B0%E7%9A%84"><span class="nav-number">19.1.0.3.</span> <span class="nav-text">3. HPA 是怎么算副本数的</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E6%8C%87%E6%A0%87"><span class="nav-number">19.1.0.4.</span> <span class="nav-text">4. 支持哪些指标</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-%E6%8E%A7%E5%88%B6%E6%89%A9%E7%BC%A9%E9%80%9F%E5%BA%A6%EF%BC%9Abehavior"><span class="nav-number">19.1.0.5.</span> <span class="nav-text">5. 控制扩缩速度：behavior</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#6-%E6%8E%92%E6%9F%A5-HPA-%E6%98%AF%E5%90%A6%E6%AD%A3%E5%B8%B8"><span class="nav-number">19.1.0.6.</span> <span class="nav-text">6. 排查 HPA 是否正常</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E5%BB%BA%E8%AE%AE"><span class="nav-number">19.1.0.7.</span> <span class="nav-text">生产建议</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q20-RBAC-%E6%80%8E%E4%B9%88%E5%81%9A%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%EF%BC%9FRole-%E5%92%8C-ClusterRole-%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">20.</span> <span class="nav-text">Q20. RBAC 怎么做权限控制？Role 和 ClusterRole 什么区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9ARBAC-%E7%9A%84%E5%9B%9B%E7%B1%BB%E5%AF%B9%E8%B1%A1%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="nav-number">20.1.</span> <span class="nav-text">补充：RBAC 的四类对象怎么配合使用？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Role-%E5%92%8C-ClusterRole-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">20.1.0.1.</span> <span class="nav-text">Role 和 ClusterRole 的区别</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-%E7%BB%99%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%86%85%E6%8E%88%E6%9D%83%EF%BC%9ARole-RoleBinding"><span class="nav-number">20.1.0.2.</span> <span class="nav-text">1. 给命名空间内授权：Role + RoleBinding</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-%E7%BB%99%E9%9B%86%E7%BE%A4%E8%8C%83%E5%9B%B4%E6%8E%88%E6%9D%83%EF%BC%9AClusterRole-ClusterRoleBinding"><span class="nav-number">20.1.0.3.</span> <span class="nav-text">2. 给集群范围授权：ClusterRole + ClusterRoleBinding</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-%E5%B8%B8%E8%A7%81%E7%BB%84%E5%90%88%EF%BC%9AClusterRole-RoleBinding"><span class="nav-number">20.1.0.4.</span> <span class="nav-text">3. 常见组合：ClusterRole + RoleBinding</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-%E6%8E%92%E6%9F%A5%E6%9D%83%E9%99%90%E6%98%AF%E5%90%A6%E7%94%9F%E6%95%88"><span class="nav-number">20.1.0.5.</span> <span class="nav-text">4. 排查权限是否生效</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E5%BB%BA%E8%AE%AE-1"><span class="nav-number">20.1.0.6.</span> <span class="nav-text">生产建议</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-Kubernetes-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%90%84%E8%87%AA%E8%B4%9F%E8%B4%A3%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">Q1. Kubernetes 是什么？核心组件有哪些，各自负责什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-%E4%BB%80%E4%B9%88%E6%98%AF-Pod%EF%BC%9FPod-%E6%9C%89%E5%93%AA%E4%BA%9B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Q2. 什么是 Pod？Pod 有哪些生命周期状态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-Deployment%E3%80%81ReplicaSet-%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%80%8E%E4%B9%88%E5%81%9A%E3%80%81%E6%80%8E%E4%B9%88%E5%9B%9E%E6%BB%9A%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">Q3. Deployment、ReplicaSet 是什么关系？滚动更新怎么做、怎么回滚？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-%E9%99%A4%E4%BA%86-RollingUpdate%EF%BC%8C%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">Q4. 除了 RollingUpdate，还有哪些更新策略？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-imagePullPolicy-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%8F%96%E5%80%BC%EF%BC%9F%E9%BB%98%E8%AE%A4%E8%A1%8C%E4%B8%BA%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">Q5. imagePullPolicy 有哪些取值？默认行为是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6-Service-%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%B1%BB%E5%9E%8B%EF%BC%9F%E5%92%8C-Ingress-%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">Q6. Service 有哪几种类型？和 Ingress 什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7-ConfigMap-%E5%92%8C-Secret-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">Q7. ConfigMap 和 Secret 是什么？有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-K8s-%E4%B8%AD-Pod-%E6%8C%82%E8%BD%BD%E5%AD%98%E5%82%A8%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">Q8. K8s 中 Pod 挂载存储有哪些方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-PV%E3%80%81PVC%E3%80%81StorageClass-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%8A%A8%E6%80%81%E4%BE%9B%E7%BB%99%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">Q9. PV、PVC、StorageClass 是什么？动态供给怎么工作的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10-StorageClass-%E4%B9%9F%E6%98%AF-K8s-%E7%9A%84%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E5%AE%83%E5%9C%A8%E4%BD%93%E7%B3%BB%E9%87%8C%E7%9A%84%E4%BD%8D%E7%BD%AE%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">Q10. StorageClass 也是 K8s 的定义对象吗？它在体系里的位置是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11-%E7%BB%99%E6%88%91%E4%B8%80%E4%B8%AA-StorageClass-%E5%8A%A8%E6%80%81%E4%BE%9B%E7%BB%99%E7%9A%84%E5%AE%8C%E6%95%B4%E6%A1%88%E4%BE%8B"><span class="nav-number">11.</span> <span class="nav-text">Q11. 给我一个 StorageClass 动态供给的完整案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q12-StatefulSet%E3%80%81DaemonSet%E3%80%81Job%E3%80%81CronJob-%E5%88%86%E5%88%AB%E7%94%A8%E5%9C%A8%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">Q12. StatefulSet、DaemonSet、Job、CronJob 分别用在什么场景？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q13-%E6%80%8E%E4%B9%88%E6%8E%A7%E5%88%B6-Pod-%E8%B0%83%E5%BA%A6%E5%88%B0%E6%8C%87%E5%AE%9A%E8%8A%82%E7%82%B9%EF%BC%9FnodeSelector%E3%80%81%E4%BA%B2%E5%92%8C%E6%80%A7%E3%80%81%E6%B1%A1%E7%82%B9%E5%AE%B9%E5%BF%8D%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">Q13. 怎么控制 Pod 调度到指定节点？nodeSelector、亲和性、污点容忍区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q14-%E5%A6%82%E4%BD%95%E7%BB%99%E8%8A%82%E7%82%B9%E6%89%93%E6%B1%A1%E7%82%B9%E3%80%81%E5%8F%96%E6%B6%88%E6%B1%A1%E7%82%B9%EF%BC%8C%E5%B9%B6%E7%BB%99-Pod-%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%BF%8D%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">Q14. 如何给节点打污点、取消污点，并给 Pod 配置容忍？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q15-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E4%BA%B2%E5%92%8C%E6%80%A7%EF%BC%9F%E7%A1%AC%E7%BA%A6%E6%9D%9F%E5%92%8C%E8%BD%AF%E7%BA%A6%E6%9D%9F%E6%80%8E%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">Q15. 什么是反亲和性？硬约束和软约束怎么用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q16-%E6%B1%A1%E7%82%B9-%E5%AE%B9%E5%BF%8D-NodeSelector-%E6%80%8E%E4%B9%88%E6%8A%8A%E6%9F%90%E7%B1%BB%E4%B8%9A%E5%8A%A1%E5%9B%BA%E5%AE%9A%E8%B0%83%E5%BA%A6%E5%88%B0%E4%B8%93%E7%94%A8%E8%8A%82%E7%82%B9%EF%BC%9F"><span class="nav-number">16.</span> <span class="nav-text">Q16. 污点+容忍+NodeSelector 怎么把某类业务固定调度到专用节点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q17-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E3%80%81ResourceQuota%E3%80%81LimitRange-%E6%98%AF%E5%B9%B2%E4%BB%80%E4%B9%88%E7%9A%84%EF%BC%9F"><span class="nav-number">17.</span> <span class="nav-text">Q17. 命名空间、ResourceQuota、LimitRange 是干什么的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q18-liveness%E3%80%81readiness%E3%80%81startup-%E4%B8%89%E7%A7%8D%E6%8E%A2%E9%92%88%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">18.</span> <span class="nav-text">Q18. liveness、readiness、startup 三种探针的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q19-HPA-%E6%80%8E%E4%B9%88%E5%81%9A%E6%B0%B4%E5%B9%B3%E6%89%A9%E7%BC%A9%E5%AE%B9%EF%BC%9F"><span class="nav-number">19.</span> <span class="nav-text">Q19. HPA 怎么做水平扩缩容？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q20-RBAC-%E6%80%8E%E4%B9%88%E5%81%9A%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%EF%BC%9FRole-%E5%92%8C-ClusterRole-%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">20.</span> <span class="nav-text">Q20. RBAC 怎么做权限控制？Role 和 ClusterRole 什么区别？</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +243,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-10-09 08:20:00 / 修改时间：08:59:39" itemprop="dateCreated datePublished" datetime="2026-10-09T08:20:00+08:00">2026-10-09</time>
+      <time title="创建时间：2026-10-09 08:20:00 / 修改时间：09:18:33" itemprop="dateCreated datePublished" datetime="2026-10-09T08:20:00+08:00">2026-10-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -329,7 +329,9 @@
 </li>
 <li>【岗位标注】通用 &#x2F; DevOps</li>
 </ul>
-<h4 id="补充：怎么列出-Deployment-可回滚的版本并回滚到指定版本？"><a href="#补充：怎么列出-Deployment-可回滚的版本并回滚到指定版本？" class="headerlink" title="补充：怎么列出 Deployment 可回滚的版本并回滚到指定版本？"></a>补充：怎么列出 Deployment 可回滚的版本并回滚到指定版本？</h4><h6 id="一、列出可回滚的版本"><a href="#一、列出可回滚的版本" class="headerlink" title="一、列出可回滚的版本"></a>一、列出可回滚的版本</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout <span class="built_in">history</span> deployment/&lt;deployment-name&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>补充：怎么列出 Deployment 可回滚的版本并回滚到指定版本？</strong></p>
+<p><strong>一、列出可回滚的版本</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout <span class="built_in">history</span> deployment/&lt;deployment-name&gt;</span><br></pre></td></tr></table></figure>
 
 <p>输出大致是这样，<code>REVISION</code> 就是回滚时要用的版本号：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1REVISION  CHANGE-CAUSE</span><br><span class="line">21         &lt;none&gt;</span><br><span class="line">32         kubectl set image deployment/&lt;name&gt; &lt;container&gt;=&lt;new-image&gt;</span><br><span class="line">43         kubectl set image deployment/&lt;name&gt; &lt;container&gt;=&lt;new-image&gt;</span><br></pre></td></tr></table></figure>
@@ -339,16 +341,19 @@
 
 <p>会输出该版本的 Pod Template、容器镜像、标签、注解等详细信息。</p>
 <p>如果 <code>CHANGE-CAUSE</code> 是空的，说明没记录变更原因。注意 K8s v1.26+ 已移除 <code>--record</code> 参数，需要手动加 annotation：<code>kubectl annotate deploy/nginx kubernetes.io/change-cause=&quot;升级nginx到1.21&quot;</code>。</p>
-<h6 id="二、回滚到指定版本"><a href="#二、回滚到指定版本" class="headerlink" title="二、回滚到指定版本"></a>二、回滚到指定版本</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回滚到上一个版本</span></span><br><span class="line">kubectl rollout undo deployment/&lt;deployment-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回滚到指定版本</span></span><br><span class="line">kubectl rollout undo deployment/my-app --to-revision=2</span><br></pre></td></tr></table></figure>
+<p><strong>二、回滚到指定版本</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 回滚到上一个版本</span></span><br><span class="line">kubectl rollout undo deployment/&lt;deployment-name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回滚到指定版本</span></span><br><span class="line">kubectl rollout undo deployment/my-app --to-revision=2</span><br></pre></td></tr></table></figure>
 
 <p><code>--to-revision</code> 默认值是 0，表示回滚到上一个版本。</p>
 <p>想先看看会改成什么样再执行，可以用 dry-run：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout undo --dry-run=server deployment/my-app --to-revision=2</span><br></pre></td></tr></table></figure>
 
-<h6 id="三、验证"><a href="#三、验证" class="headerlink" title="三、验证"></a>三、验证</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout status deployment/my-app</span><br><span class="line">kubectl get pods</span><br><span class="line">kubectl describe deployment/my-app</span><br></pre></td></tr></table></figure>
+<p><strong>三、验证</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl rollout status deployment/my-app</span><br><span class="line">kubectl get pods</span><br><span class="line">kubectl describe deployment/my-app</span><br></pre></td></tr></table></figure>
 
 <p>回滚完成后用 <code>rollout status</code> 确认状态，再用 <code>get pods</code> 看 Pod 情况，必要时 <code>describe</code> 确认资源配置。</p>
-<h6 id="四、两个容易忽略的点"><a href="#四、两个容易忽略的点" class="headerlink" title="四、两个容易忽略的点"></a>四、两个容易忽略的点</h6><p><strong>1. 历史版本数量有限</strong></p>
+<p><strong>四、两个容易忽略的点</strong></p>
+<p><strong>1. 历史版本数量有限</strong></p>
 <p>Kubernetes 默认保留 10 个修订历史，可通过 <code>spec.revisionHistoryLimit</code> 调整；超过限制的旧版本会被自动清理。所以别指望能回滚到很久以前的版本。</p>
 <p><strong>2. 回滚本质是反向滚动更新</strong></p>
 <p>核心逻辑是把目标版本对应的 ReplicaSet 副本数恢复到期望数量，同时把当前版本的 ReplicaSet 副本数降到 0，本质上是一次反向的滚动更新过程。因此回滚同样会触发 Pod 重建，可能造成服务短暂中断。</p>
@@ -356,7 +361,8 @@
 <hr>
 <p>排查滚动更新卡住时，<code>rollout history</code> 结合 <code>kubectl get rs -l app=xxx</code> 看新旧 RS 的 READY 数，通常能很快定位问题，需要我展开讲讲这套排查思路吗？</p>
 <h3 id="Q4-除了-RollingUpdate，还有哪些更新策略？"><a href="#Q4-除了-RollingUpdate，还有哪些更新策略？" class="headerlink" title="Q4. 除了 RollingUpdate，还有哪些更新策略？"></a>Q4. 除了 RollingUpdate，还有哪些更新策略？</h3><p>Kubernetes 里“更新策略”要分两层看： <strong>Deployment 原生支持的</strong> 和 <strong>需要额外工具&#x2F;其他控制器实现的</strong>。</p>
-<h5 id="Deployment-原生支持的策略"><a href="#Deployment-原生支持的策略" class="headerlink" title="Deployment 原生支持的策略"></a>Deployment 原生支持的策略</h5><table>
+<p><strong>Deployment 原生支持的策略</strong></p>
+<table>
 <thead>
 <tr>
 <th>策略</th>
@@ -375,16 +381,19 @@
 <td>开发测试、单副本、不能新旧版本共存的应用</td>
 </tr>
 </tbody></table>
-<h6 id="Recreate"><a href="#Recreate" class="headerlink" title="Recreate"></a>Recreate</h6><p><code>spec.strategy.type: Recreate</code> 时，Deployment 会：</p>
+<p><strong>Recreate</strong></p>
+<p><code>spec.strategy.type: Recreate</code> 时，Deployment 会：</p>
 <ol>
 <li>先终止所有旧 Pod；</li>
 <li>等旧 Pod 全部删除；</li>
 <li>再创建新版本 Pod。</li>
 </ol>
 <p>更新期间会有短暂服务中断，所以生产环境一般不会随便用它，除非业务能接受停机，或者新旧版本不能同时运行。</p>
-<h6 id="RollingUpdate"><a href="#RollingUpdate" class="headerlink" title="RollingUpdate"></a>RollingUpdate</h6><p>这是默认策略，通过 <code>maxSurge</code> 和 <code>maxUnavailable</code> 控制替换节奏。</p>
+<p><strong>RollingUpdate</strong></p>
+<p>这是默认策略，通过 <code>maxSurge</code> 和 <code>maxUnavailable</code> 控制替换节奏。</p>
 <p>你前面问的 <code>maxSurge=0、maxUnavailable=1</code> 就是这种策略的一种保守形态。</p>
-<h5 id="其他控制器里的更新策略"><a href="#其他控制器里的更新策略" class="headerlink" title="其他控制器里的更新策略"></a>其他控制器里的更新策略</h5><table>
+<p><strong>其他控制器里的更新策略</strong></p>
+<table>
 <thead>
 <tr>
 <th>控制器</th>
@@ -404,7 +413,8 @@
 </tr>
 </tbody></table>
 <p>StatefulSet 的 RollingUpdate 还支持 <code>partition</code>，可以只更新序号大于等于 partition 的 Pod，适合分批灰度。</p>
-<h5 id="需要借助-Ingress、Service-Mesh-或发布工具实现的策略"><a href="#需要借助-Ingress、Service-Mesh-或发布工具实现的策略" class="headerlink" title="需要借助 Ingress、Service Mesh 或发布工具实现的策略"></a>需要借助 Ingress、Service Mesh 或发布工具实现的策略</h5><p>这些不是 Deployment 原生的 <code>spec.strategy.type</code>，而是通过 <strong>流量控制</strong> 实现的发布方式：</p>
+<p><strong>需要借助 Ingress、Service Mesh 或发布工具实现的策略</strong></p>
+<p>这些不是 Deployment 原生的 <code>spec.strategy.type</code>，而是通过 <strong>流量控制</strong> 实现的发布方式：</p>
 <table>
 <thead>
 <tr>
@@ -434,8 +444,10 @@
 <td>Istio 流量镜像</td>
 </tr>
 </tbody></table>
-<h5 id="还有一类：原地升级"><a href="#还有一类：原地升级" class="headerlink" title="还有一类：原地升级"></a>还有一类：原地升级</h5><p><strong>原地升级 &#x2F; InPlaceUpdate</strong> 不是标准 Deployment 的内置策略，通常由 OpenKruise 等扩展控制器实现。它不删除 Pod，只替换 Pod 里的容器镜像或资源，Pod IP、节点、同 Pod 内其他容器可以保持不变。</p>
-<h5 id="怎么选"><a href="#怎么选" class="headerlink" title="怎么选"></a>怎么选</h5><ul>
+<p><strong>还有一类：原地升级</strong></p>
+<p><strong>原地升级 &#x2F; InPlaceUpdate</strong> 不是标准 Deployment 的内置策略，通常由 OpenKruise 等扩展控制器实现。它不删除 Pod，只替换 Pod 里的容器镜像或资源，Pod IP、节点、同 Pod 内其他容器可以保持不变。</p>
+<p><strong>怎么选</strong></p>
+<ul>
 <li><strong>普通无状态服务</strong>：优先用 <code>RollingUpdate</code>。</li>
 <li><strong>不能新旧版本共存</strong>：考虑 <code>Recreate</code>，但要接受短暂停机。</li>
 <li><strong>有状态服务</strong>：用 StatefulSet 的 RollingUpdate，必要时配合 <code>partition</code>。</li>
@@ -443,7 +455,8 @@
 <li><strong>高风险发布、需要精细灰度</strong>：用蓝绿、金丝雀、A&#x2F;B 或影子部署，通常需要 Ingress&#x2F;Service Mesh 或 Argo Rollouts、Flagger 这类工具。</li>
 </ul>
 <h3 id="Q5-imagePullPolicy-有哪些取值？默认行为是什么？"><a href="#Q5-imagePullPolicy-有哪些取值？默认行为是什么？" class="headerlink" title="Q5. imagePullPolicy 有哪些取值？默认行为是什么？"></a>Q5. imagePullPolicy 有哪些取值？默认行为是什么？</h3><p>Kubernetes 里 <code>imagePullPolicy</code> 主要有 <strong>3 种正式值</strong>，另外还有一个较少见的实验性值。</p>
-<h5 id="正式支持的取值"><a href="#正式支持的取值" class="headerlink" title="正式支持的取值"></a>正式支持的取值</h5><table>
+<p><strong>正式支持的取值</strong></p>
+<table>
 <thead>
 <tr>
 <th>策略</th>
@@ -467,8 +480,10 @@
 <td>离线环境、本地调试、预加载镜像</td>
 </tr>
 </tbody></table>
-<h5 id="实验性取值"><a href="#实验性取值" class="headerlink" title="实验性取值"></a>实验性取值</h5><p><code>OnFailure</code> 是 Kubernetes 1.19 引入的 Beta 特性：如果本地镜像存在，先尝试用本地镜像启动；如果启动失败，再尝试从远程仓库拉取。 它目前不是通用稳定特性，生产环境不建议依赖它。</p>
-<h5 id="不写-imagePullPolicy-时的默认行为"><a href="#不写-imagePullPolicy-时的默认行为" class="headerlink" title="不写 imagePullPolicy 时的默认行为"></a>不写 <code>imagePullPolicy</code> 时的默认行为</h5><p>如果你没有显式配置 <code>imagePullPolicy</code>，Kubernetes 会根据镜像标签自动选择：</p>
+<p><strong>实验性取值</strong></p>
+<p><code>OnFailure</code> 是 Kubernetes 1.19 引入的 Beta 特性：如果本地镜像存在，先尝试用本地镜像启动；如果启动失败，再尝试从远程仓库拉取。 它目前不是通用稳定特性，生产环境不建议依赖它。</p>
+<p><strong>不写 <code>imagePullPolicy</code> 时的默认行为</strong></p>
+<p>如果你没有显式配置 <code>imagePullPolicy</code>，Kubernetes 会根据镜像标签自动选择：</p>
 <table>
 <thead>
 <tr>
@@ -494,14 +509,16 @@
 </tr>
 </tbody></table>
 <p>也就是说， **只有 <code>:latest</code> 或没有标签时才会默认 <code>Always</code>**；使用固定版本标签或摘要时，默认是 <code>IfNotPresent</code>。</p>
-<h5 id="几个容易踩坑的点"><a href="#几个容易踩坑的点" class="headerlink" title="几个容易踩坑的点"></a>几个容易踩坑的点</h5><ul>
+<p><strong>几个容易踩坑的点</strong></p>
+<ul>
 <li><code>:latest</code> 不是“最新版本”，它只是一个可变标签；生产环境建议用固定版本号或摘要。</li>
 <li><code>IfNotPresent</code> 不会检查远程仓库是否有新镜像，只看本地是否存在同名镜像。</li>
 <li><code>Always</code> 不是每次都完整下载镜像，如果摘要没变，容器运行时通常会复用本地层。</li>
 <li><code>Never</code> 要求所有调度到的节点都已有镜像，否则 Pod 会启动失败。</li>
 <li>私有仓库镜像还需要配合 <code>imagePullSecrets</code>，否则可能拉取失败。</li>
 </ul>
-<h5 id="简单选择建议"><a href="#简单选择建议" class="headerlink" title="简单选择建议"></a>简单选择建议</h5><ul>
+<p><strong>简单选择建议</strong></p>
+<ul>
 <li><strong>生产环境</strong>：<code>imagePullPolicy: IfNotPresent</code> + 固定版本标签&#x2F;摘要。</li>
 <li><strong>开发&#x2F;CI</strong>：<code>imagePullPolicy: Always</code> + <code>:latest</code> 或分支标签。</li>
 <li><strong>离线&#x2F;本地调试</strong>：<code>imagePullPolicy: Never</code> + 提前在节点上导入镜像。</li>
@@ -529,7 +546,8 @@
 <li>【岗位标注】通用 &#x2F; 运维</li>
 </ul>
 <h3 id="Q8-K8s-中-Pod-挂载存储有哪些方式？"><a href="#Q8-K8s-中-Pod-挂载存储有哪些方式？" class="headerlink" title="Q8. K8s 中 Pod 挂载存储有哪些方式？"></a>Q8. K8s 中 Pod 挂载存储有哪些方式？</h3><p>K8s 里挂载存储主要分三类： <strong>Pod 级临时卷、节点本地卷、持久化存储卷</strong>，另外还有专门用来挂配置和敏感信息的特殊卷。</p>
-<h5 id="1-临时存储卷"><a href="#1-临时存储卷" class="headerlink" title="1. 临时存储卷"></a>1. 临时存储卷</h5><table>
+<p><strong>1. 临时存储卷</strong></p>
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -548,7 +566,8 @@
 <td>需要特定存储类型但不需要长期保留</td>
 </tr>
 </tbody></table>
-<h5 id="2-节点本地存储"><a href="#2-节点本地存储" class="headerlink" title="2. 节点本地存储"></a>2. 节点本地存储</h5><table>
+<p><strong>2. 节点本地存储</strong></p>
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -568,7 +587,8 @@
 </tr>
 </tbody></table>
 <p><code>hostPath</code> 生产环境要慎用，存在安全风险，而且跨节点部署时容易行为不一致。</p>
-<h5 id="3-持久化存储卷：PV-PVC-StorageClass"><a href="#3-持久化存储卷：PV-PVC-StorageClass" class="headerlink" title="3. 持久化存储卷：PV &#x2F; PVC &#x2F; StorageClass"></a>3. 持久化存储卷：PV &#x2F; PVC &#x2F; StorageClass</h5><p>这是生产环境最常用的方式。</p>
+<p><strong>3. 持久化存储卷：PV &#x2F; PVC &#x2F; StorageClass</strong></p>
+<p>这是生产环境最常用的方式。</p>
 <ul>
 <li><strong>PV</strong>：集群级持久化存储资源，生命周期独立于 Pod。</li>
 <li><strong>PVC</strong>：应用侧的存储申请，Pod 通过 PVC 使用存储。</li>
@@ -579,7 +599,8 @@
 <p>典型链路是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pod → PVC → PV → StorageClass / CSI → 后端存储</span><br></pre></td></tr></table></figure>
 
-<h5 id="4-配置与敏感信息卷"><a href="#4-配置与敏感信息卷" class="headerlink" title="4. 配置与敏感信息卷"></a>4. 配置与敏感信息卷</h5><table>
+<p><strong>4. 配置与敏感信息卷</strong></p>
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -603,11 +624,13 @@
 <td>把多种来源合并到一个目录</td>
 </tr>
 </tbody></table>
-<h5 id="挂载写法"><a href="#挂载写法" class="headerlink" title="挂载写法"></a>挂载写法</h5><p>Pod 里分两步：</p>
+<p><strong>挂载写法</strong></p>
+<p>Pod 里分两步：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">data</span></span><br><span class="line">      <span class="attr">persistentVolumeClaim:</span></span><br><span class="line">        <span class="attr">claimName:</span> <span class="string">mysql-pvc</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">app</span></span><br><span class="line">      <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">data</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/var/lib/mysql</span></span><br></pre></td></tr></table></figure>
 
 <p><code>volumes</code> 定义卷来源，<code>volumeMounts</code> 定义容器内的挂载路径。</p>
-<h5 id="怎么选-1"><a href="#怎么选-1" class="headerlink" title="怎么选"></a>怎么选</h5><ul>
+<p><strong>怎么选</strong></p>
+<ul>
 <li><strong>临时缓存、容器间共享</strong>：<code>emptyDir</code>。</li>
 <li><strong>节点级日志&#x2F;监控</strong>：<code>hostPath</code>，生产慎用。</li>
 <li><strong>高性能本地盘</strong>：<code>local</code> PV。</li>
@@ -628,8 +651,10 @@
 </li>
 <li>【岗位标注】通用 &#x2F; 运维 &#x2F; AI 运维</li>
 </ul>
-<h4 id="补充：PVC-→-PV-→-StorageClass-三者的关系是怎么配合的？"><a href="#补充：PVC-→-PV-→-StorageClass-三者的关系是怎么配合的？" class="headerlink" title="补充：PVC → PV → StorageClass 三者的关系是怎么配合的？"></a>补充：PVC → PV → StorageClass 三者的关系是怎么配合的？</h4><p>可以这样理解： <strong>PVC 是“我要多大存储”，PV 是“集群里实际的一块存储”，StorageClass 是“自动创建 PV 的模板”。</strong></p>
-<h6 id="三者各自是什么"><a href="#三者各自是什么" class="headerlink" title="三者各自是什么"></a>三者各自是什么</h6><table>
+<p><strong>补充：PVC → PV → StorageClass 三者的关系是怎么配合的？</strong></p>
+<p>可以这样理解： <strong>PVC 是“我要多大存储”，PV 是“集群里实际的一块存储”，StorageClass 是“自动创建 PV 的模板”。</strong></p>
+<p><strong>三者各自是什么</strong></p>
+<table>
 <thead>
 <tr>
 <th>对象</th>
@@ -653,33 +678,41 @@
 <td>集群管理员</td>
 </tr>
 </tbody></table>
-<h6 id="它们怎么配合"><a href="#它们怎么配合" class="headerlink" title="它们怎么配合"></a>它们怎么配合</h6><p>一条完整链路是：</p>
+<p><strong>它们怎么配合</strong></p>
+<p>一条完整链路是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Pod 引用 PVC</span><br><span class="line">  → PVC 申请存储</span><br><span class="line">  → 找到已有 PV，或者触发 StorageClass 创建新 PV</span><br><span class="line">  → PV 和 PVC 绑定</span><br><span class="line">  → Pod 挂载 PVC 使用存储</span><br></pre></td></tr></table></figure>
 
-<h6 id="两种典型流程"><a href="#两种典型流程" class="headerlink" title="两种典型流程"></a>两种典型流程</h6><h6 id="1-静态绑定：管理员先准备好-PV"><a href="#1-静态绑定：管理员先准备好-PV" class="headerlink" title="1. 静态绑定：管理员先准备好 PV"></a>1. 静态绑定：管理员先准备好 PV</h6><p>管理员先手工创建 PV，比如一块 NFS 目录或一块云盘。</p>
+<p><strong>两种典型流程</strong></p>
+<p><strong>1. 静态绑定：管理员先准备好 PV</strong></p>
+<p>管理员先手工创建 PV，比如一块 NFS 目录或一块云盘。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">管理员创建 PV</span><br><span class="line">  → 用户创建 PVC</span><br><span class="line">  → K8s 找到满足大小、访问模式、StorageClass 的 PV</span><br><span class="line">  → PVC 和 PV 绑定</span><br></pre></td></tr></table></figure>
 
-<h6 id="2-动态创建：PVC-触发-StorageClass-自动创建-PV"><a href="#2-动态创建：PVC-触发-StorageClass-自动创建-PV" class="headerlink" title="2. 动态创建：PVC 触发 StorageClass 自动创建 PV"></a>2. 动态创建：PVC 触发 StorageClass 自动创建 PV</h6><p>这是生产里更常用的方式。</p>
+<p><strong>2. 动态创建：PVC 触发 StorageClass 自动创建 PV</strong></p>
+<p>这是生产里更常用的方式。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">管理员创建 StorageClass</span><br><span class="line">  → 用户创建 PVC，并指定 storageClassName</span><br><span class="line">  → K8s 发现没有匹配的 PV</span><br><span class="line">  → 根据 StorageClass 调用 Provisioner / CSI Driver</span><br><span class="line">  → 自动创建 PV</span><br><span class="line">  → PV 和 PVC 绑定</span><br></pre></td></tr></table></figure>
 
-<h6 id="举个生活化例子"><a href="#举个生活化例子" class="headerlink" title="举个生活化例子"></a>举个生活化例子</h6><p>假设你要租房子：</p>
+<p><strong>举个生活化例子</strong></p>
+<p>假设你要租房子：</p>
 <ul>
 <li><strong>PVC</strong>：你说“我要一间 20 平米、能住人的房间”。</li>
 <li><strong>PV</strong>：房东手里已经有一间现成的房间。</li>
 <li><strong>StorageClass</strong>：你告诉中介“按标准户型给我自动生成一间房”，中介就去找施工队建一间。</li>
 </ul>
 <p>如果房东手里已经有合适房间，就直接给你用；如果没有，就按 StorageClass 模板自动建一间。</p>
-<h6 id="一句话记忆"><a href="#一句话记忆" class="headerlink" title="一句话记忆"></a>一句话记忆</h6><p><strong>Pod 消费 PVC，PVC 绑定 PV，PV 可以手工创建，也可以由 StorageClass 自动创建。</strong></p>
+<p><strong>一句话记忆</strong></p>
+<p><strong>Pod 消费 PVC，PVC 绑定 PV，PV 可以手工创建，也可以由 StorageClass 自动创建。</strong></p>
 <h3 id="Q10-StorageClass-也是-K8s-的定义对象吗？它在体系里的位置是什么？"><a href="#Q10-StorageClass-也是-K8s-的定义对象吗？它在体系里的位置是什么？" class="headerlink" title="Q10. StorageClass 也是 K8s 的定义对象吗？它在体系里的位置是什么？"></a>Q10. StorageClass 也是 K8s 的定义对象吗？它在体系里的位置是什么？</h3><p>是的， <strong>StorageClass 是 Kubernetes 的一个正式 API 对象</strong>，属于 <code>storage.k8s.io/v1</code> API 组，资源类型是 <code>StorageClass</code>，简称 <code>sc</code>。</p>
 <p>你可以用这些命令查看它：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get storageclass</span><br><span class="line">kubectl get sc</span><br><span class="line">kubectl describe sc &lt;name&gt;</span><br></pre></td></tr></table></figure>
 
 <p>它和 PV、PVC 一样，都是 Kubernetes 持久化存储体系里的标准资源对象。</p>
-<h5 id="它在体系里的位置"><a href="#它在体系里的位置" class="headerlink" title="它在体系里的位置"></a>它在体系里的位置</h5><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Pod</span><br><span class="line">  → PVC（应用申请存储）</span><br><span class="line">  → PV（集群里的实际存储资源）</span><br><span class="line">  → StorageClass（定义如何动态创建 PV）</span><br><span class="line">  → Provisioner / CSI Driver（真正去创建底层存储）</span><br></pre></td></tr></table></figure>
+<p><strong>它在体系里的位置</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Pod</span><br><span class="line">  → PVC（应用申请存储）</span><br><span class="line">  → PV（集群里的实际存储资源）</span><br><span class="line">  → StorageClass（定义如何动态创建 PV）</span><br><span class="line">  → Provisioner / CSI Driver（真正去创建底层存储）</span><br></pre></td></tr></table></figure>
 
 <p>StorageClass 本身不是存储，而是 <strong>“PV 的创建模板”</strong>。</p>
 <p>当一个 PVC 指定了 <code>storageClassName</code>，而集群里没有匹配的静态 PV 时，Kubernetes 会根据对应的 StorageClass 调用 Provisioner 动态创建 PV。</p>
-<h5 id="它主要定义什么"><a href="#它主要定义什么" class="headerlink" title="它主要定义什么"></a>它主要定义什么</h5><table>
+<p><strong>它主要定义什么</strong></p>
+<table>
 <thead>
 <tr>
 <th>字段</th>
@@ -711,24 +744,30 @@
 <td>挂载参数，比如 NFS 版本、挂载选项</td>
 </tr>
 </tbody></table>
-<h5 id="它和-PV、PVC-的区别"><a href="#它和-PV、PVC-的区别" class="headerlink" title="它和 PV、PVC 的区别"></a>它和 PV、PVC 的区别</h5><ul>
+<p><strong>它和 PV、PVC 的区别</strong></p>
+<ul>
 <li><strong>PV</strong>：集群里已经存在的一块存储资源。</li>
 <li><strong>PVC</strong>：应用申请存储的请求。</li>
 <li><strong>StorageClass</strong>：定义“怎么自动创建 PV”的模板。</li>
 </ul>
 <p>所以，StorageClass 不是 Pod 挂载卷时直接写的东西，而是 PVC 背后用来自动生成 PV 的对象。</p>
 <h3 id="Q11-给我一个-StorageClass-动态供给的完整案例"><a href="#Q11-给我一个-StorageClass-动态供给的完整案例" class="headerlink" title="Q11. 给我一个 StorageClass 动态供给的完整案例"></a>Q11. 给我一个 StorageClass 动态供给的完整案例</h3><p>这里给一个 <strong>动态供给场景</strong> 的完整案例：部署一个 Nginx Pod，并通过 PVC 自动创建 PV，把数据持久化到 NFS 存储上。</p>
-<h5 id="案例流程"><a href="#案例流程" class="headerlink" title="案例流程"></a>案例流程</h5><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">管理员创建 StorageClass</span><br><span class="line">  → 用户创建 PVC，指定 storageClassName</span><br><span class="line">  → Provisioner 自动创建 PV</span><br><span class="line">  → PV 和 PVC 绑定</span><br><span class="line">  → Pod 挂载 PVC 使用存储</span><br></pre></td></tr></table></figure>
+<p><strong>案例流程</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">管理员创建 StorageClass</span><br><span class="line">  → 用户创建 PVC，指定 storageClassName</span><br><span class="line">  → Provisioner 自动创建 PV</span><br><span class="line">  → PV 和 PVC 绑定</span><br><span class="line">  → Pod 挂载 PVC 使用存储</span><br></pre></td></tr></table></figure>
 
-<h5 id="1-创建-StorageClass"><a href="#1-创建-StorageClass" class="headerlink" title="1. 创建 StorageClass"></a>1. 创建 StorageClass</h5><p>这里假设集群已经部署了 <code>nfs-subdir-external-provisioner</code>，它的 provisioner 名称是 <code>k8s-sigs.io/nfs-subdir-external-provisioner</code>。</p>
+<p><strong>1. 创建 StorageClass</strong></p>
+<p>这里假设集群已经部署了 <code>nfs-subdir-external-provisioner</code>，它的 provisioner 名称是 <code>k8s-sigs.io/nfs-subdir-external-provisioner</code>。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">storage.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StorageClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfs-sc</span></span><br><span class="line"><span class="attr">provisioner:</span> <span class="string">k8s-sigs.io/nfs-subdir-external-provisioner</span></span><br><span class="line"><span class="attr">reclaimPolicy:</span> <span class="string">Delete</span></span><br><span class="line"><span class="attr">volumeBindingMode:</span> <span class="string">Immediate</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="2-创建-PVC"><a href="#2-创建-PVC" class="headerlink" title="2. 创建 PVC"></a>2. 创建 PVC</h5><p>PVC 不需要写 PV 名字，只要指定 <code>storageClassName</code> 和容量即可。</p>
+<p><strong>2. 创建 PVC</strong></p>
+<p>PVC 不需要写 PV 名字，只要指定 <code>storageClassName</code> 和容量即可。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-pvc</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">storageClassName:</span> <span class="string">nfs-sc</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteOnce</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">storage:</span> <span class="string">1Gi</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="3-创建-Pod-并挂载-PVC"><a href="#3-创建-Pod-并挂载-PVC" class="headerlink" title="3. 创建 Pod 并挂载 PVC"></a>3. 创建 Pod 并挂载 PVC</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">nginx:latest</span></span><br><span class="line">      <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-storage</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/usr/share/nginx/html</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-storage</span></span><br><span class="line">      <span class="attr">persistentVolumeClaim:</span></span><br><span class="line">        <span class="attr">claimName:</span> <span class="string">nginx-pvc</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 创建 Pod 并挂载 PVC</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nginx-pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">nginx:latest</span></span><br><span class="line">      <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-storage</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/usr/share/nginx/html</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-storage</span></span><br><span class="line">      <span class="attr">persistentVolumeClaim:</span></span><br><span class="line">        <span class="attr">claimName:</span> <span class="string">nginx-pvc</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="4-验证结果"><a href="#4-验证结果" class="headerlink" title="4. 验证结果"></a>4. 验证结果</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl get sc</span><br><span class="line">kubectl get pvc</span><br><span class="line">kubectl get pv</span><br><span class="line">kubectl get pod nginx-pod</span><br></pre></td></tr></table></figure>
+<p><strong>4. 验证结果</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl get sc</span><br><span class="line">kubectl get pvc</span><br><span class="line">kubectl get pv</span><br><span class="line">kubectl get pod nginx-pod</span><br></pre></td></tr></table></figure>
 
 <p>如果一切正常，你会看到：</p>
 <ul>
@@ -737,7 +776,8 @@
 <li>自动出现一个 PV，状态也是 <code>Bound</code>；</li>
 <li><code>nginx-pod</code> 启动成功。</li>
 </ul>
-<h5 id="这个案例里三者的关系"><a href="#这个案例里三者的关系" class="headerlink" title="这个案例里三者的关系"></a>这个案例里三者的关系</h5><ul>
+<p><strong>这个案例里三者的关系</strong></p>
+<ul>
 <li><strong>PVC</strong>：应用说“我要 1Gi 存储”。</li>
 <li><strong>StorageClass</strong>：告诉 K8s “用 NFS Provisioner 自动创建 PV”。</li>
 <li><strong>PV</strong>：Provisioner 在 NFS 上创建目录后，自动生成的集群存储资源。</li>
@@ -767,7 +807,8 @@
 <li>【岗位标注】通用 &#x2F; 运维</li>
 </ul>
 <h3 id="Q14-如何给节点打污点、取消污点，并给-Pod-配置容忍？"><a href="#Q14-如何给节点打污点、取消污点，并给-Pod-配置容忍？" class="headerlink" title="Q14. 如何给节点打污点、取消污点，并给 Pod 配置容忍？"></a>Q14. 如何给节点打污点、取消污点，并给 Pod 配置容忍？</h3><p>K8s 里 <strong>污点 Taint 是打在节点上的“排斥标记”</strong>， <strong>容忍 Toleration 是写在 Pod 上的“通行证”</strong>。</p>
-<h5 id="1-给节点打污点"><a href="#1-给节点打污点" class="headerlink" title="1. 给节点打污点"></a>1. 给节点打污点</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes &lt;node-name&gt; &lt;key&gt;=&lt;value&gt;:&lt;effect&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>1. 给节点打污点</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes &lt;node-name&gt; &lt;key&gt;=&lt;value&gt;:&lt;effect&gt;</span><br></pre></td></tr></table></figure>
 
 <p>示例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes node1 dedicated=<span class="literal">true</span>:NoSchedule</span><br></pre></td></tr></table></figure>
@@ -796,7 +837,8 @@
 <p>查看节点污点：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe node &lt;node-name&gt;</span><br></pre></td></tr></table></figure>
 
-<h5 id="2-取消节点污点"><a href="#2-取消节点污点" class="headerlink" title="2. 取消节点污点"></a>2. 取消节点污点</h5><p>在污点后面加一个 <code>-</code>：</p>
+<p><strong>2. 取消节点污点</strong></p>
+<p>在污点后面加一个 <code>-</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes &lt;node-name&gt; &lt;key&gt;=&lt;value&gt;:&lt;effect&gt;-</span><br></pre></td></tr></table></figure>
 
 <p>例如：</p>
@@ -806,7 +848,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes node1 dedicated-</span><br></pre></td></tr></table></figure>
 
 <p>删除后可以用 <code>kubectl describe node node1</code> 确认 <code>Taints</code> 是否已经消失。</p>
-<h5 id="3-给-Pod-配置容忍"><a href="#3-给-Pod-配置容忍" class="headerlink" title="3. 给 Pod 配置容忍"></a>3. 给 Pod 配置容忍</h5><p>在 Pod、Deployment、StatefulSet 的 <code>spec.template.spec</code> 里加 <code>tolerations</code>：</p>
+<p><strong>3. 给 Pod 配置容忍</strong></p>
+<p>在 Pod、Deployment、StatefulSet 的 <code>spec.template.spec</code> 里加 <code>tolerations</code>：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tolerations:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;dedicated&quot;</span></span><br><span class="line">    <span class="attr">operator:</span> <span class="string">&quot;Equal&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoSchedule&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p><code>operator</code> 有两种常用写法：</p>
@@ -821,7 +864,8 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tolerations:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">&quot;dedicated&quot;</span></span><br><span class="line">    <span class="attr">operator:</span> <span class="string">&quot;Equal&quot;</span></span><br><span class="line">    <span class="attr">value:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line">    <span class="attr">effect:</span> <span class="string">&quot;NoExecute&quot;</span></span><br><span class="line">    <span class="attr">tolerationSeconds:</span> <span class="number">3600</span></span><br></pre></td></tr></table></figure>
 
 <p>表示容忍 3600 秒，超过时间仍会被驱逐。</p>
-<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><p><strong>容忍只是让 Pod 有资格调度到带污点的节点，并不保证一定调度上去。</strong> 还要看节点资源、NodeSelector、亲和性、Pod 反亲和性等条件是否满足。</p>
+<p><strong>注意</strong></p>
+<p><strong>容忍只是让 Pod 有资格调度到带污点的节点，并不保证一定调度上去。</strong> 还要看节点资源、NodeSelector、亲和性、Pod 反亲和性等条件是否满足。</p>
 <h3 id="Q15-什么是反亲和性？硬约束和软约束怎么用？"><a href="#Q15-什么是反亲和性？硬约束和软约束怎么用？" class="headerlink" title="Q15. 什么是反亲和性？硬约束和软约束怎么用？"></a>Q15. 什么是反亲和性？硬约束和软约束怎么用？</h3><p><strong>反亲和性是一种调度约束，用来告诉调度器：这个 Pod 尽量不要和某些 Pod、或某些节点放在一起。</strong></p>
 <p>K8s 里没有单独的 <code>nodeAntiAffinity</code> 字段，通常分两种理解：</p>
 <table>
@@ -843,7 +887,8 @@
 <td><code>nodeAffinity</code> 里用 <code>NotIn</code> &#x2F; <code>DoesNotExist</code></td>
 </tr>
 </tbody></table>
-<h5 id="1-Pod-反亲和：把副本打散"><a href="#1-Pod-反亲和：把副本打散" class="headerlink" title="1. Pod 反亲和：把副本打散"></a>1. Pod 反亲和：把副本打散</h5><p>这是最常见的用法。比如一个 Deployment 有 3 个副本，如果都落在同一台节点上，节点一挂，服务就全没了。</p>
+<p><strong>1. Pod 反亲和：把副本打散</strong></p>
+<p>这是最常见的用法。比如一个 Deployment 有 3 个副本，如果都落在同一台节点上，节点一挂，服务就全没了。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">affinity:</span></span><br><span class="line">  <span class="attr">podAntiAffinity:</span></span><br><span class="line">    <span class="attr">requiredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">labelSelector:</span></span><br><span class="line">          <span class="attr">matchLabels:</span></span><br><span class="line">            <span class="attr">app:</span> <span class="string">web</span></span><br><span class="line">        <span class="attr">topologyKey:</span> <span class="string">kubernetes.io/hostname</span></span><br></pre></td></tr></table></figure>
 
 <p>含义是：</p>
@@ -852,7 +897,8 @@
 <li><code>topologyKey: kubernetes.io/hostname</code> 表示按“节点”打散；</li>
 <li>如果改成 <code>topology.kubernetes.io/zone</code>，就是按“可用区”打散。</li>
 </ul>
-<h5 id="2-硬约束-vs-软约束"><a href="#2-硬约束-vs-软约束" class="headerlink" title="2. 硬约束 vs 软约束"></a>2. 硬约束 vs 软约束</h5><p><strong>硬约束</strong>：<code>requiredDuringSchedulingIgnoredDuringExecution</code></p>
+<p><strong>2. 硬约束 vs 软约束</strong></p>
+<p><strong>硬约束</strong>：<code>requiredDuringSchedulingIgnoredDuringExecution</code></p>
 <p>必须满足，否则 Pod 会一直 Pending。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">requiredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">labelSelector:</span></span><br><span class="line">      <span class="attr">matchLabels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">web</span></span><br><span class="line">    <span class="attr">topologyKey:</span> <span class="string">kubernetes.io/hostname</span></span><br></pre></td></tr></table></figure>
 
@@ -860,11 +906,13 @@
 <p>尽量满足，不满足也能调度。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">preferredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">weight:</span> <span class="number">100</span></span><br><span class="line">    <span class="attr">podAffinityTerm:</span></span><br><span class="line">      <span class="attr">labelSelector:</span></span><br><span class="line">        <span class="attr">matchLabels:</span></span><br><span class="line">          <span class="attr">app:</span> <span class="string">web</span></span><br><span class="line">      <span class="attr">topologyKey:</span> <span class="string">kubernetes.io/hostname</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="3-节点反亲和：避开某些节点"><a href="#3-节点反亲和：避开某些节点" class="headerlink" title="3. 节点反亲和：避开某些节点"></a>3. 节点反亲和：避开某些节点</h5><p>比如不想让 Pod 调度到测试节点：</p>
+<p><strong>3. 节点反亲和：避开某些节点</strong></p>
+<p>比如不想让 Pod 调度到测试节点：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">affinity:</span></span><br><span class="line">  <span class="attr">nodeAffinity:</span></span><br><span class="line">    <span class="attr">requiredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">      <span class="attr">nodeSelectorTerms:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">matchExpressions:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">env</span></span><br><span class="line">              <span class="attr">operator:</span> <span class="string">NotIn</span></span><br><span class="line">              <span class="attr">values:</span> [<span class="string">&quot;test&quot;</span>]</span><br></pre></td></tr></table></figure>
 
 <p>这表示：不要调度到 <code>env=test</code> 的节点上。</p>
-<h5 id="4-一个容易踩的坑"><a href="#4-一个容易踩的坑" class="headerlink" title="4. 一个容易踩的坑"></a>4. 一个容易踩的坑</h5><p>如果用硬反亲和要求“每个节点只能有一个副本”，那集群可用节点数必须 ≥ 副本数，否则 Pod 会调度失败。</p>
+<p><strong>4. 一个容易踩的坑</strong></p>
+<p>如果用硬反亲和要求“每个节点只能有一个副本”，那集群可用节点数必须 ≥ 副本数，否则 Pod 会调度失败。</p>
 <p>简单记： <strong>亲和是“想和谁在一起”，反亲和是“不想和谁在一起”。</strong> 生产里最常用的是 Pod 反亲和，把多副本打散到不同节点或不同可用区，避免单点故障。</p>
 <hr>
 <p>反亲和和污点+容忍配合用，能把”不跟谁一起”和”只能跟谁一起”组合出很灵活的调度策略，要不要举个具体例子？</p>
@@ -875,14 +923,17 @@
 <li><strong>nodeSelector &#x2F; nodeAffinity</strong>：让专用 Pod 必须或优先落到专用节点；</li>
 <li><strong>标签</strong>：给专用节点一个身份标识。</li>
 </ul>
-<h5 id="1-给专用节点打标签"><a href="#1-给专用节点打标签" class="headerlink" title="1. 给专用节点打标签"></a>1. 给专用节点打标签</h5><p>假设有一台专用节点 <code>node-dedicated-01</code>，专门跑高负载服务：</p>
+<p><strong>1. 给专用节点打标签</strong></p>
+<p>假设有一台专用节点 <code>node-dedicated-01</code>，专门跑高负载服务：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl label nodes node-dedicated-01 workload=dedicated</span><br></pre></td></tr></table></figure>
 
-<h5 id="2-给专用节点打污点"><a href="#2-给专用节点打污点" class="headerlink" title="2. 给专用节点打污点"></a>2. 给专用节点打污点</h5><p>这样普通业务 Pod 就不会被调度到这台节点上：</p>
+<p><strong>2. 给专用节点打污点</strong></p>
+<p>这样普通业务 Pod 就不会被调度到这台节点上：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes node-dedicated-01 workload=dedicated:NoSchedule</span><br></pre></td></tr></table></figure>
 
 <p>效果是：没有匹配容忍的 Pod 不能调度上来。</p>
-<h5 id="3-给专用-Pod-配容忍和-nodeSelector"><a href="#3-给专用-Pod-配容忍和-nodeSelector" class="headerlink" title="3. 给专用 Pod 配容忍和 nodeSelector"></a>3. 给专用 Pod 配容忍和 nodeSelector</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dedicated-app</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">dedicated-app</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">dedicated-app</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">nodeSelector:</span></span><br><span class="line">        <span class="attr">workload:</span> <span class="string">dedicated</span></span><br><span class="line">      <span class="attr">tolerations:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">workload</span></span><br><span class="line">          <span class="attr">operator:</span> <span class="string">Equal</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">dedicated</span></span><br><span class="line">          <span class="attr">effect:</span> <span class="string">NoSchedule</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">app</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">myapp:latest</span></span><br><span class="line">          <span class="attr">resources:</span></span><br><span class="line">            <span class="attr">requests:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">&quot;500m&quot;</span></span><br><span class="line">              <span class="attr">memory:</span> <span class="string">&quot;512Mi&quot;</span></span><br><span class="line">            <span class="attr">limits:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">              <span class="attr">memory:</span> <span class="string">&quot;1Gi&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 给专用 Pod 配容忍和 nodeSelector</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dedicated-app</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">dedicated-app</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">dedicated-app</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">nodeSelector:</span></span><br><span class="line">        <span class="attr">workload:</span> <span class="string">dedicated</span></span><br><span class="line">      <span class="attr">tolerations:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">workload</span></span><br><span class="line">          <span class="attr">operator:</span> <span class="string">Equal</span></span><br><span class="line">          <span class="attr">value:</span> <span class="string">dedicated</span></span><br><span class="line">          <span class="attr">effect:</span> <span class="string">NoSchedule</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">app</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">myapp:latest</span></span><br><span class="line">          <span class="attr">resources:</span></span><br><span class="line">            <span class="attr">requests:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">&quot;500m&quot;</span></span><br><span class="line">              <span class="attr">memory:</span> <span class="string">&quot;512Mi&quot;</span></span><br><span class="line">            <span class="attr">limits:</span></span><br><span class="line">              <span class="attr">cpu:</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">              <span class="attr">memory:</span> <span class="string">&quot;1Gi&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>这里：</p>
 <ul>
@@ -891,13 +942,15 @@
 <li>普通 Pod 没有容忍，进不来；</li>
 <li>专用 Pod 有容忍 + nodeSelector，会固定落到专用节点。</li>
 </ul>
-<h5 id="4-更推荐的写法：用-nodeAffinity-替代-nodeSelector"><a href="#4-更推荐的写法：用-nodeAffinity-替代-nodeSelector" class="headerlink" title="4. 更推荐的写法：用 nodeAffinity 替代 nodeSelector"></a>4. 更推荐的写法：用 nodeAffinity 替代 nodeSelector</h5><p><code>nodeSelector</code> 是硬匹配，但表达能力比较弱。生产上更常用 <code>nodeAffinity</code>：</p>
+<p><strong>4. 更推荐的写法：用 nodeAffinity 替代 nodeSelector</strong></p>
+<p><code>nodeSelector</code> 是硬匹配，但表达能力比较弱。生产上更常用 <code>nodeAffinity</code>：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">affinity:</span></span><br><span class="line">  <span class="attr">nodeAffinity:</span></span><br><span class="line">    <span class="attr">requiredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">      <span class="attr">nodeSelectorTerms:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">matchExpressions:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">workload</span></span><br><span class="line">              <span class="attr">operator:</span> <span class="string">In</span></span><br><span class="line">              <span class="attr">values:</span></span><br><span class="line">                <span class="bullet">-</span> <span class="string">dedicated</span></span><br></pre></td></tr></table></figure>
 
 <p>如果希望节点不可用时能回退到其他节点，可以用软亲和：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">affinity:</span></span><br><span class="line">  <span class="attr">nodeAffinity:</span></span><br><span class="line">    <span class="attr">preferredDuringSchedulingIgnoredDuringExecution:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">weight:</span> <span class="number">100</span></span><br><span class="line">        <span class="attr">preference:</span></span><br><span class="line">          <span class="attr">matchExpressions:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">workload</span></span><br><span class="line">              <span class="attr">operator:</span> <span class="string">In</span></span><br><span class="line">                <span class="attr">values:</span></span><br><span class="line">                  <span class="bullet">-</span> <span class="string">dedicated</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="5-三者分工"><a href="#5-三者分工" class="headerlink" title="5. 三者分工"></a>5. 三者分工</h5><table>
+<p><strong>5. 三者分工</strong></p>
+<table>
 <thead>
 <tr>
 <th>机制</th>
@@ -926,7 +979,8 @@
 <td>Pod</td>
 </tr>
 </tbody></table>
-<h5 id="一个容易踩的坑"><a href="#一个容易踩的坑" class="headerlink" title="一个容易踩的坑"></a>一个容易踩的坑</h5><p><strong>只配容忍，不配 nodeSelector &#x2F; nodeAffinity，Pod 不一定会落到专用节点。</strong></p>
+<p><strong>一个容易踩的坑</strong></p>
+<p><strong>只配容忍，不配 nodeSelector &#x2F; nodeAffinity，Pod 不一定会落到专用节点。</strong></p>
 <p>容忍只是“允许进入”，不是“必须进入”。</p>
 <p>反过来， <strong>只配 nodeSelector，不打污点，普通 Pod 仍然可能调度到专用节点</strong>，达不到隔离效果。</p>
 <p>所以生产上固定业务到专用节点，最稳的就是： <strong>标签 + 污点 + 容忍 + 亲和性</strong> 一起用。</p>
@@ -943,8 +997,10 @@
 </li>
 <li>【岗位标注】运维 &#x2F; DevOps</li>
 </ul>
-<h4 id="补充：只配-limits-不配-requests-为什么会导致节点超卖？"><a href="#补充：只配-limits-不配-requests-为什么会导致节点超卖？" class="headerlink" title="补充：只配 limits 不配 requests 为什么会导致节点超卖？"></a>补充：只配 limits 不配 requests 为什么会导致节点超卖？</h4><p>“节点超卖”可以理解为： <strong>调度器账本上看起来还有资源，但节点实际可能已经扛不住了。</strong></p>
-<h6 id="先澄清一个前提：只配-limits-不配-requests，request-通常不是-0"><a href="#先澄清一个前提：只配-limits-不配-requests，request-通常不是-0" class="headerlink" title="先澄清一个前提：只配 limits 不配 requests，request 通常不是 0"></a>先澄清一个前提：只配 limits 不配 requests，request 通常不是 0</h6><p>在 Kubernetes 里，如果你只写了 <code>limits</code> 没写 <code>requests</code>，API Server 的默认行为通常是把 <code>requests</code> 自动设成和 <code>limits</code> 一样。</p>
+<p><strong>补充：只配 limits 不配 requests 为什么会导致节点超卖？</strong></p>
+<p>“节点超卖”可以理解为： <strong>调度器账本上看起来还有资源，但节点实际可能已经扛不住了。</strong></p>
+<p><strong>先澄清一个前提：只配 limits 不配 requests，request 通常不是 0</strong></p>
+<p>在 Kubernetes 里，如果你只写了 <code>limits</code> 没写 <code>requests</code>，API Server 的默认行为通常是把 <code>requests</code> 自动设成和 <code>limits</code> 一样。</p>
 <p>所以严格来说，”只配 limits 不配 requests 导致 request 按 0 算”，更常见于下面几种情况：</p>
 <ul>
 <li>Pod 既没写 <code>requests</code>，也没写 <code>limits</code>；</li>
@@ -952,7 +1008,8 @@
 <li>或者有人误以为”没写 requests 就是 0，调度器会按 0 处理”。</li>
 </ul>
 <p>真正让 request 变成 0 的，通常是 <strong>什么都没配</strong>。</p>
-<h6 id="那”超卖”是怎么发生的？"><a href="#那”超卖”是怎么发生的？" class="headerlink" title="那”超卖”是怎么发生的？"></a>那”超卖”是怎么发生的？</h6><p>调度器只看 <code>requests</code> 记账。</p>
+<p><strong>那”超卖”是怎么发生的？</strong></p>
+<p>调度器只看 <code>requests</code> 记账。</p>
 <p>比如一个节点有 4 核 CPU：</p>
 <table>
 <thead>
@@ -992,7 +1049,8 @@
 
 <p>而节点只有 4 核。</p>
 <p>这就是 <strong>超卖</strong>：调度器按 requests 认为节点还能继续放 Pod，但所有 Pod 一旦同时忙起来，节点物理资源根本不够。</p>
-<h6 id="如果-request-真的是-0，问题会更严重"><a href="#如果-request-真的是-0，问题会更严重" class="headerlink" title="如果 request 真的是 0，问题会更严重"></a>如果 request 真的是 0，问题会更严重</h6><p>假设 Pod 没配 <code>requests</code>，调度器会认为它”不占资源”。</p>
+<p><strong>如果 request 真的是 0，问题会更严重</strong></p>
+<p>假设 Pod 没配 <code>requests</code>，调度器会认为它”不占资源”。</p>
 <p>于是调度器可能把大量 Pod 都塞到同一个节点上，因为它觉得：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个节点 requests 总和还很低，还能继续放。</span><br></pre></td></tr></table></figure>
 
@@ -1004,7 +1062,8 @@
 <li>低优先级 Pod 被驱逐；</li>
 <li>业务出现延迟升高、重启、503。</li>
 </ul>
-<h6 id="一句话理解"><a href="#一句话理解" class="headerlink" title="一句话理解"></a>一句话理解</h6><ul>
+<p><strong>一句话理解</strong></p>
+<ul>
 <li><strong>requests</strong>：调度器记账用的”保底资源”。</li>
 <li><strong>limits</strong>：运行时不能超过的上限。</li>
 <li><strong>超卖</strong>：所有 Pod 的 <code>limits</code> 或实际用量加起来，超过了节点真实容量。</li>
@@ -1033,15 +1092,18 @@
 </li>
 <li>【岗位标注】通用 &#x2F; AI 运维 &#x2F; DevOps</li>
 </ul>
-<h4 id="补充：HPA-的配置项、计算公式和排查方法？"><a href="#补充：HPA-的配置项、计算公式和排查方法？" class="headerlink" title="补充：HPA 的配置项、计算公式和排查方法？"></a>补充：HPA 的配置项、计算公式和排查方法？</h4><p>HPA 的核心思路是： <strong>监控指标 → 计算期望副本数 → 更新 Deployment&#x2F;StatefulSet 的 replicas</strong>。它扩的是 Pod 副本数量，不是给单个 Pod 加 CPU&#x2F;内存。</p>
-<h6 id="1-前提条件"><a href="#1-前提条件" class="headerlink" title="1. 前提条件"></a>1. 前提条件</h6><p>要让 HPA 正常工作，通常需要满足：</p>
+<p><strong>补充：HPA 的配置项、计算公式和排查方法？</strong></p>
+<p>HPA 的核心思路是： <strong>监控指标 → 计算期望副本数 → 更新 Deployment&#x2F;StatefulSet 的 replicas</strong>。它扩的是 Pod 副本数量，不是给单个 Pod 加 CPU&#x2F;内存。</p>
+<p><strong>1. 前提条件</strong></p>
+<p>要让 HPA 正常工作，通常需要满足：</p>
 <ul>
 <li>集群里部署了 <strong>Metrics Server</strong>，否则 CPU、内存指标拿不到；</li>
 <li>目标 Deployment&#x2F;StatefulSet 必须配置 <code>resources.requests</code>；</li>
 <li>HPA 不支持 DaemonSet 这类不能水平扩缩的工作负载。</li>
 </ul>
 <p>如果 Pod 没有 <code>requests</code>，HPA 无法计算利用率，就不会基于 CPU&#x2F;内存做扩缩。</p>
-<h6 id="2-最基础的-HPA-配置"><a href="#2-最基础的-HPA-配置" class="headerlink" title="2. 最基础的 HPA 配置"></a>2. 最基础的 HPA 配置</h6><p>一个基于 CPU 利用率的 HPA 示例：</p>
+<p><strong>2. 最基础的 HPA 配置</strong></p>
+<p>一个基于 CPU 利用率的 HPA 示例：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">autoscaling/v2</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">HorizontalPodAutoscaler</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">myapp-hpa</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">scaleTargetRef:</span></span><br><span class="line">    <span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line">    <span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">myapp</span></span><br><span class="line">  <span class="attr">minReplicas:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">maxReplicas:</span> <span class="number">10</span></span><br><span class="line">  <span class="attr">metrics:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">Resource</span></span><br><span class="line">      <span class="attr">resource:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">cpu</span></span><br><span class="line">        <span class="attr">target:</span></span><br><span class="line">          <span class="attr">type:</span> <span class="string">Utilization</span></span><br><span class="line">          <span class="attr">averageUtilization:</span> <span class="number">60</span></span><br></pre></td></tr></table></figure>
 
 <p>含义是：</p>
@@ -1054,7 +1116,8 @@
 <p>也可以用快捷命令创建：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl autoscale deployment myapp --cpu-percent=60 --min=2 --max=10</span><br></pre></td></tr></table></figure>
 
-<h6 id="3-HPA-是怎么算副本数的"><a href="#3-HPA-是怎么算副本数的" class="headerlink" title="3. HPA 是怎么算副本数的"></a>3. HPA 是怎么算副本数的</h6><p>HPA 默认每 15 秒同步一次指标。</p>
+<p><strong>3. HPA 是怎么算副本数的</strong></p>
+<p>HPA 默认每 15 秒同步一次指标。</p>
 <p>对于 CPU 利用率，核心公式大致是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">期望副本数 = ceil(当前副本数 × 当前指标值 / 目标指标值)</span><br></pre></td></tr></table></figure>
 
@@ -1069,7 +1132,8 @@
 
 <p>HPA 会把 Deployment 的 replicas 调整到 5。</p>
 <p>如果有多个指标，比如同时配置了 CPU 和内存，HPA 会分别计算，然后取 <strong>最大的期望副本数</strong>。</p>
-<h6 id="4-支持哪些指标"><a href="#4-支持哪些指标" class="headerlink" title="4. 支持哪些指标"></a>4. 支持哪些指标</h6><p><code>autoscaling/v2</code> 支持四类指标：</p>
+<p><strong>4. 支持哪些指标</strong></p>
+<p><code>autoscaling/v2</code> 支持四类指标：</p>
 <table>
 <thead>
 <tr>
@@ -1095,7 +1159,8 @@
 </tr>
 </tbody></table>
 <p>如果要用自定义指标或外部指标，通常需要部署 <strong>Prometheus Adapter</strong>、 <strong>KEDA</strong> 之类的指标适配器。</p>
-<h6 id="5-控制扩缩速度：behavior"><a href="#5-控制扩缩速度：behavior" class="headerlink" title="5. 控制扩缩速度：behavior"></a>5. 控制扩缩速度：behavior</h6><p>生产上不建议只配阈值，否则容易频繁抖动。可以用 <code>behavior</code> 控制扩容和缩容行为。</p>
+<p><strong>5. 控制扩缩速度：behavior</strong></p>
+<p>生产上不建议只配阈值，否则容易频繁抖动。可以用 <code>behavior</code> 控制扩容和缩容行为。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">behavior:</span></span><br><span class="line">  <span class="attr">scaleUp:</span></span><br><span class="line">    <span class="attr">stabilizationWindowSeconds:</span> <span class="number">0</span></span><br><span class="line">    <span class="attr">policies:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">Percent</span></span><br><span class="line">        <span class="attr">value:</span> <span class="number">100</span></span><br><span class="line">        <span class="attr">periodSeconds:</span> <span class="number">15</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">Pods</span></span><br><span class="line">        <span class="attr">value:</span> <span class="number">4</span></span><br><span class="line">        <span class="attr">periodSeconds:</span> <span class="number">15</span></span><br><span class="line">    <span class="attr">selectPolicy:</span> <span class="string">Max</span></span><br><span class="line">  <span class="attr">scaleDown:</span></span><br><span class="line">    <span class="attr">stabilizationWindowSeconds:</span> <span class="number">300</span></span><br><span class="line">    <span class="attr">policies:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">type:</span> <span class="string">Percent</span></span><br><span class="line">        <span class="attr">value:</span> <span class="number">10</span></span><br><span class="line">        <span class="attr">periodSeconds:</span> <span class="number">60</span></span><br><span class="line">    <span class="attr">selectPolicy:</span> <span class="string">Min</span></span><br></pre></td></tr></table></figure>
 
 <p>几个关键字段：</p>
@@ -1104,7 +1169,8 @@
 <li><strong>policies</strong>：限制每次扩&#x2F;缩多少，比如每 15 秒最多加 4 个 Pod，或最多增加 100%。</li>
 <li><strong>selectPolicy</strong>：多条策略时选哪个。扩容常用 <code>Max</code>，缩容常用 <code>Min</code>。</li>
 </ul>
-<h6 id="6-排查-HPA-是否正常"><a href="#6-排查-HPA-是否正常" class="headerlink" title="6. 排查 HPA 是否正常"></a>6. 排查 HPA 是否正常</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get hpa</span><br><span class="line">kubectl describe hpa myapp-hpa</span><br><span class="line">kubectl top pods</span><br></pre></td></tr></table></figure>
+<p><strong>6. 排查 HPA 是否正常</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get hpa</span><br><span class="line">kubectl describe hpa myapp-hpa</span><br><span class="line">kubectl top pods</span><br></pre></td></tr></table></figure>
 
 <p>重点看：</p>
 <ul>
@@ -1113,7 +1179,8 @@
 <li>是否有 <code>FailedGetResourceMetric</code>、<code>FailedComputeMetricsReplicas</code> 等错误。</li>
 </ul>
 <p>如果 <code>TARGETS</code> 显示 <code>&lt;unknown&gt;</code>，多半是 Metrics Server 没装，或者 Pod 没配 <code>requests</code>。</p>
-<h6 id="生产建议"><a href="#生产建议" class="headerlink" title="生产建议"></a>生产建议</h6><ul>
+<p><strong>生产建议</strong></p>
+<ul>
 <li>CPU 目标利用率一般设在 **50%–80%**，不要压到 90% 以上；</li>
 <li>缩容稳定窗口不要太短，避免流量波动时反复扩缩；</li>
 <li>如果节点资源不够，HPA 扩出 Pod 也可能调度失败，这时需要配合节点弹性或提前预留资源；</li>
@@ -1135,11 +1202,13 @@
 <li>【岗位标注】运维 &#x2F; DevOps</li>
 </ul>
 <hr>
-<h4 id="补充：RBAC-的四类对象怎么配合使用？"><a href="#补充：RBAC-的四类对象怎么配合使用？" class="headerlink" title="补充：RBAC 的四类对象怎么配合使用？"></a>补充：RBAC 的四类对象怎么配合使用？</h4><p>K8s 的 RBAC 由四类对象组成： <strong>Role、ClusterRole、RoleBinding、ClusterRoleBinding</strong>。</p>
+<p><strong>补充：RBAC 的四类对象怎么配合使用？</strong></p>
+<p>K8s 的 RBAC 由四类对象组成： <strong>Role、ClusterRole、RoleBinding、ClusterRoleBinding</strong>。</p>
 <p>权限模型可以简单记成：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">谁（User / Group / ServiceAccount）</span><br><span class="line">通过 Binding</span><br><span class="line">获得 Role / ClusterRole 里定义的权限</span><br><span class="line">对哪些资源执行哪些操作</span><br></pre></td></tr></table></figure>
 
-<h6 id="Role-和-ClusterRole-的区别"><a href="#Role-和-ClusterRole-的区别" class="headerlink" title="Role 和 ClusterRole 的区别"></a>Role 和 ClusterRole 的区别</h6><table>
+<p><strong>Role 和 ClusterRole 的区别</strong></p>
+<table>
 <thead>
 <tr>
 <th>对象</th>
@@ -1170,21 +1239,24 @@
 </tbody></table>
 <p><strong>Role 必须指定 namespace，ClusterRole 没有 namespace。</strong></p>
 <p>ClusterRole 可以用来授权命名空间资源，也可以授权集群级资源，比如 Node、PV、Namespace。</p>
-<h6 id="1-给命名空间内授权：Role-RoleBinding"><a href="#1-给命名空间内授权：Role-RoleBinding" class="headerlink" title="1. 给命名空间内授权：Role + RoleBinding"></a>1. 给命名空间内授权：Role + RoleBinding</h6><p>比如只允许在 <code>dev</code> 命名空间里查看 Pod：</p>
+<p><strong>1. 给命名空间内授权：Role + RoleBinding</strong></p>
+<p>比如只允许在 <code>dev</code> 命名空间里查看 Pod：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Role</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod-reader</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">dev</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">apiGroups:</span> [<span class="string">&quot;&quot;</span>]</span><br><span class="line">    <span class="attr">resources:</span> [<span class="string">&quot;pods&quot;</span>]</span><br><span class="line">    <span class="attr">verbs:</span> [<span class="string">&quot;get&quot;</span>, <span class="string">&quot;list&quot;</span>, <span class="string">&quot;watch&quot;</span>]</span><br></pre></td></tr></table></figure>
 
 <p>绑定给用户或 ServiceAccount：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">RoleBinding</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">read-pods</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">dev</span></span><br><span class="line"><span class="attr">subjects:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">kind:</span> <span class="string">User</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">alice</span></span><br><span class="line">    <span class="attr">apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br><span class="line"><span class="attr">roleRef:</span></span><br><span class="line">  <span class="attr">kind:</span> <span class="string">Role</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod-reader</span></span><br><span class="line">  <span class="attr">apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br></pre></td></tr></table></figure>
 
 <p>这样 <code>alice</code> 只能在 <code>dev</code> 命名空间里读取 Pod，不能操作其他 namespace。</p>
-<h6 id="2-给集群范围授权：ClusterRole-ClusterRoleBinding"><a href="#2-给集群范围授权：ClusterRole-ClusterRoleBinding" class="headerlink" title="2. 给集群范围授权：ClusterRole + ClusterRoleBinding"></a>2. 给集群范围授权：ClusterRole + ClusterRoleBinding</h6><p>比如允许查看节点：</p>
+<p><strong>2. 给集群范围授权：ClusterRole + ClusterRoleBinding</strong></p>
+<p>比如允许查看节点：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">node-viewer</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">apiGroups:</span> [<span class="string">&quot;&quot;</span>]</span><br><span class="line">    <span class="attr">resources:</span> [<span class="string">&quot;nodes&quot;</span>]</span><br><span class="line">    <span class="attr">verbs:</span> [<span class="string">&quot;get&quot;</span>, <span class="string">&quot;list&quot;</span>, <span class="string">&quot;watch&quot;</span>]</span><br></pre></td></tr></table></figure>
 
 <p>绑定到用户：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRoleBinding</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">node-viewer-binding</span></span><br><span class="line"><span class="attr">subjects:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">kind:</span> <span class="string">User</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">alice</span></span><br><span class="line">    <span class="attr">apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br><span class="line"><span class="attr">roleRef:</span></span><br><span class="line">  <span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">node-viewer</span></span><br><span class="line">  <span class="attr">apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br></pre></td></tr></table></figure>
 
 <p>这样 <code>alice</code> 可以查看整个集群的节点。</p>
-<h6 id="3-常见组合：ClusterRole-RoleBinding"><a href="#3-常见组合：ClusterRole-RoleBinding" class="headerlink" title="3. 常见组合：ClusterRole + RoleBinding"></a>3. 常见组合：ClusterRole + RoleBinding</h6><p>这个组合很实用： <strong>用 ClusterRole 定义权限模板，再用 RoleBinding 限制生效范围。</strong></p>
+<p><strong>3. 常见组合：ClusterRole + RoleBinding</strong></p>
+<p>这个组合很实用： <strong>用 ClusterRole 定义权限模板，再用 RoleBinding 限制生效范围。</strong></p>
 <p>比如定义一个通用的“只读 Pod” ClusterRole：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod-reader-global</span></span><br><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">apiGroups:</span> [<span class="string">&quot;&quot;</span>]</span><br><span class="line">    <span class="attr">resources:</span> [<span class="string">&quot;pods&quot;</span>]</span><br><span class="line">    <span class="attr">verbs:</span> [<span class="string">&quot;get&quot;</span>, <span class="string">&quot;list&quot;</span>, <span class="string">&quot;watch&quot;</span>]</span><br></pre></td></tr></table></figure>
 
@@ -1192,11 +1264,13 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">rbac.authorization.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">RoleBinding</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">dev-pod-reader</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">dev</span></span><br><span class="line"><span class="attr">subjects:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">kind:</span> <span class="string">ServiceAccount</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">dev-sa</span></span><br><span class="line">    <span class="attr">namespace:</span> <span class="string">dev</span></span><br><span class="line"><span class="attr">roleRef:</span></span><br><span class="line">  <span class="attr">kind:</span> <span class="string">ClusterRole</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod-reader-global</span></span><br><span class="line">  <span class="attr">apiGroup:</span> <span class="string">rbac.authorization.k8s.io</span></span><br></pre></td></tr></table></figure>
 
 <p>这样 <code>dev-sa</code> 只能在 <code>dev</code> 命名空间里读 Pod，不会自动获得其他 namespace 权限。</p>
-<h6 id="4-排查权限是否生效"><a href="#4-排查权限是否生效" class="headerlink" title="4. 排查权限是否生效"></a>4. 排查权限是否生效</h6><p>可以用 <code>kubectl auth can-i</code> 验证：</p>
+<p><strong>4. 排查权限是否生效</strong></p>
+<p>可以用 <code>kubectl auth can-i</code> 验证：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl auth can-i list pods --as=alice -n dev</span><br><span class="line">kubectl auth can-i get nodes --as=alice</span><br><span class="line">kubectl auth can-i delete pods --as=alice -n dev</span><br></pre></td></tr></table></figure>
 
 <p>如果返回 <code>yes</code>，说明有权限；返回 <code>no</code>，说明没有。</p>
-<h6 id="生产建议-1"><a href="#生产建议-1" class="headerlink" title="生产建议"></a>生产建议</h6><ul>
+<p><strong>生产建议</strong></p>
+<ul>
 <li>优先使用命名空间级别授权，少用 <code>ClusterRoleBinding</code>。</li>
 <li>避免 <code>resources: [&quot;*&quot;]</code>、<code>verbs: [&quot;*&quot;]</code> 这类通配符。</li>
 <li>给 Pod 用最小权限的 ServiceAccount，必要时关闭 <code>automountServiceAccountToken</code>。</li>
